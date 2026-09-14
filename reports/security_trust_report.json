@@ -2,8 +2,8 @@
   "ok": true,
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
-    "scanned_files": 31,
-    "script_count": 3,
+    "scanned_files": 35,
+    "script_count": 4,
     "internal_module_count": 0,
     "secret_findings": 0,
     "dependency_files": [
@@ -18,12 +18,12 @@
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 3,
+    "help_smoke_checked_count": 4,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 31,
-    "package_sha256": "0c0feeebc1e927367131cad6cd27bc16661beb51848910b6df2a8ae95af7448b"
+    "package_hash_file_count": 35,
+    "package_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d"
   },
   "failures": [],
   "warnings": [],
@@ -34,6 +34,20 @@
       "interface": "cli",
       "interface_declared": true,
       "interface_reason": "Runs local, dependency-free route, syntax, and package-shape checks before release.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/import_telemetry_events.py",
+      "interface": "cli",
+      "interface_declared": true,
+      "interface_reason": "Validates local JSONL telemetry and emits sanitized metadata events to stdout; the caller owns any local spool redirect.",
       "has_argparse": true,
       "has_main_guard": true,
       "uses_input": false,
@@ -92,9 +106,9 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 3,
-    "checked_count": 3,
-    "passed_count": 3,
+    "candidate_count": 4,
+    "checked_count": 4,
+    "passed_count": 4,
     "failed_count": 0,
     "skipped_count": 0,
     "failed_scripts": [],
@@ -107,6 +121,16 @@
         "passed": true,
         "has_help_text": true,
         "stdout_excerpt": "usage: ci_test.py [-h] [targets ...]\n\nRun dependency-free agent-team-work release checks.\n\npositional arguments:\n  targets\n\noptions:\n  -h, --help  show this help message and exit",
+        "stderr_excerpt": ""
+      },
+      {
+        "path": "scripts/import_telemetry_events.py",
+        "command": "python3 scripts/import_telemetry_events.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: import_telemetry_events.py [-h] --input-jsonl INPUT_JSONL\n\nValidate local JSONL telemetry and emit sanitized metadata-only events to\nstdout.\n\noptions:\n  -h, --help            show this help message and exit\n  --input-jsonl INPUT_JSON",
         "stderr_excerpt": ""
       },
       {

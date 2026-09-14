@@ -486,16 +486,16 @@
           "path": "evals",
           "label": "Trigger and quality checks",
           "kind": "folder",
-          "file_count": 12
+          "file_count": 13
         },
         {
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 111
+          "file_count": 112
         }
       ],
-      "file_count": 137,
+      "file_count": 139,
       "folder_count": 4,
       "distribution": [
         {
@@ -524,11 +524,11 @@
         },
         {
           "label": "evals",
-          "value": 12
+          "value": 13
         },
         {
           "label": "reports",
-          "value": 111
+          "value": 112
         }
       ]
     },
@@ -654,13 +654,13 @@
         "path": "evals",
         "label": "Trigger and quality checks",
         "kind": "folder",
-        "file_count": 12
+        "file_count": 13
       },
       {
         "path": "reports",
         "label": "Generated evidence and overview artifacts",
         "kind": "folder",
-        "file_count": 111
+        "file_count": 112
       }
     ],
     "strengths": [
@@ -969,13 +969,13 @@
       "ok": true,
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "22f7e5bca33bb9ab4abd0945bbbb0a631642760dc70a0b33d181972fa7b1f4f5",
-        "source_contract_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d",
-        "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
+        "evidence_bundle_sha256": "df8413ee9aa17957e9871fdf397183ee2f1d4d9127e604ed5c99e0661e7295f3",
+        "source_contract_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
+        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
         "output_case_count": 5,
         "failure_disclosure_count": 2,
         "command_count": 23,
@@ -990,25 +990,25 @@
         "phase1_quality_promotion_complete": false,
         "phase1_completion_ready": false,
         "world_class_ready": false,
-        "world_class_open_gap_count": 9,
+        "world_class_open_gap_count": 5,
         "world_class_task_count": 4,
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 8,
         "beta_test_ready": false,
-        "beta_test_blocker_count": 2,
+        "beta_test_blocker_count": 1,
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 7,
-        "working_tree_dirty": null,
-        "changed_file_count": null,
-        "source_tree_dirty": null,
-        "source_changed_file_count": null,
-        "generated_tree_dirty": null,
-        "generated_changed_file_count": null
+        "public_claim_blocker_count": 6,
+        "working_tree_dirty": true,
+        "changed_file_count": 59,
+        "source_tree_dirty": false,
+        "source_changed_file_count": 0,
+        "generated_tree_dirty": true,
+        "generated_changed_file_count": 59
       },
-      "commit": "unknown",
+      "commit": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -1089,7 +1089,7 @@
       "failures": []
     },
     "trust_security": {
-      "scanned_files": 30,
+      "scanned_files": 34,
       "script_count": 3,
       "internal_module_count": 0,
       "secret_findings": 0,
@@ -1109,8 +1109,8 @@
       "help_smoke_failed_count": 0,
       "interactive_script_count": 0,
       "package_hash_scope": "source-contract-without-generated-reports",
-      "package_hash_file_count": 30,
-      "package_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d"
+      "package_hash_file_count": 34,
+      "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
     },
     "skill_atlas": {
       "skill_count": 1,
@@ -1148,8 +1148,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d",
-          "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0"
+          "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
+          "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
         },
         "compatibility": {
           "openai": "pass",
@@ -1180,7 +1180,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
+          "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -1196,8 +1196,8 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
-        "archive_entry_count": 145,
+        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+        "archive_entry_count": 154,
         "nested_skill_entry_count": 0,
         "failure_count": 0,
         "warning_count": 0
@@ -1209,7 +1209,7 @@
       "ok": true,
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 145,
+        "archive_entry_count": 154,
         "nested_skill_entry_count": 0,
         "archive_extracted": true,
         "entrypoint_loaded": true,
@@ -1231,10 +1231,10 @@
       "ok": true,
       "summary": {
         "declared_bump": "minor",
-        "recommended_bump": "patch",
+        "recommended_bump": "minor",
         "breaking_change_count": 0,
         "added_target_count": 0,
-        "metadata_change_count": 1,
+        "metadata_change_count": 2,
         "checksum_change_count": 2,
         "failure_count": 0,
         "warning_count": 0
@@ -1243,8 +1243,20 @@
         "name_changed": false,
         "added_targets": [],
         "removed_targets": [],
-        "compatibility_changes": [],
+        "compatibility_changes": [
+          {
+            "target": "agent-skills",
+            "from": "missing",
+            "to": "pass",
+            "direction": "improved"
+          }
+        ],
         "metadata_changes": [
+          {
+            "field": "description",
+            "from": "Previous agent-team-work route contract fixture used only for upgrade comparison.",
+            "to": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
+          },
           {
             "field": "license",
             "from": "",
@@ -1255,17 +1267,17 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0"
+            "to": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
           },
           {
             "field": "package_sha256",
             "from": "previous-fixture",
-            "to": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d"
+            "to": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
           }
         ]
       },
       "release_notes": [
-        "Recommended version bump: patch.",
+        "Recommended version bump: minor.",
         "Package or archive checksum changed; reviewers should verify package artifacts before release.",
         "Package verification evidence: reports/package_verification.md."
       ],
@@ -1334,9 +1346,9 @@
         "invalid_count": 0,
         "covered_gate_count": 0,
         "covered_gate_keys": [],
-        "waiver_candidate_count": 1,
+        "waiver_candidate_count": 2,
         "waiverable_open_count": 1,
-        "non_waivable_count": 0
+        "non_waivable_count": 1
       },
       "policy": {
         "blocker_waivers_allowed": false,
@@ -1599,7 +1611,7 @@
       "source_audit": {
         "json": "reports/skill_os2_audit.json",
         "markdown": "reports/skill_os2_audit.md",
-        "open_gap_count": 9
+        "open_gap_count": 5
       }
     },
     "world_class_evidence_ledger": {
@@ -1911,11 +1923,11 @@
           ],
           "observed_state": {
             "native_enforcement_count": 0,
-            "metadata_fallback_count": 1,
+            "metadata_fallback_count": 4,
             "installer_enforcement_pass_count": 0,
             "installer_permission_failure_count": 0,
             "installer_enforcement_ready": false,
-            "residual_risk_count": 1,
+            "residual_risk_count": 4,
             "failure_count": 0,
             "accepted": false
           },
@@ -2380,7 +2392,48 @@
   "feedback": {},
   "baseline": {},
   "compare": {},
-  "promotion": {},
+  "promotion": {
+    "schema_version": "1.0",
+    "generated_at": "2026-09-14",
+    "scope": "agent-team-work route contract promotion",
+    "summary": {
+      "promote": 0,
+      "keep_current": 1,
+      "blocked": 0,
+      "public_release_ready": false
+    },
+    "targets": [
+      {
+        "name": "agent-team-work",
+        "winner_label": "Current",
+        "decision": "keep_current",
+        "winner_changed": false,
+        "route_metrics": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "misroute_count": 0,
+          "ambiguous_case_count": 0,
+          "case_count": 8
+        },
+        "causes": [
+          "no_candidate_outperformed_current"
+        ],
+        "next_action": "Keep the current route contract and reopen promotion only when fresh route evidence appears.",
+        "public_release_decision": "blocked_pending_external_and_human_evidence",
+        "evidence": [
+          "reports/route_scorecard.json",
+          "reports/output_quality_scorecard.json",
+          "reports/world_class_evidence_ledger.json",
+          "reports/benchmark_reproducibility.json"
+        ]
+      }
+    ],
+    "notes": [
+      "This report records trigger-contract promotion only.",
+      "It does not convert fixture runs, pending reviews, or metadata fallbacks into public production evidence.",
+      "Unconditional public production remains blocked until the benchmark public-claim blockers are closed."
+    ]
+  },
   "benchmark": {},
   "reference_synthesis": {
     "skill_name": "agent-team-work",

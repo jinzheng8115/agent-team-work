@@ -5,7 +5,7 @@
   "root": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "target_python": "3.11",
-    "file_count": 4,
+    "file_count": 5,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -30,6 +30,12 @@
     },
     {
       "path": "scripts/ci_test.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/import_telemetry_events.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

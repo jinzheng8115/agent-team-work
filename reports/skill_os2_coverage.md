@@ -7,8 +7,8 @@ Generated at: `2026-09-14`
 - decision: `continue-implementation`
 - local blueprint ready: `false`
 - public world-class ready: `false`
-- pass: `0` / `21`
-- missing: `21`
+- pass: `1` / `21`
+- missing: `20`
 - warn: `0`
 - reference extensions: `4`
 - extension covered: `0`
@@ -23,13 +23,13 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 
 | Item | Status | Current | Command | Test |
 | --- | --- | --- | --- | --- |
-| Skill IR | `missing` | schema missing; targets 0 | `python3 scripts/yao.py skill-ir . --self` | `python3 tests/verify_skill_ir.py` |
+| Skill IR | `missing` | schema 2.0.0; targets 5 | `python3 scripts/yao.py skill-ir . --self` | `python3 tests/verify_skill_ir.py` |
 | Output Eval Lab | `missing` | 5 cases; delta 100.0; execution 10 | `python3 scripts/yao.py output-exec --self && python3 scripts/yao.py output-review --self` | `python3 tests/verify_output_eval_lab.py` |
 | Runtime Conformance | `missing` | 5/5 targets pass | `python3 scripts/yao.py conformance . --self` | `python3 tests/verify_conformance_suite.py` |
-| Trust Security | `missing` | 1 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust . --self` | `python3 tests/verify_trust_check.py` |
+| Trust Security | `missing` | 3 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust . --self` | `python3 tests/verify_trust_check.py` |
 | Skill Atlas | `missing` | 1 scanned skills; actionable collisions 0 | `python3 scripts/yao.py skill-atlas --workspace-root . --self` | `python3 tests/verify_skill_atlas.py` |
-| Registry Distribution | `missing` | archive entries 132; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self && python3 scripts/yao.py registry-audit . --self` | `python3 tests/verify_registry_audit.py` |
-| Review Studio | `missing` | 16 gates; decision blocked; warnings 4 | `python3 scripts/yao.py review-studio . --self` | `python3 tests/verify_review_studio.py` |
+| Registry Distribution | `missing` | archive entries 154; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self && python3 scripts/yao.py registry-audit . --self` | `python3 tests/verify_registry_audit.py` |
+| Review Studio | `missing` | 16 gates; decision review; warnings 3 | `python3 scripts/yao.py review-studio . --self` | `python3 tests/verify_review_studio.py` |
 | Telemetry Drift | `missing` | events 1; recipes 0; risk low | `python3 scripts/yao.py telemetry-hooks . --self && python3 scripts/yao.py adoption-drift . --self` | `python3 tests/verify_telemetry_hooks.py` |
 
 ## Recommended PR Coverage
@@ -40,14 +40,14 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Output Eval Schema | `missing` | 5 output cases | `make ci-test` | `tests/verify_output_eval_lab.py` |
 | Output Eval Runner | `missing` | delta 100.0 | `make ci-test` | `tests/verify_output_eval_lab.py` |
 | Output Quality Scorecard | `missing` | gate pass True | `make ci-test` | `tests/verify_output_eval_lab.py` |
-| Skill IR V0 | `missing` | schema missing | `make ci-test` | `tests/verify_skill_ir.py` |
+| Skill IR V0 | `missing` | schema 2.0.0 | `make ci-test` | `tests/verify_skill_ir.py` |
 | Compiler Refactor | `missing` | 5/5 compiled targets | `make ci-test` | `tests/verify_compile_skill.py` |
 | Agent Skills Conformance | `missing` | agent-skills target present | `make ci-test` | `tests/verify_conformance_suite.py` |
 | Trust Check | `missing` | secret findings 0 | `make ci-test` | `tests/verify_trust_check.py` |
 | Skill Atlas Generator | `missing` | 1 scanned skills | `make ci-test` | `tests/verify_skill_atlas.py` |
-| Registry Package Format | `missing` | registry ok False | `make ci-test` | `tests/verify_registry_audit.py` |
+| Registry Package Format | `missing` | registry ok True | `make ci-test` | `tests/verify_registry_audit.py` |
 | Review Studio 2.0 | `missing` | 16 review gates | `make ci-test` | `tests/verify_review_studio.py` |
-| Migration V2 Docs | `missing` | migration guide present | `make ci-test` | `docs review` |
+| Migration V2 Docs | `pass` | migration guide present | `make ci-test` | `docs review` |
 | Evidence Consistency | `missing` | 41 consistency checks | `make ci-test` | `tests/verify_evidence_consistency.py` |
 
 ## Reference Extension Tracks
@@ -74,8 +74,8 @@ These extension tracks come from the user-supplied 2.0 reference plan. They are 
 
 - objective: Platform-neutral capability contract exists before platform-specific packaging.
 - status: `missing`
-- existing evidence: `none`
-- missing evidence: `skill-ir/schema.json`, `skill-ir/examples/yao-meta-skill.json`, `scripts/export_skill_ir.py`, `tests/verify_skill_ir.py`
+- existing evidence: `skill-ir/schema.json`, `skill-ir/examples/yao-meta-skill.json`
+- missing evidence: `scripts/export_skill_ir.py`, `tests/verify_skill_ir.py`
 - next action: Keep all target packages compiled from IR rather than hand-maintained per target.
 
 ### Output Eval Lab
@@ -170,8 +170,8 @@ These extension tracks come from the user-supplied 2.0 reference plan. They are 
 
 - objective: Recommended Skill OS 2.0 implementation PR from the upgrade plan.
 - status: `missing`
-- existing evidence: `none`
-- missing evidence: `skill-ir/schema.json`, `skill-ir/examples/yao-meta-skill.json`, `tests/verify_skill_ir.py`
+- existing evidence: `skill-ir/schema.json`, `skill-ir/examples/yao-meta-skill.json`
+- missing evidence: `tests/verify_skill_ir.py`
 - next action: Keep this item covered as the implementation evolves.
 
 ### Compiler Refactor
@@ -225,9 +225,8 @@ These extension tracks come from the user-supplied 2.0 reference plan. They are 
 ### Migration V2 Docs
 
 - objective: Recommended Skill OS 2.0 implementation PR from the upgrade plan.
-- status: `missing`
-- existing evidence: `docs/migration-v2.md`, `README.md`
-- missing evidence: `reports/skill-os-2-review.md`
+- status: `pass`
+- existing evidence: `docs/migration-v2.md`, `reports/skill-os-2-review.md`, `README.md`
 - next action: Keep this item covered as the implementation evolves.
 
 ### Evidence Consistency
@@ -258,14 +257,14 @@ These extension tracks come from the user-supplied 2.0 reference plan. They are 
 
 - objective: Daily operations layer summarizes explicit-source conversation patterns, proposal-only adaptation work, approval state, release locks, and world-class evidence gaps.
 - status: `partial`
-- existing evidence: `none`
-- missing evidence: `scripts/render_daily_skillops_report.py`, `tests/verify_daily_skillops.py`, `reports/skillops/daily/YYYY-MM-DD.json`, `reports/skillops/daily/YYYY-MM-DD.md`
+- existing evidence: `reports/skillops/daily/2026-09-14.json`, `reports/skillops/daily/2026-09-14.md`
+- missing evidence: `scripts/render_daily_skillops_report.py`, `tests/verify_daily_skillops.py`
 - next action: Keep Daily SkillOps report aligned with proposal, approval, coverage, and world-class ledger contracts as the operations layer evolves.
 
 ### Weekly Curator Report
 
 - objective: Weekly curator layer aggregates Daily SkillOps opportunities, Skill Atlas portfolio signals, release locks, and world-class evidence gaps into a maintenance queue.
 - status: `partial`
-- existing evidence: `none`
-- missing evidence: `scripts/render_weekly_curator_report.py`, `tests/verify_weekly_curator.py`, `reports/skillops/weekly/YYYY-WNN.json`, `reports/skillops/weekly/YYYY-WNN.md`
+- existing evidence: `reports/skillops/weekly/2026-W38.json`, `reports/skillops/weekly/2026-W38.md`
+- missing evidence: `scripts/render_weekly_curator_report.py`, `tests/verify_weekly_curator.py`
 - next action: Use weekly curator output as the Skill Librarian maintenance queue before approving any durable skill-library changes.

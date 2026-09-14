@@ -4,11 +4,11 @@ Generated at: `2026-09-14`
 
 ## Summary
 
-- decision: `evidence-drift-detected`
+- decision: `consistent`
 - checks: `41`
-- pass: `40`
+- pass: `41`
 - warn: `0`
-- fail: `1`
+- fail: `0`
 
 This gate compares generated evidence reports against each other. It does not create provider, human, native-client, or permission-enforcement evidence; it only catches drift between reports that already exist.
 
@@ -22,7 +22,7 @@ This gate compares generated evidence reports against each other. It does not cr
 | Release archive hash matches package, registry, and benchmark evidence | `pass` | The release archive is deterministic and all release-facing checksum consumers must name its current SHA256. A dirty authoring worktree records drift as advisory; a clean release candidate treats drift as a failure. | `dist/yao-meta-skill.zip`, `reports/package_verification.json`, `reports/registry_audit.json`, `reports/benchmark_reproducibility.json` |
 | Phase-one provider status is consistent across evaluation, benchmark, and Skill OS audit | `pass` | Legacy model runs remain visible as legacy evidence and cannot mark the fixed 40-call phase-one matrix complete. | `reports/provider_output_evaluation.json`, `reports/benchmark_reproducibility.json`, `reports/skill_os2_audit.json` |
 | Review Studio mirrors context budget governance | `pass` | Review Studio must not keep stale context warnings after context reports prove large deferred resources are governed. | `reports/context_budget.json`, `reports/review-studio.json` |
-| Benchmark release lock matches source dirty state | `fail` | The benchmark release lock must be blocked by source changes, while generated evidence artifacts are tracked as generation context. | `reports/benchmark_reproducibility.json` |
+| Benchmark release lock matches source dirty state | `pass` | The benchmark release lock must be blocked by source changes, while generated evidence artifacts are tracked as generation context. | `reports/benchmark_reproducibility.json` |
 | Clean worktree keeps a clean benchmark release lock | `pass` | Dirty or non-git worktrees cannot prove final release-lock freshness, so this check is advisory until the final clean-lock pass. | `reports/benchmark_reproducibility.json` |
 | Human-facing reports expose the canonical Skill IR artifact | `pass` | Skill IR is the 2.0 platform-neutral semantic source, so user-facing reports must link to the artifact that actually exists. | `reports/skill-overview.json`, `reports/skill-interpretation.json`, `reports/review-studio.json`, `reports/skill-ir.json` |
 | overview embeds the benchmark commit | `pass` | Human-facing reports must point to the same benchmark release-lock commit. | `reports/benchmark_reproducibility.json`, `reports/skill-overview.json` |
@@ -57,11 +57,3 @@ This gate compares generated evidence reports against each other. It does not cr
 | Claim guard covers package and runtime claim surfaces | `pass` | The overclaim guard must scan package manifests, adapter metadata, security policy, and ledger surfaces before public readiness can be trusted. | `reports/world_class_claim_guard.json`, `manifest.json`, `agents/interface.yaml`, `dist/manifest.json`, `dist/targets/openai/adapter.json`, `evidence/world_class/README.md`, `security/permission_policy.json`, `reports/world_class_evidence_ledger.json` |
 | World-class evidence workflows cover every pending ledger entry | `pass` | Every pending world-class evidence key must have matching plan, intake, submission review, operator runbook, and Review Studio actions without counting planned work as completion. | `reports/world_class_evidence_ledger.json`, `reports/world_class_evidence_plan.json`, `reports/world_class_evidence_intake.json`, `reports/world_class_submission_review.json`, `reports/world_class_operator_runbook.json`, `reports/review-studio.json` |
 | Skill OS 2.0 review summary mirrors current evidence | `pass` | Manual 2.0 review summaries must not drift from generated gate, package, trust, context, benchmark, or CI evidence. | `reports/skill-os-2-review.md`, `reports/review-studio.json`, `reports/package_verification.json`, `reports/install_simulation.json`, `reports/security_trust_report.json`, `reports/context_budget.json`, `reports/benchmark_reproducibility.json`, `scripts/ci_test.py` |
-
-## Failures
-
-### Benchmark release lock matches source dirty state
-
-- key: `benchmark-release-lock-self-consistency`
-- expected: `true`
-- actual: `false`

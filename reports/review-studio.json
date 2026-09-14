@@ -4,12 +4,12 @@
   "skill_dir": ".",
   "summary": {
     "decision": "review",
-    "world_class_score": 89,
+    "world_class_score": 91,
     "gate_count": 16,
     "gate_contract_ok": true,
     "blocker_count": 0,
-    "warning_count": 4,
-    "action_count": 4,
+    "warning_count": 3,
+    "action_count": 3,
     "annotation_count": 0,
     "open_annotation_count": 0,
     "open_annotation_blocker_count": 0,
@@ -65,7 +65,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 870/1000; deferred 8720/120000; top deferred none; resource governance not-required; quality density 149.4",
+      "detail": "initial load 878/1000; deferred 9690/120000; top deferred none; resource governance not-required; quality density 148.1",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md",
       "review_action_id": "",
@@ -125,7 +125,7 @@
       "key": "architecture-maintainability",
       "label": "架构维护",
       "status": "pass",
-      "detail": "3 Python files; 0 hotspots; 0 watchlist files; 0 early watch files; 0 blockers; largest 128 lines; 0 CLI handlers; 0 in entrypoint",
+      "detail": "3 Python files; 0 hotspots; 0 watchlist files; 0 early watch files; 0 blockers; largest 131 lines; 0 CLI handlers; 0 in entrypoint",
       "evidence": "reports/architecture_maintainability.json",
       "link": "architecture_maintainability.md",
       "review_action_id": "",
@@ -185,7 +185,7 @@
       "key": "operations-loop",
       "label": "运营回路",
       "status": "pass",
-      "detail": "1 metadata events; adoption 100.0; missed 0; bad-output 0; risk low; daily proposals 0; daily decision monitor; daily release lock false; weekly queue 0 unique; weekly ready 0; weekly top 0; weekly release lock false",
+      "detail": "1 metadata events; adoption 100.0; missed 0; bad-output 0; risk low; daily proposals 0; daily decision monitor; daily release lock true; weekly queue 0 unique; weekly ready 0; weekly top 0; weekly release lock true",
       "evidence": "reports/adoption_drift_report.json + reports/skillops/daily + reports/skillops/weekly",
       "link": "adoption_drift_report.md",
       "review_action_id": "",
@@ -244,17 +244,17 @@
     {
       "key": "release-notes",
       "label": "发布路线",
-      "status": "warn",
-      "detail": "promotion decisions are missing; release notes need reviewer confirmation; upgrade minor declared / patch recommended",
+      "status": "pass",
+      "detail": "0 promote; 1 keep current; 0 blocked; upgrade minor declared / minor recommended",
       "evidence": "reports/promotion_decisions.json + reports/upgrade_check.json + docs/migration-v2.md",
-      "link": "/Users/jinzheng/.skills-manager/skills/yao-meta-skill/docs/migration-v2.md",
-      "review_action_id": "review-action-release-notes",
-      "review_action_status": "warn",
-      "review_action_title": "发布路线",
-      "review_action_next_step": "确认 promotion、upgrade diff、breaking changes、migration guide 和 known limitations。",
-      "review_action_reason": "发布说明不完整会让使用者无法判断升级风险和迁移动作。",
-      "review_action_source_ref_count": 3,
-      "review_action_verification_command": "python3 scripts/upgrade_check.py . --previous-package-json registry/examples/yao-meta-skill-1.0.0.json"
+      "link": "promotion_decisions.md",
+      "review_action_id": "",
+      "review_action_status": "",
+      "review_action_title": "",
+      "review_action_next_step": "",
+      "review_action_reason": "",
+      "review_action_source_ref_count": 0,
+      "review_action_verification_command": ""
     }
   ],
   "gate_contract": {
@@ -348,21 +348,6 @@
       "review_action_reason": "世界级结论必须来自已接受的外部/人工证据；计划、metadata fallback、待评审和本地命令都不能替代完成证据。",
       "review_action_source_ref_count": 16,
       "review_action_verification_command": "python3 scripts/yao.py world-class-runbook . --submissions-dir evidence/world_class/submissions --self && python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions --self && python3 scripts/yao.py review-studio . --self"
-    },
-    {
-      "key": "release-notes",
-      "label": "发布路线",
-      "status": "warn",
-      "detail": "promotion decisions are missing; release notes need reviewer confirmation; upgrade minor declared / patch recommended",
-      "evidence": "reports/promotion_decisions.json + reports/upgrade_check.json + docs/migration-v2.md",
-      "link": "/Users/jinzheng/.skills-manager/skills/yao-meta-skill/docs/migration-v2.md",
-      "review_action_id": "review-action-release-notes",
-      "review_action_status": "warn",
-      "review_action_title": "发布路线",
-      "review_action_next_step": "确认 promotion、upgrade diff、breaking changes、migration guide 和 known limitations。",
-      "review_action_reason": "发布说明不完整会让使用者无法判断升级风险和迁移动作。",
-      "review_action_source_ref_count": 3,
-      "review_action_verification_command": "python3 scripts/upgrade_check.py . --previous-package-json registry/examples/yao-meta-skill-1.0.0.json"
     }
   ],
   "review_actions": [
@@ -1284,8 +1269,8 @@
             "artifact_prefill_counts_as_evidence": false,
             "submission_ref_ready_count": 2,
             "submission_ref_total_count": 2,
-            "supporting_evidence_ready_count": 8,
-            "supporting_evidence_total_count": 8,
+            "supporting_evidence_ready_count": 11,
+            "supporting_evidence_total_count": 11,
             "roles": [
               {
                 "role": "submission-ref",
@@ -1298,8 +1283,8 @@
               {
                 "role": "supporting-evidence",
                 "label": "Supporting evidence",
-                "ready_count": 8,
-                "total_count": 8,
+                "ready_count": 11,
+                "total_count": 11,
                 "copy_to_artifact_refs": false,
                 "description": "Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs."
               }
@@ -1510,55 +1495,6 @@
           ]
         }
       ]
-    },
-    {
-      "action_id": "review-action-release-notes",
-      "gate_key": "release-notes",
-      "title": "发布路线",
-      "label": "发布路线",
-      "status": "warn",
-      "priority": "warning",
-      "next_step": "确认 promotion、upgrade diff、breaking changes、migration guide 和 known limitations。",
-      "summary": "确认 promotion、upgrade diff、breaking changes、migration guide 和 known limitations。",
-      "reason": "发布说明不完整会让使用者无法判断升级风险和迁移动作。",
-      "why": "发布说明不完整会让使用者无法判断升级风险和迁移动作。",
-      "source_fix": "reports/upgrade_check.md + docs/migration-v2.md",
-      "source_refs": [
-        {
-          "path": "reports/upgrade_check.md",
-          "label": "upgrade check",
-          "kind": "report",
-          "line": 1,
-          "matched_pattern": "# Upgrade",
-          "excerpt": "# Upgrade Check",
-          "exists": true,
-          "link": "upgrade_check.md"
-        },
-        {
-          "path": "docs/migration-v2.md",
-          "label": "migration guide",
-          "kind": "docs",
-          "line": 1,
-          "matched_pattern": "# Migration",
-          "excerpt": "# Migration guide",
-          "exists": true,
-          "link": "../docs/migration-v2.md"
-        },
-        {
-          "path": "reports/promotion_decisions.md",
-          "label": "promotion decisions",
-          "kind": "report",
-          "line": null,
-          "matched_pattern": "",
-          "excerpt": "",
-          "exists": false,
-          "link": ""
-        }
-      ],
-      "evidence": "reports/promotion_decisions.json + reports/upgrade_check.json + docs/migration-v2.md",
-      "evidence_link": "/Users/jinzheng/.skills-manager/skills/yao-meta-skill/docs/migration-v2.md",
-      "verification_command": "python3 scripts/upgrade_check.py . --previous-package-json registry/examples/yao-meta-skill-1.0.0.json",
-      "evidence_steps": []
     }
   ],
   "evidence_paths": {
@@ -2096,16 +2032,16 @@
             "path": "evals",
             "label": "Trigger and quality checks",
             "kind": "folder",
-            "file_count": 12
+            "file_count": 13
           },
           {
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 111
+            "file_count": 112
           }
         ],
-        "file_count": 137,
+        "file_count": 139,
         "folder_count": 4,
         "distribution": [
           {
@@ -2134,11 +2070,11 @@
           },
           {
             "label": "evals",
-            "value": 12
+            "value": 13
           },
           {
             "label": "reports",
-            "value": 111
+            "value": 112
           }
         ]
       },
@@ -2264,13 +2200,13 @@
           "path": "evals",
           "label": "Trigger and quality checks",
           "kind": "folder",
-          "file_count": 12
+          "file_count": 13
         },
         {
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 111
+          "file_count": 112
         }
       ],
       "strengths": [
@@ -2579,13 +2515,13 @@
         "ok": true,
         "summary": {
           "reproducibility_ready": true,
-          "release_lock_ready": false,
+          "release_lock_ready": true,
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "22f7e5bca33bb9ab4abd0945bbbb0a631642760dc70a0b33d181972fa7b1f4f5",
-          "source_contract_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d",
-          "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
+          "evidence_bundle_sha256": "df8413ee9aa17957e9871fdf397183ee2f1d4d9127e604ed5c99e0661e7295f3",
+          "source_contract_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
+          "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
           "output_case_count": 5,
           "failure_disclosure_count": 2,
           "command_count": 23,
@@ -2600,25 +2536,25 @@
           "phase1_quality_promotion_complete": false,
           "phase1_completion_ready": false,
           "world_class_ready": false,
-          "world_class_open_gap_count": 9,
+          "world_class_open_gap_count": 5,
           "world_class_task_count": 4,
           "world_class_ledger_pending_count": 4,
           "world_class_source_check_count": 14,
           "world_class_source_pass_count": 6,
           "world_class_source_blocked_count": 8,
           "beta_test_ready": false,
-          "beta_test_blocker_count": 2,
+          "beta_test_blocker_count": 1,
           "beta_test_deferred_evidence_count": 4,
           "public_claim_ready": false,
-          "public_claim_blocker_count": 7,
-          "working_tree_dirty": null,
-          "changed_file_count": null,
-          "source_tree_dirty": null,
-          "source_changed_file_count": null,
-          "generated_tree_dirty": null,
-          "generated_changed_file_count": null
+          "public_claim_blocker_count": 6,
+          "working_tree_dirty": true,
+          "changed_file_count": 59,
+          "source_tree_dirty": false,
+          "source_changed_file_count": 0,
+          "generated_tree_dirty": true,
+          "generated_changed_file_count": 59
         },
-        "commit": "unknown",
+        "commit": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -2699,7 +2635,7 @@
         "failures": []
       },
       "trust_security": {
-        "scanned_files": 30,
+        "scanned_files": 34,
         "script_count": 3,
         "internal_module_count": 0,
         "secret_findings": 0,
@@ -2719,8 +2655,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 30,
-        "package_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d"
+        "package_hash_file_count": 34,
+        "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
       },
       "skill_atlas": {
         "skill_count": 1,
@@ -2758,8 +2694,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d",
-            "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0"
+            "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
+            "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
           },
           "compatibility": {
             "openai": "pass",
@@ -2790,7 +2726,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
+            "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -2806,8 +2742,8 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
-          "archive_entry_count": 145,
+          "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+          "archive_entry_count": 154,
           "nested_skill_entry_count": 0,
           "failure_count": 0,
           "warning_count": 0
@@ -2819,7 +2755,7 @@
         "ok": true,
         "summary": {
           "archive_present": true,
-          "archive_entry_count": 145,
+          "archive_entry_count": 154,
           "nested_skill_entry_count": 0,
           "archive_extracted": true,
           "entrypoint_loaded": true,
@@ -2841,10 +2777,10 @@
         "ok": true,
         "summary": {
           "declared_bump": "minor",
-          "recommended_bump": "patch",
+          "recommended_bump": "minor",
           "breaking_change_count": 0,
           "added_target_count": 0,
-          "metadata_change_count": 1,
+          "metadata_change_count": 2,
           "checksum_change_count": 2,
           "failure_count": 0,
           "warning_count": 0
@@ -2853,8 +2789,20 @@
           "name_changed": false,
           "added_targets": [],
           "removed_targets": [],
-          "compatibility_changes": [],
+          "compatibility_changes": [
+            {
+              "target": "agent-skills",
+              "from": "missing",
+              "to": "pass",
+              "direction": "improved"
+            }
+          ],
           "metadata_changes": [
+            {
+              "field": "description",
+              "from": "Previous agent-team-work route contract fixture used only for upgrade comparison.",
+              "to": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
+            },
             {
               "field": "license",
               "from": "",
@@ -2865,17 +2813,17 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0"
+              "to": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
             },
             {
               "field": "package_sha256",
               "from": "previous-fixture",
-              "to": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d"
+              "to": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
             }
           ]
         },
         "release_notes": [
-          "Recommended version bump: patch.",
+          "Recommended version bump: minor.",
           "Package or archive checksum changed; reviewers should verify package artifacts before release.",
           "Package verification evidence: reports/package_verification.md."
         ],
@@ -2944,9 +2892,9 @@
           "invalid_count": 0,
           "covered_gate_count": 0,
           "covered_gate_keys": [],
-          "waiver_candidate_count": 1,
+          "waiver_candidate_count": 2,
           "waiverable_open_count": 1,
-          "non_waivable_count": 0
+          "non_waivable_count": 1
         },
         "policy": {
           "blocker_waivers_allowed": false,
@@ -3209,7 +3157,7 @@
         "source_audit": {
           "json": "reports/skill_os2_audit.json",
           "markdown": "reports/skill_os2_audit.md",
-          "open_gap_count": 9
+          "open_gap_count": 5
         }
       },
       "world_class_evidence_ledger": {
@@ -3521,11 +3469,11 @@
             ],
             "observed_state": {
               "native_enforcement_count": 0,
-              "metadata_fallback_count": 1,
+              "metadata_fallback_count": 4,
               "installer_enforcement_pass_count": 0,
               "installer_permission_failure_count": 0,
               "installer_enforcement_ready": false,
-              "residual_risk_count": 1,
+              "residual_risk_count": 4,
               "failure_count": 0,
               "accepted": false
             },
@@ -5861,25 +5809,63 @@
       "ok": true,
       "generated_at": "2026-09-14",
       "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
-      "commit": "unknown",
+      "commit": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
       "git_status": {
-        "available": false,
-        "dirty": null,
-        "changed_file_count": null,
-        "source_dirty": null,
-        "source_changed_file_count": null,
-        "generated_dirty": null,
-        "generated_changed_file_count": null
+        "available": true,
+        "dirty": true,
+        "changed_file_count": 59,
+        "generated_dirty": true,
+        "generated_changed_file_count": 59,
+        "source_dirty": false,
+        "source_changed_file_count": 0,
+        "sample": [
+          " M dist/agent-team-work.zip",
+          " M registry/index.json",
+          " M registry/packages/agent-team-work.json",
+          " M reports/authoring-review.md",
+          " M reports/benchmark_reproducibility.json",
+          " M reports/benchmark_reproducibility.md",
+          " M reports/context_budget.json",
+          " M reports/evidence_consistency.json",
+          " M reports/evidence_consistency.md",
+          " M reports/install_simulation.json",
+          " M reports/install_simulation.md",
+          " M reports/package_verification.json"
+        ],
+        "source_sample": [],
+        "generated_sample": [
+          " M dist/agent-team-work.zip",
+          " M registry/index.json",
+          " M registry/packages/agent-team-work.json",
+          " M reports/authoring-review.md",
+          " M reports/benchmark_reproducibility.json",
+          " M reports/benchmark_reproducibility.md",
+          " M reports/context_budget.json",
+          " M reports/evidence_consistency.json",
+          " M reports/evidence_consistency.md",
+          " M reports/install_simulation.json",
+          " M reports/install_simulation.md",
+          " M reports/package_verification.json"
+        ],
+        "generated_dirty_prefixes": [
+          "dist/",
+          "registry/index.json",
+          "registry/packages/",
+          "reports/",
+          "skill_atlas/",
+          "skill-ir/examples/"
+        ],
+        "scope": "generation-time status before this report is written"
       },
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "22f7e5bca33bb9ab4abd0945bbbb0a631642760dc70a0b33d181972fa7b1f4f5",
-        "source_contract_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d",
-        "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
+        "evidence_bundle_sha256": "df8413ee9aa17957e9871fdf397183ee2f1d4d9127e604ed5c99e0661e7295f3",
+        "source_contract_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
+        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
         "output_case_count": 5,
         "failure_disclosure_count": 2,
         "command_count": 23,
@@ -5894,29 +5880,28 @@
         "phase1_quality_promotion_complete": false,
         "phase1_completion_ready": false,
         "world_class_ready": false,
-        "world_class_open_gap_count": 9,
+        "world_class_open_gap_count": 5,
         "world_class_task_count": 4,
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 8,
         "beta_test_ready": false,
-        "beta_test_blocker_count": 2,
+        "beta_test_blocker_count": 1,
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 7,
-        "working_tree_dirty": null,
-        "changed_file_count": null,
-        "source_tree_dirty": null,
-        "source_changed_file_count": null,
-        "generated_tree_dirty": null,
-        "generated_changed_file_count": null
+        "public_claim_blocker_count": 6,
+        "working_tree_dirty": true,
+        "changed_file_count": 59,
+        "source_tree_dirty": false,
+        "source_changed_file_count": 0,
+        "generated_tree_dirty": true,
+        "generated_changed_file_count": 59
       },
       "beta_test_release": {
         "ready": false,
         "scope": "beta/public test release without superiority, fully-reviewed, or world-class claims",
         "blockers": [
-          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout source evidence is incomplete"
         ],
         "allowed_deferred_evidence": [
@@ -5948,23 +5933,22 @@
         "ready": false,
         "scope": "public benchmark or world-class readiness claim",
         "blockers": [
-          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout evidence is incomplete",
           "human blind-review adjudication is incomplete",
           "phase-one provider matrix is incomplete",
           "phase-one three-reviewer adjudication is incomplete",
-          "world-class evidence is not accepted yet (9 open gaps, 4 ledger pending)",
+          "world-class evidence is not accepted yet (5 open gaps, 4 ledger pending)",
           "world-class source checks are not all accepted (6/14 pass, 8 blocked)"
         ],
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
-        "ready": false,
-        "commit": "unknown",
-        "status_scope": "generation-time status",
-        "source_changed_file_count": null,
-        "generated_changed_file_count": null,
-        "reason": "git status unavailable; git commit unavailable; working tree cleanliness unknown"
+        "ready": true,
+        "commit": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
+        "status_scope": "generation-time status before this report is written",
+        "source_changed_file_count": 0,
+        "generated_changed_file_count": 59,
+        "reason": "only generated evidence artifacts were dirty at generation time"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -5972,7 +5956,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "22f7e5bca33bb9ab4abd0945bbbb0a631642760dc70a0b33d181972fa7b1f4f5"
+        "sha256": "df8413ee9aa17957e9871fdf397183ee2f1d4d9127e604ed5c99e0661e7295f3"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -6073,15 +6057,15 @@
           "label": "runtime_conformance",
           "path": "reports/conformance_matrix.json",
           "exists": true,
-          "bytes": 10112,
-          "sha256": "f6e2c647b22b51c35f76ca22319becd6843c71a031f20dde775216aa83f2b0fd"
+          "bytes": 10052,
+          "sha256": "f3469d6271f9d3bfbf451a78e212a68cf198bef45a6b4fc733eee2f36580f7fe"
         },
         {
           "label": "trust_report",
           "path": "reports/security_trust_report.json",
           "exists": true,
-          "bytes": 5311,
-          "sha256": "1ca77f03b02ba0dd8461d89980d3fc37bea80db0ffd3c144e7c6a2503d0ab5c1"
+          "bytes": 5329,
+          "sha256": "7bb6e81d34938d808bebcd3237e7042cd61186fdf0632177be8a13ec295cf6da"
         },
         {
           "label": "python_compatibility",
@@ -6095,91 +6079,91 @@
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3630,
-          "sha256": "e7a15a08680086b8f39490b671913ce39455e4b9b8f3b803982f02b38a2ffaa4"
+          "sha256": "ccc9272906be9aaf801b514e1c18a3d61b2471edc3720ec8647a887edeb3076f"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
-          "bytes": 3688,
-          "sha256": "356b0fd76371eab163fb704b4b699fa6cf6523ac48c3d1a95d52fa31cad7765a"
+          "bytes": 20004,
+          "sha256": "5aae530cd49b52ba8b78998481e787eb75e6427799ee820a11e9b3a4c7befa6f"
         },
         {
           "label": "install_simulation",
           "path": "reports/install_simulation.json",
           "exists": true,
-          "bytes": 5060,
-          "sha256": "59233f1c6e00f06f35cb1b2b48fc226db48b43f1712018326c606c8612b476cb"
+          "bytes": 5118,
+          "sha256": "54bfa0e8fd7dd11e6f2d327b94633e0aee8e9edbb959eb1b159a8ef77fea6464"
         },
         {
           "label": "skill_os2_audit",
           "path": "reports/skill_os2_audit.json",
           "exists": true,
-          "bytes": 15520,
-          "sha256": "6307ef50cda30973e03799bbf2a951fe916afecdb80c68b7b67b4e514d215439"
+          "bytes": 15561,
+          "sha256": "afc8b5338bc7c24a3e19fecc8e3fa204e9b712d4d2ac409576f4f91c168d8a73"
         },
         {
           "label": "world_class_evidence_plan",
           "path": "reports/world_class_evidence_plan.json",
           "exists": true,
           "bytes": 22207,
-          "sha256": "c314066a6c431084dc3fe3435786b20c197c2d2eaf2fc1c3c1d73107b3e90a1c"
+          "sha256": "0e06ef13e82c8f5ab35ef8f207ae6d697836f1b45b7daf01048714a5a8a33416"
         },
         {
           "label": "world_class_evidence_ledger",
           "path": "reports/world_class_evidence_ledger.json",
           "exists": true,
           "bytes": 23315,
-          "sha256": "d72db0885902e183f1a9fce2180a0cab991ab81edc6c28de3e6c56afe1cbfb3d"
+          "sha256": "e70671fcc379f33cc249797ae2adeb8509ed48dca19140855947c09905169877"
         },
         {
           "label": "world_class_evidence_intake",
           "path": "reports/world_class_evidence_intake.json",
           "exists": true,
           "bytes": 20163,
-          "sha256": "0e331e0d1c63dfbd35db7601c576456b7de26845d06c659a058b9924d887f71b"
+          "sha256": "7830b2ffacf384c6d1478097ddfa1e72beec05bd8e99e534a7e015404aa13516"
         },
         {
           "label": "world_class_evidence_preflight",
           "path": "reports/world_class_evidence_preflight.json",
           "exists": true,
-          "bytes": 106595,
-          "sha256": "3d95811bc6f887021fa59d84298e16f7034dcc127e62c2015b2d557cd19ea423"
+          "bytes": 106597,
+          "sha256": "b4ac1db3a9a5acdeb6ffa72647ea9c9fdffb065603fc5f5bcb95e6e710b490d0"
         },
         {
           "label": "world_class_submission_review",
           "path": "reports/world_class_submission_review.json",
           "exists": true,
           "bytes": 14315,
-          "sha256": "fb39d27ffc9d52812d327456eb8dcc06084591382cff7b4d52e83aebf59189bb"
+          "sha256": "42a953403688df054e208610819871758e39b6798afa3809421548e7dd6fd1ae"
         },
         {
           "label": "world_class_operator_runbook",
           "path": "reports/world_class_operator_runbook.json",
           "exists": true,
           "bytes": 102572,
-          "sha256": "e6bf62ffa6d0f4bf1ec0cb2013e76eec373514af86fc637cb19c45de1f9a7a14"
+          "sha256": "52528ba3334f7b7889d58d80b872a1cf717ef2968d4de80fa5f3a4618c393571"
         },
         {
           "label": "world_class_operator_runbook_markdown",
           "path": "reports/world_class_operator_runbook.md",
           "exists": true,
           "bytes": 24456,
-          "sha256": "a2683a77bd64a137498fe179c4f6a5e34d6ddeeb09467a232e6646e0971768dd"
+          "sha256": "a05fcf2a35707459c43cd44bcce1d64f9648ffe4a1afbf3b0b330b0b374f8334"
         },
         {
           "label": "world_class_operator_runbook_html",
           "path": "reports/world_class_operator_runbook.html",
           "exists": true,
           "bytes": 32905,
-          "sha256": "f26df21f07c4beb6178fe4bde8bab27fd62eec24f36d8cd09a07c1eded5ab266"
+          "sha256": "d0c6a25d96e93578ae5b6ecca290e43759b4cec16dc241e3644a269e0248b9a3"
         },
         {
           "label": "world_class_claim_guard",
           "path": "reports/world_class_claim_guard.json",
           "exists": true,
-          "bytes": 13854,
-          "sha256": "03cd235655bd476d143dbb4a91df2ec9f77b02d0adf33f55a7cbed50a0d4f5b6"
+          "bytes": 14392,
+          "sha256": "eab456a5f8827860021b1bf273f985fd2fd71d9f495a57708be5119dd090948c"
         }
       ],
       "missing_artifacts": [],
@@ -6326,9 +6310,9 @@
         "item_count": 21,
         "module_count": 8,
         "recommended_pr_count": 13,
-        "pass_count": 0,
+        "pass_count": 1,
         "warn_count": 0,
-        "missing_count": 21,
+        "missing_count": 20,
         "extension_track_count": 4,
         "extension_partial_count": 3,
         "extension_planned_count": 1,
@@ -6340,9 +6324,9 @@
         "decision": "continue-implementation"
       },
       "status_counts": {
-        "pass": 0,
+        "pass": 1,
         "warn": 0,
-        "missing": 21
+        "missing": 20
       },
       "extension_status_counts": {
         "partial": 3,
@@ -6355,17 +6339,17 @@
           "label": "Skill IR",
           "status": "missing",
           "objective": "Platform-neutral capability contract exists before platform-specific packaging.",
-          "current": "schema missing; targets 0",
+          "current": "schema 2.0.0; targets 5",
           "command": "python3 scripts/yao.py skill-ir . --self",
           "test": "python3 tests/verify_skill_ir.py",
           "evidence": [
             {
               "path": "skill-ir/schema.json",
-              "exists": false
+              "exists": true
             },
             {
               "path": "skill-ir/examples/yao-meta-skill.json",
-              "exists": false
+              "exists": true
             },
             {
               "path": "scripts/export_skill_ir.py",
@@ -6450,7 +6434,7 @@
           "label": "Trust Security",
           "status": "missing",
           "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-          "current": "1 scripts; secrets 0; help failures 0",
+          "current": "3 scripts; secrets 0; help failures 0",
           "command": "python3 scripts/yao.py trust . --self",
           "test": "python3 tests/verify_trust_check.py",
           "evidence": [
@@ -6524,7 +6508,7 @@
           "label": "Registry Distribution",
           "status": "missing",
           "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-          "current": "archive entries 132; install failures 0",
+          "current": "archive entries 154; install failures 0",
           "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self && python3 scripts/yao.py registry-audit . --self",
           "test": "python3 tests/verify_registry_audit.py",
           "evidence": [
@@ -6565,7 +6549,7 @@
           "label": "Review Studio",
           "status": "missing",
           "objective": "One HTML page supports first-pass production review across trigger, output, runtime, trust, release, and evidence actions.",
-          "current": "16 gates; decision blocked; warnings 4",
+          "current": "16 gates; decision review; warnings 3",
           "command": "python3 scripts/yao.py review-studio . --self",
           "test": "python3 tests/verify_review_studio.py",
           "evidence": [
@@ -6733,17 +6717,17 @@
           "label": "Skill IR V0",
           "status": "missing",
           "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
-          "current": "schema missing",
+          "current": "schema 2.0.0",
           "command": "make ci-test",
           "test": "tests/verify_skill_ir.py",
           "evidence": [
             {
               "path": "skill-ir/schema.json",
-              "exists": false
+              "exists": true
             },
             {
               "path": "skill-ir/examples/yao-meta-skill.json",
-              "exists": false
+              "exists": true
             },
             {
               "path": "tests/verify_skill_ir.py",
@@ -6858,7 +6842,7 @@
           "label": "Registry Package Format",
           "status": "missing",
           "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
-          "current": "registry ok False",
+          "current": "registry ok True",
           "command": "make ci-test",
           "test": "tests/verify_registry_audit.py",
           "evidence": [
@@ -6906,7 +6890,7 @@
           "key": "migration-v2-docs",
           "category": "recommended-pr",
           "label": "Migration V2 Docs",
-          "status": "missing",
+          "status": "pass",
           "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
           "current": "migration guide present",
           "command": "make ci-test",
@@ -6918,7 +6902,7 @@
             },
             {
               "path": "reports/skill-os-2-review.md",
-              "exists": false
+              "exists": true
             },
             {
               "path": "README.md",
@@ -7069,12 +7053,12 @@
               "exists": false
             },
             {
-              "path": "reports/skillops/daily/YYYY-MM-DD.json",
-              "exists": false
+              "path": "reports/skillops/daily/2026-09-14.json",
+              "exists": true
             },
             {
-              "path": "reports/skillops/daily/YYYY-MM-DD.md",
-              "exists": false
+              "path": "reports/skillops/daily/2026-09-14.md",
+              "exists": true
             }
           ],
           "next_action": "Keep Daily SkillOps report aligned with proposal, approval, coverage, and world-class ledger contracts as the operations layer evolves."
@@ -7096,12 +7080,12 @@
               "exists": false
             },
             {
-              "path": "reports/skillops/weekly/YYYY-WNN.json",
-              "exists": false
+              "path": "reports/skillops/weekly/2026-W38.json",
+              "exists": true
             },
             {
-              "path": "reports/skillops/weekly/YYYY-WNN.md",
-              "exists": false
+              "path": "reports/skillops/weekly/2026-W38.md",
+              "exists": true
             }
           ],
           "next_action": "Use weekly curator output as the Skill Librarian maintenance queue before approving any durable skill-library changes."
@@ -7227,6 +7211,7 @@
                 "references/workflow.md"
               ],
               "scripts": [
+                "scripts/ci_test.py",
                 "scripts/local_output_eval_runner.py",
                 "scripts/validate_team_state.py"
               ],
@@ -7266,13 +7251,14 @@
                 "reports/runtime_permission_probes.json",
                 "reports/runtime_permission_probes.md",
                 "reports/skill_atlas.json",
-                "reports/skill_atlas.html"
+                "reports/skill_atlas.html",
+                "reports/skill-os-2-review.md"
               ],
               "counts": {
                 "references": 7,
-                "scripts": 2,
+                "scripts": 3,
                 "assets": 0,
-                "reports": 35
+                "reports": 36
               }
             },
             "eval_plan": {
@@ -7286,6 +7272,7 @@
                 "evals/output/holdout_cases.zh-CN.jsonl",
                 "evals/output/provider_matrix.json",
                 "evals/output/schema.json",
+                "evals/packaging_expectations.json",
                 "evals/semantic-config.json",
                 "evals/trigger_cases.json"
               ],
@@ -7299,7 +7286,7 @@
               "adversarial": [],
               "baseline": "without_skill",
               "counts": {
-                "trigger": 11,
+                "trigger": 12,
                 "output": 5,
                 "adversarial": 0,
                 "baseline": 1
@@ -7378,7 +7365,7 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 2,
+                "checked_count": 3,
                 "failed_count": 0,
                 "failed_scripts": []
               },
@@ -7424,9 +7411,9 @@
                 "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
                 "counts": {
                   "references": 7,
-                  "scripts": 2,
+                  "scripts": 3,
                   "assets": 0,
-                  "reports": 35
+                  "reports": 36
                 },
                 "generated_files": [
                   "targets/openai/adapter.json",
@@ -7435,7 +7422,7 @@
               },
               "scripts": {
                 "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-                "script_count": 2,
+                "script_count": 3,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -7529,7 +7516,7 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 2,
+              "checked_count": 3,
               "failed_count": 0,
               "failed_scripts": []
             },
@@ -7573,9 +7560,9 @@
               "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
               "counts": {
                 "references": 7,
-                "scripts": 2,
+                "scripts": 3,
                 "assets": 0,
-                "reports": 35
+                "reports": 36
               },
               "generated_files": [
                 "targets/openai/adapter.json",
@@ -7584,7 +7571,7 @@
             },
             "scripts": {
               "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-              "script_count": 2,
+              "script_count": 3,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -7733,6 +7720,7 @@
                 "references/workflow.md"
               ],
               "scripts": [
+                "scripts/ci_test.py",
                 "scripts/local_output_eval_runner.py",
                 "scripts/validate_team_state.py"
               ],
@@ -7772,13 +7760,14 @@
                 "reports/runtime_permission_probes.json",
                 "reports/runtime_permission_probes.md",
                 "reports/skill_atlas.json",
-                "reports/skill_atlas.html"
+                "reports/skill_atlas.html",
+                "reports/skill-os-2-review.md"
               ],
               "counts": {
                 "references": 7,
-                "scripts": 2,
+                "scripts": 3,
                 "assets": 0,
-                "reports": 35
+                "reports": 36
               }
             },
             "eval_plan": {
@@ -7792,6 +7781,7 @@
                 "evals/output/holdout_cases.zh-CN.jsonl",
                 "evals/output/provider_matrix.json",
                 "evals/output/schema.json",
+                "evals/packaging_expectations.json",
                 "evals/semantic-config.json",
                 "evals/trigger_cases.json"
               ],
@@ -7805,7 +7795,7 @@
               "adversarial": [],
               "baseline": "without_skill",
               "counts": {
-                "trigger": 11,
+                "trigger": 12,
                 "output": 5,
                 "adversarial": 0,
                 "baseline": 1
@@ -7884,7 +7874,7 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 2,
+                "checked_count": 3,
                 "failed_count": 0,
                 "failed_scripts": []
               },
@@ -7930,9 +7920,9 @@
                 "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
                 "counts": {
                   "references": 7,
-                  "scripts": 2,
+                  "scripts": 3,
                   "assets": 0,
-                  "reports": 35
+                  "reports": 36
                 },
                 "generated_files": [
                   "targets/claude/adapter.json",
@@ -7941,7 +7931,7 @@
               },
               "scripts": {
                 "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-                "script_count": 2,
+                "script_count": 3,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -8035,7 +8025,7 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 2,
+              "checked_count": 3,
               "failed_count": 0,
               "failed_scripts": []
             },
@@ -8079,9 +8069,9 @@
               "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
               "counts": {
                 "references": 7,
-                "scripts": 2,
+                "scripts": 3,
                 "assets": 0,
-                "reports": 35
+                "reports": 36
               },
               "generated_files": [
                 "targets/claude/adapter.json",
@@ -8090,7 +8080,7 @@
             },
             "scripts": {
               "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-              "script_count": 2,
+              "script_count": 3,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -8239,6 +8229,7 @@
                 "references/workflow.md"
               ],
               "scripts": [
+                "scripts/ci_test.py",
                 "scripts/local_output_eval_runner.py",
                 "scripts/validate_team_state.py"
               ],
@@ -8278,13 +8269,14 @@
                 "reports/runtime_permission_probes.json",
                 "reports/runtime_permission_probes.md",
                 "reports/skill_atlas.json",
-                "reports/skill_atlas.html"
+                "reports/skill_atlas.html",
+                "reports/skill-os-2-review.md"
               ],
               "counts": {
                 "references": 7,
-                "scripts": 2,
+                "scripts": 3,
                 "assets": 0,
-                "reports": 35
+                "reports": 36
               }
             },
             "eval_plan": {
@@ -8298,6 +8290,7 @@
                 "evals/output/holdout_cases.zh-CN.jsonl",
                 "evals/output/provider_matrix.json",
                 "evals/output/schema.json",
+                "evals/packaging_expectations.json",
                 "evals/semantic-config.json",
                 "evals/trigger_cases.json"
               ],
@@ -8311,7 +8304,7 @@
               "adversarial": [],
               "baseline": "without_skill",
               "counts": {
-                "trigger": 11,
+                "trigger": 12,
                 "output": 5,
                 "adversarial": 0,
                 "baseline": 1
@@ -8390,7 +8383,7 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 2,
+                "checked_count": 3,
                 "failed_count": 0,
                 "failed_scripts": []
               },
@@ -8436,9 +8429,9 @@
                 "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
                 "counts": {
                   "references": 7,
-                  "scripts": 2,
+                  "scripts": 3,
                   "assets": 0,
-                  "reports": 35
+                  "reports": 36
                 },
                 "generated_files": [
                   "targets/generic/adapter.json"
@@ -8446,7 +8439,7 @@
               },
               "scripts": {
                 "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-                "script_count": 2,
+                "script_count": 3,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -8534,7 +8527,7 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 2,
+              "checked_count": 3,
               "failed_count": 0,
               "failed_scripts": []
             },
@@ -8578,9 +8571,9 @@
               "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
               "counts": {
                 "references": 7,
-                "scripts": 2,
+                "scripts": 3,
                 "assets": 0,
-                "reports": 35
+                "reports": 36
               },
               "generated_files": [
                 "targets/generic/adapter.json"
@@ -8588,7 +8581,7 @@
             },
             "scripts": {
               "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-              "script_count": 2,
+              "script_count": 3,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -8729,6 +8722,7 @@
                 "references/workflow.md"
               ],
               "scripts": [
+                "scripts/ci_test.py",
                 "scripts/local_output_eval_runner.py",
                 "scripts/validate_team_state.py"
               ],
@@ -8768,13 +8762,14 @@
                 "reports/runtime_permission_probes.json",
                 "reports/runtime_permission_probes.md",
                 "reports/skill_atlas.json",
-                "reports/skill_atlas.html"
+                "reports/skill_atlas.html",
+                "reports/skill-os-2-review.md"
               ],
               "counts": {
                 "references": 7,
-                "scripts": 2,
+                "scripts": 3,
                 "assets": 0,
-                "reports": 35
+                "reports": 36
               }
             },
             "eval_plan": {
@@ -8788,6 +8783,7 @@
                 "evals/output/holdout_cases.zh-CN.jsonl",
                 "evals/output/provider_matrix.json",
                 "evals/output/schema.json",
+                "evals/packaging_expectations.json",
                 "evals/semantic-config.json",
                 "evals/trigger_cases.json"
               ],
@@ -8801,7 +8797,7 @@
               "adversarial": [],
               "baseline": "without_skill",
               "counts": {
-                "trigger": 11,
+                "trigger": 12,
                 "output": 5,
                 "adversarial": 0,
                 "baseline": 1
@@ -8880,7 +8876,7 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 2,
+                "checked_count": 3,
                 "failed_count": 0,
                 "failed_scripts": []
               },
@@ -8926,9 +8922,9 @@
                 "strategy": "Keep optional directories as relative resources next to SKILL.md.",
                 "counts": {
                   "references": 7,
-                  "scripts": 2,
+                  "scripts": 3,
                   "assets": 0,
-                  "reports": 35
+                  "reports": 36
                 },
                 "generated_files": [
                   "SKILL.md",
@@ -8937,7 +8933,7 @@
               },
               "scripts": {
                 "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-                "script_count": 2,
+                "script_count": 3,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -9024,7 +9020,7 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 2,
+              "checked_count": 3,
               "failed_count": 0,
               "failed_scripts": []
             },
@@ -9068,9 +9064,9 @@
               "strategy": "Keep optional directories as relative resources next to SKILL.md.",
               "counts": {
                 "references": 7,
-                "scripts": 2,
+                "scripts": 3,
                 "assets": 0,
-                "reports": 35
+                "reports": 36
               },
               "generated_files": [
                 "SKILL.md",
@@ -9079,7 +9075,7 @@
             },
             "scripts": {
               "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-              "script_count": 2,
+              "script_count": 3,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -9219,6 +9215,7 @@
                 "references/workflow.md"
               ],
               "scripts": [
+                "scripts/ci_test.py",
                 "scripts/local_output_eval_runner.py",
                 "scripts/validate_team_state.py"
               ],
@@ -9258,13 +9255,14 @@
                 "reports/runtime_permission_probes.json",
                 "reports/runtime_permission_probes.md",
                 "reports/skill_atlas.json",
-                "reports/skill_atlas.html"
+                "reports/skill_atlas.html",
+                "reports/skill-os-2-review.md"
               ],
               "counts": {
                 "references": 7,
-                "scripts": 2,
+                "scripts": 3,
                 "assets": 0,
-                "reports": 35
+                "reports": 36
               }
             },
             "eval_plan": {
@@ -9278,6 +9276,7 @@
                 "evals/output/holdout_cases.zh-CN.jsonl",
                 "evals/output/provider_matrix.json",
                 "evals/output/schema.json",
+                "evals/packaging_expectations.json",
                 "evals/semantic-config.json",
                 "evals/trigger_cases.json"
               ],
@@ -9291,7 +9290,7 @@
               "adversarial": [],
               "baseline": "without_skill",
               "counts": {
-                "trigger": 11,
+                "trigger": 12,
                 "output": 5,
                 "adversarial": 0,
                 "baseline": 1
@@ -9370,7 +9369,7 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 2,
+                "checked_count": 3,
                 "failed_count": 0,
                 "failed_scripts": []
               },
@@ -9416,9 +9415,9 @@
                 "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
                 "counts": {
                   "references": 7,
-                  "scripts": 2,
+                  "scripts": 3,
                   "assets": 0,
-                  "reports": 35
+                  "reports": 36
                 },
                 "generated_files": [
                   "targets/vscode/adapter.json",
@@ -9427,7 +9426,7 @@
               },
               "scripts": {
                 "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-                "script_count": 2,
+                "script_count": 3,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -9518,7 +9517,7 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 2,
+              "checked_count": 3,
               "failed_count": 0,
               "failed_scripts": []
             },
@@ -9562,9 +9561,9 @@
               "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
               "counts": {
                 "references": 7,
-                "scripts": 2,
+                "scripts": 3,
                 "assets": 0,
-                "reports": 35
+                "reports": 36
               },
               "generated_files": [
                 "targets/vscode/adapter.json",
@@ -9573,7 +9572,7 @@
             },
             "scripts": {
               "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-              "script_count": 2,
+              "script_count": 3,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -9682,11 +9681,11 @@
             "references resource resolves: references/team-protocol.md",
             "references resource resolves: references/team-scaling.md",
             "references resource resolves: references/workflow.md",
+            "scripts resource resolves: scripts/ci_test.py",
             "scripts resource resolves: scripts/local_output_eval_runner.py",
             "scripts resource resolves: scripts/validate_team_state.py",
             "reports resource resolves: reports/benchmark_methodology.md",
-            "reports resource resolves: reports/intent-context.json",
-            "reports resource resolves: reports/intent-confidence.json"
+            "reports resource resolves: reports/intent-context.json"
           ],
           "failures": [],
           "warnings": []
@@ -9726,11 +9725,11 @@
             "references resource resolves: references/team-protocol.md",
             "references resource resolves: references/team-scaling.md",
             "references resource resolves: references/workflow.md",
+            "scripts resource resolves: scripts/ci_test.py",
             "scripts resource resolves: scripts/local_output_eval_runner.py",
             "scripts resource resolves: scripts/validate_team_state.py",
             "reports resource resolves: reports/benchmark_methodology.md",
-            "reports resource resolves: reports/intent-context.json",
-            "reports resource resolves: reports/intent-confidence.json"
+            "reports resource resolves: reports/intent-context.json"
           ],
           "failures": [],
           "warnings": []
@@ -9770,11 +9769,11 @@
             "references resource resolves: references/team-protocol.md",
             "references resource resolves: references/team-scaling.md",
             "references resource resolves: references/workflow.md",
+            "scripts resource resolves: scripts/ci_test.py",
             "scripts resource resolves: scripts/local_output_eval_runner.py",
             "scripts resource resolves: scripts/validate_team_state.py",
             "reports resource resolves: reports/benchmark_methodology.md",
-            "reports resource resolves: reports/intent-context.json",
-            "reports resource resolves: reports/intent-confidence.json"
+            "reports resource resolves: reports/intent-context.json"
           ],
           "failures": [],
           "warnings": [
@@ -9816,11 +9815,11 @@
             "references resource resolves: references/team-protocol.md",
             "references resource resolves: references/team-scaling.md",
             "references resource resolves: references/workflow.md",
+            "scripts resource resolves: scripts/ci_test.py",
             "scripts resource resolves: scripts/local_output_eval_runner.py",
             "scripts resource resolves: scripts/validate_team_state.py",
             "reports resource resolves: reports/benchmark_methodology.md",
-            "reports resource resolves: reports/intent-context.json",
-            "reports resource resolves: reports/intent-confidence.json"
+            "reports resource resolves: reports/intent-context.json"
           ],
           "failures": [],
           "warnings": [
@@ -9862,11 +9861,11 @@
             "references resource resolves: references/team-protocol.md",
             "references resource resolves: references/team-scaling.md",
             "references resource resolves: references/workflow.md",
+            "scripts resource resolves: scripts/ci_test.py",
             "scripts resource resolves: scripts/local_output_eval_runner.py",
             "scripts resource resolves: scripts/validate_team_state.py",
             "reports resource resolves: reports/benchmark_methodology.md",
-            "reports resource resolves: reports/intent-context.json",
-            "reports resource resolves: reports/intent-confidence.json"
+            "reports resource resolves: reports/intent-context.json"
           ],
           "failures": [],
           "warnings": []
@@ -10241,7 +10240,7 @@
       "ok": true,
       "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
       "summary": {
-        "scanned_files": 30,
+        "scanned_files": 34,
         "script_count": 3,
         "internal_module_count": 0,
         "secret_findings": 0,
@@ -10261,8 +10260,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 30,
-        "package_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d"
+        "package_hash_file_count": 34,
+        "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
       },
       "failures": [],
       "warnings": [],
@@ -10299,8 +10298,8 @@
         {
           "path": "scripts/validate_team_state.py",
           "interface": "cli",
-          "interface_declared": false,
-          "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
+          "interface_declared": true,
+          "interface_reason": "Validates a file-backed team ledger read-only and returns a machine-readable JSON result.",
           "has_argparse": true,
           "has_main_guard": true,
           "uses_input": false,
@@ -10471,7 +10470,7 @@
         "watch_line_threshold": 720,
         "early_watch_line_threshold": 600,
         "block_line_threshold": 1500,
-        "largest_file_lines": 128,
+        "largest_file_lines": 131,
         "watchlist_count": 0,
         "early_watchlist_count": 0,
         "hotspot_count": 0,
@@ -10481,7 +10480,7 @@
       "largest_files": [
         {
           "path": "scripts/validate_team_state.py",
-          "lines": 128,
+          "lines": 131,
           "kind": "cli-script",
           "severity": "pass",
           "early_watch": false,
@@ -10520,27 +10519,27 @@
       "stats": {
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
-        "skill_body_tokens": 549,
-        "other_text_tokens": 190450,
-        "estimated_initial_load_tokens": 870,
-        "estimated_total_text_tokens": 190999,
-        "deferred_resource_tokens": 8720,
+        "skill_body_tokens": 557,
+        "other_text_tokens": 200803,
+        "estimated_initial_load_tokens": 878,
+        "estimated_total_text_tokens": 201360,
+        "deferred_resource_tokens": 9690,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
+          {
+            "path": "evals",
+            "estimated_tokens": 3541,
+            "file_count": 11
+          },
           {
             "path": "references",
             "estimated_tokens": 3447,
             "file_count": 7
           },
           {
-            "path": "evals",
-            "estimated_tokens": 3285,
-            "file_count": 10
-          },
-          {
             "path": "scripts",
-            "estimated_tokens": 1988,
-            "file_count": 2
+            "estimated_tokens": 2702,
+            "file_count": 3
           }
         ],
         "large_deferred_resource_dirs": [],
@@ -10551,16 +10550,57 @@
           "directories": [],
           "summary": "No large deferred resource directory exceeds the per-dir threshold."
         },
-        "relevant_file_count": 115,
+        "relevant_file_count": 128,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
-        "quality_density": 149.4
+        "quality_density": 148.1
       }
     },
-    "promotion": {},
+    "promotion": {
+      "schema_version": "1.0",
+      "generated_at": "2026-09-14",
+      "scope": "agent-team-work route contract promotion",
+      "summary": {
+        "promote": 0,
+        "keep_current": 1,
+        "blocked": 0,
+        "public_release_ready": false
+      },
+      "targets": [
+        {
+          "name": "agent-team-work",
+          "winner_label": "Current",
+          "decision": "keep_current",
+          "winner_changed": false,
+          "route_metrics": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "misroute_count": 0,
+            "ambiguous_case_count": 0,
+            "case_count": 8
+          },
+          "causes": [
+            "no_candidate_outperformed_current"
+          ],
+          "next_action": "Keep the current route contract and reopen promotion only when fresh route evidence appears.",
+          "public_release_decision": "blocked_pending_external_and_human_evidence",
+          "evidence": [
+            "reports/route_scorecard.json",
+            "reports/output_quality_scorecard.json",
+            "reports/world_class_evidence_ledger.json",
+            "reports/benchmark_reproducibility.json"
+          ]
+        }
+      ],
+      "notes": [
+        "This report records trigger-contract promotion only.",
+        "It does not convert fixture runs, pending reviews, or metadata fallbacks into public production evidence.",
+        "Unconditional public production remains blocked until the benchmark public-claim blockers are closed."
+      ]
+    },
     "atlas": {
       "ok": true,
-      "workspace_root": "/Volumes/Code/team-worker",
+      "workspace_root": "/Volumes/Code/team-worker/agent-team-work",
       "summary": {
         "skill_count": 1,
         "actionable_skill_count": 1,
@@ -10583,12 +10623,12 @@
         "rules": []
       },
       "catalog": {
-        "workspace_root": "/Volumes/Code/team-worker",
+        "workspace_root": "/Volumes/Code/team-worker/agent-team-work",
         "generated_at": "2026-09-14",
         "skills": [
           {
             "name": "agent-team-work",
-            "path": "agent-team-work",
+            "path": ".",
             "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
             "owner": "Local Codex Team",
             "version": "0.2.0",
@@ -10604,6 +10644,8 @@
               "vscode"
             ],
             "resources": [
+              "scripts/ci_test.py",
+              "scripts/local_output_eval_runner.py",
               "scripts/validate_team_state.py",
               "references/codex-tools.md",
               "references/e2e-smoke-checklist.md",
@@ -10655,7 +10697,7 @@
             "scope_reason": "default release-actionable skill",
             "telemetry": {
               "report_present": true,
-              "report": "agent-team-work/reports/adoption_drift_report.json",
+              "report": "reports/adoption_drift_report.json",
               "risk_band": "low",
               "event_count": 1,
               "adoption_sample_count": 1,
@@ -10687,7 +10729,7 @@
         "nodes": [
           {
             "name": "agent-team-work",
-            "path": "agent-team-work"
+            "path": "."
           }
         ],
         "shared_resources": []
@@ -10813,8 +10855,8 @@
       "local_blueprint_ready": false,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
-      "release_lock_ready": false,
-      "evidence_consistency_ok": false,
+      "release_lock_ready": true,
+      "evidence_consistency_ok": true,
       "writes_source_files": false,
       "auto_patch_enabled": false,
       "failure_count": 0,
@@ -10830,8 +10872,8 @@
         "local_blueprint_ready": false,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": false,
-        "evidence_consistency_ok": false,
+        "release_lock_ready": true,
+        "evidence_consistency_ok": true,
         "writes_source_files": false,
         "auto_patch_enabled": false,
         "failure_count": 0
@@ -10923,8 +10965,8 @@
         "local_blueprint_ready": false,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": false,
-        "evidence_consistency_ok": false
+        "release_lock_ready": true,
+        "evidence_consistency_ok": true
       },
       "actions": [
         {
@@ -10936,11 +10978,6 @@
           "key": "close-world-class-evidence",
           "priority": "high",
           "action": "Collect accepted external or human evidence for the pending world-class ledger entries."
-        },
-        {
-          "key": "refresh-evidence-consistency",
-          "priority": "high",
-          "action": "Regenerate evidence-consistency before using this report for release decisions."
         }
       ],
       "failures": [],
@@ -10977,8 +11014,8 @@
       "top_score": 0,
       "skill_count": 1,
       "actionable_portfolio_issue_count": 0,
-      "release_lock_ready": false,
-      "evidence_consistency_ok": false,
+      "release_lock_ready": true,
+      "evidence_consistency_ok": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
       "writes_source_files": false,
@@ -10997,8 +11034,8 @@
         "top_score": 0,
         "skill_count": 1,
         "actionable_portfolio_issue_count": 0,
-        "release_lock_ready": false,
-        "evidence_consistency_ok": false,
+        "release_lock_ready": true,
+        "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
         "writes_source_files": false,
@@ -11073,8 +11110,8 @@
         "no_route_opportunity_count": 0
       },
       "release_state": {
-        "release_lock_ready": false,
-        "evidence_consistency_ok": false,
+        "release_lock_ready": true,
+        "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4
       },
@@ -11083,11 +11120,6 @@
           "key": "close-world-class-evidence",
           "priority": "high",
           "action": "Collect accepted external or human evidence for pending world-class ledger entries before public claims."
-        },
-        {
-          "key": "refresh-evidence-consistency",
-          "priority": "high",
-          "action": "Regenerate evidence consistency before using this curator report for release decisions."
         }
       ],
       "failures": [],
@@ -11116,9 +11148,9 @@
         "invalid_count": 0,
         "covered_gate_count": 0,
         "covered_gate_keys": [],
-        "waiver_candidate_count": 1,
+        "waiver_candidate_count": 2,
         "waiverable_open_count": 1,
-        "non_waivable_count": 0
+        "non_waivable_count": 1
       },
       "policy": {
         "blocker_waivers_allowed": false,
@@ -11191,7 +11223,7 @@
             "false-positive",
             "temporary-exception"
           ],
-          "risk_summary": "review pending 0; model-executed 0; output failures 0",
+          "risk_summary": "review pending 5; model-executed 0; output failures 0",
           "required_review": [
             "Reviewer confirms this release does not claim provider-backed or human-adjudicated output superiority.",
             "Reviewer names the release scope and expiry date.",
@@ -11200,6 +11232,21 @@
           "suggested_evidence": "reports/output_review_adjudication.md",
           "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-09-14 --evidence reports/output_review_adjudication.md --self",
           "world_class_boundary": "Does not count as provider, human, or public world-class completion evidence."
+        },
+        {
+          "gate_key": "world-class-evidence",
+          "label": "World-Class Evidence",
+          "status": "cannot-waive",
+          "waiver_allowed": false,
+          "risk_summary": "4 pending evidence entries; 1 human pending; 3 external pending",
+          "required_review": [
+            "Do not use a waiver to claim public world-class readiness.",
+            "Either submit accepted ledger evidence or state that this release does not claim world-class completion.",
+            "Keep claim guard active until ledger summary.ready_to_claim_world_class is true."
+          ],
+          "suggested_evidence": "reports/world_class_evidence_ledger.md",
+          "suggested_command": "python3 scripts/yao.py world-class-ledger . --submissions-dir evidence/world_class/submissions --self && python3 scripts/yao.py world-class-claim-guard . --self",
+          "world_class_boundary": "Non-waivable completion boundary."
         }
       ],
       "failures": [],
@@ -11227,7 +11274,7 @@
       },
       "annotations": [],
       "failures": [],
-      "template_written": true,
+      "template_written": false,
       "artifacts": {
         "json": "reports/review_annotations.json",
         "markdown": "reports/review_annotations.md"
@@ -11592,11 +11639,11 @@
           ],
           "observed_state": {
             "native_enforcement_count": 0,
-            "metadata_fallback_count": 1,
+            "metadata_fallback_count": 4,
             "installer_enforcement_pass_count": 0,
             "installer_permission_failure_count": 0,
             "installer_enforcement_ready": false,
-            "residual_risk_count": 1,
+            "residual_risk_count": 4,
             "failure_count": 0,
             "accepted": false
           },
@@ -12018,11 +12065,11 @@
           "source_accepted": false,
           "observed_state": {
             "native_enforcement_count": 0,
-            "metadata_fallback_count": 1,
+            "metadata_fallback_count": 4,
             "installer_enforcement_pass_count": 0,
             "installer_permission_failure_count": 0,
             "installer_enforcement_ready": false,
-            "residual_risk_count": 1,
+            "residual_risk_count": 4,
             "failure_count": 0,
             "accepted": false
           },
@@ -13005,8 +13052,8 @@
               "artifact_prefill_counts_as_evidence": false,
               "submission_ref_total_count": 2,
               "submission_ref_ready_count": 2,
-              "supporting_evidence_total_count": 8,
-              "supporting_evidence_ready_count": 8,
+              "supporting_evidence_total_count": 11,
+              "supporting_evidence_ready_count": 11,
               "roles": [
                 {
                   "role": "submission-ref",
@@ -14354,8 +14401,8 @@
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 7,
           "submission_ref_ready_count": 4,
-          "supporting_evidence_total_count": 30,
-          "supporting_evidence_ready_count": 23,
+          "supporting_evidence_total_count": 33,
+          "supporting_evidence_ready_count": 26,
           "roles": [
             {
               "role": "submission-ref",
@@ -14629,11 +14676,11 @@
           "intake_errors": [],
           "observed_state": {
             "native_enforcement_count": 0,
-            "metadata_fallback_count": 1,
+            "metadata_fallback_count": 4,
             "installer_enforcement_pass_count": 0,
             "installer_permission_failure_count": 0,
             "installer_enforcement_ready": false,
-            "residual_risk_count": 1,
+            "residual_risk_count": 4,
             "failure_count": 0,
             "accepted": false
           },
@@ -15535,11 +15582,11 @@
           ],
           "observed_state": {
             "native_enforcement_count": 0,
-            "metadata_fallback_count": 1,
+            "metadata_fallback_count": 4,
             "installer_enforcement_pass_count": 0,
             "installer_permission_failure_count": 0,
             "installer_enforcement_ready": false,
-            "residual_risk_count": 1,
+            "residual_risk_count": 4,
             "failure_count": 0,
             "accepted": false
           },
@@ -16148,7 +16195,7 @@
             "key": "review_studio_clean",
             "label": "Review Studio clean",
             "passed": false,
-            "current": "blockers 1; warnings 4",
+            "current": "blockers 0; warnings 4",
             "expected": "blocker_count == 0 and warning_count == 0",
             "artifact": "reports/review-studio.json"
           },
@@ -16190,7 +16237,7 @@
             "key": "review_studio_clean",
             "label": "Review Studio clean",
             "passed": false,
-            "current": "blockers 1; warnings 4",
+            "current": "blockers 0; warnings 4",
             "expected": "blocker_count == 0 and warning_count == 0",
             "artifact": "reports/review-studio.json"
           },
@@ -16793,9 +16840,9 @@
       "summary": {
         "ledger_ready_to_claim_world_class": false,
         "ledger_pending_count": 4,
-        "claim_surface_count": 131,
-        "json_claim_surface_count": 70,
-        "metadata_claim_surface_count": 72,
+        "claim_surface_count": 137,
+        "json_claim_surface_count": 74,
+        "metadata_claim_surface_count": 76,
         "package_claim_surface_count": 11,
         "violation_count": 0,
         "overclaim_guard_active": true,
@@ -16903,6 +16950,10 @@
         },
         {
           "path": "manifest.json",
+          "violation_count": 0
+        },
+        {
+          "path": "registry/examples/yao-meta-skill-1.0.0.json",
           "violation_count": 0
         },
         {
@@ -17098,6 +17149,14 @@
           "violation_count": 0
         },
         {
+          "path": "reports/promotion_decisions.json",
+          "violation_count": 0
+        },
+        {
+          "path": "reports/promotion_decisions.md",
+          "violation_count": 0
+        },
+        {
           "path": "reports/prompt-quality-profile.json",
           "violation_count": 0
         },
@@ -17215,6 +17274,10 @@
         },
         {
           "path": "reports/skill-ir.json",
+          "violation_count": 0
+        },
+        {
+          "path": "reports/skill-os-2-review.md",
           "violation_count": 0
         },
         {
@@ -17352,6 +17415,14 @@
         {
           "path": "security/permission_policy.json",
           "violation_count": 0
+        },
+        {
+          "path": "skill-ir/examples/yao-meta-skill.json",
+          "violation_count": 0
+        },
+        {
+          "path": "skill-ir/schema.json",
+          "violation_count": 0
         }
       ],
       "violations": [],
@@ -17387,8 +17458,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d",
-          "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0"
+          "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
+          "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
         },
         "compatibility": {
           "openai": "pass",
@@ -17419,7 +17490,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
+          "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -17444,7 +17515,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/agent-team-work.json",
-            "package_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d"
+            "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
           }
         ]
       },
@@ -17467,8 +17538,8 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
-        "archive_entry_count": 145,
+        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+        "archive_entry_count": 154,
         "nested_skill_entry_count": 0,
         "failure_count": 0,
         "warning_count": 0
@@ -17480,9 +17551,274 @@
           "detail": "Package manifest exists: /Volumes/Code/team-worker/agent-team-work/dist/manifest.json"
         },
         {
+          "id": "openai-adapter",
+          "status": "pass",
+          "detail": "Adapter exists for target: openai"
+        },
+        {
+          "id": "openai-field-name",
+          "status": "pass",
+          "detail": "openai adapter includes field: name"
+        },
+        {
+          "id": "openai-field-description",
+          "status": "pass",
+          "detail": "openai adapter includes field: description"
+        },
+        {
+          "id": "openai-field-version",
+          "status": "pass",
+          "detail": "openai adapter includes field: version"
+        },
+        {
+          "id": "openai-field-display_name",
+          "status": "pass",
+          "detail": "openai adapter includes field: display_name"
+        },
+        {
+          "id": "openai-field-short_description",
+          "status": "pass",
+          "detail": "openai adapter includes field: short_description"
+        },
+        {
+          "id": "openai-field-default_prompt",
+          "status": "pass",
+          "detail": "openai adapter includes field: default_prompt"
+        },
+        {
+          "id": "openai-field-job_to_be_done",
+          "status": "pass",
+          "detail": "openai adapter includes field: job_to_be_done"
+        },
+        {
+          "id": "openai-field-ir_source",
+          "status": "pass",
+          "detail": "openai adapter includes field: ir_source"
+        },
+        {
+          "id": "openai-field-ir_schema_version",
+          "status": "pass",
+          "detail": "openai adapter includes field: ir_schema_version"
+        },
+        {
+          "id": "openai-field-semantic_contract",
+          "status": "pass",
+          "detail": "openai adapter includes field: semantic_contract"
+        },
+        {
+          "id": "openai-field-semantic_parity",
+          "status": "pass",
+          "detail": "openai adapter includes field: semantic_parity"
+        },
+        {
+          "id": "openai-field-compiler",
+          "status": "pass",
+          "detail": "openai adapter includes field: compiler"
+        },
+        {
+          "id": "openai-field-compiled_contract",
+          "status": "pass",
+          "detail": "openai adapter includes field: compiled_contract"
+        },
+        {
+          "id": "openai-field-permission_contract",
+          "status": "pass",
+          "detail": "openai adapter includes field: permission_contract"
+        },
+        {
+          "id": "openai-field-target_permission_contract",
+          "status": "pass",
+          "detail": "openai adapter includes field: target_permission_contract"
+        },
+        {
+          "id": "openai-field-target_native_contract",
+          "status": "pass",
+          "detail": "openai adapter includes field: target_native_contract"
+        },
+        {
+          "id": "openai-field-target_transform",
+          "status": "pass",
+          "detail": "openai adapter includes field: target_transform"
+        },
+        {
+          "id": "openai-field-canonical_metadata",
+          "status": "pass",
+          "detail": "openai adapter includes field: canonical_metadata"
+        },
+        {
+          "id": "openai-field-canonical_format",
+          "status": "pass",
+          "detail": "openai adapter includes field: canonical_format"
+        },
+        {
+          "id": "openai-field-activation_mode",
+          "status": "pass",
+          "detail": "openai adapter includes field: activation_mode"
+        },
+        {
+          "id": "openai-field-execution_context",
+          "status": "pass",
+          "detail": "openai adapter includes field: execution_context"
+        },
+        {
+          "id": "openai-field-shell",
+          "status": "pass",
+          "detail": "openai adapter includes field: shell"
+        },
+        {
+          "id": "openai-field-trust_level",
+          "status": "pass",
+          "detail": "openai adapter includes field: trust_level"
+        },
+        {
+          "id": "openai-field-remote_inline_execution",
+          "status": "pass",
+          "detail": "openai adapter includes field: remote_inline_execution"
+        },
+        {
+          "id": "openai-field-degradation_strategy",
+          "status": "pass",
+          "detail": "openai adapter includes field: degradation_strategy"
+        },
+        {
+          "id": "openai-field-portability_profile",
+          "status": "pass",
+          "detail": "openai adapter includes field: portability_profile"
+        },
+        {
           "id": "claude-adapter",
           "status": "pass",
           "detail": "Adapter exists for target: claude"
+        },
+        {
+          "id": "claude-field-name",
+          "status": "pass",
+          "detail": "claude adapter includes field: name"
+        },
+        {
+          "id": "claude-field-description",
+          "status": "pass",
+          "detail": "claude adapter includes field: description"
+        },
+        {
+          "id": "claude-field-version",
+          "status": "pass",
+          "detail": "claude adapter includes field: version"
+        },
+        {
+          "id": "claude-field-display_name",
+          "status": "pass",
+          "detail": "claude adapter includes field: display_name"
+        },
+        {
+          "id": "claude-field-short_description",
+          "status": "pass",
+          "detail": "claude adapter includes field: short_description"
+        },
+        {
+          "id": "claude-field-default_prompt",
+          "status": "pass",
+          "detail": "claude adapter includes field: default_prompt"
+        },
+        {
+          "id": "claude-field-job_to_be_done",
+          "status": "pass",
+          "detail": "claude adapter includes field: job_to_be_done"
+        },
+        {
+          "id": "claude-field-ir_source",
+          "status": "pass",
+          "detail": "claude adapter includes field: ir_source"
+        },
+        {
+          "id": "claude-field-ir_schema_version",
+          "status": "pass",
+          "detail": "claude adapter includes field: ir_schema_version"
+        },
+        {
+          "id": "claude-field-semantic_contract",
+          "status": "pass",
+          "detail": "claude adapter includes field: semantic_contract"
+        },
+        {
+          "id": "claude-field-semantic_parity",
+          "status": "pass",
+          "detail": "claude adapter includes field: semantic_parity"
+        },
+        {
+          "id": "claude-field-compiler",
+          "status": "pass",
+          "detail": "claude adapter includes field: compiler"
+        },
+        {
+          "id": "claude-field-compiled_contract",
+          "status": "pass",
+          "detail": "claude adapter includes field: compiled_contract"
+        },
+        {
+          "id": "claude-field-permission_contract",
+          "status": "pass",
+          "detail": "claude adapter includes field: permission_contract"
+        },
+        {
+          "id": "claude-field-target_permission_contract",
+          "status": "pass",
+          "detail": "claude adapter includes field: target_permission_contract"
+        },
+        {
+          "id": "claude-field-target_native_contract",
+          "status": "pass",
+          "detail": "claude adapter includes field: target_native_contract"
+        },
+        {
+          "id": "claude-field-target_transform",
+          "status": "pass",
+          "detail": "claude adapter includes field: target_transform"
+        },
+        {
+          "id": "claude-field-canonical_metadata",
+          "status": "pass",
+          "detail": "claude adapter includes field: canonical_metadata"
+        },
+        {
+          "id": "claude-field-canonical_format",
+          "status": "pass",
+          "detail": "claude adapter includes field: canonical_format"
+        },
+        {
+          "id": "claude-field-activation_mode",
+          "status": "pass",
+          "detail": "claude adapter includes field: activation_mode"
+        },
+        {
+          "id": "claude-field-execution_context",
+          "status": "pass",
+          "detail": "claude adapter includes field: execution_context"
+        },
+        {
+          "id": "claude-field-shell",
+          "status": "pass",
+          "detail": "claude adapter includes field: shell"
+        },
+        {
+          "id": "claude-field-trust_level",
+          "status": "pass",
+          "detail": "claude adapter includes field: trust_level"
+        },
+        {
+          "id": "claude-field-remote_inline_execution",
+          "status": "pass",
+          "detail": "claude adapter includes field: remote_inline_execution"
+        },
+        {
+          "id": "claude-field-degradation_strategy",
+          "status": "pass",
+          "detail": "claude adapter includes field: degradation_strategy"
+        },
+        {
+          "id": "claude-field-portability_profile",
+          "status": "pass",
+          "detail": "claude adapter includes field: portability_profile"
         },
         {
           "id": "generic-adapter",
@@ -17490,14 +17826,304 @@
           "detail": "Adapter exists for target: generic"
         },
         {
-          "id": "openai-adapter",
+          "id": "generic-field-name",
           "status": "pass",
-          "detail": "Adapter exists for target: openai"
+          "detail": "generic adapter includes field: name"
+        },
+        {
+          "id": "generic-field-description",
+          "status": "pass",
+          "detail": "generic adapter includes field: description"
+        },
+        {
+          "id": "generic-field-version",
+          "status": "pass",
+          "detail": "generic adapter includes field: version"
+        },
+        {
+          "id": "generic-field-display_name",
+          "status": "pass",
+          "detail": "generic adapter includes field: display_name"
+        },
+        {
+          "id": "generic-field-short_description",
+          "status": "pass",
+          "detail": "generic adapter includes field: short_description"
+        },
+        {
+          "id": "generic-field-default_prompt",
+          "status": "pass",
+          "detail": "generic adapter includes field: default_prompt"
+        },
+        {
+          "id": "generic-field-job_to_be_done",
+          "status": "pass",
+          "detail": "generic adapter includes field: job_to_be_done"
+        },
+        {
+          "id": "generic-field-ir_source",
+          "status": "pass",
+          "detail": "generic adapter includes field: ir_source"
+        },
+        {
+          "id": "generic-field-ir_schema_version",
+          "status": "pass",
+          "detail": "generic adapter includes field: ir_schema_version"
+        },
+        {
+          "id": "generic-field-semantic_contract",
+          "status": "pass",
+          "detail": "generic adapter includes field: semantic_contract"
+        },
+        {
+          "id": "generic-field-semantic_parity",
+          "status": "pass",
+          "detail": "generic adapter includes field: semantic_parity"
+        },
+        {
+          "id": "generic-field-compiler",
+          "status": "pass",
+          "detail": "generic adapter includes field: compiler"
+        },
+        {
+          "id": "generic-field-compiled_contract",
+          "status": "pass",
+          "detail": "generic adapter includes field: compiled_contract"
+        },
+        {
+          "id": "generic-field-permission_contract",
+          "status": "pass",
+          "detail": "generic adapter includes field: permission_contract"
+        },
+        {
+          "id": "generic-field-target_permission_contract",
+          "status": "pass",
+          "detail": "generic adapter includes field: target_permission_contract"
+        },
+        {
+          "id": "generic-field-target_native_contract",
+          "status": "pass",
+          "detail": "generic adapter includes field: target_native_contract"
+        },
+        {
+          "id": "generic-field-target_transform",
+          "status": "pass",
+          "detail": "generic adapter includes field: target_transform"
+        },
+        {
+          "id": "generic-field-canonical_metadata",
+          "status": "pass",
+          "detail": "generic adapter includes field: canonical_metadata"
+        },
+        {
+          "id": "generic-field-canonical_format",
+          "status": "pass",
+          "detail": "generic adapter includes field: canonical_format"
+        },
+        {
+          "id": "generic-field-activation_mode",
+          "status": "pass",
+          "detail": "generic adapter includes field: activation_mode"
+        },
+        {
+          "id": "generic-field-execution_context",
+          "status": "pass",
+          "detail": "generic adapter includes field: execution_context"
+        },
+        {
+          "id": "generic-field-shell",
+          "status": "pass",
+          "detail": "generic adapter includes field: shell"
+        },
+        {
+          "id": "generic-field-trust_level",
+          "status": "pass",
+          "detail": "generic adapter includes field: trust_level"
+        },
+        {
+          "id": "generic-field-remote_inline_execution",
+          "status": "pass",
+          "detail": "generic adapter includes field: remote_inline_execution"
+        },
+        {
+          "id": "generic-field-degradation_strategy",
+          "status": "pass",
+          "detail": "generic adapter includes field: degradation_strategy"
+        },
+        {
+          "id": "generic-field-portability_profile",
+          "status": "pass",
+          "detail": "generic adapter includes field: portability_profile"
         },
         {
           "id": "vscode-adapter",
           "status": "pass",
           "detail": "Adapter exists for target: vscode"
+        },
+        {
+          "id": "vscode-field-name",
+          "status": "pass",
+          "detail": "vscode adapter includes field: name"
+        },
+        {
+          "id": "vscode-field-description",
+          "status": "pass",
+          "detail": "vscode adapter includes field: description"
+        },
+        {
+          "id": "vscode-field-version",
+          "status": "pass",
+          "detail": "vscode adapter includes field: version"
+        },
+        {
+          "id": "vscode-field-display_name",
+          "status": "pass",
+          "detail": "vscode adapter includes field: display_name"
+        },
+        {
+          "id": "vscode-field-short_description",
+          "status": "pass",
+          "detail": "vscode adapter includes field: short_description"
+        },
+        {
+          "id": "vscode-field-default_prompt",
+          "status": "pass",
+          "detail": "vscode adapter includes field: default_prompt"
+        },
+        {
+          "id": "vscode-field-job_to_be_done",
+          "status": "pass",
+          "detail": "vscode adapter includes field: job_to_be_done"
+        },
+        {
+          "id": "vscode-field-ir_source",
+          "status": "pass",
+          "detail": "vscode adapter includes field: ir_source"
+        },
+        {
+          "id": "vscode-field-ir_schema_version",
+          "status": "pass",
+          "detail": "vscode adapter includes field: ir_schema_version"
+        },
+        {
+          "id": "vscode-field-semantic_contract",
+          "status": "pass",
+          "detail": "vscode adapter includes field: semantic_contract"
+        },
+        {
+          "id": "vscode-field-semantic_parity",
+          "status": "pass",
+          "detail": "vscode adapter includes field: semantic_parity"
+        },
+        {
+          "id": "vscode-field-compiler",
+          "status": "pass",
+          "detail": "vscode adapter includes field: compiler"
+        },
+        {
+          "id": "vscode-field-compiled_contract",
+          "status": "pass",
+          "detail": "vscode adapter includes field: compiled_contract"
+        },
+        {
+          "id": "vscode-field-permission_contract",
+          "status": "pass",
+          "detail": "vscode adapter includes field: permission_contract"
+        },
+        {
+          "id": "vscode-field-target_permission_contract",
+          "status": "pass",
+          "detail": "vscode adapter includes field: target_permission_contract"
+        },
+        {
+          "id": "vscode-field-target_native_contract",
+          "status": "pass",
+          "detail": "vscode adapter includes field: target_native_contract"
+        },
+        {
+          "id": "vscode-field-target_transform",
+          "status": "pass",
+          "detail": "vscode adapter includes field: target_transform"
+        },
+        {
+          "id": "vscode-field-canonical_metadata",
+          "status": "pass",
+          "detail": "vscode adapter includes field: canonical_metadata"
+        },
+        {
+          "id": "vscode-field-canonical_format",
+          "status": "pass",
+          "detail": "vscode adapter includes field: canonical_format"
+        },
+        {
+          "id": "vscode-field-activation_mode",
+          "status": "pass",
+          "detail": "vscode adapter includes field: activation_mode"
+        },
+        {
+          "id": "vscode-field-execution_context",
+          "status": "pass",
+          "detail": "vscode adapter includes field: execution_context"
+        },
+        {
+          "id": "vscode-field-shell",
+          "status": "pass",
+          "detail": "vscode adapter includes field: shell"
+        },
+        {
+          "id": "vscode-field-trust_level",
+          "status": "pass",
+          "detail": "vscode adapter includes field: trust_level"
+        },
+        {
+          "id": "vscode-field-remote_inline_execution",
+          "status": "pass",
+          "detail": "vscode adapter includes field: remote_inline_execution"
+        },
+        {
+          "id": "vscode-field-degradation_strategy",
+          "status": "pass",
+          "detail": "vscode adapter includes field: degradation_strategy"
+        },
+        {
+          "id": "vscode-field-portability_profile",
+          "status": "pass",
+          "detail": "vscode adapter includes field: portability_profile"
+        },
+        {
+          "id": "openai-file-targets/openai/adapter.json",
+          "status": "pass",
+          "detail": "Package contains targets/openai/adapter.json"
+        },
+        {
+          "id": "openai-file-targets/openai/agents/openai.yaml",
+          "status": "pass",
+          "detail": "Package contains targets/openai/agents/openai.yaml"
+        },
+        {
+          "id": "claude-file-targets/claude/adapter.json",
+          "status": "pass",
+          "detail": "Package contains targets/claude/adapter.json"
+        },
+        {
+          "id": "claude-file-targets/claude/README.md",
+          "status": "pass",
+          "detail": "Package contains targets/claude/README.md"
+        },
+        {
+          "id": "generic-file-targets/generic/adapter.json",
+          "status": "pass",
+          "detail": "Package contains targets/generic/adapter.json"
+        },
+        {
+          "id": "vscode-file-targets/vscode/adapter.json",
+          "status": "pass",
+          "detail": "Package contains targets/vscode/adapter.json"
+        },
+        {
+          "id": "vscode-file-targets/vscode/README.md",
+          "status": "pass",
+          "detail": "Package contains targets/vscode/README.md"
         },
         {
           "id": "archive-safe-paths",
@@ -17545,6 +18171,11 @@
           "detail": "Registry package version matches package manifest"
         },
         {
+          "id": "registry-compat-openai",
+          "status": "pass",
+          "detail": "Registry compatibility is reviewable for target: openai"
+        },
+        {
           "id": "registry-compat-claude",
           "status": "pass",
           "detail": "Registry compatibility is reviewable for target: claude"
@@ -17553,11 +18184,6 @@
           "id": "registry-compat-generic",
           "status": "pass",
           "detail": "Registry compatibility is reviewable for target: generic"
-        },
-        {
-          "id": "registry-compat-openai",
-          "status": "pass",
-          "detail": "Registry compatibility is reviewable for target: openai"
         },
         {
           "id": "registry-compat-vscode",
@@ -17580,11 +18206,11 @@
       "generated_at": "2026-09-14",
       "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
       "package_dir": "/Volumes/Code/team-worker/agent-team-work/dist",
-      "install_root": "/private/tmp/agent-team-work-install/simulate-agent-team-work",
-      "installed_skill_dir": "/private/tmp/agent-team-work-install/simulate-agent-team-work/agent-team-work",
+      "install_root": "/Volumes/Code/team-worker/agent-team-work/dist/install-simulation/simulate-agent-team-work",
+      "installed_skill_dir": "/Volumes/Code/team-worker/agent-team-work/dist/install-simulation/simulate-agent-team-work/agent-team-work",
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 145,
+        "archive_entry_count": 154,
         "nested_skill_entry_count": 0,
         "archive_extracted": true,
         "entrypoint_loaded": true,
@@ -17768,10 +18394,10 @@
       },
       "summary": {
         "declared_bump": "minor",
-        "recommended_bump": "patch",
+        "recommended_bump": "minor",
         "breaking_change_count": 0,
         "added_target_count": 0,
-        "metadata_change_count": 1,
+        "metadata_change_count": 2,
         "checksum_change_count": 2,
         "failure_count": 0,
         "warning_count": 0
@@ -17780,8 +18406,20 @@
         "name_changed": false,
         "added_targets": [],
         "removed_targets": [],
-        "compatibility_changes": [],
+        "compatibility_changes": [
+          {
+            "target": "agent-skills",
+            "from": "missing",
+            "to": "pass",
+            "direction": "improved"
+          }
+        ],
         "metadata_changes": [
+          {
+            "field": "description",
+            "from": "Previous agent-team-work route contract fixture used only for upgrade comparison.",
+            "to": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
+          },
           {
             "field": "license",
             "from": "",
@@ -17792,24 +18430,24 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0"
+            "to": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
           },
           {
             "field": "package_sha256",
             "from": "previous-fixture",
-            "to": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d"
+            "to": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
           }
         ]
       },
       "release_notes": [
-        "Recommended version bump: patch.",
+        "Recommended version bump: minor.",
         "Package or archive checksum changed; reviewers should verify package artifacts before release.",
         "Package verification evidence: reports/package_verification.md."
       ],
       "failures": [],
       "warnings": [],
       "artifacts": {
-        "previous_package": "/private/tmp/agent-team-work-previous-package.json",
+        "previous_package": "/Volumes/Code/team-worker/agent-team-work/registry/examples/yao-meta-skill-1.0.0.json",
         "current_package": "/Volumes/Code/team-worker/agent-team-work/reports/registry_audit.json",
         "json": "/Volumes/Code/team-worker/agent-team-work/reports/upgrade_check.json",
         "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/upgrade_check.md"

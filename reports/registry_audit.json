@@ -1,5 +1,5 @@
 {
-  "ok": false,
+  "ok": true,
   "schema_version": "2.0",
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "registry_dir": "/Volumes/Code/team-worker/agent-team-work/registry",
@@ -21,8 +21,8 @@
     "trust_level": "local",
     "license": "MIT",
     "checksums": {
-      "package_sha256": "0c0feeebc1e927367131cad6cd27bc16661beb51848910b6df2a8ae95af7448b",
-      "archive_sha256": "73c9b326fcafd4a673fa4ea855c2ea6bde7300f8b11fc88953f7331dfa2545ff"
+      "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
+      "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
     },
     "compatibility": {
       "openai": "pass",
@@ -53,9 +53,9 @@
     },
     "distribution": {
       "archive_verified": true,
-      "archive_sha256": "73c9b326fcafd4a673fa4ea855c2ea6bde7300f8b11fc88953f7331dfa2545ff",
+      "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
       "package_verification": "reports/package_verification.json",
-      "install_simulated": false,
+      "install_simulated": true,
       "install_simulation": "reports/install_simulation.json"
     },
     "generated_at": "2026-09-14"
@@ -78,13 +78,11 @@
           "vscode"
         ],
         "package_metadata": "registry/packages/agent-team-work.json",
-        "package_sha256": "0c0feeebc1e927367131cad6cd27bc16661beb51848910b6df2a8ae95af7448b"
+        "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
       }
     ]
   },
-  "failures": [
-    "Install simulation report exists but install simulation did not pass"
-  ],
+  "failures": [],
   "warnings": [],
   "artifacts": {
     "index": "/Volumes/Code/team-worker/agent-team-work/registry/index.json",

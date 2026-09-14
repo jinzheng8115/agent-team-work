@@ -38,10 +38,10 @@
         "references resource resolves: references/team-scaling.md",
         "references resource resolves: references/workflow.md",
         "scripts resource resolves: scripts/ci_test.py",
+        "scripts resource resolves: scripts/import_telemetry_events.py",
         "scripts resource resolves: scripts/local_output_eval_runner.py",
         "scripts resource resolves: scripts/validate_team_state.py",
-        "reports resource resolves: reports/benchmark_methodology.md",
-        "reports resource resolves: reports/intent-context.json"
+        "reports resource resolves: reports/benchmark_methodology.md"
       ],
       "failures": [],
       "warnings": []
@@ -82,10 +82,10 @@
         "references resource resolves: references/team-scaling.md",
         "references resource resolves: references/workflow.md",
         "scripts resource resolves: scripts/ci_test.py",
+        "scripts resource resolves: scripts/import_telemetry_events.py",
         "scripts resource resolves: scripts/local_output_eval_runner.py",
         "scripts resource resolves: scripts/validate_team_state.py",
-        "reports resource resolves: reports/benchmark_methodology.md",
-        "reports resource resolves: reports/intent-context.json"
+        "reports resource resolves: reports/benchmark_methodology.md"
       ],
       "failures": [],
       "warnings": []
@@ -126,10 +126,10 @@
         "references resource resolves: references/team-scaling.md",
         "references resource resolves: references/workflow.md",
         "scripts resource resolves: scripts/ci_test.py",
+        "scripts resource resolves: scripts/import_telemetry_events.py",
         "scripts resource resolves: scripts/local_output_eval_runner.py",
         "scripts resource resolves: scripts/validate_team_state.py",
-        "reports resource resolves: reports/benchmark_methodology.md",
-        "reports resource resolves: reports/intent-context.json"
+        "reports resource resolves: reports/benchmark_methodology.md"
       ],
       "failures": [],
       "warnings": [
@@ -172,10 +172,10 @@
         "references resource resolves: references/team-scaling.md",
         "references resource resolves: references/workflow.md",
         "scripts resource resolves: scripts/ci_test.py",
+        "scripts resource resolves: scripts/import_telemetry_events.py",
         "scripts resource resolves: scripts/local_output_eval_runner.py",
         "scripts resource resolves: scripts/validate_team_state.py",
-        "reports resource resolves: reports/benchmark_methodology.md",
-        "reports resource resolves: reports/intent-context.json"
+        "reports resource resolves: reports/benchmark_methodology.md"
       ],
       "failures": [],
       "warnings": [
@@ -218,10 +218,10 @@
         "references resource resolves: references/team-scaling.md",
         "references resource resolves: references/workflow.md",
         "scripts resource resolves: scripts/ci_test.py",
+        "scripts resource resolves: scripts/import_telemetry_events.py",
         "scripts resource resolves: scripts/local_output_eval_runner.py",
         "scripts resource resolves: scripts/validate_team_state.py",
-        "reports resource resolves: reports/benchmark_methodology.md",
-        "reports resource resolves: reports/intent-context.json"
+        "reports resource resolves: reports/benchmark_methodology.md"
       ],
       "failures": [],
       "warnings": []

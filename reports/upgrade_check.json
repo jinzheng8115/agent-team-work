@@ -1,11 +1,17 @@
 {
-  "ok": false,
+  "ok": true,
   "schema_version": "2.0",
   "generated_at": "2026-09-14",
   "previous": {
-    "name": "",
-    "version": "",
-    "targets": []
+    "name": "agent-team-work",
+    "version": "0.1.0",
+    "targets": [
+      "openai",
+      "claude",
+      "generic",
+      "agent-skills-compatible",
+      "vscode"
+    ]
   },
   "current": {
     "name": "agent-team-work",
@@ -19,58 +25,22 @@
     ]
   },
   "summary": {
-    "declared_bump": "invalid",
-    "recommended_bump": "major",
-    "breaking_change_count": 1,
-    "added_target_count": 5,
-    "metadata_change_count": 6,
+    "declared_bump": "minor",
+    "recommended_bump": "minor",
+    "breaking_change_count": 0,
+    "added_target_count": 0,
+    "metadata_change_count": 2,
     "checksum_change_count": 2,
-    "failure_count": 2,
+    "failure_count": 0,
     "warning_count": 0
   },
   "upgrade_diff": {
-    "name_changed": true,
-    "added_targets": [
-      "agent-skills-compatible",
-      "claude",
-      "generic",
-      "openai",
-      "vscode"
-    ],
+    "name_changed": false,
+    "added_targets": [],
     "removed_targets": [],
     "compatibility_changes": [
       {
         "target": "agent-skills",
-        "from": "missing",
-        "to": "pass",
-        "direction": "improved"
-      },
-      {
-        "target": "agent-skills-compatible",
-        "from": "missing",
-        "to": "pass",
-        "direction": "improved"
-      },
-      {
-        "target": "claude",
-        "from": "missing",
-        "to": "pass",
-        "direction": "improved"
-      },
-      {
-        "target": "generic",
-        "from": "missing",
-        "to": "pass",
-        "direction": "improved"
-      },
-      {
-        "target": "openai",
-        "from": "missing",
-        "to": "pass",
-        "direction": "improved"
-      },
-      {
-        "target": "vscode",
         "from": "missing",
         "to": "pass",
         "direction": "improved"
@@ -79,28 +49,8 @@
     "metadata_changes": [
       {
         "field": "description",
-        "from": "",
+        "from": "Previous agent-team-work route contract fixture used only for upgrade comparison.",
         "to": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
-      },
-      {
-        "field": "maturity",
-        "from": "",
-        "to": "governed"
-      },
-      {
-        "field": "owner",
-        "from": "",
-        "to": "Local Codex Team"
-      },
-      {
-        "field": "review_cadence",
-        "from": "",
-        "to": "monthly"
-      },
-      {
-        "field": "trust_level",
-        "from": "",
-        "to": "local"
       },
       {
         "field": "license",
@@ -112,25 +62,21 @@
       {
         "field": "archive_sha256",
         "from": "",
-        "to": "73c9b326fcafd4a673fa4ea855c2ea6bde7300f8b11fc88953f7331dfa2545ff"
+        "to": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
       },
       {
         "field": "package_sha256",
-        "from": "",
-        "to": "0c0feeebc1e927367131cad6cd27bc16661beb51848910b6df2a8ae95af7448b"
+        "from": "previous-fixture",
+        "to": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
       }
     ]
   },
   "release_notes": [
-    "Recommended version bump: major.",
-    "Added targets: agent-skills-compatible, claude, generic, openai, vscode.",
+    "Recommended version bump: minor.",
     "Package or archive checksum changed; reviewers should verify package artifacts before release.",
     "Package verification evidence: reports/package_verification.md."
   ],
-  "failures": [
-    "Version comparison requires semver-like previous and current versions",
-    "Package name changed; publish as a new package or use a major version bump"
-  ],
+  "failures": [],
   "warnings": [],
   "artifacts": {
     "previous_package": "/Volumes/Code/team-worker/agent-team-work/registry/examples/yao-meta-skill-1.0.0.json",

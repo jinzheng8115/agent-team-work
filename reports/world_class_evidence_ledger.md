@@ -128,7 +128,7 @@ This ledger records the current evidence state. It requires both passing source 
 
 - objective: Prove at least one real target client or external installer runtime guard enforces approved high-permission capabilities.
 - source status: `external_required`
-- observed state: `{"native_enforcement_count": 0, "metadata_fallback_count": 1, "installer_enforcement_pass_count": 0, "installer_permission_failure_count": 0, "installer_enforcement_ready": false, "residual_risk_count": 1, "failure_count": 0, "accepted": false}`
+- observed state: `{"native_enforcement_count": 0, "metadata_fallback_count": 4, "installer_enforcement_pass_count": 0, "installer_permission_failure_count": 0, "installer_enforcement_ready": false, "residual_risk_count": 4, "failure_count": 0, "accepted": false}`
 - source checks: `1` pass / `3` total
 - submission state: `{"status": "missing", "path": "evidence/world_class/submissions/native-permission-enforcement.json", "artifact_ref_count": 0, "attested_real_evidence": false, "privacy_contract_satisfied": false, "ledger_reviewer_approved": false, "ledger_reviewer": "", "ledger_reviewed_at": "", "ledger_counts_as_completion": false}`
 

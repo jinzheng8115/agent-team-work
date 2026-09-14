@@ -68,7 +68,7 @@
       <span class="eyebrow">Evidence Collection</span>
       <h1>World-Class Evidence Preflight</h1>
       <p class="lede">This operator view shows which external and human evidence is still blocked, which commands prepare editable submission drafts, and why preflight never counts as accepted evidence.</p>
-      <div class="stats"><article><span>Decision</span><strong>collection-preflight-blocked</strong></article><article><span>Pending</span><strong>4</strong></article><article><span>Ready</span><strong>0</strong></article><article><span>Blocked</span><strong>4</strong></article><article><span>Source</span><strong>6/14</strong></article><article><span>Repairs</span><strong>17/17</strong></article><article><span>Phases</span><strong>2/2</strong></article></div>
+      <div class="stats"><article><span>Decision</span><strong>collection-preflight-blocked</strong></article><article><span>Pending</span><strong>4</strong></article><article><span>Ready</span><strong>0</strong></article><article><span>Blocked</span><strong>4</strong></article><article><span>Source</span><strong>6/14</strong></article><article><span>Repairs</span><strong>16/16</strong></article><article><span>Phases</span><strong>2/2</strong></article></div>
     </section>
     <section class="section two-col" id="handoff">
       <article class="panel">
@@ -84,7 +84,7 @@
         <article class="role-card">
           <span>Submission refs</span>
           <h3>submission-ref</h3>
-          <strong>4/7 ready</strong>
+          <strong>5/7 ready</strong>
           <p>Rows marked submission-ref are the aggregate paths expected in artifact_refs.</p>
           <small>copy to artifact_refs: <code>true</code></small>
         </article>
@@ -92,7 +92,7 @@
         <article class="role-card">
           <span>Supporting evidence</span>
           <h3>supporting-evidence</h3>
-          <strong>23/30 ready</strong>
+          <strong>26/33 ready</strong>
           <p>Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs.</p>
           <small>copy to artifact_refs: <code>false</code></small>
         </article>
@@ -112,7 +112,7 @@
           </header>
           <dl>
             <dt>Phase</dt><dd><code>unblock-access</code></dd>
-            <dt>Rows</dt><dd>9 / 9 blocked</dd>
+            <dt>Rows</dt><dd>8 / 8 blocked</dd>
             <dt>Owners</dt><dd>Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator</dd>
             <dt>Evidence</dt><dd>human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout</dd>
             <dt>Next</dt><dd>Collect three exact 20-pair reviewer packets with integrity and independent-review attestations.</dd>
@@ -641,7 +641,7 @@
         <article class="role-card">
           <span>Supporting evidence</span>
           <h3>supporting-evidence</h3>
-          <strong>8/8 ready</strong>
+          <strong>11/11 ready</strong>
           <p>Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs.</p>
           <small>copy to artifact_refs: <code>false</code></small>
         </article>
@@ -815,7 +815,7 @@
         <article class="role-card">
           <span>Submission refs</span>
           <h3>submission-ref</h3>
-          <strong>1/2 ready</strong>
+          <strong>2/2 ready</strong>
           <p>Rows marked submission-ref are the aggregate paths expected in artifact_refs.</p>
           <small>copy to artifact_refs: <code>true</code></small>
         </article>
@@ -844,14 +844,14 @@
           </dl>
         </article>
 
-        <article class="check-row missing">
+        <article class="check-row pass">
           <div>
             <span>file</span>
             <strong>Hook recipes</strong>
           </div>
           <dl>
-            <dt>Current</dt><dd><code>missing</code></dd>
-            <dt>Status</dt><dd>missing</dd>
+            <dt>Current</dt><dd><code>present</code></dd>
+            <dt>Status</dt><dd>pass</dd>
             <dt>Action</dt><dd>Refresh telemetry hook recipes before external client installation.</dd>
           </dl>
         </article>
@@ -927,23 +927,6 @@
 	            <dt>Status</dt><dd>blocked</dd>
 	            <dt>Reason</dt><dd>Required external precheck is external-required.</dd>
 	            <dt>Action</dt><dd>Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.</dd>
-	            <dt>Verify</dt><dd><code>python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self</code></dd>
-	            <dt>Evidence</dt><dd>does not count as completion</dd>
-	          </dl>
-	        </article>
-
-        <article class="repair-row blocked">
-          <div>
-            <span>precheck</span>
-            <strong>hook-recipes</strong>
-	          </div>
-	          <dl>
-	            <dt>Priority</dt><dd>20</dd>
-	            <dt>Phase</dt><dd>unblock-access</dd>
-	            <dt>Owner</dt><dd>Browser/Chrome/IDE/provider client integrator</dd>
-	            <dt>Status</dt><dd>blocked</dd>
-	            <dt>Reason</dt><dd>Required file precheck is missing.</dd>
-	            <dt>Action</dt><dd>Refresh telemetry hook recipes before external client installation.</dd>
 	            <dt>Verify</dt><dd><code>python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self</code></dd>
 	            <dt>Evidence</dt><dd>does not count as completion</dd>
 	          </dl>

@@ -6,9 +6,9 @@
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 131,
-    "json_claim_surface_count": 70,
-    "metadata_claim_surface_count": 72,
+    "claim_surface_count": 139,
+    "json_claim_surface_count": 75,
+    "metadata_claim_surface_count": 77,
     "package_claim_surface_count": 11,
     "violation_count": 0,
     "overclaim_guard_active": true,
@@ -116,6 +116,10 @@
     },
     {
       "path": "manifest.json",
+      "violation_count": 0
+    },
+    {
+      "path": "registry/examples/yao-meta-skill-1.0.0.json",
       "violation_count": 0
     },
     {
@@ -311,6 +315,14 @@
       "violation_count": 0
     },
     {
+      "path": "reports/promotion_decisions.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/promotion_decisions.md",
+      "violation_count": 0
+    },
+    {
       "path": "reports/prompt-quality-profile.json",
       "violation_count": 0
     },
@@ -431,6 +443,10 @@
       "violation_count": 0
     },
     {
+      "path": "reports/skill-os-2-review.md",
+      "violation_count": 0
+    },
+    {
       "path": "reports/skill-overview.html",
       "violation_count": 0
     },
@@ -476,6 +492,14 @@
     },
     {
       "path": "reports/skillops/weekly/2026-W38.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/telemetry_hook_recipes.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/telemetry_hook_recipes.md",
       "violation_count": 0
     },
     {
@@ -564,6 +588,14 @@
     },
     {
       "path": "security/permission_policy.json",
+      "violation_count": 0
+    },
+    {
+      "path": "skill-ir/examples/yao-meta-skill.json",
+      "violation_count": 0
+    },
+    {
+      "path": "skill-ir/schema.json",
       "violation_count": 0
     }
   ],

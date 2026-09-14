@@ -2,7 +2,7 @@
   "nodes": [
     {
       "name": "agent-team-work",
-      "path": "agent-team-work"
+      "path": "."
     }
   ],
   "shared_resources": []

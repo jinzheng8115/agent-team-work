@@ -1,14 +1,14 @@
 # Registry Audit
 
-- OK: `False`
+- OK: `True`
 - Package: `agent-team-work`
 - Version: `0.2.0`
 - Maturity: `governed`
 - Owner: `Local Codex Team`
 - License: `MIT`
-- Package SHA256: `0c0feeebc1e927367131cad6cd27bc16661beb51848910b6df2a8ae95af7448b`
-- Archive SHA256: `73c9b326fcafd4a673fa4ea855c2ea6bde7300f8b11fc88953f7331dfa2545ff`
-- Install simulated: `False`
+- Package SHA256: `fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd`
+- Archive SHA256: `862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793`
+- Install simulated: `True`
 
 ## Compatibility
 
@@ -23,7 +23,7 @@
 
 ## Failures
 
-- Install simulation report exists but install simulation did not pass
+- None
 
 ## Warnings
 

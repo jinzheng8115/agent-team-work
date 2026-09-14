@@ -6,8 +6,8 @@
   "summary": {
     "evidence_item_count": 4,
     "precheck_count": 13,
-    "precheck_pass_count": 4,
-    "precheck_missing_count": 6,
+    "precheck_pass_count": 5,
+    "precheck_missing_count": 5,
     "precheck_optional_count": 0,
     "precheck_human_required_count": 1,
     "precheck_external_required_count": 2,
@@ -16,11 +16,11 @@
     "source_check_count": 14,
     "source_pass_count": 6,
     "source_blocked_count": 8,
-    "repair_checklist_count": 17,
-    "repair_blocked_count": 17,
+    "repair_checklist_count": 16,
+    "repair_blocked_count": 16,
     "repair_ready_count": 0,
     "repair_phase_counts": {
-      "unblock-access": 9,
+      "unblock-access": 8,
       "collect-source": 8
     },
     "next_repair_action_id": "human-adjudication-precheck-decision-template",
@@ -30,7 +30,7 @@
     "repair_counts_as_completion": false,
     "phase_queue_count": 2,
     "phase_queue_blocked_count": 2,
-    "phase_queue_row_count": 17,
+    "phase_queue_row_count": 16,
     "phase_queue_next_phase": "unblock-access",
     "phase_queue_next_action_id": "human-adjudication-precheck-decision-template",
     "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
@@ -45,8 +45,8 @@
     "blocked": 4
   },
   "precheck_status_counts": {
-    "pass": 4,
-    "missing": 6,
+    "pass": 5,
+    "missing": 5,
     "human-required": 1,
     "external-required": 2
   },
@@ -841,8 +841,8 @@
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 2,
           "submission_ref_ready_count": 2,
-          "supporting_evidence_total_count": 8,
-          "supporting_evidence_ready_count": 8,
+          "supporting_evidence_total_count": 11,
+          "supporting_evidence_ready_count": 11,
           "roles": [
             {
               "role": "submission-ref",
@@ -1038,8 +1038,8 @@
           "next_action": "Refresh telemetry hook recipes before external client installation.",
           "secret_value_redacted": false,
           "path": "reports/telemetry_hook_recipes.json",
-          "status": "missing",
-          "actual": "missing"
+          "status": "pass",
+          "actual": "present"
         },
         {
           "evidence_key": "native-client-telemetry",
@@ -1108,7 +1108,7 @@
           "counts_as_evidence": false,
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 2,
-          "submission_ref_ready_count": 1,
+          "submission_ref_ready_count": 2,
           "supporting_evidence_total_count": 6,
           "supporting_evidence_ready_count": 5,
           "roles": [
@@ -1155,21 +1155,6 @@
           "counts_as_completion": false
         },
         {
-          "action_id": "native-client-telemetry-precheck-hook-recipes",
-          "evidence_key": "native-client-telemetry",
-          "repair_type": "precheck",
-          "target": "hook-recipes",
-          "phase": "unblock-access",
-          "priority": 20,
-          "owner": "Browser/Chrome/IDE/provider client integrator",
-          "status": "blocked",
-          "blocking_reason": "Required file precheck is missing.",
-          "next_action": "Refresh telemetry hook recipes before external client installation.",
-          "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
-          "source": "prechecks",
-          "counts_as_completion": false
-        },
-        {
           "action_id": "native-client-telemetry-precheck-native-host",
           "evidence_key": "native-client-telemetry",
           "repair_type": "precheck",
@@ -1206,8 +1191,8 @@
           "label": "Unblock access",
           "priority": 20,
           "status": "blocked",
-          "blocked_count": 3,
-          "row_count": 3,
+          "blocked_count": 2,
+          "row_count": 2,
           "owners": [
             "Browser/Chrome/IDE/provider client integrator"
           ],
@@ -1230,21 +1215,6 @@
               "status": "blocked",
               "blocking_reason": "Required external precheck is external-required.",
               "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
-              "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
-              "source": "prechecks",
-              "counts_as_completion": false
-            },
-            {
-              "action_id": "native-client-telemetry-precheck-hook-recipes",
-              "evidence_key": "native-client-telemetry",
-              "repair_type": "precheck",
-              "target": "hook-recipes",
-              "phase": "unblock-access",
-              "priority": 20,
-              "owner": "Browser/Chrome/IDE/provider client integrator",
-              "status": "blocked",
-              "blocking_reason": "Required file precheck is missing.",
-              "next_action": "Refresh telemetry hook recipes before external client installation.",
               "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
               "source": "prechecks",
               "counts_as_completion": false
@@ -1445,8 +1415,8 @@
       "next_action": "Refresh telemetry hook recipes before external client installation.",
       "secret_value_redacted": false,
       "path": "reports/telemetry_hook_recipes.json",
-      "status": "missing",
-      "actual": "missing"
+      "status": "pass",
+      "actual": "present"
     },
     {
       "evidence_key": "native-client-telemetry",
@@ -1664,21 +1634,6 @@
       "counts_as_completion": false
     },
     {
-      "action_id": "native-client-telemetry-precheck-hook-recipes",
-      "evidence_key": "native-client-telemetry",
-      "repair_type": "precheck",
-      "target": "hook-recipes",
-      "phase": "unblock-access",
-      "priority": 20,
-      "owner": "Browser/Chrome/IDE/provider client integrator",
-      "status": "blocked",
-      "blocking_reason": "Required file precheck is missing.",
-      "next_action": "Refresh telemetry hook recipes before external client installation.",
-      "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
-      "source": "prechecks",
-      "counts_as_completion": false
-    },
-    {
       "action_id": "native-client-telemetry-precheck-native-host",
       "evidence_key": "native-client-telemetry",
       "repair_type": "precheck",
@@ -1865,8 +1820,8 @@
       "label": "Unblock access",
       "priority": 20,
       "status": "blocked",
-      "blocked_count": 9,
-      "row_count": 9,
+      "blocked_count": 8,
+      "row_count": 8,
       "owners": [
         "Browser/Chrome/IDE/provider client integrator",
         "human reviewer",
@@ -1940,21 +1895,6 @@
           "status": "blocked",
           "blocking_reason": "Required external precheck is external-required.",
           "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
-          "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
-          "source": "prechecks",
-          "counts_as_completion": false
-        },
-        {
-          "action_id": "native-client-telemetry-precheck-hook-recipes",
-          "evidence_key": "native-client-telemetry",
-          "repair_type": "precheck",
-          "target": "hook-recipes",
-          "phase": "unblock-access",
-          "priority": 20,
-          "owner": "Browser/Chrome/IDE/provider client integrator",
-          "status": "blocked",
-          "blocking_reason": "Required file precheck is missing.",
-          "next_action": "Refresh telemetry hook recipes before external client installation.",
           "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
           "source": "prechecks",
           "counts_as_completion": false
@@ -2189,9 +2129,9 @@
       "counts_as_evidence": false,
       "artifact_prefill_counts_as_evidence": false,
       "submission_ref_total_count": 7,
-      "submission_ref_ready_count": 4,
-      "supporting_evidence_total_count": 30,
-      "supporting_evidence_ready_count": 23,
+      "submission_ref_ready_count": 5,
+      "supporting_evidence_total_count": 33,
+      "supporting_evidence_ready_count": 26,
       "roles": [
         {
           "role": "submission-ref",

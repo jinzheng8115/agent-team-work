@@ -8,7 +8,7 @@
       "budget_limit": 1000,
       "initial_tokens": 878,
       "skill_body_tokens": 557,
-      "deferred_resource_tokens": 9690,
+      "deferred_resource_tokens": 10997,
       "large_deferred_resource_dirs": [],
       "deferred_resource_governance": {
         "status": "not-required",

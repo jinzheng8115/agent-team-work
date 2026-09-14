@@ -1,6 +1,6 @@
 # Install Simulation
 
-- OK: `False`
+- OK: `True`
 - Package directory: `/Volumes/Code/team-worker/agent-team-work/dist`
 - Archive extracted: `True`
 - Nested SKILL.md entries: `0`
@@ -10,7 +10,7 @@
 - Adapters readable: `4`
 - Installer permissions enforced: `0`
 - Installer permission failures: `0`
-- Failures: `2`
+- Failures: `0`
 - Warnings: `0`
 
 ## Checks
@@ -28,8 +28,8 @@
 | `manifest-name` | `pass` | Installed manifest name matches package manifest |
 | `manifest-version` | `pass` | Installed manifest version matches package manifest |
 | `interface-load` | `pass` | Installed agents/interface.yaml is readable |
-| `overview-report` | `fail` | Installed overview report is present |
-| `review-studio-report` | `fail` | Installed Review Studio report is present |
+| `overview-report` | `pass` | Installed overview report is present |
+| `review-studio-report` | `pass` | Installed Review Studio report is present |
 | `adapter-claude` | `pass` | claude adapter is readable after package install simulation |
 | `adapter-claude-name` | `pass` | claude adapter name matches package manifest |
 | `adapter-generic` | `pass` | generic adapter is readable after package install simulation |
@@ -46,8 +46,7 @@
 
 ## Failures
 
-- Installed overview report is present
-- Installed Review Studio report is present
+- None
 
 ## Warnings
 

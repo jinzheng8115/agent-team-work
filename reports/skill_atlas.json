@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "workspace_root": "/Volumes/Code/team-worker",
+  "workspace_root": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "skill_count": 1,
     "actionable_skill_count": 1,
@@ -23,12 +23,12 @@
     "rules": []
   },
   "catalog": {
-    "workspace_root": "/Volumes/Code/team-worker",
+    "workspace_root": "/Volumes/Code/team-worker/agent-team-work",
     "generated_at": "2026-09-14",
     "skills": [
       {
         "name": "agent-team-work",
-        "path": "agent-team-work",
+        "path": ".",
         "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
         "owner": "Local Codex Team",
         "version": "0.2.0",
@@ -44,6 +44,8 @@
           "vscode"
         ],
         "resources": [
+          "scripts/ci_test.py",
+          "scripts/local_output_eval_runner.py",
           "scripts/validate_team_state.py",
           "references/codex-tools.md",
           "references/e2e-smoke-checklist.md",
@@ -95,7 +97,7 @@
         "scope_reason": "default release-actionable skill",
         "telemetry": {
           "report_present": true,
-          "report": "agent-team-work/reports/adoption_drift_report.json",
+          "report": "reports/adoption_drift_report.json",
           "risk_band": "low",
           "event_count": 1,
           "adoption_sample_count": 1,
@@ -127,7 +129,7 @@
     "nodes": [
       {
         "name": "agent-team-work",
-        "path": "agent-team-work"
+        "path": "."
       }
     ],
     "shared_resources": []

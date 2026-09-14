@@ -1,42 +1,42 @@
 {
   "schema_version": "1.0",
-  "ok": false,
+  "ok": true,
   "generated_at": "2026-09-14",
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "item_count": 15,
-    "pass_count": 6,
+    "pass_count": 11,
     "warn_count": 0,
     "human_required_count": 1,
     "external_required_count": 3,
-    "missing_count": 5,
-    "open_gap_count": 9,
-    "local_foundation_ready": false,
+    "missing_count": 0,
+    "open_gap_count": 4,
+    "local_foundation_ready": true,
     "world_class_ready": false,
     "decision": "continue-iteration"
   },
   "status_counts": {
-    "pass": 6,
+    "pass": 11,
     "warn": 0,
     "human_required": 1,
     "external_required": 3,
-    "missing": 5
+    "missing": 0
   },
   "items": [
     {
       "key": "skill-ir",
       "label": "Skill IR",
-      "status": "missing",
+      "status": "pass",
       "current": "schema 2.0.0; targets 5",
       "target": "2.0 schema, root export, and target-neutral contract evidence",
       "evidence": [
         {
           "path": "skill-ir/schema.json",
-          "exists": false
+          "exists": true
         },
         {
           "path": "skill-ir/examples/yao-meta-skill.json",
-          "exists": false
+          "exists": true
         },
         {
           "path": "references/skill-ir-method.md",
@@ -201,7 +201,7 @@
       "key": "trust-security",
       "label": "Trust Security",
       "status": "pass",
-      "current": "secrets 0; scripts 1; help failures 0",
+      "current": "secrets 0; scripts 4; help failures 0",
       "target": "Secrets, scripts, dependencies, permissions, and package hash are reviewable",
       "evidence": [
         {
@@ -222,8 +222,8 @@
     {
       "key": "runtime-permission-metadata",
       "label": "Permission Metadata",
-      "status": "missing",
-      "current": "1/1 target probes pass; metadata fallback 1; installer enforcement 0",
+      "status": "pass",
+      "current": "4/4 target probes pass; metadata fallback 4; installer enforcement 0",
       "target": "Packaged adapters expose explicit permission metadata, residual risks, and installer enforcement evidence when available",
       "evidence": [
         {
@@ -288,8 +288,8 @@
     {
       "key": "registry-distribution",
       "label": "Registry Distribution",
-      "status": "missing",
-      "current": "zip entries 132; install failures 0; permission failures 0",
+      "status": "pass",
+      "current": "zip entries 154; install failures 0; permission failures 0",
       "target": "Package metadata, archive checksum, package verification, and install simulation pass",
       "evidence": [
         {
@@ -310,8 +310,8 @@
     {
       "key": "review-studio",
       "label": "Review Studio",
-      "status": "missing",
-      "current": "decision blocked; warnings 4; score 83",
+      "status": "pass",
+      "current": "decision review; warnings 3; score 91",
       "target": "One page shows gates, evidence paths, blockers, warnings, actions, waivers, and annotations",
       "evidence": [
         {
@@ -332,8 +332,8 @@
     {
       "key": "telemetry-drift",
       "label": "Telemetry Drift",
-      "status": "missing",
-      "current": "events 1; risk low; recipes 0",
+      "status": "pass",
+      "current": "events 1; risk low; recipes 5",
       "target": "Local-first metadata-only event contract, aggregate drift report, hook recipes, and import path",
       "evidence": [
         {
@@ -342,11 +342,11 @@
         },
         {
           "path": "reports/telemetry_hook_recipes.json",
-          "exists": false
+          "exists": true
         },
         {
           "path": "scripts/import_telemetry_events.py",
-          "exists": false
+          "exists": true
         }
       ],
       "next_action": "Keep raw JSONL out of distributed packages and use aggregate reports for Atlas."
@@ -371,28 +371,6 @@
     }
   ],
   "next_highest_leverage": [
-    {
-      "key": "skill-ir",
-      "label": "Skill IR",
-      "status": "missing",
-      "current": "schema 2.0.0; targets 5",
-      "target": "2.0 schema, root export, and target-neutral contract evidence",
-      "evidence": [
-        {
-          "path": "skill-ir/schema.json",
-          "exists": false
-        },
-        {
-          "path": "skill-ir/examples/yao-meta-skill.json",
-          "exists": false
-        },
-        {
-          "path": "references/skill-ir-method.md",
-          "exists": false
-        }
-      ],
-      "next_action": "Keep IR as the source before target packaging."
-    },
     {
       "key": "provider-holdout",
       "label": "Provider Holdout",
@@ -438,24 +416,6 @@
       "next_action": "Collect three controlled reviewer packets and adjudicate them against the private run answer key."
     },
     {
-      "key": "runtime-permission-metadata",
-      "label": "Permission Metadata",
-      "status": "missing",
-      "current": "1/1 target probes pass; metadata fallback 1; installer enforcement 0",
-      "target": "Packaged adapters expose explicit permission metadata, residual risks, and installer enforcement evidence when available",
-      "evidence": [
-        {
-          "path": "scripts/probe_runtime_permissions.py",
-          "exists": false
-        },
-        {
-          "path": "reports/runtime_permission_probes.json",
-          "exists": true
-        }
-      ],
-      "next_action": "Preserve residual-risk notes until real native enforcement exists."
-    },
-    {
       "key": "native-permission-enforcement",
       "label": "Native Permission Enforcement",
       "status": "external_required",
@@ -476,6 +436,24 @@
         }
       ],
       "next_action": "Integrate a real target-client or external installer runtime guard before claiming native permission enforcement."
+    },
+    {
+      "key": "native-client-telemetry",
+      "label": "Native Client Telemetry",
+      "status": "external_required",
+      "current": "external source events 0; adoption samples 1",
+      "target": "A real Browser/Chrome/provider client sends production metadata events",
+      "evidence": [
+        {
+          "path": "scripts/telemetry_native_host.py",
+          "exists": false
+        },
+        {
+          "path": "reports/adoption_drift_report.json",
+          "exists": true
+        }
+      ],
+      "next_action": "Install a real client against the native host and import production metadata-only events."
     }
   ],
   "artifacts": {

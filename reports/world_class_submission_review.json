@@ -243,11 +243,11 @@
       "intake_errors": [],
       "observed_state": {
         "native_enforcement_count": 0,
-        "metadata_fallback_count": 1,
+        "metadata_fallback_count": 4,
         "installer_enforcement_pass_count": 0,
         "installer_permission_failure_count": 0,
         "installer_enforcement_ready": false,
-        "residual_risk_count": 1,
+        "residual_risk_count": 4,
         "failure_count": 0,
         "accepted": false
       },

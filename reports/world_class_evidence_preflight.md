@@ -11,9 +11,9 @@ Generated at: `2026-09-14`
 - collection ready: `0`
 - collection blocked: `4`
 - source checks: `6` pass / `14` total
-- repair rows: `17` blocked / `17` total
+- repair rows: `16` blocked / `16` total
 - phase queue: `2` blocked / `2` phases
-- phase queue rows: `17`
+- phase queue rows: `16`
 - next repair action: `human-adjudication-precheck-decision-template`
 - next repair owner: `human reviewer`
 - next phase: `unblock-access`
@@ -32,15 +32,15 @@ This preflight report checks whether an operator can start collecting the remain
 - guard claims: `python3 scripts/yao.py world-class-claim-guard . --self`
 - drafts count as evidence: `false`
 - artifact prefill counts as evidence: `false`
-- submission refs ready: `4` / `7`
-- supporting evidence ready: `23` / `30`
+- submission refs ready: `5` / `7`
+- supporting evidence ready: `26` / `33`
 
 Generate the submission kit after the real provider, human, native-permission, or native-client work exists. The generated JSON drafts remain `template_only: true` until an operator edits them with real aggregate artifact references and matching SHA-256 digests. The prefill command only inserts local artifact SHA-256 digests; it does not make a draft count as evidence.
 
 | Role | Copy to artifact_refs | Ready | Meaning |
 | --- | --- | --- | --- |
-| `submission-ref` | `true` | `4 / 7` | Rows marked submission-ref are the aggregate paths expected in artifact_refs. |
-| `supporting-evidence` | `false` | `23 / 30` | Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs. |
+| `submission-ref` | `true` | `5 / 7` | Rows marked submission-ref are the aggregate paths expected in artifact_refs. |
+| `supporting-evidence` | `false` | `26 / 33` | Supporting-evidence rows help reviewers audit the packet but do not all need to be copied into artifact_refs. |
 
 `submission-ref` rows are the only checklist rows expected in `artifact_refs`; `supporting-evidence` rows stay available for audit context and reviewer traceability.
 
@@ -50,7 +50,7 @@ Phase queue rows group the same repair checklist into operator execution phases.
 
 | Priority | Phase | Status | Rows | Owners | Evidence | Verify | Next action |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `20` | `unblock-access` | `blocked` | 9 / 9 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Collect three exact 20-pair reviewer packets with integrity and independent-review attestations. |
+| `20` | `unblock-access` | `blocked` | 8 / 8 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Collect three exact 20-pair reviewer packets with integrity and independent-review attestations. |
 | `40` | `collect-source` | `blocked` | 8 / 8 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout | `python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <A.json> --decisions <B.json> --decisions <C.json> --reviewer-registry <registry.json> --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Bind adjudication to the reviewed blind pack SHA256. |
 
 ## Evidence Items
@@ -72,7 +72,6 @@ Repair rows convert preflight and source blockers into a prioritized operator qu
 | `20` | `unblock-access` | human reviewer | `human-adjudication` | `precheck` | `human-reviewer` | `blocked` | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Assign three independent controlled reviewer identities before claiming human adjudication. |
 | `20` | `unblock-access` | human reviewer | `human-adjudication` | `precheck` | `review-kit` | `blocked` | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Use the provider run's role-neutral pack and finalizer for three controlled reviews. |
 | `20` | `unblock-access` | Browser/Chrome/IDE/provider client integrator | `native-client-telemetry` | `precheck` | `external-client` | `blocked` | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events. |
-| `20` | `unblock-access` | Browser/Chrome/IDE/provider client integrator | `native-client-telemetry` | `precheck` | `hook-recipes` | `blocked` | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Refresh telemetry hook recipes before external client installation. |
 | `20` | `unblock-access` | Browser/Chrome/IDE/provider client integrator | `native-client-telemetry` | `precheck` | `native-host` | `blocked` | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Use the native host to receive metadata-only client events. |
 | `20` | `unblock-access` | target client or installer integrator | `native-permission-enforcement` | `precheck` | `native-guard` | `blocked` | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Attach a real target-client or external installer runtime guard; metadata fallback is not enough. |
 | `20` | `unblock-access` | operator with provider credentials | `provider-holdout` | `precheck` | `provider-api-key` | `blocked` | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Set DEEPSEEK_API_KEY in the operator shell; never commit or print the value. |
@@ -149,7 +148,7 @@ Repair rows convert preflight and source blockers into a prioritized operator qu
 - prepare draft: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions --self`
 - prepare draft with artifact SHA prefill: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-permission-enforcement --output-dir evidence/world_class/submissions --prefill-artifacts --self`
 - submission refs ready: `2` / `2`
-- supporting evidence ready: `8` / `8`
+- supporting evidence ready: `11` / `11`
 
 ### Prechecks
 
@@ -174,7 +173,7 @@ Repair rows convert preflight and source blockers into a prioritized operator qu
 - submission: `evidence/world_class/submissions/native-client-telemetry.json`
 - prepare draft: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions --self`
 - prepare draft with artifact SHA prefill: `python3 scripts/yao.py world-class-submission-kit . --evidence-key native-client-telemetry --output-dir evidence/world_class/submissions --prefill-artifacts --self`
-- submission refs ready: `1` / `2`
+- submission refs ready: `2` / `2`
 - supporting evidence ready: `5` / `6`
 
 ### Prechecks
@@ -182,7 +181,7 @@ Repair rows convert preflight and source blockers into a prioritized operator qu
 | Check | Kind | Current | Status | Next action |
 | --- | --- | --- | --- | --- |
 | Native telemetry host | `file` | `missing` | `missing` | Use the native host to receive metadata-only client events. |
-| Hook recipes | `file` | `missing` | `missing` | Refresh telemetry hook recipes before external client installation. |
+| Hook recipes | `file` | `present` | `pass` | Refresh telemetry hook recipes before external client installation. |
 | External client | `external` | `external-integration-required` | `external-required` | Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events. |
 
 ### Source Checks

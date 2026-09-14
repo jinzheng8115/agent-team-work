@@ -15,7 +15,7 @@
 3. 首次建队先完成菜单摘要和一次最终确认；只读查看已有团队时不创建会话或派单。
 4. 状态保存在项目根目录 `.team/`，可用 `python3 scripts/validate_team_state.py .team` 做只读账本校验。
 
-维护者可用 `python3 scripts/ci_test.py` 运行路由、Python 语法和包形状检查；`scripts/local_output_eval_runner.py` 只回放固定 fixture。`evals/output/provider_matrix.json` 与 `holdout_cases.zh-CN.jsonl` 定义真实 provider 留出评测的 40-call 合同，但没有凭证时保持 `external-required`。
+维护者可用 `python3 scripts/ci_test.py` 运行路由、Python 语法和包形状检查；`scripts/local_output_eval_runner.py` 只回放固定 fixture。`scripts/import_telemetry_events.py` 校验 metadata-only JSONL 并向 stdout 输出脱敏事件，不联网也不写文件。`evals/output/provider_matrix.json` 与 `holdout_cases.zh-CN.jsonl` 定义真实 provider 留出评测的 40-call 合同，但没有凭证时保持 `external-required`。
 
 ## 发布证据
 

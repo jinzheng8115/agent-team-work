@@ -5,15 +5,15 @@ Generated at: `2026-09-14`
 ## Summary
 
 - decision: `pass`
-- python files: `3`
-- scripts: `3`
+- python files: `4`
+- scripts: `4`
 - tests: `0`
 - internal modules: `0`
-- CLI scripts: `3`
+- CLI scripts: `4`
 - Yao CLI command handlers: `0`
 - entrypoint command handlers: `0`
 - command modules: `0`
-- largest file lines: `131`
+- largest file lines: `136`
 - early watch threshold lines: `600`
 - early watchlist: `0`
 - watch threshold lines: `720`
@@ -39,6 +39,7 @@ No early watch files found.
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
+| `scripts/import_telemetry_events.py` | `136` | `cli-script` | `pass` |
 | `scripts/validate_team_state.py` | `131` | `cli-script` | `pass` |
 | `scripts/ci_test.py` | `76` | `cli-script` | `pass` |
 | `scripts/local_output_eval_runner.py` | `68` | `cli-script` | `pass` |

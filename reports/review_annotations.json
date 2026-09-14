@@ -16,7 +16,7 @@
   },
   "annotations": [],
   "failures": [],
-  "template_written": true,
+  "template_written": false,
   "artifacts": {
     "json": "reports/review_annotations.json",
     "markdown": "reports/review_annotations.md"

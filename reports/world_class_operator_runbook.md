@@ -12,13 +12,13 @@ Generated at: `2026-09-14`
 - awaiting submission: `4`
 - ready for ledger review: `0`
 - phase queue: `2` blocked / `2` phases
-- phase queue rows: `17`
+- phase queue rows: `16`
 - phase queue counts as completion: `false`
 - coordination steps: `6` user-required / `6` total
 - coordination pending keys: `human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout`
 - coordination counts as completion: `false`
 - release gate ready: `false`
-- release gate blocked checks: `5` / `5`
+- release gate blocked checks: `4` / `5`
 - release gate counts as completion: `false`
 
 This runbook coordinates evidence collection only. It does not accept submissions or make world-class completion true.
@@ -45,7 +45,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 | Phase | Status | Rows | Blocked | Owners | Next action | Verify |
 | --- | --- | ---: | ---: | --- | --- | --- |
-| `unblock-access` | `blocked` | `9` | `9` | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | Collect three exact 20-pair reviewer packets with integrity and independent-review attestations. | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` |
+| `unblock-access` | `blocked` | `8` | `8` | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | Collect three exact 20-pair reviewer packets with integrity and independent-review attestations. | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` |
 | `collect-source` | `blocked` | `8` | `8` | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | Bind adjudication to the reviewed blind pack SHA256. | `python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <A.json> --decisions <B.json> --decisions <C.json> --reviewer-registry <registry.json> --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` |
 
 ## Evidence Items
@@ -304,7 +304,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 - objective: Import production metadata-only events from a real external client into the local drift loop.
 - blocking reason: No evidence packet has been submitted for review.
 - blocked source checks: `1`
-- repair rows: `4` blocked
+- repair rows: `3` blocked
 - phase queue: `2` blocked phases
 - submission: `evidence/world_class/submissions/native-client-telemetry.json`
 - template: `evidence/world_class/templates/native-client-telemetry.intake.json`
@@ -313,7 +313,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 | Phase | Status | Rows | Blocked | Next action |
 | --- | --- | ---: | ---: | --- |
-| `unblock-access` | `blocked` | `3` | `3` | Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events. |
+| `unblock-access` | `blocked` | `2` | `2` | Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events. |
 | `collect-source` | `blocked` | `1` | `1` | Import at least one metadata-only event from a real client. |
 
 ### Source Runbook
@@ -378,7 +378,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 - decision: `blocked-until-evidence-accepted`
 - ready: `false`
-- blocked checks: `5` / `5`
+- blocked checks: `4` / `5`
 - counts as completion: `false`
 - final manual check: Run make ci-test in a clean worktree and verify GitHub Actions before converting the PR out of Draft.
 
@@ -387,8 +387,8 @@ This runbook coordinates evidence collection only. It does not accept submission
 | World-class ledger ready | `evidence-pending` | `ready_to_claim_world_class == true` | `blocked` | `reports/world_class_evidence_ledger.json` |
 | Claim guard clean | `violations 0; ledger ready False` | `violation_count == 0 and ledger_ready_to_claim_world_class == true` | `blocked` | `reports/world_class_claim_guard.json` |
 | Benchmark public claim ready | `public_claim_ready False` | `public_claim_ready == true` | `blocked` | `reports/benchmark_reproducibility.json` |
-| Review Studio clean | `blockers 1; warnings 4` | `blocker_count == 0 and warning_count == 0` | `blocked` | `reports/review-studio.json` |
-| Evidence consistency clean | `evidence-drift-detected` | `decision == consistent and fail_count == 0` | `blocked` | `reports/evidence_consistency.json` |
+| Review Studio clean | `blockers 0; warnings 3` | `blocker_count == 0 and warning_count == 0` | `blocked` | `reports/review-studio.json` |
+| Evidence consistency clean | `consistent` | `decision == consistent and fail_count == 0` | `pass` | `reports/evidence_consistency.json` |
 
 ## Boundary
 

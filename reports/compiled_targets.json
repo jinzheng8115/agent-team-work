@@ -97,6 +97,7 @@
           ],
           "scripts": [
             "scripts/ci_test.py",
+            "scripts/import_telemetry_events.py",
             "scripts/local_output_eval_runner.py",
             "scripts/validate_team_state.py"
           ],
@@ -135,15 +136,17 @@
             "reports/security_trust_report.md",
             "reports/runtime_permission_probes.json",
             "reports/runtime_permission_probes.md",
+            "reports/telemetry_hook_recipes.json",
+            "reports/telemetry_hook_recipes.md",
             "reports/skill_atlas.json",
             "reports/skill_atlas.html",
             "reports/skill-os-2-review.md"
           ],
           "counts": {
             "references": 7,
-            "scripts": 3,
+            "scripts": 4,
             "assets": 0,
-            "reports": 36
+            "reports": 38
           }
         },
         "eval_plan": {
@@ -296,9 +299,9 @@
             "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
             "counts": {
               "references": 7,
-              "scripts": 3,
+              "scripts": 4,
               "assets": 0,
-              "reports": 36
+              "reports": 38
             },
             "generated_files": [
               "targets/openai/adapter.json",
@@ -307,7 +310,7 @@
           },
           "scripts": {
             "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-            "script_count": 3,
+            "script_count": 4,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -445,9 +448,9 @@
           "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
           "counts": {
             "references": 7,
-            "scripts": 3,
+            "scripts": 4,
             "assets": 0,
-            "reports": 36
+            "reports": 38
           },
           "generated_files": [
             "targets/openai/adapter.json",
@@ -456,7 +459,7 @@
         },
         "scripts": {
           "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-          "script_count": 3,
+          "script_count": 4,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -606,6 +609,7 @@
           ],
           "scripts": [
             "scripts/ci_test.py",
+            "scripts/import_telemetry_events.py",
             "scripts/local_output_eval_runner.py",
             "scripts/validate_team_state.py"
           ],
@@ -644,15 +648,17 @@
             "reports/security_trust_report.md",
             "reports/runtime_permission_probes.json",
             "reports/runtime_permission_probes.md",
+            "reports/telemetry_hook_recipes.json",
+            "reports/telemetry_hook_recipes.md",
             "reports/skill_atlas.json",
             "reports/skill_atlas.html",
             "reports/skill-os-2-review.md"
           ],
           "counts": {
             "references": 7,
-            "scripts": 3,
+            "scripts": 4,
             "assets": 0,
-            "reports": 36
+            "reports": 38
           }
         },
         "eval_plan": {
@@ -805,9 +811,9 @@
             "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
             "counts": {
               "references": 7,
-              "scripts": 3,
+              "scripts": 4,
               "assets": 0,
-              "reports": 36
+              "reports": 38
             },
             "generated_files": [
               "targets/claude/adapter.json",
@@ -816,7 +822,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-            "script_count": 3,
+            "script_count": 4,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -954,9 +960,9 @@
           "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
           "counts": {
             "references": 7,
-            "scripts": 3,
+            "scripts": 4,
             "assets": 0,
-            "reports": 36
+            "reports": 38
           },
           "generated_files": [
             "targets/claude/adapter.json",
@@ -965,7 +971,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-          "script_count": 3,
+          "script_count": 4,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1115,6 +1121,7 @@
           ],
           "scripts": [
             "scripts/ci_test.py",
+            "scripts/import_telemetry_events.py",
             "scripts/local_output_eval_runner.py",
             "scripts/validate_team_state.py"
           ],
@@ -1153,15 +1160,17 @@
             "reports/security_trust_report.md",
             "reports/runtime_permission_probes.json",
             "reports/runtime_permission_probes.md",
+            "reports/telemetry_hook_recipes.json",
+            "reports/telemetry_hook_recipes.md",
             "reports/skill_atlas.json",
             "reports/skill_atlas.html",
             "reports/skill-os-2-review.md"
           ],
           "counts": {
             "references": 7,
-            "scripts": 3,
+            "scripts": 4,
             "assets": 0,
-            "reports": 36
+            "reports": 38
           }
         },
         "eval_plan": {
@@ -1314,9 +1323,9 @@
             "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
             "counts": {
               "references": 7,
-              "scripts": 3,
+              "scripts": 4,
               "assets": 0,
-              "reports": 36
+              "reports": 38
             },
             "generated_files": [
               "targets/generic/adapter.json"
@@ -1324,7 +1333,7 @@
           },
           "scripts": {
             "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-            "script_count": 3,
+            "script_count": 4,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -1456,9 +1465,9 @@
           "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
           "counts": {
             "references": 7,
-            "scripts": 3,
+            "scripts": 4,
             "assets": 0,
-            "reports": 36
+            "reports": 38
           },
           "generated_files": [
             "targets/generic/adapter.json"
@@ -1466,7 +1475,7 @@
         },
         "scripts": {
           "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-          "script_count": 3,
+          "script_count": 4,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -1608,6 +1617,7 @@
           ],
           "scripts": [
             "scripts/ci_test.py",
+            "scripts/import_telemetry_events.py",
             "scripts/local_output_eval_runner.py",
             "scripts/validate_team_state.py"
           ],
@@ -1646,15 +1656,17 @@
             "reports/security_trust_report.md",
             "reports/runtime_permission_probes.json",
             "reports/runtime_permission_probes.md",
+            "reports/telemetry_hook_recipes.json",
+            "reports/telemetry_hook_recipes.md",
             "reports/skill_atlas.json",
             "reports/skill_atlas.html",
             "reports/skill-os-2-review.md"
           ],
           "counts": {
             "references": 7,
-            "scripts": 3,
+            "scripts": 4,
             "assets": 0,
-            "reports": 36
+            "reports": 38
           }
         },
         "eval_plan": {
@@ -1807,9 +1819,9 @@
             "strategy": "Keep optional directories as relative resources next to SKILL.md.",
             "counts": {
               "references": 7,
-              "scripts": 3,
+              "scripts": 4,
               "assets": 0,
-              "reports": 36
+              "reports": 38
             },
             "generated_files": [
               "SKILL.md",
@@ -1818,7 +1830,7 @@
           },
           "scripts": {
             "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-            "script_count": 3,
+            "script_count": 4,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -1949,9 +1961,9 @@
           "strategy": "Keep optional directories as relative resources next to SKILL.md.",
           "counts": {
             "references": 7,
-            "scripts": 3,
+            "scripts": 4,
             "assets": 0,
-            "reports": 36
+            "reports": 38
           },
           "generated_files": [
             "SKILL.md",
@@ -1960,7 +1972,7 @@
         },
         "scripts": {
           "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-          "script_count": 3,
+          "script_count": 4,
           "help_smoke_failed_count": 0
         },
         "permissions": {
@@ -2101,6 +2113,7 @@
           ],
           "scripts": [
             "scripts/ci_test.py",
+            "scripts/import_telemetry_events.py",
             "scripts/local_output_eval_runner.py",
             "scripts/validate_team_state.py"
           ],
@@ -2139,15 +2152,17 @@
             "reports/security_trust_report.md",
             "reports/runtime_permission_probes.json",
             "reports/runtime_permission_probes.md",
+            "reports/telemetry_hook_recipes.json",
+            "reports/telemetry_hook_recipes.md",
             "reports/skill_atlas.json",
             "reports/skill_atlas.html",
             "reports/skill-os-2-review.md"
           ],
           "counts": {
             "references": 7,
-            "scripts": 3,
+            "scripts": 4,
             "assets": 0,
-            "reports": 36
+            "reports": 38
           }
         },
         "eval_plan": {
@@ -2300,9 +2315,9 @@
             "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
             "counts": {
               "references": 7,
-              "scripts": 3,
+              "scripts": 4,
               "assets": 0,
-              "reports": 36
+              "reports": 38
             },
             "generated_files": [
               "targets/vscode/adapter.json",
@@ -2311,7 +2326,7 @@
           },
           "scripts": {
             "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-            "script_count": 3,
+            "script_count": 4,
             "help_smoke_failed_count": 0
           },
           "permissions": {
@@ -2446,9 +2461,9 @@
           "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
           "counts": {
             "references": 7,
-            "scripts": 3,
+            "scripts": 4,
             "assets": 0,
-            "reports": 36
+            "reports": 38
           },
           "generated_files": [
             "targets/vscode/adapter.json",
@@ -2457,7 +2472,7 @@
         },
         "scripts": {
           "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-          "script_count": 3,
+          "script_count": 4,
           "help_smoke_failed_count": 0
         },
         "permissions": {

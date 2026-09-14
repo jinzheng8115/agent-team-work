@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "ok": false,
+  "ok": true,
   "generated_at": "2026-09-14",
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "check_count": 41,
-    "pass_count": 40,
+    "pass_count": 41,
     "warn_count": 0,
-    "fail_count": 1,
-    "decision": "evidence-drift-detected"
+    "fail_count": 0,
+    "decision": "consistent"
   },
   "status_counts": {
-    "pass": 40,
+    "pass": 41,
     "warn": 0,
-    "fail": 1
+    "fail": 0
   },
   "checks": [
     {
@@ -191,13 +191,11 @@
       "expected": {
         "non_pass_gate_keys": [
           "output-lab",
-          "release-notes",
           "review-waivers",
           "world-class-evidence"
         ],
         "action_gate_keys": [
           "output-lab",
-          "release-notes",
           "review-waivers",
           "world-class-evidence"
         ],
@@ -244,22 +242,6 @@
             "source_ref_present": true,
             "verification_command_present": true,
             "top_level_action_id": "review-action-world-class-evidence",
-            "top_level_action_status": "warn",
-            "top_level_title_present": true,
-            "top_level_next_step_present": true,
-            "top_level_reason_present": true,
-            "top_level_source_ref_present": true,
-            "top_level_verification_command_present": true
-          },
-          "release-notes": {
-            "review_action_id": "review-action-release-notes",
-            "review_action_status": "warn",
-            "title_present": true,
-            "next_step_present": true,
-            "reason_present": true,
-            "source_ref_present": true,
-            "verification_command_present": true,
-            "top_level_action_id": "review-action-release-notes",
             "top_level_action_status": "warn",
             "top_level_title_present": true,
             "top_level_next_step_present": true,
@@ -272,13 +254,11 @@
       "actual": {
         "non_pass_gate_keys": [
           "output-lab",
-          "release-notes",
           "review-waivers",
           "world-class-evidence"
         ],
         "action_gate_keys": [
           "output-lab",
-          "release-notes",
           "review-waivers",
           "world-class-evidence"
         ],
@@ -325,22 +305,6 @@
             "source_ref_present": true,
             "verification_command_present": true,
             "top_level_action_id": "review-action-world-class-evidence",
-            "top_level_action_status": "warn",
-            "top_level_title_present": true,
-            "top_level_next_step_present": true,
-            "top_level_reason_present": true,
-            "top_level_source_ref_present": true,
-            "top_level_verification_command_present": true
-          },
-          "release-notes": {
-            "review_action_id": "review-action-release-notes",
-            "review_action_status": "warn",
-            "title_present": true,
-            "next_step_present": true,
-            "reason_present": true,
-            "source_ref_present": true,
-            "verification_command_present": true,
-            "top_level_action_id": "review-action-release-notes",
             "top_level_action_status": "warn",
             "top_level_title_present": true,
             "top_level_next_step_present": true,
@@ -360,13 +324,13 @@
       "label": "Release archive hash matches package, registry, and benchmark evidence",
       "status": "pass",
       "expected": {
-        "all_equal_to_actual_archive": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0"
+        "all_equal_to_actual_archive": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
       },
       "actual": {
-        "actual_archive": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
-        "package_verification": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
-        "registry": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
-        "benchmark": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0"
+        "actual_archive": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+        "package_verification": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+        "registry": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+        "benchmark": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
       },
       "paths": [
         "dist/yao-meta-skill.zip",
@@ -401,12 +365,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 870/1000; deferred 8720/120000; top deferred none; resource governance not-required; quality density 149.4",
+        "detail": "initial load 878/1000; deferred 9690/120000; top deferred none; resource governance not-required; quality density 148.1",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 870/1000; deferred 8720/120000; top deferred none; resource governance not-required; quality density 149.4",
+        "detail": "initial load 878/1000; deferred 9690/120000; top deferred none; resource governance not-required; quality density 148.1",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -418,9 +382,9 @@
     {
       "key": "benchmark-release-lock-self-consistency",
       "label": "Benchmark release lock matches source dirty state",
-      "status": "fail",
+      "status": "pass",
       "expected": true,
-      "actual": false,
+      "actual": true,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
@@ -434,7 +398,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 170
+        "changed_file_count": 59
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -475,8 +439,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "unknown",
-      "actual": "unknown",
+      "expected": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
+      "actual": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -488,36 +452,36 @@
       "label": "overview embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d",
-        "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
+        "source_contract_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
+        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 8,
         "beta_test_ready": false,
-        "beta_test_blocker_count": 2,
+        "beta_test_blocker_count": 1,
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 7
+        "public_claim_blocker_count": 6
       },
       "actual": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d",
-        "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
+        "source_contract_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
+        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 8,
         "beta_test_ready": false,
-        "beta_test_blocker_count": 2,
+        "beta_test_blocker_count": 1,
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 7
+        "public_claim_blocker_count": 6
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -627,8 +591,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "unknown",
-      "actual": "unknown",
+      "expected": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
+      "actual": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -640,36 +604,36 @@
       "label": "interpretation embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d",
-        "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
+        "source_contract_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
+        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 8,
         "beta_test_ready": false,
-        "beta_test_blocker_count": 2,
+        "beta_test_blocker_count": 1,
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 7
+        "public_claim_blocker_count": 6
       },
       "actual": {
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d",
-        "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
+        "source_contract_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
+        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 8,
         "beta_test_ready": false,
-        "beta_test_blocker_count": 2,
+        "beta_test_blocker_count": 1,
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 7
+        "public_claim_blocker_count": 6
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -1691,16 +1655,16 @@
             "path": "evals",
             "label": "Trigger and quality checks",
             "kind": "folder",
-            "file_count": 12
+            "file_count": 13
           },
           {
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 111
+            "file_count": 112
           }
         ],
-        "file_count": 137,
+        "file_count": 139,
         "folder_count": 4,
         "distribution": [
           {
@@ -1729,11 +1693,11 @@
           },
           {
             "label": "evals",
-            "value": 12
+            "value": 13
           },
           {
             "label": "reports",
-            "value": 111
+            "value": 112
           }
         ]
       },
@@ -1779,16 +1743,16 @@
             "path": "evals",
             "label": "Trigger and quality checks",
             "kind": "folder",
-            "file_count": 12
+            "file_count": 13
           },
           {
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 111
+            "file_count": 112
           }
         ],
-        "file_count": 137,
+        "file_count": 139,
         "folder_count": 4,
         "distribution": [
           {
@@ -1817,11 +1781,11 @@
           },
           {
             "label": "evals",
-            "value": 12
+            "value": 13
           },
           {
             "label": "reports",
-            "value": 111
+            "value": 112
           }
         ]
       },
@@ -2156,8 +2120,8 @@
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 2,
           "submission_ref_ready_count": 2,
-          "supporting_evidence_total_count": 8,
-          "supporting_evidence_ready_count": 8,
+          "supporting_evidence_total_count": 11,
+          "supporting_evidence_ready_count": 11,
           "submission_ref_copy_to_artifact_refs": true,
           "supporting_evidence_copy_to_artifact_refs": false
         },
@@ -2202,8 +2166,8 @@
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 2,
           "submission_ref_ready_count": 2,
-          "supporting_evidence_total_count": 8,
-          "supporting_evidence_ready_count": 8,
+          "supporting_evidence_total_count": 11,
+          "supporting_evidence_ready_count": 11,
           "submission_ref_copy_to_artifact_refs": true,
           "supporting_evidence_copy_to_artifact_refs": false
         },
@@ -3695,18 +3659,18 @@
       "label": "Skill OS 2.0 review summary mirrors current evidence",
       "status": "pass",
       "expected": [
-        "score `89`",
+        "score `91`",
         "`16` gates",
-        "`4` warnings",
+        "`3` warnings",
         "`0` declared internal modules",
         "`3 / 3` CLI help smoke checks passing across `3` scripts",
-        "`145` zip entries",
-        "archive with `145` entries",
+        "`154` zip entries",
+        "archive with `154` entries",
         "`0` installer permission checks enforced",
         "`0` permission failures",
         "`25` required artifacts",
         "`23` reproduction commands",
-        "initial load `870/1000`",
+        "initial load `878/1000`",
         "target count is `3`"
       ],
       "actual": "all present",

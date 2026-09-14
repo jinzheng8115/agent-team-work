@@ -1,5 +1,5 @@
 {
-  "ok": false,
+  "ok": true,
   "schema_version": "2.0",
   "generated_at": "2026-09-14",
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
@@ -8,7 +8,7 @@
   "installed_skill_dir": "/Volumes/Code/team-worker/agent-team-work/dist/install-simulation/simulate-agent-team-work/agent-team-work",
   "summary": {
     "archive_present": true,
-    "archive_entry_count": 34,
+    "archive_entry_count": 154,
     "nested_skill_entry_count": 0,
     "archive_extracted": true,
     "entrypoint_loaded": true,
@@ -20,7 +20,7 @@
     "permission_target_count": 4,
     "permission_capability_count": 0,
     "install_root_is_temp": false,
-    "failure_count": 2,
+    "failure_count": 0,
     "warning_count": 0
   },
   "checks": [
@@ -81,12 +81,12 @@
     },
     {
       "id": "overview-report",
-      "status": "fail",
+      "status": "pass",
       "detail": "Installed overview report is present"
     },
     {
       "id": "review-studio-report",
-      "status": "fail",
+      "status": "pass",
       "detail": "Installed Review Studio report is present"
     },
     {
@@ -155,10 +155,7 @@
       "detail": "vscode adapter exposes target permission contract for installer enforcement"
     }
   ],
-  "failures": [
-    "Installed overview report is present",
-    "Installed Review Studio report is present"
-  ],
+  "failures": [],
   "warnings": [],
   "artifacts": {
     "archive": "/Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip",
