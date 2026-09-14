@@ -1,0 +1,620 @@
+{
+  "name": "agent-team-work",
+  "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+  "version": "0.2.0",
+  "platform": "vscode",
+  "skill_root": "agent-team-work",
+  "job_to_be_done": "在项目开始时通过菜单组建一个由当前会话担任 Leader、多个独立项目会话担任成员的 Codex 团队，并按阶段派单、收取报告、验收和恢复，直到整体交付完成或明确阻塞。",
+  "ir_source": "reports/skill-ir.json",
+  "ir_schema_version": "2.0.0",
+  "semantic_contract": {
+    "name": "agent-team-work",
+    "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+    "job_to_be_done": "在项目开始时通过菜单组建一个由当前会话担任 Leader、多个独立项目会话担任成员的 Codex 团队，并按阶段派单、收取报告、验收和恢复，直到整体交付完成或明确阻塞。",
+    "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+    "should_trigger_count": 6,
+    "should_not_trigger_count": 10,
+    "edge_case_count": 4,
+    "workflow_step_count": 3,
+    "decision_point_count": 0,
+    "failure_mode_count": 6,
+    "resource_counts": {
+      "references": 7,
+      "scripts": 3,
+      "assets": 0,
+      "reports": 36
+    },
+    "eval_counts": {
+      "trigger": 12,
+      "output": 5,
+      "adversarial": 0,
+      "baseline": 1
+    },
+    "risk": {
+      "output_risk": "medium",
+      "execution_risk": "medium",
+      "trust_boundary": "external"
+    },
+    "governance": {
+      "owner": "Local Codex Team",
+      "maturity": "governed",
+      "review_cadence": "monthly",
+      "review_due": "2026-10-14"
+    },
+    "targets": [
+      "openai",
+      "claude",
+      "generic",
+      "agent-skills-compatible",
+      "vscode"
+    ],
+    "source_files_count": 5
+  },
+  "semantic_parity": {
+    "source": "skill-ir",
+    "ir_source": "reports/skill-ir.json",
+    "name_matches_ir": true,
+    "description_matches_ir": true,
+    "platform_declared_in_ir": true,
+    "platform_declared_in_interface": true,
+    "display_name_present": true,
+    "default_prompt_present": true
+  },
+  "compiler": {
+    "name": "yao-skill-ir-compiler",
+    "schema_version": "1.0",
+    "source": "skill-ir",
+    "ir_source": "reports/skill-ir.json",
+    "ir_schema_version": "2.0.0"
+  },
+  "compiled_contract": {
+    "name": "agent-team-work",
+    "title": "Agent Team Work",
+    "version": "0.2.0",
+    "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+    "job_to_be_done": "在项目开始时通过菜单组建一个由当前会话担任 Leader、多个独立项目会话担任成员的 Codex 团队，并按阶段派单、收取报告、验收和恢复，直到整体交付完成或明确阻塞。",
+    "trigger": {
+      "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+      "should_trigger": [
+        "为这个新项目组建团队，每个角色在项目栏有独立会话。",
+        "通过菜单创建项目会话团队，由 Leader 分配各阶段工作。",
+        "帮我建一个团队，研究、核验、综合各有自己的项目对话。",
+        "继续 agent-team-work 的已有团队，验收上次成果后安排下一步。",
+        "查看 agent-team-work 团队当前阶段，不要派发新任务。",
+        "使用 agent-team-work 调整成员职责，保留已有角色会话。"
+      ],
+      "should_not_trigger": [
+        "解释什么是多智能体团队。",
+        "创建一个 skill，名字是 agent-team-work。",
+        "修改 skill agent-team-work 的菜单和文档。",
+        "翻译这个团队管理教程。",
+        "用临时子代理并行审查这三个文件。",
+        "不用创建会话，只给出组建团队的建议。",
+        "解释多智能体团队概念或只写流程建议",
+        "编写、修改或翻译 skill",
+        "单次会话改名或普通子代理任务",
+        "并行 worker、Orca team、Sub-Lead、子团队或临时会话"
+      ],
+      "edge_cases": [
+        "只创建一个项目会话，名称叫开发记录。",
+        "请通过 Cindy Helper 创建项目会话团队。",
+        "帮我重命名现有对话。",
+        "讨论如何组建团队，不建团队，只解释流程。"
+      ]
+    },
+    "workflow": {
+      "steps": [
+        "Understand the request.",
+        "Execute the main task.",
+        "Validate the result."
+      ],
+      "decision_points": [],
+      "failure_modes": [
+        "Tables can render as dense grids with weak hierarchy or poor mobile readability.",
+        "Long bullets can make the output look complete while hiding the actual decision logic.",
+        "Footnote markers or dense citation notes can interrupt the reading flow.",
+        "Evidence can be over-attached to obvious statements and under-attached to risky claims.",
+        "Commands can omit environment assumptions, working directory, or rollback notes.",
+        "Code snippets can look runnable while missing required inputs."
+      ]
+    },
+    "resources": {
+      "references": [
+        "references/codex-tools.md",
+        "references/e2e-smoke-checklist.md",
+        "references/role-capabilities.md",
+        "references/role-presets.md",
+        "references/team-protocol.md",
+        "references/team-scaling.md",
+        "references/workflow.md"
+      ],
+      "scripts": [
+        "scripts/ci_test.py",
+        "scripts/local_output_eval_runner.py",
+        "scripts/validate_team_state.py"
+      ],
+      "assets": [],
+      "reports": [
+        "reports/benchmark_methodology.md",
+        "reports/intent-context.json",
+        "reports/intent-confidence.json",
+        "reports/intent-confidence.md",
+        "reports/reference-synthesis.json",
+        "reports/reference-synthesis.md",
+        "reports/output-risk-profile.json",
+        "reports/output-risk-profile.md",
+        "reports/artifact-design-profile.json",
+        "reports/artifact-design-profile.md",
+        "reports/prompt-quality-profile.json",
+        "reports/prompt-quality-profile.md",
+        "reports/iteration-directions.json",
+        "reports/iteration-directions.md",
+        "reports/skill-overview.json",
+        "reports/skill-overview.html",
+        "reports/output_quality_scorecard.json",
+        "reports/output_quality_scorecard.md",
+        "reports/output_execution_runs.json",
+        "reports/output_execution_runs.md",
+        "reports/output_blind_review_pack.json",
+        "reports/output_blind_review_pack.md",
+        "reports/output_blind_answer_key.json",
+        "reports/output_review_adjudication.json",
+        "reports/output_review_adjudication.md",
+        "reports/review_annotations.json",
+        "reports/review_annotations.md",
+        "reports/conformance_matrix.json",
+        "reports/conformance_matrix.md",
+        "reports/security_trust_report.json",
+        "reports/security_trust_report.md",
+        "reports/runtime_permission_probes.json",
+        "reports/runtime_permission_probes.md",
+        "reports/skill_atlas.json",
+        "reports/skill_atlas.html",
+        "reports/skill-os-2-review.md"
+      ],
+      "counts": {
+        "references": 7,
+        "scripts": 3,
+        "assets": 0,
+        "reports": 36
+      }
+    },
+    "eval_plan": {
+      "trigger": [
+        "evals/evals.json",
+        "evals/failure-cases.md",
+        "evals/history/2026-09-14-real-smoke.json",
+        "evals/holdout_cases.json",
+        "evals/output/cases.jsonl",
+        "evals/output/fixtures/project-brief.md",
+        "evals/output/holdout_cases.zh-CN.jsonl",
+        "evals/output/provider_matrix.json",
+        "evals/output/schema.json",
+        "evals/packaging_expectations.json",
+        "evals/semantic-config.json",
+        "evals/trigger_cases.json"
+      ],
+      "output": [
+        "evals/output/cases.jsonl",
+        "evals/output/fixtures/project-brief.md",
+        "evals/output/holdout_cases.zh-CN.jsonl",
+        "evals/output/provider_matrix.json",
+        "evals/output/schema.json"
+      ],
+      "adversarial": [],
+      "baseline": "without_skill",
+      "counts": {
+        "trigger": 12,
+        "output": 5,
+        "adversarial": 0,
+        "baseline": 1
+      }
+    },
+    "risk": {
+      "output_risk": "medium",
+      "execution_risk": "medium",
+      "trust_boundary": "external"
+    },
+    "governance": {
+      "owner": "Local Codex Team",
+      "maturity": "governed",
+      "review_cadence": "monthly",
+      "review_due": "2026-10-14"
+    },
+    "runtime": {
+      "activation": {
+        "mode": "manual",
+        "paths": []
+      },
+      "execution": {
+        "context": "inline",
+        "shell": "bash"
+      },
+      "trust": {
+        "source_tier": "local",
+        "remote_inline_execution": "forbid",
+        "remote_metadata_policy": "allow-metadata-only"
+      },
+      "adapter_targets": [
+        "openai",
+        "claude",
+        "generic",
+        "vscode"
+      ],
+      "canonical_format": "agent-skills"
+    },
+    "permissions": {
+      "schema_version": "1.0",
+      "source": "reports/security_trust_report.json",
+      "source_available": true,
+      "declared_capabilities": [],
+      "review_required": false,
+      "capabilities": {
+        "network": {
+          "required": false,
+          "script_count": 0,
+          "scripts": [],
+          "review_reason": ""
+        },
+        "file_write": {
+          "required": false,
+          "script_count": 0,
+          "scripts": [],
+          "review_reason": ""
+        },
+        "subprocess": {
+          "required": false,
+          "script_count": 0,
+          "scripts": [],
+          "review_reason": ""
+        },
+        "interactive": {
+          "required": false,
+          "script_count": 0,
+          "scripts": [],
+          "review_reason": ""
+        }
+      },
+      "network_policy": {
+        "source": "security/network_policy.json",
+        "covered_scripts": [],
+        "missing_scripts": [],
+        "mismatches": []
+      },
+      "help_smoke": {
+        "enabled": true,
+        "checked_count": 3,
+        "failed_count": 0,
+        "failed_scripts": []
+      },
+      "trust_summary": {
+        "secret_findings": 0,
+        "network_script_count": 0,
+        "file_write_script_count": 0,
+        "subprocess_script_count": 0,
+        "interactive_script_count": 0,
+        "help_smoke_failed_count": 0
+      }
+    },
+    "source_files_count": 5,
+    "target": "vscode",
+    "target_permission_contract": {
+      "schema_version": "1.0",
+      "target": "vscode",
+      "permission_model": "vscode-workspace-trust-plus-metadata",
+      "native_enforcement": false,
+      "representation": "targets/vscode/adapter.json::target_permission_contract and targets/vscode/README.md install notes",
+      "review_required": false,
+      "declared_capabilities": [],
+      "capability_counts": {
+        "network": 0,
+        "file_write": 0,
+        "subprocess": 0,
+        "interactive": 0
+      },
+      "evidence": "reports/security_trust_report.json",
+      "operator_note": "VS Code target relies on project or user skill installation plus VS Code workspace trust; Yao preserves permission metadata for reviewer and installer checks."
+    },
+    "target_native_contract": {
+      "schema_version": "1.0",
+      "target": "vscode",
+      "native_surface": "VS Code/Copilot Agent Skills project or user scope",
+      "activation": {
+        "policy": "Use folder name plus SKILL.md name/description; keep description under platform limits.",
+        "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+        "manual_activation_supported": true,
+        "automatic_activation_note": "Depends on the target client route/catalog implementation."
+      },
+      "resources": {
+        "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
+        "counts": {
+          "references": 7,
+          "scripts": 3,
+          "assets": 0,
+          "reports": 36
+        },
+        "generated_files": [
+          "targets/vscode/adapter.json",
+          "targets/vscode/README.md"
+        ]
+      },
+      "scripts": {
+        "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
+        "script_count": 3,
+        "help_smoke_failed_count": 0
+      },
+      "permissions": {
+        "enforcement": "client-or-workspace-trust",
+        "native_enforcement": false,
+        "declared_capabilities": [],
+        "review_required": false
+      },
+      "review": {
+        "artifacts": [
+          "SKILL.md",
+          "agents/interface.yaml",
+          "reports/review-studio.html"
+        ],
+        "fallback_behavior": "If VS Code scope is not installed, use the neutral Agent Skills source.",
+        "unsupported_native_features": [
+          "automatic VS Code installation",
+          "VS Code installation scope is documented but not installed by this compiler"
+        ]
+      },
+      "install_scope": "VS Code user or project skills directory"
+    },
+    "degradation_strategy": "agent-skills-source-without-Codex-session-runtime",
+    "target_runtime": {
+      "adapter_mode": "vscode-agent-skills-adapter",
+      "generated_files": [
+        "targets/vscode/adapter.json",
+        "targets/vscode/README.md"
+      ],
+      "metadata_mapping": {
+        "name": "folder-name-and-SKILL.md::frontmatter.name",
+        "description": "SKILL.md::frontmatter.description",
+        "interface": "agents/interface.yaml",
+        "permissions": "targets/vscode/adapter.json::target_permission_contract",
+        "install_scope": "targets/vscode/README.md"
+      },
+      "preserved_semantics": [
+        "trigger",
+        "workflow",
+        "resources",
+        "eval-plan",
+        "risk",
+        "governance",
+        "runtime",
+        "trust",
+        "permissions"
+      ],
+      "native_surface": "VS Code/Copilot Agent Skills project or user scope"
+    }
+  },
+  "permission_contract": {
+    "schema_version": "1.0",
+    "source": "reports/security_trust_report.json",
+    "source_available": true,
+    "declared_capabilities": [],
+    "review_required": false,
+    "capabilities": {
+      "network": {
+        "required": false,
+        "script_count": 0,
+        "scripts": [],
+        "review_reason": ""
+      },
+      "file_write": {
+        "required": false,
+        "script_count": 0,
+        "scripts": [],
+        "review_reason": ""
+      },
+      "subprocess": {
+        "required": false,
+        "script_count": 0,
+        "scripts": [],
+        "review_reason": ""
+      },
+      "interactive": {
+        "required": false,
+        "script_count": 0,
+        "scripts": [],
+        "review_reason": ""
+      }
+    },
+    "network_policy": {
+      "source": "security/network_policy.json",
+      "covered_scripts": [],
+      "missing_scripts": [],
+      "mismatches": []
+    },
+    "help_smoke": {
+      "enabled": true,
+      "checked_count": 3,
+      "failed_count": 0,
+      "failed_scripts": []
+    },
+    "trust_summary": {
+      "secret_findings": 0,
+      "network_script_count": 0,
+      "file_write_script_count": 0,
+      "subprocess_script_count": 0,
+      "interactive_script_count": 0,
+      "help_smoke_failed_count": 0
+    }
+  },
+  "target_permission_contract": {
+    "schema_version": "1.0",
+    "target": "vscode",
+    "permission_model": "vscode-workspace-trust-plus-metadata",
+    "native_enforcement": false,
+    "representation": "targets/vscode/adapter.json::target_permission_contract and targets/vscode/README.md install notes",
+    "review_required": false,
+    "declared_capabilities": [],
+    "capability_counts": {
+      "network": 0,
+      "file_write": 0,
+      "subprocess": 0,
+      "interactive": 0
+    },
+    "evidence": "reports/security_trust_report.json",
+    "operator_note": "VS Code target relies on project or user skill installation plus VS Code workspace trust; Yao preserves permission metadata for reviewer and installer checks."
+  },
+  "target_native_contract": {
+    "schema_version": "1.0",
+    "target": "vscode",
+    "native_surface": "VS Code/Copilot Agent Skills project or user scope",
+    "activation": {
+      "policy": "Use folder name plus SKILL.md name/description; keep description under platform limits.",
+      "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+      "manual_activation_supported": true,
+      "automatic_activation_note": "Depends on the target client route/catalog implementation."
+    },
+    "resources": {
+      "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
+      "counts": {
+        "references": 7,
+        "scripts": 3,
+        "assets": 0,
+        "reports": 36
+      },
+      "generated_files": [
+        "targets/vscode/adapter.json",
+        "targets/vscode/README.md"
+      ]
+    },
+    "scripts": {
+      "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
+      "script_count": 3,
+      "help_smoke_failed_count": 0
+    },
+    "permissions": {
+      "enforcement": "client-or-workspace-trust",
+      "native_enforcement": false,
+      "declared_capabilities": [],
+      "review_required": false
+    },
+    "review": {
+      "artifacts": [
+        "SKILL.md",
+        "agents/interface.yaml",
+        "reports/review-studio.html"
+      ],
+      "fallback_behavior": "If VS Code scope is not installed, use the neutral Agent Skills source.",
+      "unsupported_native_features": [
+        "automatic VS Code installation",
+        "VS Code installation scope is documented but not installed by this compiler"
+      ]
+    },
+    "install_scope": "VS Code user or project skills directory"
+  },
+  "target_transform": {
+    "target": "vscode",
+    "adapter_mode": "vscode-agent-skills-adapter",
+    "generated_files": [
+      "targets/vscode/adapter.json",
+      "targets/vscode/README.md"
+    ],
+    "metadata_mapping": {
+      "name": "folder-name-and-SKILL.md::frontmatter.name",
+      "description": "SKILL.md::frontmatter.description",
+      "interface": "agents/interface.yaml",
+      "permissions": "targets/vscode/adapter.json::target_permission_contract",
+      "install_scope": "targets/vscode/README.md"
+    },
+    "preserved_semantics": [
+      "trigger",
+      "workflow",
+      "resources",
+      "eval-plan",
+      "risk",
+      "governance",
+      "runtime",
+      "trust",
+      "permissions"
+    ],
+    "degradation_strategy": "agent-skills-source-without-Codex-session-runtime",
+    "permission_representation": "targets/vscode/adapter.json::target_permission_contract and targets/vscode/README.md install notes",
+    "native_surface": "VS Code/Copilot Agent Skills project or user scope",
+    "activation_policy": "Use folder name plus SKILL.md name/description; keep description under platform limits.",
+    "resource_strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
+    "script_strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
+    "permission_enforcement": "client-or-workspace-trust"
+  },
+  "unsupported_features": [
+    "VS Code installation scope is documented but not installed by this compiler"
+  ],
+  "compiler_warnings": [],
+  "display_name": "Agent Team Work",
+  "short_description": "由 Leader 严格串行协调项目独立角色会话",
+  "default_prompt": "Use $agent-team-work to set up one current-session Leader and independent Codex project sessions for each role, confirm once before mutations, and continue stages only after acceptance until complete or blocked.",
+  "canonical_metadata": "agents/interface.yaml",
+  "canonical_format": "agent-skills",
+  "adapter_targets": [
+    "openai",
+    "claude",
+    "generic",
+    "vscode"
+  ],
+  "activation_mode": "manual",
+  "activation_paths": [],
+  "execution_context": "inline",
+  "shell": "bash",
+  "trust_level": "local",
+  "remote_inline_execution": "forbid",
+  "remote_metadata_policy": "allow-metadata-only",
+  "degradation_strategy": "agent-skills-source-without-Codex-session-runtime",
+  "portability_profile": {
+    "activation_mode": "manual",
+    "activation_paths": [],
+    "execution_context": "inline",
+    "shell": "bash",
+    "source_tier": "local",
+    "remote_inline_execution": "forbid",
+    "remote_metadata_policy": "allow-metadata-only",
+    "degradation_strategy": "agent-skills-source-without-Codex-session-runtime"
+  },
+  "install_hint": "Install the package as a VS Code user or project scoped Agent Skill; use targets/vscode/README.md for scope and trust notes.",
+  "contract": {
+    "required_fields": [
+      "name",
+      "description",
+      "version",
+      "display_name",
+      "short_description",
+      "default_prompt",
+      "job_to_be_done",
+      "ir_source",
+      "ir_schema_version",
+      "semantic_contract",
+      "semantic_parity",
+      "compiler",
+      "compiled_contract",
+      "permission_contract",
+      "target_permission_contract",
+      "target_native_contract",
+      "target_transform",
+      "canonical_metadata",
+      "canonical_format",
+      "activation_mode",
+      "execution_context",
+      "shell",
+      "trust_level",
+      "remote_inline_execution",
+      "degradation_strategy",
+      "portability_profile"
+    ],
+    "required_files": [
+      "targets/vscode/adapter.json",
+      "targets/vscode/README.md"
+    ],
+    "field_mapping": {
+      "name": "SKILL.md::frontmatter.name and folder name",
+      "description": "SKILL.md::frontmatter.description",
+      "display_name": "agents/interface.yaml::interface.display_name",
+      "execution_context": "compatibility.execution.context",
+      "permissions": "adapter.target_permission_contract"
+    }
+  }
+}

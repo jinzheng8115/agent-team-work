@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "reviewer": "",
+  "reviewed_at": "",
+  "review_integrity": {
+    "blind_pack_sha256": "2653a18d9b32b03411cf466492c9f4a3b499b8546202f3ac3c96a23c3a6dabac",
+    "case_count": 5,
+    "case_ids": [
+      "team-bootstrap",
+      "serial-gate",
+      "rework-safety",
+      "resume-ledger",
+      "near-neighbor-explanation"
+    ],
+    "prompt_sha256_by_case": {
+      "team-bootstrap": "af1e1749704920ad0e330a04b0dee9a392734eb8ee45d4b48c57926ad23fcf20",
+      "serial-gate": "c0be51da2e514b9f70389fbb7fbbdf6cd7ec46b64f3e6c835cc7a86b5f55769a",
+      "rework-safety": "7969201c2a518b5930349346148f259157c51282f2133f85644042ee97495bbd",
+      "resume-ledger": "f3e1266acce4ee06ce2f8579246821f28607b5a1d35a889ebb5fa6f4944c212e",
+      "near-neighbor-explanation": "50e209a56f2be077589a0f7319e2f93c698c0da620811a96ab2a10752a34f4c0"
+    }
+  },
+  "reviewer_attestation": {
+    "blind_review_completed_before_answer_key": false,
+    "answer_key_not_opened_before_decisions": false,
+    "raw_content_excluded": true,
+    "reviewer_reason_required": true
+  },
+  "decision_contract": {
+    "winner_variant": "Use A or B after reading the blind review pack. Leave blank when pending.",
+    "confidence": "Optional number from 0 to 1.",
+    "reason": "Required reviewer rationale. Do not reveal baseline or with-skill labels before adjudication.",
+    "reviewer_attestation": "Set blind_review_completed_before_answer_key and answer_key_not_opened_before_decisions to true only after a real blind review."
+  },
+  "decisions": [
+    {
+      "case_id": "team-bootstrap",
+      "winner_variant": "",
+      "confidence": null,
+      "reason": ""
+    },
+    {
+      "case_id": "serial-gate",
+      "winner_variant": "",
+      "confidence": null,
+      "reason": ""
+    },
+    {
+      "case_id": "rework-safety",
+      "winner_variant": "",
+      "confidence": null,
+      "reason": ""
+    },
+    {
+      "case_id": "resume-ledger",
+      "winner_variant": "",
+      "confidence": null,
+      "reason": ""
+    },
+    {
+      "case_id": "near-neighbor-explanation",
+      "winner_variant": "",
+      "confidence": null,
+      "reason": ""
+    }
+  ]
+}

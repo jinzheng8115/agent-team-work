@@ -1,0 +1,33 @@
+{
+  "skill_name": "agent-team-work",
+  "evals": [
+    {
+      "id": "create-serial-team",
+      "prompt": "为当前 Codex 项目创建一个 Leader 和三个项目栏独立角色会话，先让我确认，再只启动第一个阶段。",
+      "expected_output": "逐项菜单收集目标、角色、顺序、门控和工作目录；展示一次最终摘要并取得确认；创建待命会话后只派首阶段。",
+      "files": [],
+      "assertions": ["does_not_create_before_confirmation", "creates_project_sessions", "starts_one_stage"]
+    },
+    {
+      "id": "resume-after-interruption",
+      "prompt": "继续 agent-team-work 团队，查清上次哪个阶段已验收，再安排下一步。",
+      "expected_output": "读取状态和真实会话，匹配 team/epoch/stage/attempt/dispatch key，只恢复未完成阶段。",
+      "files": [],
+      "assertions": ["checks_state_and_threads", "rejects_stale_result", "does_not_duplicate_send"]
+    },
+    {
+      "id": "reject-neighbor",
+      "prompt": "不用创建项目会话，只解释多智能体团队怎么协作。",
+      "expected_output": "不触发 agent-team-work 建队流程，不调用会话创建工具。",
+      "files": [],
+      "assertions": ["does_not_create_sessions", "answers_or_routes_as_explanation"]
+    },
+    {
+      "id": "rework-gate",
+      "prompt": "成员说开发完成了，但验收发现测试缺失，请退回他修复，不要启动审查阶段。",
+      "expected_output": "记录 needs_rework，attempt 加一，向原会话发送带失败 DoD 和复验方式的 rework。",
+      "files": [],
+      "assertions": ["reuses_original_role", "increments_attempt", "does_not_start_next_stage"]
+    }
+  ]
+}

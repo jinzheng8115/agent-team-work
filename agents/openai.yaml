@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent Team Work"
+  short_description: "通过菜单创建独立角色会话，由 Leader 分阶段派单、验收和恢复项目进度"
+  default_prompt: "使用 $agent-team-work 为当前项目组建一个 Leader 和独立角色会话，先展示一次最终摘要并确认，再按严格串行阶段派单、验收，直到 complete 或记录 blocked。"

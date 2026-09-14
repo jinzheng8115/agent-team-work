@@ -1,0 +1,39 @@
+{
+  "summary": {
+    "skill_name": "agent-team-work",
+    "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+    "maturity_tier": "governed",
+    "selection_rule": "Pick the three smallest next steps that increase reliability more than they increase context cost.",
+    "recommended_now": "Tighten trigger and exclusions",
+    "recommended_now_why": "The package needs clearer near-neighbor exclusions before it grows.",
+    "defer_for_now": "Create an iteration evidence loop"
+  },
+  "directions": [
+    {
+      "priority": 1,
+      "title": "Tighten trigger and exclusions",
+      "why": "The package needs clearer near-neighbor exclusions before it grows.",
+      "actions": [
+        "Add 3 to 5 should-trigger and should-not-trigger examples.",
+        "Refine the frontmatter description to name the recurring job and non-goals.",
+        "Run a first trigger evaluation pass before expanding the package."
+      ],
+      "unlocks": "Cleaner routing and fewer accidental activations.",
+      "do_now": "Do this first.",
+      "wait_on": "Wait to add broader structure until this move clearly improves reliability."
+    },
+    {
+      "priority": 11,
+      "title": "Create an iteration evidence loop",
+      "why": "The package should show what changed and why after the first draft.",
+      "actions": [
+        "Generate the HTML skill report and keep it aligned with the package.",
+        "Record reference scan choices and non-goals.",
+        "Capture the next iteration choice explicitly before adding more files."
+      ],
+      "unlocks": "A clearer path for the next author or reviewer.",
+      "do_now": "Do this after the first move lands cleanly.",
+      "wait_on": "Wait until the package has evidence that this extra structure is justified."
+    }
+  ]
+}

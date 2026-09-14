@@ -1,0 +1,57 @@
+{
+  "schema_version": "2.0",
+  "name": "agent-team-work",
+  "version": "0.2.0",
+  "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+  "targets": [
+    "openai",
+    "claude",
+    "generic",
+    "agent-skills-compatible",
+    "vscode"
+  ],
+  "maturity": "governed",
+  "owner": "Local Codex Team",
+  "review_cadence": "monthly",
+  "trust_level": "local",
+  "license": "MIT",
+  "checksums": {
+    "package_sha256": "0c0feeebc1e927367131cad6cd27bc16661beb51848910b6df2a8ae95af7448b",
+    "archive_sha256": "73c9b326fcafd4a673fa4ea855c2ea6bde7300f8b11fc88953f7331dfa2545ff"
+  },
+  "compatibility": {
+    "openai": "pass",
+    "claude": "pass",
+    "agent-skills": "pass",
+    "vscode": "pass",
+    "generic": "pass",
+    "agent-skills-compatible": "pass"
+  },
+  "source": {
+    "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+    "skill_ir": "reports/skill-ir.json",
+    "ir_schema_version": "2.0.0",
+    "canonical_metadata": "agents/interface.yaml"
+  },
+  "artifacts": {
+    "overview_html": "reports/skill-overview.html",
+    "review_studio_html": "reports/review-studio.html",
+    "trust_report": "reports/security_trust_report.md",
+    "conformance_matrix": "reports/conformance_matrix.md",
+    "compiled_targets": "reports/compiled_targets.md",
+    "package_verification": "reports/package_verification.md",
+    "install_simulation": "reports/install_simulation.md",
+    "adoption_drift": "reports/adoption_drift_report.md",
+    "review_waivers": "reports/review_waivers.md",
+    "review_annotations": "reports/review_annotations.md",
+    "package_metadata": "registry/packages/agent-team-work.json"
+  },
+  "distribution": {
+    "archive_verified": true,
+    "archive_sha256": "73c9b326fcafd4a673fa4ea855c2ea6bde7300f8b11fc88953f7331dfa2545ff",
+    "package_verification": "reports/package_verification.json",
+    "install_simulated": false,
+    "install_simulation": "reports/install_simulation.json"
+  },
+  "generated_at": "2026-09-14"
+}

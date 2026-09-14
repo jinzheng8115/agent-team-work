@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["id", "prompt", "baseline_output", "with_skill_output", "assertions"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "prompt": {"type": "string"},
+    "input_files": {"type": "array", "items": {"type": "string"}},
+    "metadata": {"type": "object"},
+    "baseline_output": {"type": "string"},
+    "with_skill_output": {"type": "string"},
+    "assertions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "description", "required", "weight", "failure_type"],
+        "properties": {
+          "id": {"type": "string"},
+          "description": {"type": "string"},
+          "required": {"type": "array", "items": {"type": "string"}},
+          "weight": {"type": "number", "exclusiveMinimum": 0},
+          "failure_type": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "run_id": "smoke-team-20260914",
+  "date": "2026-09-14",
+  "scope": "local Codex project session team",
+  "project": "team-worker",
+  "git_backed": false,
+  "leader_count": 1,
+  "member_count": 2,
+  "completed_stages": 2,
+  "rework_attempts": 1,
+  "final_status": "complete",
+  "accepted_tasks": [
+    {
+      "task_id": "smoke-produce",
+      "attempt": 2,
+      "dispatch_key": "smoke-team-20260914/1/stage-1-produce/2/rework"
+    },
+    {
+      "task_id": "smoke-review",
+      "attempt": 1,
+      "dispatch_key": "smoke-team-20260914/1/stage-2-review/1/work"
+    }
+  ],
+  "evidence": "external run record: workspace .team/reports/smoke-summary.md",
+  "limitations": [
+    "Git worktree handoff and interruption recovery were not exercised.",
+    "Sidebar visibility and model-routing evidence remain host-specific."
+  ]
+}

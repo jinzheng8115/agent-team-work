@@ -1,0 +1,676 @@
+{
+  "threshold": 0.55,
+  "threshold_explanation": "Prompts at or above the threshold are treated as trigger matches. Scores are driven primarily by semantic intent coverage: packaging intent, workflow-to-skill transformation intent, reuse/distribution intent, and eval intent. Explicit exclusions such as summary-only, translation-only, one-off, document-only, or do-not-build directives apply direct penalties and can override otherwise similar wording.",
+  "false_positives": 0,
+  "false_negatives": 0,
+  "precision": 1.0,
+  "recall": 1.0,
+  "bucket_stats": {
+    "should_trigger": {
+      "total": 6,
+      "passed": 6,
+      "pass_rate": 1.0
+    },
+    "should_not_trigger": {
+      "total": 6,
+      "passed": 6,
+      "pass_rate": 1.0
+    },
+    "near_neighbor": {
+      "total": 4,
+      "passed": 4,
+      "pass_rate": 1.0
+    }
+  },
+  "family_stats": {
+    "create": {
+      "total": 3,
+      "passed": 3,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "pass_rate": 1.0
+    },
+    "resume": {
+      "total": 1,
+      "passed": 1,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "pass_rate": 1.0
+    },
+    "status": {
+      "total": 1,
+      "passed": 1,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "pass_rate": 1.0
+    },
+    "adjust": {
+      "total": 1,
+      "passed": 1,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "pass_rate": 1.0
+    },
+    "explain": {
+      "total": 1,
+      "passed": 1,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "pass_rate": 1.0
+    },
+    "authoring": {
+      "total": 2,
+      "passed": 2,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "pass_rate": 1.0
+    },
+    "translation": {
+      "total": 1,
+      "passed": 1,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "pass_rate": 1.0
+    },
+    "subagents": {
+      "total": 1,
+      "passed": 1,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "pass_rate": 1.0
+    },
+    "proposal": {
+      "total": 2,
+      "passed": 2,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "pass_rate": 1.0
+    },
+    "single-thread": {
+      "total": 2,
+      "passed": 2,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "pass_rate": 1.0
+    },
+    "other-runtime": {
+      "total": 1,
+      "passed": 1,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "pass_rate": 1.0
+    }
+  },
+  "misfires": [],
+  "results": {
+    "should_trigger": [
+      {
+        "prompt": "为这个新项目组建团队，每个角色在项目栏有独立会话。",
+        "family": "create",
+        "score": 0.92,
+        "predicted_trigger": true,
+        "expected_trigger": true,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [],
+          "exclusive_negative_concepts": [],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "组建团队"
+              ]
+            },
+            "negative": {}
+          }
+        }
+      },
+      {
+        "prompt": "通过菜单创建项目会话团队，由 Leader 分配各阶段工作。",
+        "family": "create",
+        "score": 0.94,
+        "predicted_trigger": true,
+        "expected_trigger": true,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [],
+          "exclusive_negative_concepts": [],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.25,
+          "negative_penalty": 0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "创建项目会话团队"
+              ]
+            },
+            "negative": {}
+          }
+        }
+      },
+      {
+        "prompt": "帮我建一个团队，研究、核验、综合各有自己的项目对话。",
+        "family": "create",
+        "score": 0.92,
+        "predicted_trigger": true,
+        "expected_trigger": true,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [],
+          "exclusive_negative_concepts": [],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "建一个团队"
+              ]
+            },
+            "negative": {}
+          }
+        }
+      },
+      {
+        "prompt": "继续 agent-team-work 的已有团队，验收上次成果后安排下一步。",
+        "family": "resume",
+        "score": 0.947,
+        "predicted_trigger": true,
+        "expected_trigger": true,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [],
+          "exclusive_negative_concepts": [],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.333,
+          "negative_penalty": 0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "agent-team-work"
+              ]
+            },
+            "negative": {}
+          }
+        }
+      },
+      {
+        "prompt": "查看 agent-team-work 团队当前阶段，不要派发新任务。",
+        "family": "status",
+        "score": 0.947,
+        "predicted_trigger": true,
+        "expected_trigger": true,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [],
+          "exclusive_negative_concepts": [],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.333,
+          "negative_penalty": 0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "agent-team-work"
+              ]
+            },
+            "negative": {}
+          }
+        }
+      },
+      {
+        "prompt": "使用 agent-team-work 调整成员职责，保留已有角色会话。",
+        "family": "adjust",
+        "score": 0.947,
+        "predicted_trigger": true,
+        "expected_trigger": true,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [],
+          "exclusive_negative_concepts": [],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.333,
+          "negative_penalty": 0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "agent-team-work"
+              ]
+            },
+            "negative": {}
+          }
+        }
+      }
+    ],
+    "should_not_trigger": [
+      {
+        "prompt": "解释什么是多智能体团队。",
+        "family": "explain",
+        "score": 0.0,
+        "predicted_trigger": false,
+        "expected_trigger": false,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [
+            "out_of_scope"
+          ],
+          "exclusive_negative_concepts": [
+            "out_of_scope"
+          ],
+          "semantic_coverage": 0.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 1.0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {},
+            "negative": {
+              "out_of_scope": [
+                "解释"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "prompt": "创建一个 skill，名字是 agent-team-work。",
+        "family": "authoring",
+        "score": 0.0,
+        "predicted_trigger": false,
+        "expected_trigger": false,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [
+            "out_of_scope"
+          ],
+          "exclusive_negative_concepts": [
+            "out_of_scope"
+          ],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.5,
+          "negative_penalty": 1.0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "agent-team-work"
+              ]
+            },
+            "negative": {
+              "out_of_scope": [
+                "创建一个 skill"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "prompt": "修改 skill agent-team-work 的菜单和文档。",
+        "family": "authoring",
+        "score": 0.0,
+        "predicted_trigger": false,
+        "expected_trigger": false,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [
+            "out_of_scope"
+          ],
+          "exclusive_negative_concepts": [
+            "out_of_scope"
+          ],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.5,
+          "negative_penalty": 1.0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "agent-team-work"
+              ]
+            },
+            "negative": {
+              "out_of_scope": [
+                "修改 skill"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "prompt": "翻译这个团队管理教程。",
+        "family": "translation",
+        "score": 0.0,
+        "predicted_trigger": false,
+        "expected_trigger": false,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [],
+          "exclusive_negative_concepts": [],
+          "semantic_coverage": 0.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {},
+            "negative": {}
+          }
+        }
+      },
+      {
+        "prompt": "用临时子代理并行审查这三个文件。",
+        "family": "subagents",
+        "score": 0.0,
+        "predicted_trigger": false,
+        "expected_trigger": false,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [
+            "out_of_scope"
+          ],
+          "exclusive_negative_concepts": [
+            "out_of_scope"
+          ],
+          "semantic_coverage": 0.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 1.0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {},
+            "negative": {
+              "out_of_scope": [
+                "临时子代理"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "prompt": "不用创建会话，只给出组建团队的建议。",
+        "family": "proposal",
+        "score": 0.0,
+        "predicted_trigger": false,
+        "expected_trigger": false,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [
+            "out_of_scope"
+          ],
+          "exclusive_negative_concepts": [
+            "out_of_scope"
+          ],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 1.0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "组建团队"
+              ]
+            },
+            "negative": {
+              "out_of_scope": [
+                "不用创建会话"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "near_neighbor": [
+      {
+        "prompt": "只创建一个项目会话，名称叫开发记录。",
+        "family": "single-thread",
+        "score": 0.0,
+        "predicted_trigger": false,
+        "expected_trigger": false,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [
+            "out_of_scope"
+          ],
+          "exclusive_negative_concepts": [
+            "out_of_scope"
+          ],
+          "semantic_coverage": 0.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 1.0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {},
+            "negative": {
+              "out_of_scope": [
+                "只创建一个"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "prompt": "请通过 Cindy Helper 创建项目会话团队。",
+        "family": "other-runtime",
+        "score": 0.0,
+        "predicted_trigger": false,
+        "expected_trigger": false,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [
+            "out_of_scope"
+          ],
+          "exclusive_negative_concepts": [
+            "out_of_scope"
+          ],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.25,
+          "negative_penalty": 1.0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "创建项目会话团队"
+              ]
+            },
+            "negative": {
+              "out_of_scope": [
+                "Cindy Helper"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "prompt": "帮我重命名现有对话。",
+        "family": "single-thread",
+        "score": 0.0,
+        "predicted_trigger": false,
+        "expected_trigger": false,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [],
+          "exclusive_negative_concepts": [],
+          "semantic_coverage": 0.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {},
+            "negative": {}
+          }
+        }
+      },
+      {
+        "prompt": "讨论如何组建团队，不建团队，只解释流程。",
+        "family": "proposal",
+        "score": 0.0,
+        "predicted_trigger": false,
+        "expected_trigger": false,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [
+            "out_of_scope"
+          ],
+          "exclusive_negative_concepts": [
+            "out_of_scope"
+          ],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 1.0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "组建团队"
+              ]
+            },
+            "negative": {
+              "out_of_scope": [
+                "解释",
+                "不建团队"
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+}

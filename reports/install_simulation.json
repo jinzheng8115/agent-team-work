@@ -1,0 +1,169 @@
+{
+  "ok": false,
+  "schema_version": "2.0",
+  "generated_at": "2026-09-14",
+  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+  "package_dir": "/Volumes/Code/team-worker/agent-team-work/dist",
+  "install_root": "/Volumes/Code/team-worker/agent-team-work/dist/install-simulation/simulate-agent-team-work",
+  "installed_skill_dir": "/Volumes/Code/team-worker/agent-team-work/dist/install-simulation/simulate-agent-team-work/agent-team-work",
+  "summary": {
+    "archive_present": true,
+    "archive_entry_count": 34,
+    "nested_skill_entry_count": 0,
+    "archive_extracted": true,
+    "entrypoint_loaded": true,
+    "manifest_loaded": true,
+    "interface_loaded": true,
+    "adapter_count": 4,
+    "installer_permission_enforced_count": 0,
+    "installer_permission_failure_count": 0,
+    "permission_target_count": 4,
+    "permission_capability_count": 0,
+    "install_root_is_temp": false,
+    "failure_count": 2,
+    "warning_count": 0
+  },
+  "checks": [
+    {
+      "id": "archive-present",
+      "status": "pass",
+      "detail": "Package archive exists: /Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip"
+    },
+    {
+      "id": "archive-safe-paths",
+      "status": "pass",
+      "detail": "Archive has no absolute or parent-traversal entries"
+    },
+    {
+      "id": "single-skill-entrypoint",
+      "status": "pass",
+      "detail": "Installed package exposes only the root SKILL.md entrypoint"
+    },
+    {
+      "id": "single-top-level",
+      "status": "pass",
+      "detail": "Archive top-level directory is agent-team-work"
+    },
+    {
+      "id": "entrypoint-load",
+      "status": "pass",
+      "detail": "Installed SKILL.md frontmatter is readable"
+    },
+    {
+      "id": "entrypoint-name",
+      "status": "pass",
+      "detail": "Installed SKILL.md name matches package directory"
+    },
+    {
+      "id": "entrypoint-description",
+      "status": "pass",
+      "detail": "Installed SKILL.md description is present"
+    },
+    {
+      "id": "manifest-load",
+      "status": "pass",
+      "detail": "Installed manifest.json is readable"
+    },
+    {
+      "id": "manifest-name",
+      "status": "pass",
+      "detail": "Installed manifest name matches package manifest"
+    },
+    {
+      "id": "manifest-version",
+      "status": "pass",
+      "detail": "Installed manifest version matches package manifest"
+    },
+    {
+      "id": "interface-load",
+      "status": "pass",
+      "detail": "Installed agents/interface.yaml is readable"
+    },
+    {
+      "id": "overview-report",
+      "status": "fail",
+      "detail": "Installed overview report is present"
+    },
+    {
+      "id": "review-studio-report",
+      "status": "fail",
+      "detail": "Installed Review Studio report is present"
+    },
+    {
+      "id": "adapter-claude",
+      "status": "pass",
+      "detail": "claude adapter is readable after package install simulation"
+    },
+    {
+      "id": "adapter-claude-name",
+      "status": "pass",
+      "detail": "claude adapter name matches package manifest"
+    },
+    {
+      "id": "adapter-generic",
+      "status": "pass",
+      "detail": "generic adapter is readable after package install simulation"
+    },
+    {
+      "id": "adapter-generic-name",
+      "status": "pass",
+      "detail": "generic adapter name matches package manifest"
+    },
+    {
+      "id": "adapter-openai",
+      "status": "pass",
+      "detail": "openai adapter is readable after package install simulation"
+    },
+    {
+      "id": "adapter-openai-name",
+      "status": "pass",
+      "detail": "openai adapter name matches package manifest"
+    },
+    {
+      "id": "adapter-vscode",
+      "status": "pass",
+      "detail": "vscode adapter is readable after package install simulation"
+    },
+    {
+      "id": "adapter-vscode-name",
+      "status": "pass",
+      "detail": "vscode adapter name matches package manifest"
+    },
+    {
+      "id": "permission-policy-load",
+      "status": "pass",
+      "detail": "Installed permission policy is readable"
+    },
+    {
+      "id": "permission-claude-contract",
+      "status": "pass",
+      "detail": "claude adapter exposes target permission contract for installer enforcement"
+    },
+    {
+      "id": "permission-generic-contract",
+      "status": "pass",
+      "detail": "generic adapter exposes target permission contract for installer enforcement"
+    },
+    {
+      "id": "permission-openai-contract",
+      "status": "pass",
+      "detail": "openai adapter exposes target permission contract for installer enforcement"
+    },
+    {
+      "id": "permission-vscode-contract",
+      "status": "pass",
+      "detail": "vscode adapter exposes target permission contract for installer enforcement"
+    }
+  ],
+  "failures": [
+    "Installed overview report is present",
+    "Installed Review Studio report is present"
+  ],
+  "warnings": [],
+  "artifacts": {
+    "archive": "/Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip",
+    "package_manifest": "/Volumes/Code/team-worker/agent-team-work/dist/manifest.json",
+    "json": "/Volumes/Code/team-worker/agent-team-work/reports/install_simulation.json",
+    "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/install_simulation.md"
+  }
+}

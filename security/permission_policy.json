@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "reviewed_at": "2026-09-14",
+  "capabilities": {
+    "metadata-only": {
+      "decision": "not-required",
+      "reviewer": "Local Codex Team",
+      "scope": "This package contains no executable scripts or external dependencies; project and thread actions are performed by the Codex host tools.",
+      "reason": "The skill is a documentation and routing package. Its native host actions remain subject to the Codex tool and user confirmation boundaries.",
+      "expires_at": "2026-12-14",
+      "evidence": [
+        "reports/security_trust_report.json",
+        "agents/interface.yaml"
+      ],
+      "target_enforcement": {
+        "openai": "Host-enforced native project/thread tool permissions; package declares no executable capability.",
+        "claude": "Consumer-enforced neutral source permissions; package declares no executable capability.",
+        "generic": "Consumer-enforced neutral source permissions; package declares no executable capability.",
+        "vscode": "Workspace and consumer-enforced permissions; package declares no executable capability."
+      }
+    }
+  }
+}

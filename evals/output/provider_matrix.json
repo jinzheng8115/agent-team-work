@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "provider": "deepseek",
+  "api_key_env": "DEEPSEEK_API_KEY",
+  "api_format": "chat-completions",
+  "evaluation_locale": "zh-CN",
+  "holdout_cases": "holdout_cases.zh-CN.jsonl",
+  "models": [
+    {
+      "model": "deepseek-v4-flash",
+      "thinking": "disabled",
+      "temperature": 0,
+      "max_output_tokens": 3000
+    },
+    {
+      "model": "deepseek-v4-pro",
+      "thinking": "disabled",
+      "temperature": 0,
+      "max_output_tokens": 3000
+    }
+  ],
+  "limits": {
+    "max_calls": 40,
+    "max_total_tokens": 250000,
+    "timeout_seconds": 60
+  },
+  "promotion": {
+    "pair_count": 20,
+    "with_skill_min_wins": 15,
+    "per_model_min_wins": 7,
+    "critical_failure_max": 0,
+    "fleiss_kappa_min": 0.4,
+    "reviewer_count": 3
+  },
+  "world_class_counts_as_completion": false
+}

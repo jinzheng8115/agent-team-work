@@ -1,0 +1,22 @@
+{
+  "schema_version": "2.0",
+  "generated_at": "2026-09-14",
+  "package_count": 1,
+  "packages": [
+    {
+      "name": "agent-team-work",
+      "version": "0.2.0",
+      "maturity": "governed",
+      "owner": "Local Codex Team",
+      "targets": [
+        "openai",
+        "claude",
+        "generic",
+        "agent-skills-compatible",
+        "vscode"
+      ],
+      "package_metadata": "registry/packages/agent-team-work.json",
+      "package_sha256": "0c0feeebc1e927367131cad6cd27bc16661beb51848910b6df2a8ae95af7448b"
+    }
+  ]
+}

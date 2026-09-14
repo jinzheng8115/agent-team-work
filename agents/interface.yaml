@@ -1,0 +1,27 @@
+interface:
+  display_name: "Agent Team Work"
+  short_description: "由 Leader 严格串行协调项目独立角色会话"
+  default_prompt: "Use $agent-team-work to set up one current-session Leader and independent Codex project sessions for each role, confirm once before mutations, and continue stages only after acceptance until complete or blocked."
+compatibility:
+  runtime_scope: "Executable in a Codex desktop host exposing the native project/thread tools listed in references/codex-tools.md; adapter metadata does not provide runtime capability."
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "generic"
+    - "vscode"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  degradation:
+    openai: "native-Codex-runtime"
+    claude: "neutral-source-without-Codex-session-runtime"
+    generic: "neutral-source"
+    vscode: "agent-skills-source-without-Codex-session-runtime"

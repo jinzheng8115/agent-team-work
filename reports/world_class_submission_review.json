@@ -1,0 +1,380 @@
+{
+  "schema_version": "1.0",
+  "ok": true,
+  "generated_at": "2026-09-14",
+  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+  "decision": "awaiting-submissions",
+  "ready_to_claim_world_class": false,
+  "review_item_count": 4,
+  "accepted_count": 0,
+  "awaiting_submission_count": 4,
+  "valid_packet_source_incomplete_count": 0,
+  "ready_for_ledger_review_count": 0,
+  "fix_submission_count": 0,
+  "unmatched_submission_count": 0,
+  "invalid_submission_count": 0,
+  "source_check_count": 14,
+  "source_pass_count": 6,
+  "source_blocked_count": 8,
+  "review_counts_submission_as_completion": false,
+  "summary": {
+    "review_item_count": 4,
+    "accepted_count": 0,
+    "awaiting_submission_count": 4,
+    "valid_packet_source_incomplete_count": 0,
+    "ready_for_ledger_review_count": 0,
+    "fix_submission_count": 0,
+    "unmatched_submission_count": 0,
+    "invalid_submission_count": 0,
+    "source_check_count": 14,
+    "source_pass_count": 6,
+    "source_blocked_count": 8,
+    "ready_to_claim_world_class": false,
+    "review_counts_submission_as_completion": false,
+    "decision": "awaiting-submissions"
+  },
+  "report_contract": {
+    "schema_version": "1.0",
+    "contract": "world-class-submission-review",
+    "top_level_mirrors_summary": true,
+    "summary_fields": [
+      "decision",
+      "ready_to_claim_world_class",
+      "review_item_count",
+      "accepted_count",
+      "awaiting_submission_count",
+      "valid_packet_source_incomplete_count",
+      "ready_for_ledger_review_count",
+      "fix_submission_count",
+      "unmatched_submission_count",
+      "invalid_submission_count",
+      "source_check_count",
+      "source_pass_count",
+      "source_blocked_count",
+      "review_counts_submission_as_completion"
+    ],
+    "source_of_truth": "summary"
+  },
+  "submissions": {
+    "directory": "evidence/world_class/submissions",
+    "review_counts_submission_as_completion": false
+  },
+  "items": [
+    {
+      "evidence_key": "provider-holdout",
+      "label": "Provider Holdout",
+      "category": "external",
+      "owner": "operator with provider credentials",
+      "ledger_status": "pending",
+      "submission_status": "missing",
+      "intake_status": "missing",
+      "source_accepted": false,
+      "review_state": "awaiting-submission",
+      "blocking_reason": "No evidence packet has been submitted for review.",
+      "submission_path": "evidence/world_class/submissions/provider-holdout.json",
+      "submitted_by": "",
+      "submitted_at": "",
+      "artifact_ref_count": 0,
+      "intake_errors": [],
+      "observed_state": {
+        "contract_version": "phase1",
+        "call_count": 0,
+        "model_executed_count": 0,
+        "failure_count": 0,
+        "total_tokens": 0,
+        "accepted": false
+      },
+      "source_checklist": [
+        {
+          "evidence_key": "provider-holdout",
+          "label": "Provider calls",
+          "field": "call_count",
+          "expected": "==40",
+          "actual": 0,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Complete all 40 fixed DeepSeek calls."
+        },
+        {
+          "evidence_key": "provider-holdout",
+          "label": "Provider model runs",
+          "field": "model_executed_count",
+          "expected": "==40",
+          "actual": 0,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Require model identity on all 40 calls."
+        },
+        {
+          "evidence_key": "provider-holdout",
+          "label": "Provider failures",
+          "field": "failure_count",
+          "expected": "==0",
+          "actual": 0,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Resolve every fixed-matrix failure."
+        },
+        {
+          "evidence_key": "provider-holdout",
+          "label": "Token budget",
+          "field": "total_tokens",
+          "expected": "<=250000",
+          "actual": 0,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Keep the matrix within the 250000-token ceiling."
+        }
+      ],
+      "source_check_count": 4,
+      "source_pass_count": 2,
+      "source_blocked_count": 2,
+      "success_checks": [
+        "reports/provider_output_evaluation.json summary.call_count == 40",
+        "reports/provider_output_evaluation.json summary.model_executed_count == 40",
+        "reports/provider_output_evaluation.json summary.failure_count == 0",
+        "reports/provider_output_evaluation.json summary.total_tokens <= 250000",
+        "reports/skill_os2_audit.json item provider-holdout status becomes pass"
+      ],
+      "privacy_contract": [
+        "Do not commit provider credentials or environment dumps.",
+        "The output execution report records output hashes and aggregate run metadata, not raw provider prompts."
+      ],
+      "next_action": "Run evidence-build with DEEPSEEK_API_KEY and keep raw outputs in the isolated run directory."
+    },
+    {
+      "evidence_key": "human-adjudication",
+      "label": "Human Adjudication",
+      "category": "human",
+      "owner": "human reviewer",
+      "ledger_status": "pending",
+      "submission_status": "missing",
+      "intake_status": "missing",
+      "source_accepted": false,
+      "review_state": "awaiting-submission",
+      "blocking_reason": "No evidence packet has been submitted for review.",
+      "submission_path": "evidence/world_class/submissions/human-adjudication.json",
+      "submitted_by": "",
+      "submitted_at": "",
+      "artifact_ref_count": 0,
+      "intake_errors": [],
+      "observed_state": {
+        "contract_version": "phase1",
+        "reviewer_count": 0,
+        "pair_count": 0,
+        "failure_count": 0,
+        "blind_pack_bound": false,
+        "accepted": false
+      },
+      "source_checklist": [
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Registered reviewers",
+          "field": "reviewer_count",
+          "expected": "==3",
+          "actual": 0,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Collect reviewer-a, reviewer-b, and reviewer-c."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Blind pairs",
+          "field": "pair_count",
+          "expected": "==20",
+          "actual": 0,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Complete all 20 blind pairs."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Review failures",
+          "field": "failure_count",
+          "expected": "==0",
+          "actual": 0,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Resolve packet, identity, or adjudication failures."
+        },
+        {
+          "evidence_key": "human-adjudication",
+          "label": "Blind pack binding",
+          "field": "blind_pack_bound",
+          "expected": "true",
+          "actual": false,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Bind adjudication to the reviewed blind pack SHA256."
+        }
+      ],
+      "source_check_count": 4,
+      "source_pass_count": 1,
+      "source_blocked_count": 3,
+      "success_checks": [
+        "reports/provider_output_adjudication.json summary.reviewer_count == 3",
+        "reports/provider_output_adjudication.json summary.pair_count == 20",
+        "reports/provider_output_adjudication.json summary.failure_count == 0",
+        "reports/provider_output_adjudication.json evidence_binding.blind_pack_sha256 matches the source run",
+        "reports/skill_os2_audit.json item human-adjudication status becomes pass"
+      ],
+      "privacy_contract": [
+        "Reviewer packets contain choices, reasons, hashes, and controlled submission metadata without raw prompts or answer-key roles.",
+        "The private answer key remains under .yao/runs and is opened by the finalizer after all controlled packets are fixed.",
+        "The adjudication and lineage artifacts preserve blind_pack_sha256 and answer_key_sha256 commitments."
+      ],
+      "next_action": "Collect three controlled reviewer packets and adjudicate them against the private run answer key."
+    },
+    {
+      "evidence_key": "native-permission-enforcement",
+      "label": "Native Permission Enforcement",
+      "category": "external",
+      "owner": "target client or installer integrator",
+      "ledger_status": "pending",
+      "submission_status": "missing",
+      "intake_status": "missing",
+      "source_accepted": false,
+      "review_state": "awaiting-submission",
+      "blocking_reason": "No evidence packet has been submitted for review.",
+      "submission_path": "evidence/world_class/submissions/native-permission-enforcement.json",
+      "submitted_by": "",
+      "submitted_at": "",
+      "artifact_ref_count": 0,
+      "intake_errors": [],
+      "observed_state": {
+        "native_enforcement_count": 0,
+        "metadata_fallback_count": 1,
+        "installer_enforcement_pass_count": 0,
+        "installer_permission_failure_count": 0,
+        "installer_enforcement_ready": false,
+        "residual_risk_count": 1,
+        "failure_count": 0,
+        "accepted": false
+      },
+      "source_checklist": [
+        {
+          "evidence_key": "native-permission-enforcement",
+          "label": "Native enforcement",
+          "field": "native_enforcement_count",
+          "expected": ">0",
+          "actual": 0,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Collect real target-client or external runtime guard proof."
+        },
+        {
+          "evidence_key": "native-permission-enforcement",
+          "label": "Probe failures",
+          "field": "failure_count",
+          "expected": "==0",
+          "actual": 0,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Runtime permission probes must stay clean."
+        },
+        {
+          "evidence_key": "native-permission-enforcement",
+          "label": "Installer support",
+          "field": "installer_enforcement_ready",
+          "expected": "true",
+          "actual": false,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Installer enforcement is supporting evidence, not native proof."
+        }
+      ],
+      "source_check_count": 3,
+      "source_pass_count": 1,
+      "source_blocked_count": 2,
+      "success_checks": [
+        "reports/runtime_permission_probes.json summary.native_enforcement_count > 0",
+        "reports/runtime_permission_probes.json summary.failure_count == 0",
+        "reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence",
+        "reports/skill_os2_audit.json item native-permission-enforcement status becomes pass"
+      ],
+      "privacy_contract": [
+        "Do not mark native_enforcement true for metadata-only fallbacks.",
+        "Keep residual risks visible for targets that still rely on operator enforcement."
+      ],
+      "next_action": "Integrate a real target-client or external installer runtime guard before claiming native permission enforcement."
+    },
+    {
+      "evidence_key": "native-client-telemetry",
+      "label": "Native Client Telemetry",
+      "category": "external",
+      "owner": "Browser/Chrome/IDE/provider client integrator",
+      "ledger_status": "pending",
+      "submission_status": "missing",
+      "intake_status": "missing",
+      "source_accepted": false,
+      "review_state": "awaiting-submission",
+      "blocking_reason": "No evidence packet has been submitted for review.",
+      "submission_path": "evidence/world_class/submissions/native-client-telemetry.json",
+      "submitted_by": "",
+      "submitted_at": "",
+      "artifact_ref_count": 0,
+      "intake_errors": [],
+      "observed_state": {
+        "external_source_events": 0,
+        "adoption_sample_count": 1,
+        "raw_content_allowed": false,
+        "risk_band": "low",
+        "accepted": false
+      },
+      "source_checklist": [
+        {
+          "evidence_key": "native-client-telemetry",
+          "label": "External events",
+          "field": "external_source_events",
+          "expected": ">0",
+          "actual": 0,
+          "status": "blocked",
+          "source_accepted": false,
+          "next_action": "Import at least one metadata-only event from a real client."
+        },
+        {
+          "evidence_key": "native-client-telemetry",
+          "label": "Adoption sample",
+          "field": "adoption_sample_count",
+          "expected": ">0",
+          "actual": 1,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Telemetry must include adoption outcome evidence."
+        },
+        {
+          "evidence_key": "native-client-telemetry",
+          "label": "Raw content blocked",
+          "field": "raw_content_allowed",
+          "expected": "false",
+          "actual": false,
+          "status": "pass",
+          "source_accepted": false,
+          "next_action": "Telemetry must stay metadata-only."
+        }
+      ],
+      "source_check_count": 3,
+      "source_pass_count": 2,
+      "source_blocked_count": 1,
+      "success_checks": [
+        "reports/adoption_drift_report.json summary.source_types.external > 0",
+        "reports/adoption_drift_report.json summary.adoption_sample_count > 0",
+        "reports/skill_os2_audit.json item native-client-telemetry status becomes pass"
+      ],
+      "privacy_contract": [
+        "Telemetry must remain metadata-only and local-first.",
+        "Do not package reports/telemetry_events.jsonl or any raw prompt, output, transcript, note, or message field."
+      ],
+      "next_action": "Install a real client against the native host and import production metadata-only events."
+    }
+  ],
+  "unmatched_submissions": [],
+  "source_reports": {
+    "ledger": "reports/world_class_evidence_ledger.json",
+    "intake": "reports/world_class_evidence_intake.json"
+  },
+  "artifacts": {
+    "json": "reports/world_class_submission_review.json",
+    "markdown": "reports/world_class_submission_review.md"
+  }
+}

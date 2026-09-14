@@ -1,0 +1,31 @@
+interface:
+  display_name: Agent Team Work
+  short_description: 由 Leader 严格串行协调项目独立角色会话
+  default_prompt: Use $agent-team-work to set up one current-session Leader and independent
+    Codex project sessions for each role, confirm once before mutations, and continue
+    stages only after acceptance until complete or blocked.
+compatibility:
+  canonical_format: agent-skills
+  activation_mode: manual
+  execution_context: inline
+  shell: bash
+  trust_level: local
+  remote_inline_execution: forbid
+  permission_contract:
+    review_required: false
+    declared_capabilities: []
+    native_enforcement: false
+    representation: targets/openai/agents/openai.yaml::compatibility.permission_contract
+      plus adapter.json
+  native_contract:
+    native_surface: OpenAI-style interface metadata plus neutral Agent Skills source
+    activation_policy: Use frontmatter description for catalog routing and targets/openai/agents/openai.yaml
+      for display name, default prompt, and compatibility metadata.
+    resource_strategy: Ship the neutral source tree and expose OpenAI-facing interface
+      metadata as a generated companion file.
+    permission_enforcement: metadata-only
+    review_artifacts:
+    - targets/openai/agents/openai.yaml
+    - targets/openai/adapter.json
+    - reports/review-studio.html
+  degradation_strategy: native-Codex-runtime

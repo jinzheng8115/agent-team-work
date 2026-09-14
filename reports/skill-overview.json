@@ -1,0 +1,2126 @@
+{
+  "skill_summary": {
+    "name": "agent-team-work",
+    "title": "项目会话团队",
+    "display_name": "Agent Team Work",
+    "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+    "maturity": "governed",
+    "updated_at": "2026-09-14",
+    "core_value": "把一次性经验沉淀为可复用、可评估、可迁移的 Skill 包体。",
+    "audience": "Skill 作者、复用团队和后续 reviewer。",
+    "deliverables": [
+      "SKILL.md",
+      "agents/interface.yaml",
+      "reports/skill-ir.json",
+      "reports/compiled_targets.md",
+      "reports/output_quality_scorecard.md",
+      "reports/output_execution_runs.md",
+      "reports/output_blind_review_pack.md",
+      "reports/output_review_kit.md",
+      "reports/output_review_adjudication.md",
+      "reports/benchmark_reproducibility.md",
+      "reports/output_blind_answer_key.json",
+      "reports/conformance_matrix.md",
+      "reports/security_trust_report.md",
+      "reports/runtime_permission_probes.md",
+      "reports/skill_atlas.html",
+      "reports/registry_audit.md",
+      "reports/package_verification.md",
+      "reports/install_simulation.md",
+      "reports/upgrade_check.md",
+      "reports/adoption_drift_report.md",
+      "reports/review_waivers.md",
+      "reports/world_class_evidence_plan.md",
+      "reports/world_class_evidence_ledger.md",
+      "reports/review_annotations.md",
+      "reports/review-studio.html",
+      "reports/skill-interpretation.html",
+      "reports/skill-overview.html"
+    ],
+    "flow": [
+      "输入材料",
+      "Skill 包体",
+      "可复用能力"
+    ]
+  },
+  "scorecard": {
+    "completeness_score": {
+      "label": "完整度",
+      "score": 100,
+      "reasons": [
+        "SKILL.md 已存在，是 Skill 的入口。",
+        "README.md 已存在，便于人工阅读。",
+        "agents/interface.yaml 已存在，便于跨平台适配。",
+        "manifest.json 已存在，生命周期信息可追踪。",
+        "reports/ 已存在，生成证据可以随包体迁移。"
+      ]
+    },
+    "trigger_score": {
+      "label": "触发清晰",
+      "score": 100,
+      "reasons": [
+        "frontmatter description 已存在，具备基础路由面。",
+        "description 有足够长度说明任务边界。",
+        "description 已包含使用场景或排除边界信号。",
+        "evals/ 已存在，可承载触发样例或质量检查。",
+        "intent-confidence 报告已生成，可辅助判断触发稳定性。"
+      ]
+    },
+    "evidence_score": {
+      "label": "证据充分",
+      "score": 95,
+      "reasons": [
+        "已生成 19 / 20 类报告证据。",
+        "skill-ir.json 已存在。",
+        "compiled_targets.json 已存在。",
+        "intent-dialogue.json 已存在。",
+        "证据不足：缺少 system-model.json。"
+      ]
+    },
+    "maintainability_score": {
+      "label": "可维护性",
+      "score": 80,
+      "reasons": [
+        "SKILL.md 约 1028 个词/字。",
+        "入口文件偏长，建议继续拆到 references/。",
+        "references/ 已承载扩展指导。",
+        "scripts/ 已承载确定性逻辑。",
+        "evals/ 已承载可迁移检查。"
+      ]
+    },
+    "portability_score": {
+      "label": "可迁移性",
+      "score": 100,
+      "reasons": [
+        "agents/interface.yaml 已存在。",
+        "manifest.json 已存在。",
+        "目标平台或 adapter target 已声明。",
+        "入口文件未发现明显私有绝对路径。"
+      ]
+    },
+    "context_cost": {
+      "label": "上下文成本",
+      "score": 42,
+      "reasons": [
+        "入口约 1028 个词/字，references 约 7796 个词/字。",
+        "分数越高代表上下文成本越低。",
+        "上下文成本偏高，建议压缩入口或拆分 references。"
+      ]
+    }
+  },
+  "capability_profile": {
+    "archetype": "workflow",
+    "task_family": "Execution operation",
+    "maturity": "governed",
+    "trigger_strength": "手动触发 + description 路由",
+    "reuse_scope": "跨平台",
+    "matrix": {
+      "execution_certainty": 72,
+      "knowledge_density": 80
+    }
+  },
+  "principle_model": {
+    "nodes": [
+      {
+        "title": "意图澄清",
+        "body": "先确认真实任务、输入材料和交付结果。"
+      },
+      {
+        "title": "边界路由",
+        "body": "用 frontmatter description 决定是否触发，并写明相邻非目标。"
+      },
+      {
+        "title": "资产分层",
+        "body": "把入口、参考、脚本、评估和报告拆到各自目录，避免 SKILL.md 膨胀。"
+      },
+      {
+        "title": "证据回路",
+        "body": "通过评估、报告和复盘把真实使用反馈变成下一轮改进。"
+      },
+      {
+        "title": "漂移观察",
+        "body": "持续观察触发漂移、输出漂移和治理漂移。"
+      },
+      {
+        "title": "杠杆升级",
+        "body": "优先改边界、触发和一个最小自修复检查。"
+      }
+    ],
+    "layers": [
+      "入口层",
+      "参考层",
+      "脚本层",
+      "评估层",
+      "报告层"
+    ]
+  },
+  "contract_boundary": {
+    "trigger": {
+      "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+      "activation": "manual",
+      "execution": "inline",
+      "shell": "bash"
+    },
+    "inputs": [
+      "用户确认的项目目标、首要交付物和完成判定",
+      "已保存 Codex 项目及其 project_id、Git 或 local 工作目录信息",
+      "成员角色、职责、标题、阶段顺序、输入依赖和允许路径",
+      "team.json、tasks.json、成员报告和 Codex 项目/thread 查询结果"
+    ],
+    "outputs": [
+      "可恢复的 .team 状态账本、真实 Leader/member 项目会话绑定、逐阶段报告与验收证据，统一记录 complete、blocked、待用户处理状态和下一步。",
+      "结构化 Skill 目录，共 8 类关键资产。"
+    ],
+    "should_trigger": [
+      "团队复用前，需要明确触发边界、质量证据和维护责任。",
+      "用户说出类似需求时：Use $agent-team-work to set up one current-session Leader and independent Codex project sessions for each role, confirm once before mutations, and continue stages only after acceptance until complete or blocked.",
+      "已有原始资料，但还没有清晰输入、输出和后续迭代路径。"
+    ],
+    "should_not_trigger": [
+      "只需要一次性回答、没有复用价值的临时请求。",
+      "要求直接执行相邻任务，而不是沉淀或使用这个 Skill。",
+      "缺少必要事实且用户不允许澄清的场景。"
+    ],
+    "boundary_cards": [
+      {
+        "label": "Owned",
+        "body": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
+      },
+      {
+        "label": "Adjacent",
+        "body": "相邻任务需要先确认是否应转为独立 Skill。"
+      },
+      {
+        "label": "Excluded",
+        "body": "不替代人工事实核查，也不静默扩大职责。"
+      }
+    ]
+  },
+  "quality_review": {
+    "strengths": [
+      "触发面保持精简，并锚定在 frontmatter description。",
+      "已生成 Skill IR，核心语义可先于平台打包被审查和迁移。",
+      "已生成目标编译报告，可审查 IR 到 OpenAI、Claude、generic 等目标契约的映射。",
+      "已生成 Output Eval Lab scorecard，可比较 with-skill 与 baseline 输出质量。",
+      "已生成 Output Execution Runs，可区分记录样本、命令执行和模型执行证据。",
+      "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
+    ],
+    "gaps": [
+      "上下文成本需要补强：入口约 1028 个词/字，references 约 7796 个词/字。"
+    ],
+    "recommendations": [
+      "先改触发边界，再扩展工作流。",
+      "只把重复且稳定的步骤沉淀为脚本。",
+      "每次升级后重新生成报告并检查分数原因。"
+    ],
+    "artifact_design": {
+      "design_system": "content-led editorial",
+      "highlights": [
+        "High-trust editorial report with a clear first-screen thesis, compact evidence blocks, and decisions separated from supporting detail.",
+        "Keep the first screen useful without requiring the reader to parse every detail.",
+        "Use tables only for comparisons; move explanations below the table.",
+        "Keep source notes readable without flooding the body with markers."
+      ]
+    },
+    "prompt_quality": {
+      "overall_quality_score": 90.0,
+      "highlights": [
+        "Primary prompt task family: Execution operation.",
+        "Complexity: expert — multiple task families plus governance, evaluation, or expert-level constraints",
+        "Completeness: 100/100.",
+        "Clarity: 85/100."
+      ]
+    },
+    "system_model": {
+      "stability": {},
+      "highlights": []
+    }
+  },
+  "risk_governance": {
+    "risks": [
+      {
+        "name": "误触发风险",
+        "impact": 3,
+        "probability": 1,
+        "signal": "frontmatter description 已存在，具备基础路由面。",
+        "response": "先补证据和边界，再增加包体复杂度。"
+      },
+      {
+        "name": "输出漂移风险",
+        "impact": 2,
+        "probability": 1,
+        "signal": "已生成 19 / 20 类报告证据。",
+        "response": "先补证据和边界，再增加包体复杂度。"
+      },
+      {
+        "name": "证据不足风险",
+        "impact": 3,
+        "probability": 1,
+        "signal": "已生成 19 / 20 类报告证据。",
+        "response": "先补证据和边界，再增加包体复杂度。"
+      },
+      {
+        "name": "包体膨胀风险",
+        "impact": 2,
+        "probability": 2,
+        "signal": "SKILL.md 约 1028 个词/字。",
+        "response": "先补证据和边界，再增加包体复杂度。"
+      },
+      {
+        "name": "跨平台迁移风险",
+        "impact": 3,
+        "probability": 1,
+        "signal": "agents/interface.yaml 已存在。",
+        "response": "先补证据和边界，再增加包体复杂度。"
+      }
+    ],
+    "risk_families": [
+      {
+        "key": "markdown_readability",
+        "label": "Markdown readability",
+        "matched_keywords": [
+          "md",
+          "report",
+          "报告"
+        ],
+        "score": 3,
+        "risks": [
+          "Tables can render as dense grids with weak hierarchy or poor mobile readability.",
+          "Long bullets can make the output look complete while hiding the actual decision logic.",
+          "Mixed heading levels can reduce scanability."
+        ],
+        "constraints": [
+          "Use tables only when comparison is the main job; otherwise prefer compact cards or grouped bullets.",
+          "Keep table cells short and move explanations below the table.",
+          "Use heading levels consistently and keep each section anchored to a user-facing outcome."
+        ],
+        "self_repair": [
+          "Preview whether each table still reads well when columns are narrow.",
+          "Convert any table with paragraph-length cells into bullets or cards."
+        ]
+      },
+      {
+        "key": "citation_clutter",
+        "label": "Citation and footnote clutter",
+        "matched_keywords": [
+          "reference"
+        ],
+        "score": 1,
+        "risks": [
+          "Footnote markers or dense citation notes can interrupt the reading flow.",
+          "Evidence can be over-attached to obvious statements and under-attached to risky claims.",
+          "Source notes may become more prominent than the tutorial itself."
+        ],
+        "constraints": [
+          "Attach citations only to claims that need evidence, not to every sentence.",
+          "Group source notes at the end of a section when inline markers would hurt readability.",
+          "Keep the main sentence readable without requiring the reader to chase a footnote."
+        ],
+        "self_repair": [
+          "Remove decorative citations that do not support a material claim.",
+          "Move repeated source explanations into one compact source note."
+        ]
+      },
+      {
+        "key": "code_or_command_safety",
+        "label": "Code and command safety",
+        "matched_keywords": [
+          "code"
+        ],
+        "score": 1,
+        "risks": [
+          "Commands can omit environment assumptions, working directory, or rollback notes.",
+          "Code snippets can look runnable while missing required inputs.",
+          "Error handling can be either absent or over-engineered."
+        ],
+        "constraints": [
+          "Name the working directory, required inputs, and expected output for each command.",
+          "Mark destructive or external side-effect operations explicitly.",
+          "Prefer the smallest runnable snippet over broad framework code."
+        ],
+        "self_repair": [
+          "Scan each command for cwd, input, output, and side-effect assumptions.",
+          "Remove speculative error handling that is not tied to a real failure mode."
+        ]
+      },
+      {
+        "key": "tone_and_specificity",
+        "label": "Tone and specificity",
+        "matched_keywords": [
+          "标题"
+        ],
+        "score": 1,
+        "risks": [
+          "Headings and summaries can drift into generic, interchangeable language.",
+          "The output can sound polished but lose the user's actual taste, audience, or scenario.",
+          "Strong claims can appear without examples or constraints."
+        ],
+        "constraints": [
+          "Anchor titles and summaries in the user's audience, object, and concrete outcome.",
+          "Avoid placeholder phrases such as comprehensive guide, ultimate solution, or key insights unless the source demands them.",
+          "Preserve one distinctive phrase, constraint, or standard from the user's input."
+        ],
+        "self_repair": [
+          "Replace generic title candidates with scenario-specific alternatives.",
+          "Delete any polished sentence that could fit almost any project unchanged."
+        ]
+      }
+    ],
+    "human_judgment_boundary": []
+  },
+  "world_class_readiness": {
+    "ready": false,
+    "decision": "evidence-pending",
+    "entry_count": 4,
+    "pending_count": 4,
+    "accepted_count": 0,
+    "external_pending_count": 3,
+    "human_pending_count": 1,
+    "source_check_count": 14,
+    "source_pass_count": 6,
+    "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
+    "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
+    "entries": [
+      {
+        "key": "provider-holdout",
+        "label_zh": "提供商留出",
+        "label_en": "Provider Holdout",
+        "category": "external",
+        "category_zh": "外部证据",
+        "category_en": "External evidence",
+        "status": "pending",
+        "summary_zh": "缺少真实 provider 模型运行和 token metadata。",
+        "summary_en": "Missing a real provider model run and token metadata.",
+        "blocked_checks": [
+          "Provider calls",
+          "Provider model runs"
+        ]
+      },
+      {
+        "key": "human-adjudication",
+        "label_zh": "人工盲评",
+        "label_en": "Human Adjudication",
+        "category": "human",
+        "category_zh": "人工证据",
+        "category_en": "Human evidence",
+        "status": "pending",
+        "summary_zh": "盲评 pair 仍待真实 reviewer 决策。",
+        "summary_en": "Blind-review pairs still need real reviewer decisions.",
+        "blocked_checks": [
+          "Registered reviewers",
+          "Blind pairs",
+          "Blind pack binding"
+        ]
+      },
+      {
+        "key": "native-permission-enforcement",
+        "label_zh": "原生权限",
+        "label_en": "Native Permission",
+        "category": "external",
+        "category_zh": "外部证据",
+        "category_en": "External evidence",
+        "status": "pending",
+        "summary_zh": "原生 runtime enforcement 仍待目标客户端或外部安装器证明。",
+        "summary_en": "Native runtime enforcement still needs target-client or external-installer proof.",
+        "blocked_checks": [
+          "Native enforcement",
+          "Installer support"
+        ]
+      },
+      {
+        "key": "native-client-telemetry",
+        "label_zh": "原生遥测",
+        "label_en": "Native Telemetry",
+        "category": "external",
+        "category_zh": "外部证据",
+        "category_en": "External evidence",
+        "status": "pending",
+        "summary_zh": "真实外部客户端 metadata-only 事件仍未导入。",
+        "summary_en": "Real external-client metadata-only events have not been imported yet.",
+        "blocked_checks": [
+          "External events"
+        ]
+      }
+    ]
+  },
+  "package_assets": {
+    "entries": [
+      {
+        "path": "SKILL.md",
+        "label": "Skill entrypoint",
+        "kind": "file",
+        "file_count": 1
+      },
+      {
+        "path": "README.md",
+        "label": "Human-readable usage guide",
+        "kind": "file",
+        "file_count": 1
+      },
+      {
+        "path": "agents/interface.yaml",
+        "label": "Neutral interface metadata",
+        "kind": "file",
+        "file_count": 1
+      },
+      {
+        "path": "manifest.json",
+        "label": "Lifecycle and portability metadata",
+        "kind": "file",
+        "file_count": 1
+      },
+      {
+        "path": "references",
+        "label": "Extended guidance and reusable notes",
+        "kind": "folder",
+        "file_count": 7
+      },
+      {
+        "path": "scripts",
+        "label": "Deterministic helpers or local tooling",
+        "kind": "folder",
+        "file_count": 3
+      },
+      {
+        "path": "evals",
+        "label": "Trigger and quality checks",
+        "kind": "folder",
+        "file_count": 12
+      },
+      {
+        "path": "reports",
+        "label": "Generated evidence and overview artifacts",
+        "kind": "folder",
+        "file_count": 111
+      }
+    ],
+    "file_count": 137,
+    "folder_count": 4,
+    "distribution": [
+      {
+        "label": "SKILL.md",
+        "value": 1
+      },
+      {
+        "label": "README.md",
+        "value": 1
+      },
+      {
+        "label": "agents/interface.yaml",
+        "value": 1
+      },
+      {
+        "label": "manifest.json",
+        "value": 1
+      },
+      {
+        "label": "references",
+        "value": 7
+      },
+      {
+        "label": "scripts",
+        "value": 3
+      },
+      {
+        "label": "evals",
+        "value": 12
+      },
+      {
+        "label": "reports",
+        "value": 111
+      }
+    ]
+  },
+  "iteration_roadmap": {
+    "items": [
+      {
+        "title": "补齐世界证据",
+        "why": "世界级证据仍有 4 项待补；公开完成态 claim 必须继续保持阻塞。",
+        "actions": [
+          "补齐提供商留出证据：缺少真实 provider 模型运行和 token metadata。",
+          "补齐人工盲评证据：盲评 pair 仍待真实 reviewer 决策。",
+          "按 ledger 总量继续补齐 4 项待补证据（外部 3 项、人工 1 项；未展开 2 项），并保持 claim guard 为 pending 状态。"
+        ],
+        "unlocks": "全部外部/人工证据被 ledger 接受后，才能进入公开 world-class claim 复核。",
+        "source": "world_class_evidence_ledger"
+      },
+      {
+        "title": "Tighten trigger and exclusions",
+        "why": "The package needs clearer near-neighbor exclusions before it grows.",
+        "actions": [
+          "Add 3 to 5 should-trigger and should-not-trigger examples.",
+          "Refine the frontmatter description to name the recurring job and non-goals.",
+          "Run a first trigger evaluation pass before expanding the package."
+        ],
+        "unlocks": "Cleaner routing and fewer accidental activations."
+      },
+      {
+        "title": "Create an iteration evidence loop",
+        "why": "The package should show what changed and why after the first draft.",
+        "actions": [
+          "Generate the HTML skill report and keep it aligned with the package.",
+          "Record reference scan choices and non-goals.",
+          "Capture the next iteration choice explicitly before adding more files."
+        ],
+        "unlocks": "A clearer path for the next author or reviewer."
+      }
+    ]
+  },
+  "report_contract": {
+    "schema_version": "2.0",
+    "html_report": "reports/skill-overview.html",
+    "language": "zh-CN",
+    "default_language": "zh-CN",
+    "languages": [
+      "zh-CN",
+      "en"
+    ],
+    "layout": "kami-white-audit-v2",
+    "nav_labels": [
+      "技能概述",
+      "总览指标",
+      "能力画像",
+      "原理结构",
+      "契约边界",
+      "质量评估",
+      "风险治理",
+      "包体资产",
+      "迭代路线"
+    ],
+    "nav_labels_en": [
+      "Overview",
+      "Metrics",
+      "Profile",
+      "Principle",
+      "Contract",
+      "Quality",
+      "Risk",
+      "Assets",
+      "Roadmap"
+    ]
+  },
+  "name": "agent-team-work",
+  "title": "项目会话团队",
+  "display_name": "Agent Team Work",
+  "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+  "logic_steps": [
+    "Understand the request",
+    "Execute the main task",
+    "Validate the result"
+  ],
+  "usage_steps": [
+    "Use $agent-team-work to set up one current-session Leader and independent Codex project sessions for each role, confirm once before mutations, and continue stages only after acceptance until complete or blocked.",
+    "Use this skill when the request matches: Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
+  ],
+  "package_map": [
+    {
+      "path": "SKILL.md",
+      "label": "Skill entrypoint",
+      "kind": "file",
+      "file_count": 1
+    },
+    {
+      "path": "README.md",
+      "label": "Human-readable usage guide",
+      "kind": "file",
+      "file_count": 1
+    },
+    {
+      "path": "agents/interface.yaml",
+      "label": "Neutral interface metadata",
+      "kind": "file",
+      "file_count": 1
+    },
+    {
+      "path": "manifest.json",
+      "label": "Lifecycle and portability metadata",
+      "kind": "file",
+      "file_count": 1
+    },
+    {
+      "path": "references",
+      "label": "Extended guidance and reusable notes",
+      "kind": "folder",
+      "file_count": 7
+    },
+    {
+      "path": "scripts",
+      "label": "Deterministic helpers or local tooling",
+      "kind": "folder",
+      "file_count": 3
+    },
+    {
+      "path": "evals",
+      "label": "Trigger and quality checks",
+      "kind": "folder",
+      "file_count": 12
+    },
+    {
+      "path": "reports",
+      "label": "Generated evidence and overview artifacts",
+      "kind": "folder",
+      "file_count": 111
+    }
+  ],
+  "strengths": [
+    "触发面保持精简，并锚定在 frontmatter description。",
+    "已生成 Skill IR，核心语义可先于平台打包被审查和迁移。",
+    "已生成目标编译报告，可审查 IR 到 OpenAI、Claude、generic 等目标契约的映射。",
+    "已生成 Output Eval Lab scorecard，可比较 with-skill 与 baseline 输出质量。",
+    "已生成 Output Execution Runs，可区分记录样本、命令执行和模型执行证据。",
+    "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
+  ],
+  "scenarios": [
+    "团队复用前，需要明确触发边界、质量证据和维护责任。",
+    "用户说出类似需求时：Use $agent-team-work to set up one current-session Leader and independent Codex project sessions for each role, confirm once before mutations, and continue stages only after acceptance until complete or blocked.",
+    "已有原始资料，但还没有清晰输入、输出和后续迭代路径。"
+  ],
+  "trigger_contract": {
+    "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+    "activation": "manual",
+    "execution": "inline",
+    "shell": "bash"
+  },
+  "io_contract": {
+    "inputs": [
+      "用户确认的项目目标、首要交付物和完成判定",
+      "已保存 Codex 项目及其 project_id、Git 或 local 工作目录信息",
+      "成员角色、职责、标题、阶段顺序、输入依赖和允许路径",
+      "team.json、tasks.json、成员报告和 Codex 项目/thread 查询结果"
+    ],
+    "outputs": [
+      "可恢复的 .team 状态账本、真实 Leader/member 项目会话绑定、逐阶段报告与验收证据，统一记录 complete、blocked、待用户处理状态和下一步。",
+      "结构化 Skill 目录，共 8 类关键资产。"
+    ]
+  },
+  "principles": [
+    {
+      "title": "意图澄清",
+      "body": "先确认真实任务、输入材料和交付结果。"
+    },
+    {
+      "title": "边界路由",
+      "body": "用 frontmatter description 决定是否触发，并写明相邻非目标。"
+    },
+    {
+      "title": "资产分层",
+      "body": "把入口、参考、脚本、评估和报告拆到各自目录，避免 SKILL.md 膨胀。"
+    },
+    {
+      "title": "证据回路",
+      "body": "通过评估、报告和复盘把真实使用反馈变成下一轮改进。"
+    },
+    {
+      "title": "漂移观察",
+      "body": "持续观察触发漂移、输出漂移和治理漂移。"
+    },
+    {
+      "title": "杠杆升级",
+      "body": "优先改边界、触发和一个最小自修复检查。"
+    }
+  ],
+  "roadmap": [
+    {
+      "title": "补齐世界证据",
+      "why": "世界级证据仍有 4 项待补；公开完成态 claim 必须继续保持阻塞。",
+      "actions": [
+        "补齐提供商留出证据：缺少真实 provider 模型运行和 token metadata。",
+        "补齐人工盲评证据：盲评 pair 仍待真实 reviewer 决策。",
+        "按 ledger 总量继续补齐 4 项待补证据（外部 3 项、人工 1 项；未展开 2 项），并保持 claim guard 为 pending 状态。"
+      ],
+      "unlocks": "全部外部/人工证据被 ledger 接受后，才能进入公开 world-class claim 复核。",
+      "source": "world_class_evidence_ledger"
+    },
+    {
+      "title": "Tighten trigger and exclusions",
+      "why": "The package needs clearer near-neighbor exclusions before it grows.",
+      "actions": [
+        "Add 3 to 5 should-trigger and should-not-trigger examples.",
+        "Refine the frontmatter description to name the recurring job and non-goals.",
+        "Run a first trigger evaluation pass before expanding the package."
+      ],
+      "unlocks": "Cleaner routing and fewer accidental activations."
+    },
+    {
+      "title": "Create an iteration evidence loop",
+      "why": "The package should show what changed and why after the first draft.",
+      "actions": [
+        "Generate the HTML skill report and keep it aligned with the package.",
+        "Record reference scan choices and non-goals.",
+        "Capture the next iteration choice explicitly before adding more files."
+      ],
+      "unlocks": "A clearer path for the next author or reviewer."
+    }
+  ],
+  "cards": [],
+  "introduction": [
+    "这份报告用于快速理解新生成 Skill 的定位、原理、触发边界和交付内容。",
+    "先确认重复任务、真实输入形态和可交付输出，再决定是否继续加 references、scripts 或 evals。",
+    "如果需求仍然模糊，优先回到 intent dialogue 收紧边界，再扩展包体结构。"
+  ],
+  "benchmark_highlights": [],
+  "skill_ir": {
+    "schema_version": "2.0.0",
+    "source_path": "reports/skill-ir.json",
+    "target_count": 5,
+    "trigger_samples": 6,
+    "output_eval_cases": 5
+  },
+  "compiled_targets": {
+    "ok": true,
+    "schema_version": "1.0",
+    "summary": {
+      "target_count": 5,
+      "pass_count": 5,
+      "warn_count": 0,
+      "block_count": 0,
+      "failure_count": 0,
+      "warning_count": 0
+    },
+    "targets": [
+      {
+        "target": "openai",
+        "status": "pass",
+        "adapter_mode": "metadata-adapter",
+        "degradation_strategy": "native-Codex-runtime",
+        "native_surface": "OpenAI-style interface metadata plus neutral Agent Skills source",
+        "permission_enforcement": "metadata-only",
+        "generated_files": [
+          "targets/openai/adapter.json",
+          "targets/openai/agents/openai.yaml"
+        ],
+        "unsupported_features": [
+          "client-native script permission prompts are represented as permission contract metadata"
+        ],
+        "warnings": []
+      },
+      {
+        "target": "claude",
+        "status": "pass",
+        "adapter_mode": "neutral-source-plus-adapter",
+        "degradation_strategy": "neutral-source-without-Codex-session-runtime",
+        "native_surface": "Claude-compatible neutral source folder with adapter notes",
+        "permission_enforcement": "metadata-fallback",
+        "generated_files": [
+          "targets/claude/adapter.json",
+          "targets/claude/README.md"
+        ],
+        "unsupported_features": [
+          "vendor-native metadata fields are carried as adapter JSON and README notes"
+        ],
+        "warnings": []
+      },
+      {
+        "target": "generic",
+        "status": "pass",
+        "adapter_mode": "agent-skills-compatible",
+        "degradation_strategy": "neutral-source",
+        "native_surface": "Agent Skills compatible neutral package",
+        "permission_enforcement": "consumer-enforced-or-metadata-only",
+        "generated_files": [
+          "targets/generic/adapter.json"
+        ],
+        "unsupported_features": [],
+        "warnings": []
+      },
+      {
+        "target": "agent-skills-compatible",
+        "status": "pass",
+        "adapter_mode": "neutral-agent-skills-source",
+        "degradation_strategy": "neutral-source",
+        "native_surface": "Agent Skills standard source tree",
+        "permission_enforcement": "consumer-enforced-or-metadata-only",
+        "generated_files": [
+          "SKILL.md",
+          "agents/interface.yaml"
+        ],
+        "unsupported_features": [],
+        "warnings": []
+      },
+      {
+        "target": "vscode",
+        "status": "pass",
+        "adapter_mode": "vscode-agent-skills-adapter",
+        "degradation_strategy": "agent-skills-source-without-Codex-session-runtime",
+        "native_surface": "VS Code/Copilot Agent Skills project or user scope",
+        "permission_enforcement": "client-or-workspace-trust",
+        "generated_files": [
+          "targets/vscode/adapter.json",
+          "targets/vscode/README.md"
+        ],
+        "unsupported_features": [
+          "VS Code installation scope is documented but not installed by this compiler"
+        ],
+        "warnings": []
+      }
+    ],
+    "failures": [],
+    "warnings": []
+  },
+  "output_quality": {
+    "case_count": 5,
+    "file_backed_case_count": 1,
+    "near_neighbor_case_count": 1,
+    "boundary_case_count": 1,
+    "baseline_pass_rate": 0.0,
+    "with_skill_pass_rate": 100.0,
+    "delta": 100.0,
+    "regression_count": 0,
+    "gate_pass": true,
+    "failure_taxonomy": [],
+    "blind_pair_count": 5
+  },
+  "output_execution": {
+    "ok": true,
+    "summary": {
+      "case_count": 5,
+      "variant_run_count": 10,
+      "command_executed_count": 10,
+      "model_executed_count": 0,
+      "recorded_fixture_count": 0,
+      "timing_observed_count": 10,
+      "token_observed_count": 0,
+      "token_estimated_count": 10,
+      "baseline_pass_rate": 0.0,
+      "with_skill_pass_rate": 100.0,
+      "delta": 100.0,
+      "regression_count": 0,
+      "failure_count": 0,
+      "gate_pass": true
+    },
+    "runner": {
+      "mode": "command",
+      "command": [
+        "python3",
+        "scripts/local_output_eval_runner.py"
+      ],
+      "timeout_seconds": 30.0
+    },
+    "failures": []
+  },
+  "output_blind_review": {
+    "summary": {
+      "pair_count": 5,
+      "answer_key_separate": true,
+      "with_skill_hidden_count": 5
+    },
+    "seed": "yao-output-eval-blind-v1",
+    "pair_count": 5,
+    "answer_key_separate": true
+  },
+  "output_review_kit": {
+    "ok": true,
+    "summary": {
+      "case_count": 5,
+      "ready_for_adjudication_count": 0,
+      "pending_decision_count": 5,
+      "invalid_decision_count": 0,
+      "reviewer_metadata_present": false,
+      "answer_key_hidden": true,
+      "answer_key_path_exposed": false,
+      "ready_to_run_adjudication": false,
+      "failure_count": 0
+    },
+    "artifacts": {
+      "reviewer_kit_json": "/Volumes/Code/team-worker/agent-team-work/reports/output_review_kit.json",
+      "reviewer_kit_markdown": "/Volumes/Code/team-worker/agent-team-work/reports/output_review_kit.md",
+      "reviewer_kit_html": "/Volumes/Code/team-worker/agent-team-work/reports/output_review_kit.html",
+      "blind_pack_json": "/Volumes/Code/team-worker/agent-team-work/reports/output_blind_review_pack.json",
+      "blind_pack_markdown": "/Volumes/Code/team-worker/agent-team-work/reports/output_blind_review_pack.md",
+      "decisions": "/Volumes/Code/team-worker/agent-team-work/reports/output_review_decisions.json",
+      "adjudication_json": "reports/output_review_adjudication.json",
+      "adjudication_markdown": "reports/output_review_adjudication.md"
+    },
+    "failures": []
+  },
+  "output_review_adjudication": {
+    "ok": true,
+    "summary": {
+      "pair_count": 5,
+      "judgment_count": 0,
+      "pending_count": 5,
+      "agreement_count": 0,
+      "disagreement_count": 0,
+      "invalid_decision_count": 0,
+      "answer_revealed_count": 0,
+      "pending_answer_hidden_count": 5,
+      "agreement_rate": null,
+      "needs_review": true,
+      "reviewer_metadata_present": false,
+      "reason_required": true,
+      "blind_review_attested": false,
+      "blind_review_completed_before_answer_key": false,
+      "answer_key_not_opened_before_decisions": false,
+      "raw_content_excluded_attested": false,
+      "reviewer_reason_required_attested": false,
+      "ready_for_human_evidence": false,
+      "failure_count": 0,
+      "reviewer_checklist_count": 5,
+      "reviewer_checklist_pending_count": 5,
+      "reviewer_checklist_invalid_count": 0,
+      "reviewer_checklist_ready_count": 0
+    },
+    "reviewer": "",
+    "reviewed_at": "",
+    "failures": []
+  },
+  "benchmark_reproducibility": {
+    "ok": true,
+    "summary": {
+      "reproducibility_ready": true,
+      "release_lock_ready": false,
+      "methodology_complete": true,
+      "required_artifact_count": 25,
+      "missing_artifact_count": 0,
+      "evidence_bundle_sha256": "22f7e5bca33bb9ab4abd0945bbbb0a631642760dc70a0b33d181972fa7b1f4f5",
+      "source_contract_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d",
+      "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
+      "output_case_count": 5,
+      "failure_disclosure_count": 2,
+      "command_count": 23,
+      "command_executed_count": 10,
+      "timing_observed_count": 10,
+      "model_executed_count": 0,
+      "token_observed_count": 0,
+      "human_review_complete": false,
+      "provider_evidence_complete": false,
+      "phase1_provider_matrix_complete": false,
+      "phase1_human_review_complete": false,
+      "phase1_quality_promotion_complete": false,
+      "phase1_completion_ready": false,
+      "world_class_ready": false,
+      "world_class_open_gap_count": 9,
+      "world_class_task_count": 4,
+      "world_class_ledger_pending_count": 4,
+      "world_class_source_check_count": 14,
+      "world_class_source_pass_count": 6,
+      "world_class_source_blocked_count": 8,
+      "beta_test_ready": false,
+      "beta_test_blocker_count": 2,
+      "beta_test_deferred_evidence_count": 4,
+      "public_claim_ready": false,
+      "public_claim_blocker_count": 7,
+      "working_tree_dirty": null,
+      "changed_file_count": null,
+      "source_tree_dirty": null,
+      "source_changed_file_count": null,
+      "generated_tree_dirty": null,
+      "generated_changed_file_count": null
+    },
+    "commit": "unknown",
+    "missing_artifacts": [],
+    "limitations": [
+      "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
+      "Local command-runner evidence is reproducible but does not replace provider-backed model holdout evidence.",
+      "Pending blind-review decisions are visible but do not count as human adjudication.",
+      "World-class readiness remains false until external and human evidence gaps close.",
+      "Beta/public testing may proceed without human blind-review only when wording avoids superiority, fully-reviewed, or world-class claims."
+    ]
+  },
+  "runtime_conformance": {
+    "target_count": 5,
+    "pass_count": 5,
+    "fail_count": 0
+  },
+  "runtime_permissions": {
+    "ok": true,
+    "summary": {
+      "target_count": 4,
+      "pass_count": 4,
+      "fail_count": 0,
+      "native_enforcement_count": 0,
+      "metadata_fallback_count": 4,
+      "residual_risk_count": 4,
+      "required_capability_count": 0,
+      "failure_count": 0,
+      "installer_enforcement_source_status": "present",
+      "installer_enforcement_target_count": 4,
+      "installer_enforcement_pass_count": 0,
+      "installer_permission_enforced_count": 0,
+      "installer_permission_failure_count": 0,
+      "installer_permission_capability_count": 0,
+      "world_class_native_evidence_ready": false,
+      "installer_enforcement_ready": false
+    },
+    "expected_capabilities": [],
+    "targets": [
+      {
+        "target": "openai",
+        "status": "pass",
+        "assurance": "metadata-fallback-explicit",
+        "native_enforcement": false,
+        "metadata_fallback_explicit": true,
+        "residual_risks": [
+          "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
+        ]
+      },
+      {
+        "target": "claude",
+        "status": "pass",
+        "assurance": "metadata-fallback-explicit",
+        "native_enforcement": false,
+        "metadata_fallback_explicit": true,
+        "residual_risks": [
+          "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
+        ]
+      },
+      {
+        "target": "generic",
+        "status": "pass",
+        "assurance": "metadata-fallback-explicit",
+        "native_enforcement": false,
+        "metadata_fallback_explicit": true,
+        "residual_risks": [
+          "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
+        ]
+      },
+      {
+        "target": "vscode",
+        "status": "pass",
+        "assurance": "metadata-fallback-explicit",
+        "native_enforcement": false,
+        "metadata_fallback_explicit": true,
+        "residual_risks": [
+          "Client-native permission enforcement is not provided by this target; installer or operator must honor metadata."
+        ]
+      }
+    ],
+    "failures": []
+  },
+  "trust_security": {
+    "scanned_files": 30,
+    "script_count": 3,
+    "internal_module_count": 0,
+    "secret_findings": 0,
+    "dependency_files": [
+      "requirements-ci.txt"
+    ],
+    "network_script_count": 0,
+    "network_policy_covered_count": 0,
+    "network_policy_missing_count": 0,
+    "file_write_script_count": 0,
+    "permission_required_count": 0,
+    "permission_approved_count": 0,
+    "permission_missing_count": 0,
+    "permission_invalid_count": 0,
+    "permission_expired_count": 0,
+    "help_smoke_checked_count": 3,
+    "help_smoke_failed_count": 0,
+    "interactive_script_count": 0,
+    "package_hash_scope": "source-contract-without-generated-reports",
+    "package_hash_file_count": 30,
+    "package_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d"
+  },
+  "skill_atlas": {
+    "skill_count": 1,
+    "actionable_skill_count": 1,
+    "route_collision_count": 0,
+    "actionable_route_collision_count": 0,
+    "owner_gap_count": 0,
+    "actionable_owner_gap_count": 0,
+    "stale_count": 0,
+    "actionable_stale_count": 0,
+    "shared_resource_count": 0,
+    "no_route_opportunity_count": 0,
+    "telemetry_report_count": 1,
+    "drift_signal_count": 0,
+    "actionable_drift_signal_count": 0,
+    "non_actionable_issue_count": 0
+  },
+  "registry_distribution": {
+    "ok": true,
+    "package": {
+      "schema_version": "2.0",
+      "name": "agent-team-work",
+      "version": "0.2.0",
+      "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+      "targets": [
+        "openai",
+        "claude",
+        "generic",
+        "agent-skills-compatible",
+        "vscode"
+      ],
+      "maturity": "governed",
+      "owner": "Local Codex Team",
+      "review_cadence": "monthly",
+      "trust_level": "local",
+      "license": "MIT",
+      "checksums": {
+        "package_sha256": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d",
+        "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0"
+      },
+      "compatibility": {
+        "openai": "pass",
+        "claude": "pass",
+        "agent-skills": "pass",
+        "vscode": "pass",
+        "generic": "pass",
+        "agent-skills-compatible": "pass"
+      },
+      "source": {
+        "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+        "skill_ir": "reports/skill-ir.json",
+        "ir_schema_version": "2.0.0",
+        "canonical_metadata": "agents/interface.yaml"
+      },
+      "artifacts": {
+        "overview_html": "reports/skill-overview.html",
+        "review_studio_html": "reports/review-studio.html",
+        "trust_report": "reports/security_trust_report.md",
+        "conformance_matrix": "reports/conformance_matrix.md",
+        "compiled_targets": "reports/compiled_targets.md",
+        "package_verification": "reports/package_verification.md",
+        "install_simulation": "reports/install_simulation.md",
+        "adoption_drift": "reports/adoption_drift_report.md",
+        "review_waivers": "reports/review_waivers.md",
+        "review_annotations": "reports/review_annotations.md",
+        "package_metadata": "registry/packages/agent-team-work.json"
+      },
+      "distribution": {
+        "archive_verified": true,
+        "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
+        "package_verification": "reports/package_verification.json",
+        "install_simulated": true,
+        "install_simulation": "reports/install_simulation.json"
+      },
+      "generated_at": "2026-09-14"
+    },
+    "failures": [],
+    "warnings": []
+  },
+  "package_verification": {
+    "ok": true,
+    "summary": {
+      "target_count": 4,
+      "adapter_count": 4,
+      "archive_present": true,
+      "archive_sha256": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0",
+      "archive_entry_count": 145,
+      "nested_skill_entry_count": 0,
+      "failure_count": 0,
+      "warning_count": 0
+    },
+    "failures": [],
+    "warnings": []
+  },
+  "install_simulation": {
+    "ok": true,
+    "summary": {
+      "archive_present": true,
+      "archive_entry_count": 145,
+      "nested_skill_entry_count": 0,
+      "archive_extracted": true,
+      "entrypoint_loaded": true,
+      "manifest_loaded": true,
+      "interface_loaded": true,
+      "adapter_count": 4,
+      "installer_permission_enforced_count": 0,
+      "installer_permission_failure_count": 0,
+      "permission_target_count": 4,
+      "permission_capability_count": 0,
+      "install_root_is_temp": false,
+      "failure_count": 0,
+      "warning_count": 0
+    },
+    "failures": [],
+    "warnings": []
+  },
+  "upgrade_check": {
+    "ok": true,
+    "summary": {
+      "declared_bump": "minor",
+      "recommended_bump": "patch",
+      "breaking_change_count": 0,
+      "added_target_count": 0,
+      "metadata_change_count": 1,
+      "checksum_change_count": 2,
+      "failure_count": 0,
+      "warning_count": 0
+    },
+    "upgrade_diff": {
+      "name_changed": false,
+      "added_targets": [],
+      "removed_targets": [],
+      "compatibility_changes": [],
+      "metadata_changes": [
+        {
+          "field": "license",
+          "from": "",
+          "to": "MIT"
+        }
+      ],
+      "checksum_changes": [
+        {
+          "field": "archive_sha256",
+          "from": "",
+          "to": "4f4f394d1b880af962fc626004f715e32c3afdca7b5b62c5b6fe6f7906ac2ff0"
+        },
+        {
+          "field": "package_sha256",
+          "from": "previous-fixture",
+          "to": "4c09331f19dd85bd2b291f4b3d1559d590d89adb3cb12d6a9401bab29822170d"
+        }
+      ]
+    },
+    "release_notes": [
+      "Recommended version bump: patch.",
+      "Package or archive checksum changed; reviewers should verify package artifacts before release.",
+      "Package verification evidence: reports/package_verification.md."
+    ],
+    "failures": [],
+    "warnings": []
+  },
+  "adoption_drift": {
+    "ok": true,
+    "summary": {
+      "event_count": 1,
+      "adoption_sample_count": 1,
+      "activation_count": 1,
+      "accepted_count": 1,
+      "edited_count": 0,
+      "rejected_count": 0,
+      "missed_count": 0,
+      "failed_count": 0,
+      "adoption_rate": 100.0,
+      "missed_trigger_count": 0,
+      "wrong_trigger_count": 0,
+      "bad_output_count": 0,
+      "script_error_count": 0,
+      "missing_resource_count": 0,
+      "review_overdue_count": 0,
+      "risk_band": "low",
+      "event_types": {
+        "skill_activation": 1
+      },
+      "failure_types": {},
+      "source_types": {
+        "manual": 1
+      },
+      "command_counts": {
+        "real_smoke": 1
+      }
+    },
+    "next_iteration_candidates": [],
+    "privacy_contract": {
+      "storage": "local-first",
+      "event_scope": "metadata-only",
+      "raw_content_allowed": false,
+      "raw_event_log_packaged": false,
+      "blocked_fields": [
+        "content",
+        "input",
+        "inputs",
+        "message",
+        "messages",
+        "note",
+        "output",
+        "outputs",
+        "prompt",
+        "raw",
+        "text",
+        "transcript"
+      ]
+    },
+    "failures": []
+  },
+  "review_waivers": {
+    "ok": true,
+    "summary": {
+      "waiver_count": 0,
+      "active_count": 0,
+      "expired_count": 0,
+      "invalid_count": 0,
+      "covered_gate_count": 0,
+      "covered_gate_keys": [],
+      "waiver_candidate_count": 1,
+      "waiverable_open_count": 1,
+      "non_waivable_count": 0
+    },
+    "policy": {
+      "blocker_waivers_allowed": false,
+      "minimum_reason_chars": 20,
+      "expires_required": true,
+      "review_studio_gate_keys": [
+        "architecture-maintainability",
+        "context-budget",
+        "intent-canvas",
+        "operations-loop",
+        "output-lab",
+        "permission-gates",
+        "permission-runtime",
+        "python-compat",
+        "registry-audit",
+        "release-notes",
+        "review-waivers",
+        "runtime-matrix",
+        "skill-atlas",
+        "trigger-lab",
+        "trust-report",
+        "world-class-evidence"
+      ],
+      "known_gate_keys": [
+        "architecture-maintainability",
+        "context-budget",
+        "intent-canvas",
+        "operations-loop",
+        "output-lab",
+        "permission-gates",
+        "permission-runtime",
+        "python-compat",
+        "registry-audit",
+        "release-notes",
+        "runtime-matrix",
+        "skill-atlas",
+        "trigger-lab",
+        "trust-report"
+      ],
+      "waiverable_gate_keys": [
+        "architecture-maintainability",
+        "context-budget",
+        "intent-canvas",
+        "operations-loop",
+        "output-lab",
+        "permission-gates",
+        "permission-runtime",
+        "python-compat",
+        "registry-audit",
+        "release-notes",
+        "runtime-matrix",
+        "skill-atlas",
+        "trigger-lab",
+        "trust-report"
+      ],
+      "non_waivable_gate_keys": [
+        "review-waivers",
+        "world-class-evidence"
+      ]
+    },
+    "failures": [],
+    "warnings": []
+  },
+  "review_annotations": {
+    "ok": true,
+    "summary": {
+      "annotation_count": 0,
+      "open_count": 0,
+      "resolved_count": 0,
+      "deferred_count": 0,
+      "open_blocker_count": 0,
+      "open_warning_count": 0,
+      "linked_gate_count": 0,
+      "target_missing_count": 0,
+      "failure_count": 0
+    },
+    "annotations": [],
+    "failures": []
+  },
+  "world_class_evidence_plan": {
+    "ok": false,
+    "summary": {
+      "audit_decision": "continue-iteration",
+      "world_class_ready": false,
+      "audit_world_class_ready": false,
+      "ready_to_claim_world_class": false,
+      "ledger_completion_required": true,
+      "evidence_requirement_count": 4,
+      "task_count": 4,
+      "human_task_count": 1,
+      "external_task_count": 3,
+      "review_task_count": 0,
+      "decision": "collect-external-evidence"
+    },
+    "tasks": [
+      {
+        "key": "provider-holdout",
+        "label": "Provider Holdout",
+        "status": "external_required",
+        "category": "external",
+        "owner": "operator with provider credentials",
+        "current": "phase1 model-executed 0/40; calls 0/40; status external-required",
+        "objective": "Complete the fixed 10-case DeepSeek Flash+Pro matrix with 40 real calls and governed budget evidence.",
+        "runbook": [
+          "Set DEEPSEEK_API_KEY in the operator shell; never commit or print the value.",
+          "python3 scripts/yao.py evidence-build . --run-id <PROVIDER_RUN_ID> --self",
+          "Keep the generated private answer key and role-neutral review materials inside .yao/runs/<PROVIDER_RUN_ID>.",
+          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD> --self",
+          "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
+          "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions --self"
+        ],
+        "success_checks": [
+          "reports/provider_output_evaluation.json summary.call_count == 40",
+          "reports/provider_output_evaluation.json summary.model_executed_count == 40",
+          "reports/provider_output_evaluation.json summary.failure_count == 0",
+          "reports/provider_output_evaluation.json summary.total_tokens <= 250000",
+          "reports/skill_os2_audit.json item provider-holdout status becomes pass"
+        ],
+        "evidence_artifacts": [
+          "evals/output/provider_matrix.json",
+          "reports/provider_output_evaluation.json",
+          "reports/provider_output_blind_pack.json",
+          "reports/provider_output_answer_commitment.json",
+          "reports/skill_os2_audit.json",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/provider-holdout.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
+        ],
+        "privacy_contract": [
+          "Do not commit provider credentials or environment dumps.",
+          "The output execution report records output hashes and aggregate run metadata, not raw provider prompts."
+        ],
+        "audit_next_action": "Run evidence-build with DEEPSEEK_API_KEY and keep raw outputs in the isolated run directory."
+      },
+      {
+        "key": "human-adjudication",
+        "label": "Human Adjudication",
+        "status": "human_required",
+        "category": "human",
+        "owner": "human reviewer",
+        "current": "phase1 reviewers 0/3; pairs 0/20; promotion pending",
+        "objective": "Collect three controlled, independent reviews of the same 20-pair provider blind pack.",
+        "runbook": [
+          "Give each registered reviewer an independent copy of the matching provider_review_reviewer-*.json template and the role-neutral blind pack.",
+          "Collect all 20 A/B choices, reasons, controlled submission ids, timestamps, and truthful independent-review attestations.",
+          "Export an access-controlled reviewer registry that binds each reviewer id to the exact packet SHA256.",
+          "python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <reviewer-a.json> --decisions <reviewer-b.json> --decisions <reviewer-c.json> --reviewer-registry <registry.json> --run-id <FINAL_RUN_ID> --self",
+          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD> --self",
+          "Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.",
+          "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions --self"
+        ],
+        "success_checks": [
+          "reports/provider_output_adjudication.json summary.reviewer_count == 3",
+          "reports/provider_output_adjudication.json summary.pair_count == 20",
+          "reports/provider_output_adjudication.json summary.failure_count == 0",
+          "reports/provider_output_adjudication.json evidence_binding.blind_pack_sha256 matches the source run",
+          "reports/skill_os2_audit.json item human-adjudication status becomes pass"
+        ],
+        "evidence_artifacts": [
+          "reports/provider_output_blind_pack.json",
+          "reports/provider_reviewer_registry.json",
+          "reports/provider_output_adjudication.json",
+          "reports/provider_review_lineage.json",
+          "scripts/adjudicate_multi_reviewer.py",
+          "scripts/finalize_provider_review.py",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/human-adjudication.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
+        ],
+        "privacy_contract": [
+          "Reviewer packets contain choices, reasons, hashes, and controlled submission metadata without raw prompts or answer-key roles.",
+          "The private answer key remains under .yao/runs and is opened by the finalizer after all controlled packets are fixed.",
+          "The adjudication and lineage artifacts preserve blind_pack_sha256 and answer_key_sha256 commitments."
+        ],
+        "audit_next_action": "Collect three controlled reviewer packets and adjudicate them against the private run answer key."
+      },
+      {
+        "key": "native-permission-enforcement",
+        "label": "Native Permission Enforcement",
+        "status": "external_required",
+        "category": "external",
+        "owner": "target client or installer integrator",
+        "current": "native-enforced targets 0; installer-enforced targets 0",
+        "objective": "Prove at least one real target client or external installer runtime guard enforces approved high-permission capabilities.",
+        "runbook": [
+          "Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.",
+          "Update the generated target adapter only when the guard is actually enforced by that target.",
+          "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self",
+          "python3 scripts/yao.py install-simulate . --package-dir dist --install-root dist/install-simulation --self",
+          "python3 scripts/yao.py runtime-permissions . --package-dir dist --self",
+          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD> --self",
+          "Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.",
+          "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions --self"
+        ],
+        "success_checks": [
+          "reports/runtime_permission_probes.json summary.native_enforcement_count > 0",
+          "reports/runtime_permission_probes.json summary.failure_count == 0",
+          "reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence",
+          "reports/skill_os2_audit.json item native-permission-enforcement status becomes pass"
+        ],
+        "evidence_artifacts": [
+          "dist/targets/*/adapter.json",
+          "reports/runtime_permission_probes.json",
+          "reports/runtime_permission_probes.md",
+          "reports/install_simulation.json",
+          "reports/install_simulation.md",
+          "security/permission_policy.json",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/native-permission-enforcement.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
+        ],
+        "privacy_contract": [
+          "Do not mark native_enforcement true for metadata-only fallbacks.",
+          "Keep residual risks visible for targets that still rely on operator enforcement."
+        ],
+        "audit_next_action": "Integrate a real target-client or external installer runtime guard before claiming native permission enforcement."
+      },
+      {
+        "key": "native-client-telemetry",
+        "label": "Native Client Telemetry",
+        "status": "external_required",
+        "category": "external",
+        "owner": "Browser/Chrome/IDE/provider client integrator",
+        "current": "external source events 0; adoption samples 1",
+        "objective": "Import production metadata-only events from a real external client into the local drift loop.",
+        "runbook": [
+          "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
+          "Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.",
+          "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self",
+          "python3 scripts/yao.py skill-atlas --workspace-root . --self",
+          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD> --self",
+          "Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.",
+          "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions --self"
+        ],
+        "success_checks": [
+          "reports/adoption_drift_report.json summary.source_types.external > 0",
+          "reports/adoption_drift_report.json summary.adoption_sample_count > 0",
+          "reports/skill_os2_audit.json item native-client-telemetry status becomes pass"
+        ],
+        "evidence_artifacts": [
+          "reports/adoption_drift_report.json",
+          "reports/adoption_drift_report.md",
+          "reports/telemetry_hook_recipes.json",
+          "scripts/telemetry_native_host.py",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/native-client-telemetry.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
+        ],
+        "privacy_contract": [
+          "Telemetry must remain metadata-only and local-first.",
+          "Do not package reports/telemetry_events.jsonl or any raw prompt, output, transcript, note, or message field."
+        ],
+        "audit_next_action": "Install a real client against the native host and import production metadata-only events."
+      }
+    ],
+    "source_audit": {
+      "json": "reports/skill_os2_audit.json",
+      "markdown": "reports/skill_os2_audit.md",
+      "open_gap_count": 9
+    }
+  },
+  "world_class_evidence_ledger": {
+    "ok": true,
+    "summary": {
+      "ledger_entry_count": 4,
+      "source_accepted_count": 0,
+      "accepted_count": 0,
+      "pending_count": 4,
+      "human_pending_count": 1,
+      "external_pending_count": 3,
+      "submitted_entry_count": 0,
+      "reviewer_approved_submission_count": 0,
+      "missing_submission_count": 4,
+      "invalid_submission_count": 0,
+      "source_check_count": 14,
+      "source_pass_count": 6,
+      "source_blocked_count": 8,
+      "submitted_but_pending_count": 0,
+      "source_accepted_without_valid_submission_count": 0,
+      "overclaim_guard_active": true,
+      "ready_to_claim_world_class": false,
+      "decision": "evidence-pending"
+    },
+    "entries": [
+      {
+        "key": "provider-holdout",
+        "label": "Provider Holdout",
+        "category": "external",
+        "owner": "operator with provider credentials",
+        "status": "pending",
+        "source_status": "external_required",
+        "source_accepted": false,
+        "current": "phase1 model-executed 0/40; calls 0/40; status external-required",
+        "objective": "Complete the fixed 10-case DeepSeek Flash+Pro matrix with 40 real calls and governed budget evidence.",
+        "runbook": [
+          "Set DEEPSEEK_API_KEY in the operator shell; never commit or print the value.",
+          "python3 scripts/yao.py evidence-build . --run-id <PROVIDER_RUN_ID> --self",
+          "Keep the generated private answer key and role-neutral review materials inside .yao/runs/<PROVIDER_RUN_ID>.",
+          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD> --self",
+          "Copy evidence/world_class/templates/provider-holdout.intake.json to evidence/world_class/submissions/provider-holdout.json and fill only real evidence fields.",
+          "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions --self"
+        ],
+        "provenance_requirements": [
+          "provider-backed model run",
+          "observed timing",
+          "observed token metadata"
+        ],
+        "success_checks": [
+          "reports/provider_output_evaluation.json summary.call_count == 40",
+          "reports/provider_output_evaluation.json summary.model_executed_count == 40",
+          "reports/provider_output_evaluation.json summary.failure_count == 0",
+          "reports/provider_output_evaluation.json summary.total_tokens <= 250000",
+          "reports/skill_os2_audit.json item provider-holdout status becomes pass"
+        ],
+        "evidence_artifacts": [
+          "evals/output/provider_matrix.json",
+          "reports/provider_output_evaluation.json",
+          "reports/provider_output_blind_pack.json",
+          "reports/provider_output_answer_commitment.json",
+          "reports/skill_os2_audit.json",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/provider-holdout.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
+        ],
+        "privacy_contract": [
+          "Do not commit provider credentials or environment dumps.",
+          "The output execution report records output hashes and aggregate run metadata, not raw provider prompts."
+        ],
+        "observed_state": {
+          "contract_version": "phase1",
+          "call_count": 0,
+          "model_executed_count": 0,
+          "failure_count": 0,
+          "total_tokens": 0,
+          "accepted": false
+        },
+        "source_checklist": [
+          {
+            "evidence_key": "provider-holdout",
+            "label": "Provider calls",
+            "field": "call_count",
+            "expected": "==40",
+            "actual": 0,
+            "status": "blocked",
+            "source_accepted": false,
+            "next_action": "Complete all 40 fixed DeepSeek calls."
+          },
+          {
+            "evidence_key": "provider-holdout",
+            "label": "Provider model runs",
+            "field": "model_executed_count",
+            "expected": "==40",
+            "actual": 0,
+            "status": "blocked",
+            "source_accepted": false,
+            "next_action": "Require model identity on all 40 calls."
+          },
+          {
+            "evidence_key": "provider-holdout",
+            "label": "Provider failures",
+            "field": "failure_count",
+            "expected": "==0",
+            "actual": 0,
+            "status": "pass",
+            "source_accepted": false,
+            "next_action": "Resolve every fixed-matrix failure."
+          },
+          {
+            "evidence_key": "provider-holdout",
+            "label": "Token budget",
+            "field": "total_tokens",
+            "expected": "<=250000",
+            "actual": 0,
+            "status": "pass",
+            "source_accepted": false,
+            "next_action": "Keep the matrix within the 250000-token ceiling."
+          }
+        ],
+        "source_check_count": 4,
+        "source_pass_count": 2,
+        "source_blocked_count": 2,
+        "submission_state": {
+          "status": "missing",
+          "path": "evidence/world_class/submissions/provider-holdout.json",
+          "artifact_ref_count": 0,
+          "attested_real_evidence": false,
+          "privacy_contract_satisfied": false,
+          "ledger_reviewer_approved": false,
+          "ledger_reviewer": "",
+          "ledger_reviewed_at": "",
+          "ledger_counts_as_completion": false
+        },
+        "anti_overclaim": {
+          "planned_work_counts_as_evidence": false,
+          "metadata_fallback_counts_as_native_enforcement": false,
+          "pending_review_counts_as_human_decision": false,
+          "local_command_runner_counts_as_provider_model": false
+        },
+        "next_action": "Run evidence-build with DEEPSEEK_API_KEY and keep raw outputs in the isolated run directory."
+      },
+      {
+        "key": "human-adjudication",
+        "label": "Human Adjudication",
+        "category": "human",
+        "owner": "human reviewer",
+        "status": "pending",
+        "source_status": "human_required",
+        "source_accepted": false,
+        "current": "phase1 reviewers 0/3; pairs 0/20; promotion pending",
+        "objective": "Collect three controlled, independent reviews of the same 20-pair provider blind pack.",
+        "runbook": [
+          "Give each registered reviewer an independent copy of the matching provider_review_reviewer-*.json template and the role-neutral blind pack.",
+          "Collect all 20 A/B choices, reasons, controlled submission ids, timestamps, and truthful independent-review attestations.",
+          "Export an access-controlled reviewer registry that binds each reviewer id to the exact packet SHA256.",
+          "python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <reviewer-a.json> --decisions <reviewer-b.json> --decisions <reviewer-c.json> --reviewer-registry <registry.json> --run-id <FINAL_RUN_ID> --self",
+          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD> --self",
+          "Copy evidence/world_class/templates/human-adjudication.intake.json to evidence/world_class/submissions/human-adjudication.json and fill only real evidence fields.",
+          "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions --self"
+        ],
+        "provenance_requirements": [
+          "real reviewer identity",
+          "blind A/B decisions",
+          "answer key unopened until decisions exist"
+        ],
+        "success_checks": [
+          "reports/provider_output_adjudication.json summary.reviewer_count == 3",
+          "reports/provider_output_adjudication.json summary.pair_count == 20",
+          "reports/provider_output_adjudication.json summary.failure_count == 0",
+          "reports/provider_output_adjudication.json evidence_binding.blind_pack_sha256 matches the source run",
+          "reports/skill_os2_audit.json item human-adjudication status becomes pass"
+        ],
+        "evidence_artifacts": [
+          "reports/provider_output_blind_pack.json",
+          "reports/provider_reviewer_registry.json",
+          "reports/provider_output_adjudication.json",
+          "reports/provider_review_lineage.json",
+          "scripts/adjudicate_multi_reviewer.py",
+          "scripts/finalize_provider_review.py",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/human-adjudication.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
+        ],
+        "privacy_contract": [
+          "Reviewer packets contain choices, reasons, hashes, and controlled submission metadata without raw prompts or answer-key roles.",
+          "The private answer key remains under .yao/runs and is opened by the finalizer after all controlled packets are fixed.",
+          "The adjudication and lineage artifacts preserve blind_pack_sha256 and answer_key_sha256 commitments."
+        ],
+        "observed_state": {
+          "contract_version": "phase1",
+          "reviewer_count": 0,
+          "pair_count": 0,
+          "failure_count": 0,
+          "blind_pack_bound": false,
+          "accepted": false
+        },
+        "source_checklist": [
+          {
+            "evidence_key": "human-adjudication",
+            "label": "Registered reviewers",
+            "field": "reviewer_count",
+            "expected": "==3",
+            "actual": 0,
+            "status": "blocked",
+            "source_accepted": false,
+            "next_action": "Collect reviewer-a, reviewer-b, and reviewer-c."
+          },
+          {
+            "evidence_key": "human-adjudication",
+            "label": "Blind pairs",
+            "field": "pair_count",
+            "expected": "==20",
+            "actual": 0,
+            "status": "blocked",
+            "source_accepted": false,
+            "next_action": "Complete all 20 blind pairs."
+          },
+          {
+            "evidence_key": "human-adjudication",
+            "label": "Review failures",
+            "field": "failure_count",
+            "expected": "==0",
+            "actual": 0,
+            "status": "pass",
+            "source_accepted": false,
+            "next_action": "Resolve packet, identity, or adjudication failures."
+          },
+          {
+            "evidence_key": "human-adjudication",
+            "label": "Blind pack binding",
+            "field": "blind_pack_bound",
+            "expected": "true",
+            "actual": false,
+            "status": "blocked",
+            "source_accepted": false,
+            "next_action": "Bind adjudication to the reviewed blind pack SHA256."
+          }
+        ],
+        "source_check_count": 4,
+        "source_pass_count": 1,
+        "source_blocked_count": 3,
+        "submission_state": {
+          "status": "missing",
+          "path": "evidence/world_class/submissions/human-adjudication.json",
+          "artifact_ref_count": 0,
+          "attested_real_evidence": false,
+          "privacy_contract_satisfied": false,
+          "ledger_reviewer_approved": false,
+          "ledger_reviewer": "",
+          "ledger_reviewed_at": "",
+          "ledger_counts_as_completion": false
+        },
+        "anti_overclaim": {
+          "planned_work_counts_as_evidence": false,
+          "metadata_fallback_counts_as_native_enforcement": false,
+          "pending_review_counts_as_human_decision": false,
+          "local_command_runner_counts_as_provider_model": false
+        },
+        "next_action": "Collect three controlled reviewer packets and adjudicate them against the private run answer key."
+      },
+      {
+        "key": "native-permission-enforcement",
+        "label": "Native Permission Enforcement",
+        "category": "external",
+        "owner": "target client or installer integrator",
+        "status": "pending",
+        "source_status": "external_required",
+        "source_accepted": false,
+        "current": "native-enforced targets 0; installer-enforced targets 0",
+        "objective": "Prove at least one real target client or external installer runtime guard enforces approved high-permission capabilities.",
+        "runbook": [
+          "Implement or connect a real target client or external installer runtime guard that blocks undeclared network, file_write, or subprocess capabilities.",
+          "Update the generated target adapter only when the guard is actually enforced by that target.",
+          "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self",
+          "python3 scripts/yao.py install-simulate . --package-dir dist --install-root dist/install-simulation --self",
+          "python3 scripts/yao.py runtime-permissions . --package-dir dist --self",
+          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD> --self",
+          "Copy evidence/world_class/templates/native-permission-enforcement.intake.json to evidence/world_class/submissions/native-permission-enforcement.json and fill only real evidence fields.",
+          "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions --self"
+        ],
+        "provenance_requirements": [
+          "real target client or external installer runtime guard",
+          "native enforcement flag or externally accepted guard proof",
+          "residual risk retained for fallback targets"
+        ],
+        "success_checks": [
+          "reports/runtime_permission_probes.json summary.native_enforcement_count > 0",
+          "reports/runtime_permission_probes.json summary.failure_count == 0",
+          "reports/runtime_permission_probes.json summary.installer_enforcement_pass_count records local installer enforcement but does not replace native evidence",
+          "reports/skill_os2_audit.json item native-permission-enforcement status becomes pass"
+        ],
+        "evidence_artifacts": [
+          "dist/targets/*/adapter.json",
+          "reports/runtime_permission_probes.json",
+          "reports/runtime_permission_probes.md",
+          "reports/install_simulation.json",
+          "reports/install_simulation.md",
+          "security/permission_policy.json",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/native-permission-enforcement.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
+        ],
+        "privacy_contract": [
+          "Do not mark native_enforcement true for metadata-only fallbacks.",
+          "Keep residual risks visible for targets that still rely on operator enforcement."
+        ],
+        "observed_state": {
+          "native_enforcement_count": 0,
+          "metadata_fallback_count": 1,
+          "installer_enforcement_pass_count": 0,
+          "installer_permission_failure_count": 0,
+          "installer_enforcement_ready": false,
+          "residual_risk_count": 1,
+          "failure_count": 0,
+          "accepted": false
+        },
+        "source_checklist": [
+          {
+            "evidence_key": "native-permission-enforcement",
+            "label": "Native enforcement",
+            "field": "native_enforcement_count",
+            "expected": ">0",
+            "actual": 0,
+            "status": "blocked",
+            "source_accepted": false,
+            "next_action": "Collect real target-client or external runtime guard proof."
+          },
+          {
+            "evidence_key": "native-permission-enforcement",
+            "label": "Probe failures",
+            "field": "failure_count",
+            "expected": "==0",
+            "actual": 0,
+            "status": "pass",
+            "source_accepted": false,
+            "next_action": "Runtime permission probes must stay clean."
+          },
+          {
+            "evidence_key": "native-permission-enforcement",
+            "label": "Installer support",
+            "field": "installer_enforcement_ready",
+            "expected": "true",
+            "actual": false,
+            "status": "blocked",
+            "source_accepted": false,
+            "next_action": "Installer enforcement is supporting evidence, not native proof."
+          }
+        ],
+        "source_check_count": 3,
+        "source_pass_count": 1,
+        "source_blocked_count": 2,
+        "submission_state": {
+          "status": "missing",
+          "path": "evidence/world_class/submissions/native-permission-enforcement.json",
+          "artifact_ref_count": 0,
+          "attested_real_evidence": false,
+          "privacy_contract_satisfied": false,
+          "ledger_reviewer_approved": false,
+          "ledger_reviewer": "",
+          "ledger_reviewed_at": "",
+          "ledger_counts_as_completion": false
+        },
+        "anti_overclaim": {
+          "planned_work_counts_as_evidence": false,
+          "metadata_fallback_counts_as_native_enforcement": false,
+          "pending_review_counts_as_human_decision": false,
+          "local_command_runner_counts_as_provider_model": false
+        },
+        "next_action": "Integrate a real target-client or external installer runtime guard before claiming native permission enforcement."
+      },
+      {
+        "key": "native-client-telemetry",
+        "label": "Native Client Telemetry",
+        "category": "external",
+        "owner": "Browser/Chrome/IDE/provider client integrator",
+        "status": "pending",
+        "source_status": "external_required",
+        "source_accepted": false,
+        "current": "external source events 0; adoption samples 1",
+        "objective": "Import production metadata-only events from a real external client into the local drift loop.",
+        "runbook": [
+          "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
+          "Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.",
+          "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self",
+          "python3 scripts/yao.py skill-atlas --workspace-root . --self",
+          "python3 scripts/yao.py skill-os2-audit . --generated-at <YYYY-MM-DD> --self",
+          "Copy evidence/world_class/templates/native-client-telemetry.intake.json to evidence/world_class/submissions/native-client-telemetry.json and fill only real evidence fields.",
+          "python3 scripts/yao.py world-class-intake . --submissions-dir evidence/world_class/submissions --self"
+        ],
+        "provenance_requirements": [
+          "real external client source",
+          "metadata-only event",
+          "local-first import path"
+        ],
+        "success_checks": [
+          "reports/adoption_drift_report.json summary.source_types.external > 0",
+          "reports/adoption_drift_report.json summary.adoption_sample_count > 0",
+          "reports/skill_os2_audit.json item native-client-telemetry status becomes pass"
+        ],
+        "evidence_artifacts": [
+          "reports/adoption_drift_report.json",
+          "reports/adoption_drift_report.md",
+          "reports/telemetry_hook_recipes.json",
+          "scripts/telemetry_native_host.py",
+          "evidence/world_class/intake.schema.json",
+          "evidence/world_class/templates/native-client-telemetry.intake.json",
+          "reports/world_class_evidence_intake.json",
+          "reports/world_class_evidence_intake.md"
+        ],
+        "privacy_contract": [
+          "Telemetry must remain metadata-only and local-first.",
+          "Do not package reports/telemetry_events.jsonl or any raw prompt, output, transcript, note, or message field."
+        ],
+        "observed_state": {
+          "external_source_events": 0,
+          "adoption_sample_count": 1,
+          "raw_content_allowed": false,
+          "risk_band": "low",
+          "accepted": false
+        },
+        "source_checklist": [
+          {
+            "evidence_key": "native-client-telemetry",
+            "label": "External events",
+            "field": "external_source_events",
+            "expected": ">0",
+            "actual": 0,
+            "status": "blocked",
+            "source_accepted": false,
+            "next_action": "Import at least one metadata-only event from a real client."
+          },
+          {
+            "evidence_key": "native-client-telemetry",
+            "label": "Adoption sample",
+            "field": "adoption_sample_count",
+            "expected": ">0",
+            "actual": 1,
+            "status": "pass",
+            "source_accepted": false,
+            "next_action": "Telemetry must include adoption outcome evidence."
+          },
+          {
+            "evidence_key": "native-client-telemetry",
+            "label": "Raw content blocked",
+            "field": "raw_content_allowed",
+            "expected": "false",
+            "actual": false,
+            "status": "pass",
+            "source_accepted": false,
+            "next_action": "Telemetry must stay metadata-only."
+          }
+        ],
+        "source_check_count": 3,
+        "source_pass_count": 2,
+        "source_blocked_count": 1,
+        "submission_state": {
+          "status": "missing",
+          "path": "evidence/world_class/submissions/native-client-telemetry.json",
+          "artifact_ref_count": 0,
+          "attested_real_evidence": false,
+          "privacy_contract_satisfied": false,
+          "ledger_reviewer_approved": false,
+          "ledger_reviewer": "",
+          "ledger_reviewed_at": "",
+          "ledger_counts_as_completion": false
+        },
+        "anti_overclaim": {
+          "planned_work_counts_as_evidence": false,
+          "metadata_fallback_counts_as_native_enforcement": false,
+          "pending_review_counts_as_human_decision": false,
+          "local_command_runner_counts_as_provider_model": false
+        },
+        "next_action": "Install a real client against the native host and import production metadata-only events."
+      }
+    ],
+    "source_plan": {
+      "json": "reports/world_class_evidence_plan.json",
+      "markdown": "reports/world_class_evidence_plan.md",
+      "task_count": 4,
+      "evidence_requirement_count": 4
+    }
+  },
+  "synthesis_highlights": [
+    "Borrow progressive disclosure: keep the entrypoint lean and move depth into references or scripts.",
+    "Borrow a small hypothesis-test-learn loop so the first revision is evidence-backed.",
+    "Borrow the habit of designing from the required hand-back output backwards."
+  ],
+  "artifact_design": {
+    "design_system": "content-led editorial",
+    "highlights": [
+      "High-trust editorial report with a clear first-screen thesis, compact evidence blocks, and decisions separated from supporting detail.",
+      "Keep the first screen useful without requiring the reader to parse every detail.",
+      "Use tables only for comparisons; move explanations below the table.",
+      "Keep source notes readable without flooding the body with markers."
+    ]
+  },
+  "prompt_quality": {
+    "overall_quality_score": 90.0,
+    "highlights": [
+      "Primary prompt task family: Execution operation.",
+      "Complexity: expert — multiple task families plus governance, evaluation, or expert-level constraints",
+      "Completeness: 100/100.",
+      "Clarity: 85/100."
+    ]
+  },
+  "system_model": {
+    "stability": {},
+    "highlights": []
+  },
+  "metadata": {
+    "canonical_format": "agent-skills",
+    "targets": [
+      "openai",
+      "claude",
+      "generic",
+      "vscode"
+    ],
+    "maturity_tier": "governed",
+    "skill_archetype": "workflow",
+    "updated_at": "2026-09-14"
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "skill_name": "agent-team-work",
+  "relevance": "prompt-heavy",
+  "primary_task_family": {
+    "key": "execution_operation",
+    "label": "Execution operation",
+    "matched_keywords": [
+      "workflow",
+      "checklist",
+      "流程",
+      "执行",
+      "清单"
+    ]
+  },
+  "task_families": [
+    {
+      "key": "execution_operation",
+      "label": "Execution operation",
+      "score": 5,
+      "matched_keywords": [
+        "workflow",
+        "checklist",
+        "流程",
+        "执行",
+        "清单"
+      ],
+      "role_guidance": "Use an operator role with explicit boundaries, inputs, outputs, and failure handling.",
+      "task_guidance": "Convert the job into ordered steps with validation checks and stop conditions.",
+      "format_guidance": "Return a runbook-like handoff with commands, checks, owners, and next actions when relevant."
+    },
+    {
+      "key": "creative_generation",
+      "label": "Creative generation",
+      "score": 1,
+      "matched_keywords": [
+        "标题"
+      ],
+      "role_guidance": "Use a taste-aware creator role with clear audience, tone, and originality boundaries.",
+      "task_guidance": "Generate variants, explain selection logic, and preserve the user's distinctive constraints.",
+      "format_guidance": "Return options with rationale, selection criteria, and refinement paths."
+    },
+    {
+      "key": "prompt_engineering",
+      "label": "Prompt engineering",
+      "score": 1,
+      "matched_keywords": [
+        "role"
+      ],
+      "role_guidance": "Use a prompt engineer role only when role design materially improves execution.",
+      "task_guidance": "Map Role, Task, and Format into skill behavior rather than copying a large prompt template.",
+      "format_guidance": "Return a compact prompt contract plus tests, quality matrix, and usage notes."
+    }
+  ],
+  "complexity": {
+    "band": "expert",
+    "score": 26,
+    "reason": "multiple task families plus governance, evaluation, or expert-level constraints"
+  },
+  "need_model": {
+    "explicit_need": "在项目开始时通过菜单组建一个由当前会话担任 Leader、多个独立项目会话担任成员的 Codex 团队，并按阶段派单、收取报告、验收和恢复，直到整体交付完成或明确阻塞。",
+    "implicit_need": "The reusable skill needs a stable role, task, and output contract rather than a one-off prompt.",
+    "scenario": "用户确认的项目目标、首要交付物和完成判定, 已保存 Codex 项目及其 project_id、Git 或 local 工作目录信息, 成员角色、职责、标题、阶段顺序、输入依赖和允许路径, team.json、tasks.json、成员报告和 Codex 项目/thread 查询结果",
+    "user_level": "infer from examples and standards; ask only if it changes output depth",
+    "success_standard": "阶段严格串行，只有 Leader 验收后才能推进, 任务与报告包含 team、epoch、stage、attempt、dispatch_key 身份字段, 创建、标题、项目归属、送达和验收分别提供证据, 缺失或不确定证据明确标记为 MISSING 或 UNKNOWN，不虚构结果"
+  },
+  "rtf_to_skill": {
+    "role": "Use an operator role with explicit boundaries, inputs, outputs, and failure handling.",
+    "task": "Convert the job into ordered steps with validation checks and stop conditions.",
+    "format": "Return a runbook-like handoff with commands, checks, owners, and next actions when relevant."
+  },
+  "quality_matrix": [
+    {
+      "key": "completeness",
+      "label": "Completeness",
+      "score": 100,
+      "matched_signals": [
+        "example",
+        "输入",
+        "约束"
+      ],
+      "repair": "Name missing inputs, outputs, constraints, or success standards before deepening the package."
+    },
+    {
+      "key": "clarity",
+      "label": "Clarity",
+      "score": 85,
+      "matched_signals": [
+        "明确"
+      ],
+      "repair": "Replace broad verbs with observable actions and define what done means."
+    },
+    {
+      "key": "consistency",
+      "label": "Consistency",
+      "score": 85,
+      "matched_signals": [
+        "边界"
+      ],
+      "repair": "Check that role, task, format, exclusions, and examples do not contradict each other."
+    },
+    {
+      "key": "practicality",
+      "label": "Practicality",
+      "score": 95,
+      "matched_signals": [
+        "use",
+        "workflow",
+        "执行",
+        "使用"
+      ],
+      "repair": "Add runnable steps, examples, or verification cues instead of abstract advice."
+    },
+    {
+      "key": "specificity",
+      "label": "Specificity",
+      "score": 85,
+      "matched_signals": [
+        "用户"
+      ],
+      "repair": "Anchor wording in the user's audience, domain nouns, and target outcome."
+    }
+  ],
+  "overall_quality_score": 90.0,
+  "self_repair_checks": [
+    "Check explicit need, implicit need, scenario, user level, and success standard before deepening.",
+    "Map Role, Task, and Format into skill behavior, not decorative prompt labels.",
+    "Ask one focused clarification only when missing information changes the package boundary.",
+    "Add tests or examples for prompt-heavy behavior before treating it as reusable.",
+    "Keep prompt methodology in references and reports instead of bloating SKILL.md."
+  ],
+  "reviewer_note": "Use this profile when the package depends on prompt behavior, role design, output contracts, or conversation quality."
+}

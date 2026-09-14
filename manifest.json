@@ -1,0 +1,30 @@
+{
+  "name": "agent-team-work",
+  "version": "0.2.0",
+  "owner": "Local Codex Team",
+  "updated_at": "2026-09-14",
+  "review_due": "2026-10-14",
+  "status": "active",
+  "maturity_tier": "governed",
+  "lifecycle_stage": "governed",
+  "context_budget_tier": "production",
+  "review_cadence": "monthly",
+  "skill_ir_source": "reports/skill-ir.json",
+  "skill_archetype": "workflow",
+  "target_platforms": [
+    "openai",
+    "claude",
+    "generic",
+    "agent-skills-compatible",
+    "vscode"
+  ],
+  "target_platforms_scope": "Codex/OpenAI provides the native project and thread execution surface; other targets carry the source contract and explicit degradation notes.",
+  "factory_components": [
+    "references",
+    "evals",
+    "scripts",
+    "reports",
+    "examples",
+    "failures"
+  ]
+}

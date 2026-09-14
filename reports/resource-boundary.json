@@ -1,0 +1,44 @@
+{
+  "ok": true,
+  "failures": [],
+  "warnings": [],
+  "stats": {
+    "context_budget_tier": "production",
+    "context_budget_limit": 1000,
+    "skill_body_tokens": 557,
+    "other_text_tokens": 193385,
+    "estimated_initial_load_tokens": 878,
+    "estimated_total_text_tokens": 193942,
+    "deferred_resource_tokens": 9690,
+    "deferred_resource_warn_threshold": 120000,
+    "deferred_resource_dirs": [
+      {
+        "path": "evals",
+        "estimated_tokens": 3541,
+        "file_count": 11
+      },
+      {
+        "path": "references",
+        "estimated_tokens": 3447,
+        "file_count": 7
+      },
+      {
+        "path": "scripts",
+        "estimated_tokens": 2702,
+        "file_count": 3
+      }
+    ],
+    "large_deferred_resource_dirs": [],
+    "deferred_resource_governance": {
+      "status": "not-required",
+      "large_dir_count": 0,
+      "governed_large_dir_count": 0,
+      "directories": [],
+      "summary": "No large deferred resource directory exceeds the per-dir threshold."
+    },
+    "relevant_file_count": 128,
+    "unused_resource_dirs": [],
+    "quality_signal_points": 130,
+    "quality_density": 148.1
+  }
+}

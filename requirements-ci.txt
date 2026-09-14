@@ -1,0 +1,2 @@
+# agent-team-work has no executable runtime dependencies.
+# The skill runs through Codex native project/thread tools supplied by the host.
