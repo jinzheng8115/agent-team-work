@@ -26,11 +26,11 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Skill IR | `missing` | schema 2.0.0; targets 5 | `python3 scripts/yao.py skill-ir . --self` | `python3 tests/verify_skill_ir.py` |
 | Output Eval Lab | `missing` | 5 cases; delta 100.0; execution 10 | `python3 scripts/yao.py output-exec --self && python3 scripts/yao.py output-review --self` | `python3 tests/verify_output_eval_lab.py` |
 | Runtime Conformance | `missing` | 5/5 targets pass | `python3 scripts/yao.py conformance . --self` | `python3 tests/verify_conformance_suite.py` |
-| Trust Security | `missing` | 3 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust . --self` | `python3 tests/verify_trust_check.py` |
+| Trust Security | `missing` | 4 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust . --self` | `python3 tests/verify_trust_check.py` |
 | Skill Atlas | `missing` | 1 scanned skills; actionable collisions 0 | `python3 scripts/yao.py skill-atlas --workspace-root . --self` | `python3 tests/verify_skill_atlas.py` |
-| Registry Distribution | `missing` | archive entries 154; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self && python3 scripts/yao.py registry-audit . --self` | `python3 tests/verify_registry_audit.py` |
+| Registry Distribution | `missing` | archive entries 157; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self && python3 scripts/yao.py registry-audit . --self` | `python3 tests/verify_registry_audit.py` |
 | Review Studio | `missing` | 16 gates; decision review; warnings 3 | `python3 scripts/yao.py review-studio . --self` | `python3 tests/verify_review_studio.py` |
-| Telemetry Drift | `missing` | events 1; recipes 0; risk low | `python3 scripts/yao.py telemetry-hooks . --self && python3 scripts/yao.py adoption-drift . --self` | `python3 tests/verify_telemetry_hooks.py` |
+| Telemetry Drift | `missing` | events 1; recipes 5; risk low | `python3 scripts/yao.py telemetry-hooks . --self && python3 scripts/yao.py adoption-drift . --self` | `python3 tests/verify_telemetry_hooks.py` |
 
 ## Recommended PR Coverage
 
@@ -130,8 +130,8 @@ These extension tracks come from the user-supplied 2.0 reference plan. They are 
 
 - objective: Real usage feedback is captured as metadata-only local-first drift signals.
 - status: `missing`
-- existing evidence: `reports/adoption_drift_report.json`
-- missing evidence: `scripts/emit_telemetry_event.py`, `scripts/import_telemetry_events.py`, `scripts/telemetry_native_host.py`, `reports/telemetry_hook_recipes.json`, `tests/verify_telemetry_hooks.py`
+- existing evidence: `scripts/import_telemetry_events.py`, `reports/adoption_drift_report.json`, `reports/telemetry_hook_recipes.json`
+- missing evidence: `scripts/emit_telemetry_event.py`, `scripts/telemetry_native_host.py`, `tests/verify_telemetry_hooks.py`
 - next action: Install a real client and import production metadata-only events into the local drift loop.
 
 ### Benchmark Methodology

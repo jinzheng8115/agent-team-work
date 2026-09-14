@@ -324,13 +324,13 @@
       "label": "Release archive hash matches package, registry, and benchmark evidence",
       "status": "pass",
       "expected": {
-        "all_equal_to_actual_archive": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
+        "all_equal_to_actual_archive": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27"
       },
       "actual": {
-        "actual_archive": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
-        "package_verification": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
-        "registry": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
-        "benchmark": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
+        "actual_archive": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
+        "package_verification": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
+        "registry": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
+        "benchmark": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27"
       },
       "paths": [
         "dist/yao-meta-skill.zip",
@@ -365,12 +365,12 @@
       "status": "pass",
       "expected": {
         "status": "pass",
-        "detail": "initial load 878/1000; deferred 9690/120000; top deferred none; resource governance not-required; quality density 148.1",
+        "detail": "initial load 878/1000; deferred 10997/120000; top deferred none; resource governance not-required; quality density 148.1",
         "evidence": "reports/context_budget.json"
       },
       "actual": {
         "status": "pass",
-        "detail": "initial load 878/1000; deferred 9690/120000; top deferred none; resource governance not-required; quality density 148.1",
+        "detail": "initial load 878/1000; deferred 10997/120000; top deferred none; resource governance not-required; quality density 148.1",
         "evidence": "reports/context_budget.json"
       },
       "paths": [
@@ -398,7 +398,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 59
+        "changed_file_count": 30
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -439,8 +439,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
-      "actual": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
+      "expected": "317d1296a96d4839fca32bdb215713999e6ac2cc",
+      "actual": "317d1296a96d4839fca32bdb215713999e6ac2cc",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -455,8 +455,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
-        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+        "source_contract_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
+        "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
@@ -471,8 +471,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
-        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+        "source_contract_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
+        "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
@@ -591,8 +591,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
-      "actual": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
+      "expected": "317d1296a96d4839fca32bdb215713999e6ac2cc",
+      "actual": "317d1296a96d4839fca32bdb215713999e6ac2cc",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -607,8 +607,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
-        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+        "source_contract_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
+        "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
@@ -623,8 +623,8 @@
         "release_lock_ready": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
-        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+        "source_contract_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
+        "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
@@ -1649,7 +1649,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 3
+            "file_count": 4
           },
           {
             "path": "evals",
@@ -1661,10 +1661,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 112
+            "file_count": 114
           }
         ],
-        "file_count": 139,
+        "file_count": 142,
         "folder_count": 4,
         "distribution": [
           {
@@ -1689,7 +1689,7 @@
           },
           {
             "label": "scripts",
-            "value": 3
+            "value": 4
           },
           {
             "label": "evals",
@@ -1697,7 +1697,7 @@
           },
           {
             "label": "reports",
-            "value": 112
+            "value": 114
           }
         ]
       },
@@ -1737,7 +1737,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 3
+            "file_count": 4
           },
           {
             "path": "evals",
@@ -1749,10 +1749,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 112
+            "file_count": 114
           }
         ],
-        "file_count": 139,
+        "file_count": 142,
         "folder_count": 4,
         "distribution": [
           {
@@ -1777,7 +1777,7 @@
           },
           {
             "label": "scripts",
-            "value": 3
+            "value": 4
           },
           {
             "label": "evals",
@@ -1785,7 +1785,7 @@
           },
           {
             "label": "reports",
-            "value": 112
+            "value": 114
           }
         ]
       },
@@ -2130,7 +2130,7 @@
           "counts_as_evidence": false,
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 2,
-          "submission_ref_ready_count": 1,
+          "submission_ref_ready_count": 2,
           "supporting_evidence_total_count": 6,
           "supporting_evidence_ready_count": 5,
           "submission_ref_copy_to_artifact_refs": true,
@@ -2176,7 +2176,7 @@
           "counts_as_evidence": false,
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 2,
-          "submission_ref_ready_count": 1,
+          "submission_ref_ready_count": 2,
           "supporting_evidence_total_count": 6,
           "supporting_evidence_ready_count": 5,
           "submission_ref_copy_to_artifact_refs": true,
@@ -2197,7 +2197,7 @@
         "summary": {
           "phase_queue_count": 2,
           "phase_queue_blocked_count": 2,
-          "phase_queue_row_count": 17,
+          "phase_queue_row_count": 16,
           "phase_queue_next_phase": "unblock-access",
           "phase_queue_next_action_id": "human-adjudication-precheck-decision-template",
           "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
@@ -2208,8 +2208,8 @@
             "phase": "unblock-access",
             "priority": 20,
             "status": "blocked",
-            "blocked_count": 9,
-            "row_count": 9,
+            "blocked_count": 8,
+            "row_count": 8,
             "owners": [
               "Browser/Chrome/IDE/provider client integrator",
               "human reviewer",
@@ -2357,8 +2357,8 @@
               "phase": "unblock-access",
               "priority": 20,
               "status": "blocked",
-              "blocked_count": 3,
-              "row_count": 3,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
@@ -2391,7 +2391,7 @@
         "operator_runbook_summary": {
           "phase_queue_count": 2,
           "phase_queue_blocked_count": 2,
-          "phase_queue_row_count": 17,
+          "phase_queue_row_count": 16,
           "phase_queue_next_phase": "unblock-access",
           "phase_queue_next_action_id": "human-adjudication-precheck-decision-template",
           "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
@@ -2402,8 +2402,8 @@
             "phase": "unblock-access",
             "priority": 20,
             "status": "blocked",
-            "blocked_count": 9,
-            "row_count": 9,
+            "blocked_count": 8,
+            "row_count": 8,
             "owners": [
               "Browser/Chrome/IDE/provider client integrator",
               "human reviewer",
@@ -2551,8 +2551,8 @@
               "phase": "unblock-access",
               "priority": 20,
               "status": "blocked",
-              "blocked_count": 3,
-              "row_count": 3,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
@@ -2689,8 +2689,8 @@
               "phase": "unblock-access",
               "priority": 20,
               "status": "blocked",
-              "blocked_count": 3,
-              "row_count": 3,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
@@ -2724,7 +2724,7 @@
         "summary": {
           "phase_queue_count": 2,
           "phase_queue_blocked_count": 2,
-          "phase_queue_row_count": 17,
+          "phase_queue_row_count": 16,
           "phase_queue_next_phase": "unblock-access",
           "phase_queue_next_action_id": "human-adjudication-precheck-decision-template",
           "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
@@ -2735,8 +2735,8 @@
             "phase": "unblock-access",
             "priority": 20,
             "status": "blocked",
-            "blocked_count": 9,
-            "row_count": 9,
+            "blocked_count": 8,
+            "row_count": 8,
             "owners": [
               "Browser/Chrome/IDE/provider client integrator",
               "human reviewer",
@@ -2779,7 +2779,7 @@
         "operator_runbook_summary": {
           "phase_queue_count": 2,
           "phase_queue_blocked_count": 2,
-          "phase_queue_row_count": 17,
+          "phase_queue_row_count": 16,
           "phase_queue_next_phase": "unblock-access",
           "phase_queue_next_action_id": "human-adjudication-precheck-decision-template",
           "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
@@ -2790,8 +2790,8 @@
             "phase": "unblock-access",
             "priority": 20,
             "status": "blocked",
-            "blocked_count": 9,
-            "row_count": 9,
+            "blocked_count": 8,
+            "row_count": 8,
             "owners": [
               "Browser/Chrome/IDE/provider client integrator",
               "human reviewer",
@@ -2939,8 +2939,8 @@
               "phase": "unblock-access",
               "priority": 20,
               "status": "blocked",
-              "blocked_count": 3,
-              "row_count": 3,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
@@ -3077,8 +3077,8 @@
               "phase": "unblock-access",
               "priority": 20,
               "status": "blocked",
-              "blocked_count": 3,
-              "row_count": 3,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
@@ -3215,8 +3215,8 @@
               "phase": "unblock-access",
               "priority": 20,
               "status": "blocked",
-              "blocked_count": 3,
-              "row_count": 3,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
@@ -3663,9 +3663,9 @@
         "`16` gates",
         "`3` warnings",
         "`0` declared internal modules",
-        "`3 / 3` CLI help smoke checks passing across `3` scripts",
-        "`154` zip entries",
-        "archive with `154` entries",
+        "`4 / 4` CLI help smoke checks passing across `4` scripts",
+        "`157` zip entries",
+        "archive with `157` entries",
         "`0` installer permission checks enforced",
         "`0` permission failures",
         "`25` required artifacts",

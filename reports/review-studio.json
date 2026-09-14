@@ -65,7 +65,7 @@
       "key": "context-budget",
       "label": "上下文",
       "status": "pass",
-      "detail": "initial load 878/1000; deferred 9690/120000; top deferred none; resource governance not-required; quality density 148.1",
+      "detail": "initial load 878/1000; deferred 10997/120000; top deferred none; resource governance not-required; quality density 148.1",
       "evidence": "reports/context_budget.json",
       "link": "context_budget.md",
       "review_action_id": "",
@@ -95,7 +95,7 @@
       "key": "trust-report",
       "label": "信任报告",
       "status": "pass",
-      "detail": "0 secrets; 3 scripts; 0 network-capable scripts; 0 help smoke failures",
+      "detail": "0 secrets; 4 scripts; 0 network-capable scripts; 0 help smoke failures",
       "evidence": "reports/security_trust_report.json",
       "link": "security_trust_report.md",
       "review_action_id": "",
@@ -110,7 +110,7 @@
       "key": "python-compat",
       "label": "Python 兼容",
       "status": "pass",
-      "detail": "Python 3.11; 4 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
+      "detail": "Python 3.11; 5 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
       "evidence": "reports/python_compatibility.json",
       "link": "python_compatibility.md",
       "review_action_id": "",
@@ -125,7 +125,7 @@
       "key": "architecture-maintainability",
       "label": "架构维护",
       "status": "pass",
-      "detail": "3 Python files; 0 hotspots; 0 watchlist files; 0 early watch files; 0 blockers; largest 131 lines; 0 CLI handlers; 0 in entrypoint",
+      "detail": "4 Python files; 0 hotspots; 0 watchlist files; 0 early watch files; 0 blockers; largest 136 lines; 0 CLI handlers; 0 in entrypoint",
       "evidence": "reports/architecture_maintainability.json",
       "link": "architecture_maintainability.md",
       "review_action_id": "",
@@ -1332,19 +1332,6 @@
               "counts_as_completion": false
             },
             {
-              "action_id": "native-client-telemetry-precheck-hook-recipes",
-              "repair_type": "precheck",
-              "target": "hook-recipes",
-              "phase": "unblock-access",
-              "priority": 20,
-              "owner": "Browser/Chrome/IDE/provider client integrator",
-              "status": "blocked",
-              "blocking_reason": "Required file precheck is missing.",
-              "next_action": "Refresh telemetry hook recipes before external client installation.",
-              "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
-              "counts_as_completion": false
-            },
-            {
               "action_id": "native-client-telemetry-precheck-native-host",
               "repair_type": "precheck",
               "target": "native-host",
@@ -1371,7 +1358,7 @@
               "counts_as_completion": false
             }
           ],
-          "repair_blocked_count": 4,
+          "repair_blocked_count": 3,
           "repair_counts_as_completion": false,
           "phase_queue": [
             {
@@ -1379,8 +1366,8 @@
               "label": "Unblock access",
               "priority": 20,
               "status": "blocked",
-              "blocked_count": 3,
-              "row_count": 3,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
@@ -1466,7 +1453,7 @@
             "role_source": "world-class-submission-kit",
             "counts_as_evidence": false,
             "artifact_prefill_counts_as_evidence": false,
-            "submission_ref_ready_count": 1,
+            "submission_ref_ready_count": 2,
             "submission_ref_total_count": 2,
             "supporting_evidence_ready_count": 5,
             "supporting_evidence_total_count": 6,
@@ -1474,7 +1461,7 @@
               {
                 "role": "submission-ref",
                 "label": "Submission refs",
-                "ready_count": 1,
+                "ready_count": 2,
                 "total_count": 2,
                 "copy_to_artifact_refs": true,
                 "description": "Rows marked submission-ref are the aggregate paths expected in artifact_refs."
@@ -2026,7 +2013,7 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 3
+            "file_count": 4
           },
           {
             "path": "evals",
@@ -2038,10 +2025,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 112
+            "file_count": 114
           }
         ],
-        "file_count": 139,
+        "file_count": 142,
         "folder_count": 4,
         "distribution": [
           {
@@ -2066,7 +2053,7 @@
           },
           {
             "label": "scripts",
-            "value": 3
+            "value": 4
           },
           {
             "label": "evals",
@@ -2074,7 +2061,7 @@
           },
           {
             "label": "reports",
-            "value": 112
+            "value": 114
           }
         ]
       },
@@ -2194,7 +2181,7 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 3
+          "file_count": 4
         },
         {
           "path": "evals",
@@ -2206,7 +2193,7 @@
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 112
+          "file_count": 114
         }
       ],
       "strengths": [
@@ -2519,9 +2506,9 @@
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "df8413ee9aa17957e9871fdf397183ee2f1d4d9127e604ed5c99e0661e7295f3",
-          "source_contract_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
-          "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+          "evidence_bundle_sha256": "9fe3fe07a9acbea9fd6a11837227f267b37d7e470b871725724645d11b6e3765",
+          "source_contract_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
+          "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
           "output_case_count": 5,
           "failure_disclosure_count": 2,
           "command_count": 23,
@@ -2536,7 +2523,7 @@
           "phase1_quality_promotion_complete": false,
           "phase1_completion_ready": false,
           "world_class_ready": false,
-          "world_class_open_gap_count": 5,
+          "world_class_open_gap_count": 4,
           "world_class_task_count": 4,
           "world_class_ledger_pending_count": 4,
           "world_class_source_check_count": 14,
@@ -2548,13 +2535,13 @@
           "public_claim_ready": false,
           "public_claim_blocker_count": 6,
           "working_tree_dirty": true,
-          "changed_file_count": 59,
+          "changed_file_count": 18,
           "source_tree_dirty": false,
           "source_changed_file_count": 0,
           "generated_tree_dirty": true,
-          "generated_changed_file_count": 59
+          "generated_changed_file_count": 18
         },
-        "commit": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
+        "commit": "317d1296a96d4839fca32bdb215713999e6ac2cc",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -2635,8 +2622,8 @@
         "failures": []
       },
       "trust_security": {
-        "scanned_files": 34,
-        "script_count": 3,
+        "scanned_files": 35,
+        "script_count": 4,
         "internal_module_count": 0,
         "secret_findings": 0,
         "dependency_files": [
@@ -2651,12 +2638,12 @@
         "permission_missing_count": 0,
         "permission_invalid_count": 0,
         "permission_expired_count": 0,
-        "help_smoke_checked_count": 3,
+        "help_smoke_checked_count": 4,
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 34,
-        "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
+        "package_hash_file_count": 35,
+        "package_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d"
       },
       "skill_atlas": {
         "skill_count": 1,
@@ -2694,8 +2681,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
-            "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
+            "package_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
+            "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27"
           },
           "compatibility": {
             "openai": "pass",
@@ -2726,7 +2713,7 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+            "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
@@ -2742,8 +2729,8 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
-          "archive_entry_count": 154,
+          "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
+          "archive_entry_count": 157,
           "nested_skill_entry_count": 0,
           "failure_count": 0,
           "warning_count": 0
@@ -2755,7 +2742,7 @@
         "ok": true,
         "summary": {
           "archive_present": true,
-          "archive_entry_count": 154,
+          "archive_entry_count": 157,
           "nested_skill_entry_count": 0,
           "archive_extracted": true,
           "entrypoint_loaded": true,
@@ -2813,12 +2800,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
+              "to": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27"
             },
             {
               "field": "package_sha256",
               "from": "previous-fixture",
-              "to": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
+              "to": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d"
             }
           ]
         },
@@ -2975,7 +2962,7 @@
         "failures": []
       },
       "world_class_evidence_plan": {
-        "ok": false,
+        "ok": true,
         "summary": {
           "audit_decision": "continue-iteration",
           "world_class_ready": false,
@@ -3157,7 +3144,7 @@
         "source_audit": {
           "json": "reports/skill_os2_audit.json",
           "markdown": "reports/skill_os2_audit.md",
-          "open_gap_count": 5
+          "open_gap_count": 4
         }
       },
       "world_class_evidence_ledger": {
@@ -5809,43 +5796,43 @@
       "ok": true,
       "generated_at": "2026-09-14",
       "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
-      "commit": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
+      "commit": "317d1296a96d4839fca32bdb215713999e6ac2cc",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 59,
+        "changed_file_count": 18,
         "generated_dirty": true,
-        "generated_changed_file_count": 59,
+        "generated_changed_file_count": 18,
         "source_dirty": false,
         "source_changed_file_count": 0,
         "sample": [
           " M dist/agent-team-work.zip",
+          " M dist/manifest.json",
+          " M dist/targets/claude/adapter.json",
+          " M dist/targets/generic/adapter.json",
+          " M dist/targets/openai/adapter.json",
+          " M dist/targets/vscode/adapter.json",
           " M registry/index.json",
           " M registry/packages/agent-team-work.json",
-          " M reports/authoring-review.md",
-          " M reports/benchmark_reproducibility.json",
-          " M reports/benchmark_reproducibility.md",
-          " M reports/context_budget.json",
-          " M reports/evidence_consistency.json",
-          " M reports/evidence_consistency.md",
           " M reports/install_simulation.json",
-          " M reports/install_simulation.md",
-          " M reports/package_verification.json"
+          " M reports/package_verification.json",
+          " M reports/package_verification.md",
+          " M reports/registry_audit.json"
         ],
         "source_sample": [],
         "generated_sample": [
           " M dist/agent-team-work.zip",
+          " M dist/manifest.json",
+          " M dist/targets/claude/adapter.json",
+          " M dist/targets/generic/adapter.json",
+          " M dist/targets/openai/adapter.json",
+          " M dist/targets/vscode/adapter.json",
           " M registry/index.json",
           " M registry/packages/agent-team-work.json",
-          " M reports/authoring-review.md",
-          " M reports/benchmark_reproducibility.json",
-          " M reports/benchmark_reproducibility.md",
-          " M reports/context_budget.json",
-          " M reports/evidence_consistency.json",
-          " M reports/evidence_consistency.md",
           " M reports/install_simulation.json",
-          " M reports/install_simulation.md",
-          " M reports/package_verification.json"
+          " M reports/package_verification.json",
+          " M reports/package_verification.md",
+          " M reports/registry_audit.json"
         ],
         "generated_dirty_prefixes": [
           "dist/",
@@ -5863,9 +5850,9 @@
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "df8413ee9aa17957e9871fdf397183ee2f1d4d9127e604ed5c99e0661e7295f3",
-        "source_contract_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
-        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+        "evidence_bundle_sha256": "9fe3fe07a9acbea9fd6a11837227f267b37d7e470b871725724645d11b6e3765",
+        "source_contract_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
+        "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
         "output_case_count": 5,
         "failure_disclosure_count": 2,
         "command_count": 23,
@@ -5880,7 +5867,7 @@
         "phase1_quality_promotion_complete": false,
         "phase1_completion_ready": false,
         "world_class_ready": false,
-        "world_class_open_gap_count": 5,
+        "world_class_open_gap_count": 4,
         "world_class_task_count": 4,
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
@@ -5892,11 +5879,11 @@
         "public_claim_ready": false,
         "public_claim_blocker_count": 6,
         "working_tree_dirty": true,
-        "changed_file_count": 59,
+        "changed_file_count": 18,
         "source_tree_dirty": false,
         "source_changed_file_count": 0,
         "generated_tree_dirty": true,
-        "generated_changed_file_count": 59
+        "generated_changed_file_count": 18
       },
       "beta_test_release": {
         "ready": false,
@@ -5937,17 +5924,17 @@
           "human blind-review adjudication is incomplete",
           "phase-one provider matrix is incomplete",
           "phase-one three-reviewer adjudication is incomplete",
-          "world-class evidence is not accepted yet (5 open gaps, 4 ledger pending)",
+          "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
           "world-class source checks are not all accepted (6/14 pass, 8 blocked)"
         ],
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
         "ready": true,
-        "commit": "7cfd3aecc88c8bfad95d66011e1ce7afe0497762",
+        "commit": "317d1296a96d4839fca32bdb215713999e6ac2cc",
         "status_scope": "generation-time status before this report is written",
         "source_changed_file_count": 0,
-        "generated_changed_file_count": 59,
+        "generated_changed_file_count": 18,
         "reason": "only generated evidence artifacts were dirty at generation time"
       },
       "evidence_bundle": {
@@ -5956,7 +5943,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "df8413ee9aa17957e9871fdf397183ee2f1d4d9127e604ed5c99e0661e7295f3"
+        "sha256": "9fe3fe07a9acbea9fd6a11837227f267b37d7e470b871725724645d11b6e3765"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -6057,57 +6044,57 @@
           "label": "runtime_conformance",
           "path": "reports/conformance_matrix.json",
           "exists": true,
-          "bytes": 10052,
-          "sha256": "f3469d6271f9d3bfbf451a78e212a68cf198bef45a6b4fc733eee2f36580f7fe"
+          "bytes": 10087,
+          "sha256": "e6917a833293da505a75ba9c789a2091ec0a49d8eaaf256d30c3dd647550258a"
         },
         {
           "label": "trust_report",
           "path": "reports/security_trust_report.json",
           "exists": true,
-          "bytes": 5329,
-          "sha256": "7bb6e81d34938d808bebcd3237e7042cd61186fdf0632177be8a13ec295cf6da"
+          "bytes": 6391,
+          "sha256": "ec746a0ac75111734c81efda00107b1e31f819f025cc7fc7d9a8ec36766c13e0"
         },
         {
           "label": "python_compatibility",
           "path": "reports/python_compatibility.json",
           "exists": true,
-          "bytes": 1284,
-          "sha256": "9820d7e0a69e1a93bb70d5961c136da4295db982c4821b57a013702be95efd96"
+          "bytes": 1410,
+          "sha256": "dbb9e929edb7e92170f4da79395849f5ef5e22477d69fc6ae081bae076e9e1d0"
         },
         {
           "label": "registry_audit",
           "path": "reports/registry_audit.json",
           "exists": true,
           "bytes": 3630,
-          "sha256": "ccc9272906be9aaf801b514e1c18a3d61b2471edc3720ec8647a887edeb3076f"
+          "sha256": "85247170e9019e4b6adde9252ccdaeba66470ed386e7e1285631eb7650821a4a"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
           "bytes": 20004,
-          "sha256": "5aae530cd49b52ba8b78998481e787eb75e6427799ee820a11e9b3a4c7befa6f"
+          "sha256": "64bea45a44a9eb0c8d943644c485910913b1fff0b5eb21cf5bcb84535d6d5adc"
         },
         {
           "label": "install_simulation",
           "path": "reports/install_simulation.json",
           "exists": true,
           "bytes": 5118,
-          "sha256": "54bfa0e8fd7dd11e6f2d327b94633e0aee8e9edbb959eb1b159a8ef77fea6464"
+          "sha256": "4a34c3479d406f211a4a63598ba0989d9639eb33e12f41b1f5f9e11ae46d304f"
         },
         {
           "label": "skill_os2_audit",
           "path": "reports/skill_os2_audit.json",
           "exists": true,
-          "bytes": 15561,
-          "sha256": "afc8b5338bc7c24a3e19fecc8e3fa204e9b712d4d2ac409576f4f91c168d8a73"
+          "bytes": 14843,
+          "sha256": "66ebbf14ae1ecc09b8e6283cf2177ac8d83520025636cdf605475d011bc24b5f"
         },
         {
           "label": "world_class_evidence_plan",
           "path": "reports/world_class_evidence_plan.json",
           "exists": true,
-          "bytes": 22207,
-          "sha256": "0e06ef13e82c8f5ab35ef8f207ae6d697836f1b45b7daf01048714a5a8a33416"
+          "bytes": 22206,
+          "sha256": "21cfcf6312756d9c02e855a94aa326d96e38de19f69bd5fe90b134f9d67ba230"
         },
         {
           "label": "world_class_evidence_ledger",
@@ -6127,8 +6114,8 @@
           "label": "world_class_evidence_preflight",
           "path": "reports/world_class_evidence_preflight.json",
           "exists": true,
-          "bytes": 106597,
-          "sha256": "b4ac1db3a9a5acdeb6ffa72647ea9c9fdffb065603fc5f5bcb95e6e710b490d0"
+          "bytes": 103555,
+          "sha256": "fae083d1769412e6df607dca69eb4994bf50629ae0fac5babc01d84547dd0c68"
         },
         {
           "label": "world_class_submission_review",
@@ -6141,29 +6128,29 @@
           "label": "world_class_operator_runbook",
           "path": "reports/world_class_operator_runbook.json",
           "exists": true,
-          "bytes": 102572,
-          "sha256": "52528ba3334f7b7889d58d80b872a1cf717ef2968d4de80fa5f3a4618c393571"
+          "bytes": 99220,
+          "sha256": "973663f6cae9c1f98fae16211242a0622d6ee6aaf7d45e0bb7bd37d07da0fd77"
         },
         {
           "label": "world_class_operator_runbook_markdown",
           "path": "reports/world_class_operator_runbook.md",
           "exists": true,
-          "bytes": 24456,
-          "sha256": "a05fcf2a35707459c43cd44bcce1d64f9648ffe4a1afbf3b0b330b0b374f8334"
+          "bytes": 24440,
+          "sha256": "ea3baea36fd816f9112eec64aafe98558866882f9b60df3d811af99294128444"
         },
         {
           "label": "world_class_operator_runbook_html",
           "path": "reports/world_class_operator_runbook.html",
           "exists": true,
-          "bytes": 32905,
-          "sha256": "d0c6a25d96e93578ae5b6ecca290e43759b4cec16dc241e3644a269e0248b9a3"
+          "bytes": 32886,
+          "sha256": "26539e126ddcdd08fc3af8c9d92d474334a64fb7a3ad4fce31245c4dc67aa490"
         },
         {
           "label": "world_class_claim_guard",
           "path": "reports/world_class_claim_guard.json",
           "exists": true,
-          "bytes": 14392,
-          "sha256": "eab456a5f8827860021b1bf273f985fd2fd71d9f495a57708be5119dd090948c"
+          "bytes": 14576,
+          "sha256": "ba2087cbb5994cae39e23bcbe82442a5e4f192f031be93793b7f3706e574f1f9"
         }
       ],
       "missing_artifacts": [],
@@ -6434,7 +6421,7 @@
           "label": "Trust Security",
           "status": "missing",
           "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-          "current": "3 scripts; secrets 0; help failures 0",
+          "current": "4 scripts; secrets 0; help failures 0",
           "command": "python3 scripts/yao.py trust . --self",
           "test": "python3 tests/verify_trust_check.py",
           "evidence": [
@@ -6508,7 +6495,7 @@
           "label": "Registry Distribution",
           "status": "missing",
           "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-          "current": "archive entries 154; install failures 0",
+          "current": "archive entries 157; install failures 0",
           "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self && python3 scripts/yao.py registry-audit . --self",
           "test": "python3 tests/verify_registry_audit.py",
           "evidence": [
@@ -6578,7 +6565,7 @@
           "label": "Telemetry Drift",
           "status": "missing",
           "objective": "Real usage feedback is captured as metadata-only local-first drift signals.",
-          "current": "events 1; recipes 0; risk low",
+          "current": "events 1; recipes 5; risk low",
           "command": "python3 scripts/yao.py telemetry-hooks . --self && python3 scripts/yao.py adoption-drift . --self",
           "test": "python3 tests/verify_telemetry_hooks.py",
           "evidence": [
@@ -6588,7 +6575,7 @@
             },
             {
               "path": "scripts/import_telemetry_events.py",
-              "exists": false
+              "exists": true
             },
             {
               "path": "scripts/telemetry_native_host.py",
@@ -6600,7 +6587,7 @@
             },
             {
               "path": "reports/telemetry_hook_recipes.json",
-              "exists": false
+              "exists": true
             },
             {
               "path": "tests/verify_telemetry_hooks.py",
@@ -7212,6 +7199,7 @@
               ],
               "scripts": [
                 "scripts/ci_test.py",
+                "scripts/import_telemetry_events.py",
                 "scripts/local_output_eval_runner.py",
                 "scripts/validate_team_state.py"
               ],
@@ -7250,15 +7238,17 @@
                 "reports/security_trust_report.md",
                 "reports/runtime_permission_probes.json",
                 "reports/runtime_permission_probes.md",
+                "reports/telemetry_hook_recipes.json",
+                "reports/telemetry_hook_recipes.md",
                 "reports/skill_atlas.json",
                 "reports/skill_atlas.html",
                 "reports/skill-os-2-review.md"
               ],
               "counts": {
                 "references": 7,
-                "scripts": 3,
+                "scripts": 4,
                 "assets": 0,
-                "reports": 36
+                "reports": 38
               }
             },
             "eval_plan": {
@@ -7411,9 +7401,9 @@
                 "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
                 "counts": {
                   "references": 7,
-                  "scripts": 3,
+                  "scripts": 4,
                   "assets": 0,
-                  "reports": 36
+                  "reports": 38
                 },
                 "generated_files": [
                   "targets/openai/adapter.json",
@@ -7422,7 +7412,7 @@
               },
               "scripts": {
                 "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-                "script_count": 3,
+                "script_count": 4,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -7560,9 +7550,9 @@
               "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
               "counts": {
                 "references": 7,
-                "scripts": 3,
+                "scripts": 4,
                 "assets": 0,
-                "reports": 36
+                "reports": 38
               },
               "generated_files": [
                 "targets/openai/adapter.json",
@@ -7571,7 +7561,7 @@
             },
             "scripts": {
               "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-              "script_count": 3,
+              "script_count": 4,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -7721,6 +7711,7 @@
               ],
               "scripts": [
                 "scripts/ci_test.py",
+                "scripts/import_telemetry_events.py",
                 "scripts/local_output_eval_runner.py",
                 "scripts/validate_team_state.py"
               ],
@@ -7759,15 +7750,17 @@
                 "reports/security_trust_report.md",
                 "reports/runtime_permission_probes.json",
                 "reports/runtime_permission_probes.md",
+                "reports/telemetry_hook_recipes.json",
+                "reports/telemetry_hook_recipes.md",
                 "reports/skill_atlas.json",
                 "reports/skill_atlas.html",
                 "reports/skill-os-2-review.md"
               ],
               "counts": {
                 "references": 7,
-                "scripts": 3,
+                "scripts": 4,
                 "assets": 0,
-                "reports": 36
+                "reports": 38
               }
             },
             "eval_plan": {
@@ -7920,9 +7913,9 @@
                 "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
                 "counts": {
                   "references": 7,
-                  "scripts": 3,
+                  "scripts": 4,
                   "assets": 0,
-                  "reports": 36
+                  "reports": 38
                 },
                 "generated_files": [
                   "targets/claude/adapter.json",
@@ -7931,7 +7924,7 @@
               },
               "scripts": {
                 "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-                "script_count": 3,
+                "script_count": 4,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -8069,9 +8062,9 @@
               "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
               "counts": {
                 "references": 7,
-                "scripts": 3,
+                "scripts": 4,
                 "assets": 0,
-                "reports": 36
+                "reports": 38
               },
               "generated_files": [
                 "targets/claude/adapter.json",
@@ -8080,7 +8073,7 @@
             },
             "scripts": {
               "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-              "script_count": 3,
+              "script_count": 4,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -8230,6 +8223,7 @@
               ],
               "scripts": [
                 "scripts/ci_test.py",
+                "scripts/import_telemetry_events.py",
                 "scripts/local_output_eval_runner.py",
                 "scripts/validate_team_state.py"
               ],
@@ -8268,15 +8262,17 @@
                 "reports/security_trust_report.md",
                 "reports/runtime_permission_probes.json",
                 "reports/runtime_permission_probes.md",
+                "reports/telemetry_hook_recipes.json",
+                "reports/telemetry_hook_recipes.md",
                 "reports/skill_atlas.json",
                 "reports/skill_atlas.html",
                 "reports/skill-os-2-review.md"
               ],
               "counts": {
                 "references": 7,
-                "scripts": 3,
+                "scripts": 4,
                 "assets": 0,
-                "reports": 36
+                "reports": 38
               }
             },
             "eval_plan": {
@@ -8429,9 +8425,9 @@
                 "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
                 "counts": {
                   "references": 7,
-                  "scripts": 3,
+                  "scripts": 4,
                   "assets": 0,
-                  "reports": 36
+                  "reports": 38
                 },
                 "generated_files": [
                   "targets/generic/adapter.json"
@@ -8439,7 +8435,7 @@
               },
               "scripts": {
                 "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-                "script_count": 3,
+                "script_count": 4,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -8571,9 +8567,9 @@
               "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
               "counts": {
                 "references": 7,
-                "scripts": 3,
+                "scripts": 4,
                 "assets": 0,
-                "reports": 36
+                "reports": 38
               },
               "generated_files": [
                 "targets/generic/adapter.json"
@@ -8581,7 +8577,7 @@
             },
             "scripts": {
               "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-              "script_count": 3,
+              "script_count": 4,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -8723,6 +8719,7 @@
               ],
               "scripts": [
                 "scripts/ci_test.py",
+                "scripts/import_telemetry_events.py",
                 "scripts/local_output_eval_runner.py",
                 "scripts/validate_team_state.py"
               ],
@@ -8761,15 +8758,17 @@
                 "reports/security_trust_report.md",
                 "reports/runtime_permission_probes.json",
                 "reports/runtime_permission_probes.md",
+                "reports/telemetry_hook_recipes.json",
+                "reports/telemetry_hook_recipes.md",
                 "reports/skill_atlas.json",
                 "reports/skill_atlas.html",
                 "reports/skill-os-2-review.md"
               ],
               "counts": {
                 "references": 7,
-                "scripts": 3,
+                "scripts": 4,
                 "assets": 0,
-                "reports": 36
+                "reports": 38
               }
             },
             "eval_plan": {
@@ -8922,9 +8921,9 @@
                 "strategy": "Keep optional directories as relative resources next to SKILL.md.",
                 "counts": {
                   "references": 7,
-                  "scripts": 3,
+                  "scripts": 4,
                   "assets": 0,
-                  "reports": 36
+                  "reports": 38
                 },
                 "generated_files": [
                   "SKILL.md",
@@ -8933,7 +8932,7 @@
               },
               "scripts": {
                 "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-                "script_count": 3,
+                "script_count": 4,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -9064,9 +9063,9 @@
               "strategy": "Keep optional directories as relative resources next to SKILL.md.",
               "counts": {
                 "references": 7,
-                "scripts": 3,
+                "scripts": 4,
                 "assets": 0,
-                "reports": 36
+                "reports": 38
               },
               "generated_files": [
                 "SKILL.md",
@@ -9075,7 +9074,7 @@
             },
             "scripts": {
               "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-              "script_count": 3,
+              "script_count": 4,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -9216,6 +9215,7 @@
               ],
               "scripts": [
                 "scripts/ci_test.py",
+                "scripts/import_telemetry_events.py",
                 "scripts/local_output_eval_runner.py",
                 "scripts/validate_team_state.py"
               ],
@@ -9254,15 +9254,17 @@
                 "reports/security_trust_report.md",
                 "reports/runtime_permission_probes.json",
                 "reports/runtime_permission_probes.md",
+                "reports/telemetry_hook_recipes.json",
+                "reports/telemetry_hook_recipes.md",
                 "reports/skill_atlas.json",
                 "reports/skill_atlas.html",
                 "reports/skill-os-2-review.md"
               ],
               "counts": {
                 "references": 7,
-                "scripts": 3,
+                "scripts": 4,
                 "assets": 0,
-                "reports": 36
+                "reports": 38
               }
             },
             "eval_plan": {
@@ -9415,9 +9417,9 @@
                 "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
                 "counts": {
                   "references": 7,
-                  "scripts": 3,
+                  "scripts": 4,
                   "assets": 0,
-                  "reports": 36
+                  "reports": 38
                 },
                 "generated_files": [
                   "targets/vscode/adapter.json",
@@ -9426,7 +9428,7 @@
               },
               "scripts": {
                 "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-                "script_count": 3,
+                "script_count": 4,
                 "help_smoke_failed_count": 0
               },
               "permissions": {
@@ -9561,9 +9563,9 @@
               "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
               "counts": {
                 "references": 7,
-                "scripts": 3,
+                "scripts": 4,
                 "assets": 0,
-                "reports": 36
+                "reports": 38
               },
               "generated_files": [
                 "targets/vscode/adapter.json",
@@ -9572,7 +9574,7 @@
             },
             "scripts": {
               "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-              "script_count": 3,
+              "script_count": 4,
               "help_smoke_failed_count": 0
             },
             "permissions": {
@@ -9682,10 +9684,10 @@
             "references resource resolves: references/team-scaling.md",
             "references resource resolves: references/workflow.md",
             "scripts resource resolves: scripts/ci_test.py",
+            "scripts resource resolves: scripts/import_telemetry_events.py",
             "scripts resource resolves: scripts/local_output_eval_runner.py",
             "scripts resource resolves: scripts/validate_team_state.py",
-            "reports resource resolves: reports/benchmark_methodology.md",
-            "reports resource resolves: reports/intent-context.json"
+            "reports resource resolves: reports/benchmark_methodology.md"
           ],
           "failures": [],
           "warnings": []
@@ -9726,10 +9728,10 @@
             "references resource resolves: references/team-scaling.md",
             "references resource resolves: references/workflow.md",
             "scripts resource resolves: scripts/ci_test.py",
+            "scripts resource resolves: scripts/import_telemetry_events.py",
             "scripts resource resolves: scripts/local_output_eval_runner.py",
             "scripts resource resolves: scripts/validate_team_state.py",
-            "reports resource resolves: reports/benchmark_methodology.md",
-            "reports resource resolves: reports/intent-context.json"
+            "reports resource resolves: reports/benchmark_methodology.md"
           ],
           "failures": [],
           "warnings": []
@@ -9770,10 +9772,10 @@
             "references resource resolves: references/team-scaling.md",
             "references resource resolves: references/workflow.md",
             "scripts resource resolves: scripts/ci_test.py",
+            "scripts resource resolves: scripts/import_telemetry_events.py",
             "scripts resource resolves: scripts/local_output_eval_runner.py",
             "scripts resource resolves: scripts/validate_team_state.py",
-            "reports resource resolves: reports/benchmark_methodology.md",
-            "reports resource resolves: reports/intent-context.json"
+            "reports resource resolves: reports/benchmark_methodology.md"
           ],
           "failures": [],
           "warnings": [
@@ -9816,10 +9818,10 @@
             "references resource resolves: references/team-scaling.md",
             "references resource resolves: references/workflow.md",
             "scripts resource resolves: scripts/ci_test.py",
+            "scripts resource resolves: scripts/import_telemetry_events.py",
             "scripts resource resolves: scripts/local_output_eval_runner.py",
             "scripts resource resolves: scripts/validate_team_state.py",
-            "reports resource resolves: reports/benchmark_methodology.md",
-            "reports resource resolves: reports/intent-context.json"
+            "reports resource resolves: reports/benchmark_methodology.md"
           ],
           "failures": [],
           "warnings": [
@@ -9862,10 +9864,10 @@
             "references resource resolves: references/team-scaling.md",
             "references resource resolves: references/workflow.md",
             "scripts resource resolves: scripts/ci_test.py",
+            "scripts resource resolves: scripts/import_telemetry_events.py",
             "scripts resource resolves: scripts/local_output_eval_runner.py",
             "scripts resource resolves: scripts/validate_team_state.py",
-            "reports resource resolves: reports/benchmark_methodology.md",
-            "reports resource resolves: reports/intent-context.json"
+            "reports resource resolves: reports/benchmark_methodology.md"
           ],
           "failures": [],
           "warnings": []
@@ -10240,8 +10242,8 @@
       "ok": true,
       "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
       "summary": {
-        "scanned_files": 34,
-        "script_count": 3,
+        "scanned_files": 35,
+        "script_count": 4,
         "internal_module_count": 0,
         "secret_findings": 0,
         "dependency_files": [
@@ -10256,12 +10258,12 @@
         "permission_missing_count": 0,
         "permission_invalid_count": 0,
         "permission_expired_count": 0,
-        "help_smoke_checked_count": 3,
+        "help_smoke_checked_count": 4,
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 34,
-        "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
+        "package_hash_file_count": 35,
+        "package_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d"
       },
       "failures": [],
       "warnings": [],
@@ -10272,6 +10274,20 @@
           "interface": "cli",
           "interface_declared": true,
           "interface_reason": "Runs local, dependency-free route, syntax, and package-shape checks before release.",
+          "has_argparse": true,
+          "has_main_guard": true,
+          "uses_input": false,
+          "uses_network": false,
+          "uses_file_write": false,
+          "uses_subprocess": false,
+          "network_urls": [],
+          "network_hosts": []
+        },
+        {
+          "path": "scripts/import_telemetry_events.py",
+          "interface": "cli",
+          "interface_declared": true,
+          "interface_reason": "Validates local JSONL telemetry and emits sanitized metadata events to stdout; the caller owns any local spool redirect.",
           "has_argparse": true,
           "has_main_guard": true,
           "uses_input": false,
@@ -10330,9 +10346,9 @@
       "help_smoke": {
         "enabled": true,
         "timeout_seconds": 5.0,
-        "candidate_count": 3,
-        "checked_count": 3,
-        "passed_count": 3,
+        "candidate_count": 4,
+        "checked_count": 4,
+        "passed_count": 4,
         "failed_count": 0,
         "skipped_count": 0,
         "failed_scripts": [],
@@ -10345,6 +10361,16 @@
             "passed": true,
             "has_help_text": true,
             "stdout_excerpt": "usage: ci_test.py [-h] [targets ...]\n\nRun dependency-free agent-team-work release checks.\n\npositional arguments:\n  targets\n\noptions:\n  -h, --help  show this help message and exit",
+            "stderr_excerpt": ""
+          },
+          {
+            "path": "scripts/import_telemetry_events.py",
+            "command": "python3 scripts/import_telemetry_events.py --help",
+            "returncode": 0,
+            "timed_out": false,
+            "passed": true,
+            "has_help_text": true,
+            "stdout_excerpt": "usage: import_telemetry_events.py [-h] --input-jsonl INPUT_JSONL\n\nValidate local JSONL telemetry and emit sanitized metadata-only events to\nstdout.\n\noptions:\n  -h, --help            show this help message and exit\n  --input-jsonl INPUT_JSON",
             "stderr_excerpt": ""
           },
           {
@@ -10404,7 +10430,7 @@
       "root": "/Volumes/Code/team-worker/agent-team-work",
       "summary": {
         "target_python": "3.11",
-        "file_count": 4,
+        "file_count": 5,
         "issue_count": 0,
         "syntax_error_count": 0,
         "fstring_311_violation_count": 0,
@@ -10434,6 +10460,12 @@
           "issues": []
         },
         {
+          "path": "scripts/import_telemetry_events.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
+        {
           "path": "scripts/local_output_eval_runner.py",
           "ok": true,
           "issue_count": 0,
@@ -10458,11 +10490,11 @@
       "generated_at": "2026-09-14",
       "skill_dir": ".",
       "summary": {
-        "python_file_count": 3,
-        "script_file_count": 3,
+        "python_file_count": 4,
+        "script_file_count": 4,
         "test_file_count": 0,
         "internal_module_count": 0,
-        "cli_script_count": 3,
+        "cli_script_count": 4,
         "command_handler_count": 0,
         "entrypoint_command_handler_count": 0,
         "command_module_count": 0,
@@ -10470,7 +10502,7 @@
         "watch_line_threshold": 720,
         "early_watch_line_threshold": 600,
         "block_line_threshold": 1500,
-        "largest_file_lines": 131,
+        "largest_file_lines": 136,
         "watchlist_count": 0,
         "early_watchlist_count": 0,
         "hotspot_count": 0,
@@ -10478,6 +10510,14 @@
         "decision": "pass"
       },
       "largest_files": [
+        {
+          "path": "scripts/import_telemetry_events.py",
+          "lines": 136,
+          "kind": "cli-script",
+          "severity": "pass",
+          "early_watch": false,
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
         {
           "path": "scripts/validate_team_state.py",
           "lines": 131,
@@ -10520,12 +10560,17 @@
         "context_budget_tier": "production",
         "context_budget_limit": 1000,
         "skill_body_tokens": 557,
-        "other_text_tokens": 200803,
+        "other_text_tokens": 203364,
         "estimated_initial_load_tokens": 878,
-        "estimated_total_text_tokens": 201360,
-        "deferred_resource_tokens": 9690,
+        "estimated_total_text_tokens": 203921,
+        "deferred_resource_tokens": 10997,
         "deferred_resource_warn_threshold": 120000,
         "deferred_resource_dirs": [
+          {
+            "path": "scripts",
+            "estimated_tokens": 4009,
+            "file_count": 4
+          },
           {
             "path": "evals",
             "estimated_tokens": 3541,
@@ -10535,11 +10580,6 @@
             "path": "references",
             "estimated_tokens": 3447,
             "file_count": 7
-          },
-          {
-            "path": "scripts",
-            "estimated_tokens": 2702,
-            "file_count": 3
           }
         ],
         "large_deferred_resource_dirs": [],
@@ -10550,7 +10590,7 @@
           "directories": [],
           "summary": "No large deferred resource directory exceeds the per-dir threshold."
         },
-        "relevant_file_count": 128,
+        "relevant_file_count": 131,
         "unused_resource_dirs": [],
         "quality_signal_points": 130,
         "quality_density": 148.1
@@ -12217,8 +12257,8 @@
       "summary": {
         "evidence_item_count": 4,
         "precheck_count": 13,
-        "precheck_pass_count": 4,
-        "precheck_missing_count": 6,
+        "precheck_pass_count": 5,
+        "precheck_missing_count": 5,
         "precheck_optional_count": 0,
         "precheck_human_required_count": 1,
         "precheck_external_required_count": 2,
@@ -12227,11 +12267,11 @@
         "source_check_count": 14,
         "source_pass_count": 6,
         "source_blocked_count": 8,
-        "repair_checklist_count": 17,
-        "repair_blocked_count": 17,
+        "repair_checklist_count": 16,
+        "repair_blocked_count": 16,
         "repair_ready_count": 0,
         "repair_phase_counts": {
-          "unblock-access": 9,
+          "unblock-access": 8,
           "collect-source": 8
         },
         "next_repair_action_id": "human-adjudication-precheck-decision-template",
@@ -12241,7 +12281,7 @@
         "repair_counts_as_completion": false,
         "phase_queue_count": 2,
         "phase_queue_blocked_count": 2,
-        "phase_queue_row_count": 17,
+        "phase_queue_row_count": 16,
         "phase_queue_next_phase": "unblock-access",
         "phase_queue_next_action_id": "human-adjudication-precheck-decision-template",
         "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
@@ -12256,8 +12296,8 @@
         "blocked": 4
       },
       "precheck_status_counts": {
-        "pass": 4,
-        "missing": 6,
+        "pass": 5,
+        "missing": 5,
         "human-required": 1,
         "external-required": 2
       },
@@ -13249,8 +13289,8 @@
               "next_action": "Refresh telemetry hook recipes before external client installation.",
               "secret_value_redacted": false,
               "path": "reports/telemetry_hook_recipes.json",
-              "status": "missing",
-              "actual": "missing"
+              "status": "pass",
+              "actual": "present"
             },
             {
               "evidence_key": "native-client-telemetry",
@@ -13319,7 +13359,7 @@
               "counts_as_evidence": false,
               "artifact_prefill_counts_as_evidence": false,
               "submission_ref_total_count": 2,
-              "submission_ref_ready_count": 1,
+              "submission_ref_ready_count": 2,
               "supporting_evidence_total_count": 6,
               "supporting_evidence_ready_count": 5,
               "roles": [
@@ -13366,21 +13406,6 @@
               "counts_as_completion": false
             },
             {
-              "action_id": "native-client-telemetry-precheck-hook-recipes",
-              "evidence_key": "native-client-telemetry",
-              "repair_type": "precheck",
-              "target": "hook-recipes",
-              "phase": "unblock-access",
-              "priority": 20,
-              "owner": "Browser/Chrome/IDE/provider client integrator",
-              "status": "blocked",
-              "blocking_reason": "Required file precheck is missing.",
-              "next_action": "Refresh telemetry hook recipes before external client installation.",
-              "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
-              "source": "prechecks",
-              "counts_as_completion": false
-            },
-            {
               "action_id": "native-client-telemetry-precheck-native-host",
               "evidence_key": "native-client-telemetry",
               "repair_type": "precheck",
@@ -13417,8 +13442,8 @@
               "label": "Unblock access",
               "priority": 20,
               "status": "blocked",
-              "blocked_count": 3,
-              "row_count": 3,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
@@ -13441,21 +13466,6 @@
                   "status": "blocked",
                   "blocking_reason": "Required external precheck is external-required.",
                   "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
-                  "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
-                  "source": "prechecks",
-                  "counts_as_completion": false
-                },
-                {
-                  "action_id": "native-client-telemetry-precheck-hook-recipes",
-                  "evidence_key": "native-client-telemetry",
-                  "repair_type": "precheck",
-                  "target": "hook-recipes",
-                  "phase": "unblock-access",
-                  "priority": 20,
-                  "owner": "Browser/Chrome/IDE/provider client integrator",
-                  "status": "blocked",
-                  "blocking_reason": "Required file precheck is missing.",
-                  "next_action": "Refresh telemetry hook recipes before external client installation.",
                   "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
                   "source": "prechecks",
                   "counts_as_completion": false
@@ -13656,8 +13666,8 @@
           "next_action": "Refresh telemetry hook recipes before external client installation.",
           "secret_value_redacted": false,
           "path": "reports/telemetry_hook_recipes.json",
-          "status": "missing",
-          "actual": "missing"
+          "status": "pass",
+          "actual": "present"
         },
         {
           "evidence_key": "native-client-telemetry",
@@ -13875,21 +13885,6 @@
           "counts_as_completion": false
         },
         {
-          "action_id": "native-client-telemetry-precheck-hook-recipes",
-          "evidence_key": "native-client-telemetry",
-          "repair_type": "precheck",
-          "target": "hook-recipes",
-          "phase": "unblock-access",
-          "priority": 20,
-          "owner": "Browser/Chrome/IDE/provider client integrator",
-          "status": "blocked",
-          "blocking_reason": "Required file precheck is missing.",
-          "next_action": "Refresh telemetry hook recipes before external client installation.",
-          "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
-          "source": "prechecks",
-          "counts_as_completion": false
-        },
-        {
           "action_id": "native-client-telemetry-precheck-native-host",
           "evidence_key": "native-client-telemetry",
           "repair_type": "precheck",
@@ -14076,8 +14071,8 @@
           "label": "Unblock access",
           "priority": 20,
           "status": "blocked",
-          "blocked_count": 9,
-          "row_count": 9,
+          "blocked_count": 8,
+          "row_count": 8,
           "owners": [
             "Browser/Chrome/IDE/provider client integrator",
             "human reviewer",
@@ -14151,21 +14146,6 @@
               "status": "blocked",
               "blocking_reason": "Required external precheck is external-required.",
               "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
-              "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
-              "source": "prechecks",
-              "counts_as_completion": false
-            },
-            {
-              "action_id": "native-client-telemetry-precheck-hook-recipes",
-              "evidence_key": "native-client-telemetry",
-              "repair_type": "precheck",
-              "target": "hook-recipes",
-              "phase": "unblock-access",
-              "priority": 20,
-              "owner": "Browser/Chrome/IDE/provider client integrator",
-              "status": "blocked",
-              "blocking_reason": "Required file precheck is missing.",
-              "next_action": "Refresh telemetry hook recipes before external client installation.",
               "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
               "source": "prechecks",
               "counts_as_completion": false
@@ -14400,7 +14380,7 @@
           "counts_as_evidence": false,
           "artifact_prefill_counts_as_evidence": false,
           "submission_ref_total_count": 7,
-          "submission_ref_ready_count": 4,
+          "submission_ref_ready_count": 5,
           "supporting_evidence_total_count": 33,
           "supporting_evidence_ready_count": 26,
           "roles": [
@@ -14827,11 +14807,11 @@
         "source_check_count": 14,
         "source_pass_count": 6,
         "source_blocked_count": 8,
-        "repair_checklist_count": 17,
-        "repair_blocked_count": 17,
+        "repair_checklist_count": 16,
+        "repair_blocked_count": 16,
         "phase_queue_count": 2,
         "phase_queue_blocked_count": 2,
-        "phase_queue_row_count": 17,
+        "phase_queue_row_count": 16,
         "phase_queue_next_phase": "unblock-access",
         "phase_queue_next_action_id": "human-adjudication-precheck-decision-template",
         "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
@@ -14846,7 +14826,7 @@
         ],
         "coordination_counts_as_completion": false,
         "release_gate_ready": false,
-        "release_gate_blocked_count": 5,
+        "release_gate_blocked_count": 4,
         "release_gate_check_count": 5,
         "release_gate_counts_as_completion": false,
         "ready_to_claim_world_class": false,
@@ -15899,21 +15879,6 @@
               "counts_as_completion": false
             },
             {
-              "action_id": "native-client-telemetry-precheck-hook-recipes",
-              "evidence_key": "native-client-telemetry",
-              "repair_type": "precheck",
-              "target": "hook-recipes",
-              "phase": "unblock-access",
-              "priority": 20,
-              "owner": "Browser/Chrome/IDE/provider client integrator",
-              "status": "blocked",
-              "blocking_reason": "Required file precheck is missing.",
-              "next_action": "Refresh telemetry hook recipes before external client installation.",
-              "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
-              "source": "prechecks",
-              "counts_as_completion": false
-            },
-            {
               "action_id": "native-client-telemetry-precheck-native-host",
               "evidence_key": "native-client-telemetry",
               "repair_type": "precheck",
@@ -15944,7 +15909,7 @@
               "counts_as_completion": false
             }
           ],
-          "repair_blocked_count": 4,
+          "repair_blocked_count": 3,
           "repair_counts_as_completion": false,
           "phase_queue": [
             {
@@ -15952,8 +15917,8 @@
               "label": "Unblock access",
               "priority": 20,
               "status": "blocked",
-              "blocked_count": 3,
-              "row_count": 3,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
@@ -15976,21 +15941,6 @@
                   "status": "blocked",
                   "blocking_reason": "Required external precheck is external-required.",
                   "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
-                  "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
-                  "source": "prechecks",
-                  "counts_as_completion": false
-                },
-                {
-                  "action_id": "native-client-telemetry-precheck-hook-recipes",
-                  "evidence_key": "native-client-telemetry",
-                  "repair_type": "precheck",
-                  "target": "hook-recipes",
-                  "phase": "unblock-access",
-                  "priority": 20,
-                  "owner": "Browser/Chrome/IDE/provider client integrator",
-                  "status": "blocked",
-                  "blocking_reason": "Required file precheck is missing.",
-                  "next_action": "Refresh telemetry hook recipes before external client installation.",
                   "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
                   "source": "prechecks",
                   "counts_as_completion": false
@@ -16165,7 +16115,7 @@
         "ready": false,
         "decision": "blocked-until-evidence-accepted",
         "check_count": 5,
-        "blocked_count": 5,
+        "blocked_count": 4,
         "checks": [
           {
             "key": "world_class_ledger_ready",
@@ -16195,15 +16145,15 @@
             "key": "review_studio_clean",
             "label": "Review Studio clean",
             "passed": false,
-            "current": "blockers 0; warnings 4",
+            "current": "blockers 0; warnings 3",
             "expected": "blocker_count == 0 and warning_count == 0",
             "artifact": "reports/review-studio.json"
           },
           {
             "key": "evidence_consistency_clean",
             "label": "Evidence consistency clean",
-            "passed": false,
-            "current": "evidence-drift-detected",
+            "passed": true,
+            "current": "consistent",
             "expected": "decision == consistent and fail_count == 0",
             "artifact": "reports/evidence_consistency.json"
           }
@@ -16237,17 +16187,9 @@
             "key": "review_studio_clean",
             "label": "Review Studio clean",
             "passed": false,
-            "current": "blockers 0; warnings 4",
+            "current": "blockers 0; warnings 3",
             "expected": "blocker_count == 0 and warning_count == 0",
             "artifact": "reports/review-studio.json"
-          },
-          {
-            "key": "evidence_consistency_clean",
-            "label": "Evidence consistency clean",
-            "passed": false,
-            "current": "evidence-drift-detected",
-            "expected": "decision == consistent and fail_count == 0",
-            "artifact": "reports/evidence_consistency.json"
           }
         ],
         "final_manual_check": "Run make ci-test in a clean worktree and verify GitHub Actions before converting the PR out of Draft.",
@@ -16310,21 +16252,6 @@
           "status": "blocked",
           "blocking_reason": "Required external precheck is external-required.",
           "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
-          "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
-          "source": "prechecks",
-          "counts_as_completion": false
-        },
-        {
-          "action_id": "native-client-telemetry-precheck-hook-recipes",
-          "evidence_key": "native-client-telemetry",
-          "repair_type": "precheck",
-          "target": "hook-recipes",
-          "phase": "unblock-access",
-          "priority": 20,
-          "owner": "Browser/Chrome/IDE/provider client integrator",
-          "status": "blocked",
-          "blocking_reason": "Required file precheck is missing.",
-          "next_action": "Refresh telemetry hook recipes before external client installation.",
           "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
           "source": "prechecks",
           "counts_as_completion": false
@@ -16516,8 +16443,8 @@
           "label": "Unblock access",
           "priority": 20,
           "status": "blocked",
-          "blocked_count": 9,
-          "row_count": 9,
+          "blocked_count": 8,
+          "row_count": 8,
           "owners": [
             "Browser/Chrome/IDE/provider client integrator",
             "human reviewer",
@@ -16591,21 +16518,6 @@
               "status": "blocked",
               "blocking_reason": "Required external precheck is external-required.",
               "next_action": "Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events.",
-              "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
-              "source": "prechecks",
-              "counts_as_completion": false
-            },
-            {
-              "action_id": "native-client-telemetry-precheck-hook-recipes",
-              "evidence_key": "native-client-telemetry",
-              "repair_type": "precheck",
-              "target": "hook-recipes",
-              "phase": "unblock-access",
-              "priority": 20,
-              "owner": "Browser/Chrome/IDE/provider client integrator",
-              "status": "blocked",
-              "blocking_reason": "Required file precheck is missing.",
-              "next_action": "Refresh telemetry hook recipes before external client installation.",
               "verification_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
               "source": "prechecks",
               "counts_as_completion": false
@@ -16840,9 +16752,9 @@
       "summary": {
         "ledger_ready_to_claim_world_class": false,
         "ledger_pending_count": 4,
-        "claim_surface_count": 137,
-        "json_claim_surface_count": 74,
-        "metadata_claim_surface_count": 76,
+        "claim_surface_count": 139,
+        "json_claim_surface_count": 75,
+        "metadata_claim_surface_count": 77,
         "package_claim_surface_count": 11,
         "violation_count": 0,
         "overclaim_guard_active": true,
@@ -17329,6 +17241,14 @@
           "violation_count": 0
         },
         {
+          "path": "reports/telemetry_hook_recipes.json",
+          "violation_count": 0
+        },
+        {
+          "path": "reports/telemetry_hook_recipes.md",
+          "violation_count": 0
+        },
+        {
           "path": "reports/trigger-eval.json",
           "violation_count": 0
         },
@@ -17458,8 +17378,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd",
-          "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
+          "package_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
+          "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27"
         },
         "compatibility": {
           "openai": "pass",
@@ -17490,7 +17410,7 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
+          "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
@@ -17515,7 +17435,7 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/agent-team-work.json",
-            "package_sha256": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
+            "package_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d"
           }
         ]
       },
@@ -17538,8 +17458,8 @@
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793",
-        "archive_entry_count": 154,
+        "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
+        "archive_entry_count": 157,
         "nested_skill_entry_count": 0,
         "failure_count": 0,
         "warning_count": 0
@@ -18210,7 +18130,7 @@
       "installed_skill_dir": "/Volumes/Code/team-worker/agent-team-work/dist/install-simulation/simulate-agent-team-work/agent-team-work",
       "summary": {
         "archive_present": true,
-        "archive_entry_count": 154,
+        "archive_entry_count": 157,
         "nested_skill_entry_count": 0,
         "archive_extracted": true,
         "entrypoint_loaded": true,
@@ -18430,12 +18350,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793"
+            "to": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27"
           },
           {
             "field": "package_sha256",
             "from": "previous-fixture",
-            "to": "fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd"
+            "to": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d"
           }
         ]
       },
@@ -18475,6 +18395,7 @@
       ],
       "target_platforms_scope": "Codex/OpenAI provides the native project and thread execution surface; other targets carry the source contract and explicit degradation notes.",
       "factory_components": [
+        "skill-ir",
         "references",
         "evals",
         "scripts",

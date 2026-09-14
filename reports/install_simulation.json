@@ -8,7 +8,7 @@
   "installed_skill_dir": "/Volumes/Code/team-worker/agent-team-work/dist/install-simulation/simulate-agent-team-work/agent-team-work",
   "summary": {
     "archive_present": true,
-    "archive_entry_count": 154,
+    "archive_entry_count": 157,
     "nested_skill_entry_count": 0,
     "archive_extracted": true,
     "entrypoint_loaded": true,

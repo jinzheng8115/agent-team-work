@@ -8,7 +8,7 @@ This standalone package review is generated from the current local evidence. It 
 - Review Studio gates: `16` gates
 - Review Studio warnings: `3` warnings
 - Trust report: `0` declared internal modules; `4 / 4` CLI help smoke checks passing across `4` scripts.
-- Package archive: `154` zip entries; archive with `154` entries.
+- Package archive: `157` zip entries; archive with `157` entries.
 - Install simulation: `0` installer permission checks enforced; `0` permission failures.
 - Benchmark contract: `25` required artifacts; `23` reproduction commands.
 - Context budget: initial load `878/1000`.

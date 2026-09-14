@@ -9,7 +9,7 @@
 - 真实 E2E 冒烟：通过；在 `team-worker` 项目创建 1 个 Leader + 2 个独立成员，完成待命、首阶段派单、DoD 失败、原成员 rework attempt=2、阶段验收、下一阶段派单和最终 `complete`；证据见 `/Volumes/Code/team-worker/.team/reports/smoke-summary.md`。
 - Trust：通过；0 secret、4 个本地 CLI script、0 network-capable script、4/4 help smoke 通过、无 required capability。
 - 运行时权限探针：四目标全部通过元数据校验，但 native enforcement 为 0，metadata fallback 为 4；该限制已进入 world-class ledger。
-- 归档与安装：四目标 adapter、154 个 zip entries、路径安全、单入口、portable evidence index、安装模拟均通过。
+- 归档与安装：四目标 adapter、157 个 zip entries、路径安全、单入口、portable evidence index、安装模拟均通过。
 - Registry：通过；MIT 许可、四目标兼容性、archive/package checksum 已同步。
 - Claim guard：通过；0 overclaim violation，但 ledger 仍有 4 项 pending（provider、human adjudication、native permission、native telemetry）。
 

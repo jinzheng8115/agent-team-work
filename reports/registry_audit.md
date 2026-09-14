@@ -6,8 +6,8 @@
 - Maturity: `governed`
 - Owner: `Local Codex Team`
 - License: `MIT`
-- Package SHA256: `fe003b5b95e72ba7b8c1d74b377aef64aabfc8dc51a3691f8696eabe12b1efdd`
-- Archive SHA256: `862f3f346ad3ff78cf91b9426767a18c75347531705d4e11d8d314c69e168793`
+- Package SHA256: `c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d`
+- Archive SHA256: `fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27`
 - Install simulated: `True`
 
 ## Compatibility

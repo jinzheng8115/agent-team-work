@@ -20,9 +20,9 @@
     "failure_mode_count": 6,
     "resource_counts": {
       "references": 7,
-      "scripts": 3,
+      "scripts": 4,
       "assets": 0,
-      "reports": 36
+      "reports": 38
     },
     "eval_counts": {
       "trigger": 12,
@@ -130,6 +130,7 @@
       ],
       "scripts": [
         "scripts/ci_test.py",
+        "scripts/import_telemetry_events.py",
         "scripts/local_output_eval_runner.py",
         "scripts/validate_team_state.py"
       ],
@@ -168,15 +169,17 @@
         "reports/security_trust_report.md",
         "reports/runtime_permission_probes.json",
         "reports/runtime_permission_probes.md",
+        "reports/telemetry_hook_recipes.json",
+        "reports/telemetry_hook_recipes.md",
         "reports/skill_atlas.json",
         "reports/skill_atlas.html",
         "reports/skill-os-2-review.md"
       ],
       "counts": {
         "references": 7,
-        "scripts": 3,
+        "scripts": 4,
         "assets": 0,
-        "reports": 36
+        "reports": 38
       }
     },
     "eval_plan": {
@@ -283,7 +286,7 @@
       },
       "help_smoke": {
         "enabled": true,
-        "checked_count": 3,
+        "checked_count": 4,
         "failed_count": 0,
         "failed_scripts": []
       },
@@ -329,9 +332,9 @@
         "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
         "counts": {
           "references": 7,
-          "scripts": 3,
+          "scripts": 4,
           "assets": 0,
-          "reports": 36
+          "reports": 38
         },
         "generated_files": [
           "targets/generic/adapter.json"
@@ -339,7 +342,7 @@
       },
       "scripts": {
         "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-        "script_count": 3,
+        "script_count": 4,
         "help_smoke_failed_count": 0
       },
       "permissions": {
@@ -427,7 +430,7 @@
     },
     "help_smoke": {
       "enabled": true,
-      "checked_count": 3,
+      "checked_count": 4,
       "failed_count": 0,
       "failed_scripts": []
     },
@@ -471,9 +474,9 @@
       "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
       "counts": {
         "references": 7,
-        "scripts": 3,
+        "scripts": 4,
         "assets": 0,
-        "reports": 36
+        "reports": 38
       },
       "generated_files": [
         "targets/generic/adapter.json"
@@ -481,7 +484,7 @@
     },
     "scripts": {
       "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-      "script_count": 3,
+      "script_count": 4,
       "help_smoke_failed_count": 0
     },
     "permissions": {
