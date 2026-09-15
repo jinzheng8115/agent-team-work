@@ -7,6 +7,8 @@ import argparse
 import json
 import py_compile
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 
@@ -51,10 +53,21 @@ def package_shape() -> None:
         raise AssertionError("manifest identity does not match the release")
 
 
+def revision_state() -> None:
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "evals" / "revision_cycle_state_test.py")],
+        cwd=ROOT,
+        check=False,
+    )
+    if result.returncode:
+        raise AssertionError("revision-cycle-state regression tests failed")
+
+
 CHECKS = {
     "route-contract": route_contract,
     "python-compile": python_compile,
     "package-shape": package_shape,
+    "revision-state": revision_state,
 }
 
 
