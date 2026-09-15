@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-09-14",
+  "generated_at": "2026-09-15",
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 139,
-    "json_claim_surface_count": 75,
-    "metadata_claim_surface_count": 77,
+    "claim_surface_count": 144,
+    "json_claim_surface_count": 77,
+    "metadata_claim_surface_count": 79,
     "package_claim_surface_count": 11,
     "violation_count": 0,
     "overclaim_guard_active": true,
@@ -88,6 +88,14 @@
     },
     {
       "path": "docs/migration-v2.md",
+      "violation_count": 0
+    },
+    {
+      "path": "docs/superpowers/plans/2026-09-15-post-completion-revision-cycle.md",
+      "violation_count": 0
+    },
+    {
+      "path": "docs/superpowers/specs/2026-09-15-post-completion-revision-cycle-design.md",
       "violation_count": 0
     },
     {
@@ -415,6 +423,10 @@
       "violation_count": 0
     },
     {
+      "path": "reports/runtime_package.json",
+      "violation_count": 0
+    },
+    {
       "path": "reports/runtime_permission_probes.json",
       "violation_count": 0
     },
@@ -484,6 +496,14 @@
     },
     {
       "path": "reports/skillops/daily/2026-09-14.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/skillops/daily/2026-09-15.json",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/skillops/daily/2026-09-15.md",
       "violation_count": 0
     },
     {

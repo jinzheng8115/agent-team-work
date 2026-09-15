@@ -1,6 +1,6 @@
 ---
 name: agent-team-work
-description: "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
+description: "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
 ---
 
 # 项目会话团队
@@ -29,10 +29,8 @@ description: "Use when a user explicitly asks to create or continue a Codex proj
 
 交付必须包含可核验的团队绑定（真实 `project_id`、Leader/member `thread_id`、标题和项目归属证据）、逐阶段任务与报告（`task_id`、`attempt`、身份字段、产物绝对路径和验证结果），以及最终 `complete`、`blocked` 或待用户处理状态和下一步。任何未查询到的创建、送达、侧边栏可见性或验收事实都标为 `unknown`，不能写成成功。
 
-维护者可用 `scripts/ci_test.py` 运行无依赖发布检查，`scripts/validate_team_state.py` 校验 `.team/` 账本；`scripts/local_output_eval_runner.py` 只回放固定 fixture 以验证评估管线，不代表 provider 模型运行。
-
 ## 交付
 
 报告团队就绪情况、当前阶段、成员状态、成果和下一步，并按宿主要求附真实创建会话入口。工具不可用或项目归属无法核实时说明缺口，不声称已创建或完成。
 
-维护者的触发样例位于 `evals/`，检查证据与验证范围位于 `reports/`；正常建队不必读取。Codex 与通用 agent-skills 元数据的差异见 [工具规则](references/codex-tools.md)。真实试跑按 [端到端冒烟清单](references/e2e-smoke-checklist.md) 留证。需要了解能力门、规模边界、完整串行案例或已知失败时，按需读取 `references/role-capabilities.md`、`references/team-scaling.md`、`examples/serial-pipeline.md` 和 `failures/README.md`。
+Codex 与通用 agent-skills 元数据的差异见 [工具规则](references/codex-tools.md)。运行时只按需读取流程、协议、角色和能力门参考；评测、报告、冒烟记录和发布检查属于源码仓库维护资产，不是 Skill 运行依赖。

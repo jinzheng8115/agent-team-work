@@ -7,8 +7,8 @@
   "recall": 1.0,
   "bucket_stats": {
     "should_trigger": {
-      "total": 6,
-      "passed": 6,
+      "total": 10,
+      "passed": 10,
       "pass_rate": 1.0
     },
     "should_not_trigger": {
@@ -17,8 +17,8 @@
       "pass_rate": 1.0
     },
     "near_neighbor": {
-      "total": 4,
-      "passed": 4,
+      "total": 7,
+      "passed": 7,
       "pass_rate": 1.0
     }
   },
@@ -51,16 +51,23 @@
       "false_negatives": 0,
       "pass_rate": 1.0
     },
+    "revision": {
+      "total": 4,
+      "passed": 4,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "pass_rate": 1.0
+    },
     "explain": {
-      "total": 1,
-      "passed": 1,
+      "total": 2,
+      "passed": 2,
       "false_positives": 0,
       "false_negatives": 0,
       "pass_rate": 1.0
     },
     "authoring": {
-      "total": 2,
-      "passed": 2,
+      "total": 3,
+      "passed": 3,
       "false_positives": 0,
       "false_negatives": 0,
       "pass_rate": 1.0
@@ -94,6 +101,13 @@
       "pass_rate": 1.0
     },
     "other-runtime": {
+      "total": 1,
+      "passed": 1,
+      "false_positives": 0,
+      "false_negatives": 0,
+      "pass_rate": 1.0
+    },
+    "one-off-edit": {
       "total": 1,
       "passed": 1,
       "false_positives": 0,
@@ -296,6 +310,143 @@
             "positive": {
               "team_work": [
                 "agent-team-work"
+              ]
+            },
+            "negative": {}
+          }
+        }
+      },
+      {
+        "prompt": "第一轮已完成后修改数据来源，请继续使用项目会话团队处理。",
+        "family": "revision",
+        "score": 0.92,
+        "predicted_trigger": true,
+        "expected_trigger": true,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [],
+          "exclusive_negative_concepts": [],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "完成后修改"
+              ]
+            },
+            "negative": {}
+          }
+        }
+      },
+      {
+        "prompt": "团队完成后由 Lead 影响分析，再安排这次修改。",
+        "family": "revision",
+        "score": 0.94,
+        "predicted_trigger": true,
+        "expected_trigger": true,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [],
+          "exclusive_negative_concepts": [],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.25,
+          "negative_penalty": 0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "影响分析"
+              ]
+            },
+            "negative": {}
+          }
+        }
+      },
+      {
+        "prompt": "完成后的需求变化只重跑受影响阶段和必要下游阶段。",
+        "family": "revision",
+        "score": 0.92,
+        "predicted_trigger": true,
+        "expected_trigger": true,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [],
+          "exclusive_negative_concepts": [],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "受影响阶段",
+                "必要下游阶段",
+                "下游阶段"
+              ]
+            },
+            "negative": {}
+          }
+        }
+      },
+      {
+        "prompt": "交付完成后发现问题，请复用原成员返修并重新验收。",
+        "family": "revision",
+        "score": 0.92,
+        "predicted_trigger": true,
+        "expected_trigger": true,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [],
+          "exclusive_negative_concepts": [],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "交付完成后",
+                "复用原成员",
+                "原成员返修",
+                "重新验收"
               ]
             },
             "negative": {}
@@ -585,7 +736,7 @@
           ],
           "semantic_coverage": 1.0,
           "support_score": 0,
-          "lexical_support": 0.25,
+          "lexical_support": 0.0,
           "negative_penalty": 1.0,
           "coverage_boost": 0.0,
           "concept_evidence": {
@@ -668,6 +819,118 @@
                 "不建团队"
               ]
             }
+          }
+        }
+      },
+      {
+        "prompt": "把这个普通文档里的日期改一下，这是一次性编辑，不需要项目团队。",
+        "family": "one-off-edit",
+        "score": 0.0,
+        "predicted_trigger": false,
+        "expected_trigger": false,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [
+            "out_of_scope"
+          ],
+          "exclusive_negative_concepts": [
+            "out_of_scope"
+          ],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 1.0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "项目团队"
+              ]
+            },
+            "negative": {
+              "out_of_scope": [
+                "一次性编辑",
+                "普通文档",
+                "不需要项目团队"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "prompt": "只解释完成后的影响分析是什么，不要操作或派发任务。",
+        "family": "explain",
+        "score": 0.0,
+        "predicted_trigger": false,
+        "expected_trigger": false,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [
+            "team_work"
+          ],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [
+            "out_of_scope"
+          ],
+          "exclusive_negative_concepts": [
+            "out_of_scope"
+          ],
+          "semantic_coverage": 1.0,
+          "support_score": 0,
+          "lexical_support": 0.0,
+          "negative_penalty": 1.0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {
+              "team_work": [
+                "影响分析"
+              ]
+            },
+            "negative": {
+              "out_of_scope": [
+                "解释",
+                "不要操作或派发任务"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "prompt": "创建一个支持修订流程的新 skill，不要建立项目会话团队。",
+        "family": "authoring",
+        "score": 0.027,
+        "predicted_trigger": false,
+        "expected_trigger": false,
+        "passed": true,
+        "score_detail": {
+          "mode": "semantic-intent",
+          "desired_positive_concepts": [
+            "team_work"
+          ],
+          "matched_desired_concepts": [],
+          "extra_positive_concepts": [],
+          "matched_negative_concepts": [],
+          "exclusive_negative_concepts": [],
+          "semantic_coverage": 0.0,
+          "support_score": 0,
+          "lexical_support": 0.333,
+          "negative_penalty": 0,
+          "coverage_boost": 0.0,
+          "concept_evidence": {
+            "positive": {},
+            "negative": {}
           }
         }
       }

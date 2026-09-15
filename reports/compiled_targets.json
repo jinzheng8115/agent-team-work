@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-09-14",
+  "generated_at": "2026-09-15",
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "target_count": 5,
@@ -38,17 +38,19 @@
         "name": "agent-team-work",
         "title": "Agent Team Work",
         "version": "0.2.0",
-        "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+        "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
         "job_to_be_done": "在项目开始时通过菜单组建一个由当前会话担任 Leader、多个独立项目会话担任成员的 Codex 团队，并按阶段派单、收取报告、验收和恢复，直到整体交付完成或明确阻塞。",
         "trigger": {
-          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
           "should_trigger": [
             "为这个新项目组建团队，每个角色在项目栏有独立会话。",
             "通过菜单创建项目会话团队，由 Leader 分配各阶段工作。",
             "帮我建一个团队，研究、核验、综合各有自己的项目对话。",
             "继续 agent-team-work 的已有团队，验收上次成果后安排下一步。",
             "查看 agent-team-work 团队当前阶段，不要派发新任务。",
-            "使用 agent-team-work 调整成员职责，保留已有角色会话。"
+            "使用 agent-team-work 调整成员职责，保留已有角色会话。",
+            "第一轮已完成后修改数据来源，请继续使用项目会话团队处理。",
+            "团队完成后由 Lead 影响分析，再安排这次修改。"
           ],
           "should_not_trigger": [
             "解释什么是多智能体团队。",
@@ -66,7 +68,10 @@
             "只创建一个项目会话，名称叫开发记录。",
             "请通过 Cindy Helper 创建项目会话团队。",
             "帮我重命名现有对话。",
-            "讨论如何组建团队，不建团队，只解释流程。"
+            "讨论如何组建团队，不建团队，只解释流程。",
+            "把这个普通文档里的日期改一下，这是一次性编辑，不需要项目团队。",
+            "只解释完成后的影响分析是什么，不要操作或派发任务。",
+            "创建一个支持修订流程的新 skill，不要建立项目会话团队。"
           ]
         },
         "workflow": {
@@ -96,9 +101,11 @@
             "references/workflow.md"
           ],
           "scripts": [
+            "scripts/build_runtime_package.py",
             "scripts/ci_test.py",
             "scripts/import_telemetry_events.py",
             "scripts/local_output_eval_runner.py",
+            "scripts/runtime_package_check.py",
             "scripts/validate_team_state.py"
           ],
           "assets": [],
@@ -144,7 +151,7 @@
           ],
           "counts": {
             "references": 7,
-            "scripts": 4,
+            "scripts": 6,
             "assets": 0,
             "reports": 38
           }
@@ -217,8 +224,10 @@
           "schema_version": "1.0",
           "source": "reports/security_trust_report.json",
           "source_available": true,
-          "declared_capabilities": [],
-          "review_required": false,
+          "declared_capabilities": [
+            "subprocess"
+          ],
+          "review_required": true,
           "capabilities": {
             "network": {
               "required": false,
@@ -233,10 +242,12 @@
               "review_reason": ""
             },
             "subprocess": {
-              "required": false,
-              "script_count": 0,
-              "scripts": [],
-              "review_reason": ""
+              "required": true,
+              "script_count": 1,
+              "scripts": [
+                "scripts/ci_test.py"
+              ],
+              "review_reason": "Scripts spawn local commands and need operator review."
             },
             "interactive": {
               "required": false,
@@ -253,7 +264,7 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 3,
+            "checked_count": 4,
             "failed_count": 0,
             "failed_scripts": []
           },
@@ -261,7 +272,7 @@
             "secret_findings": 0,
             "network_script_count": 0,
             "file_write_script_count": 0,
-            "subprocess_script_count": 0,
+            "subprocess_script_count": 1,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -274,12 +285,14 @@
           "permission_model": "metadata-only",
           "native_enforcement": false,
           "representation": "targets/openai/agents/openai.yaml::compatibility.permission_contract plus adapter.json",
-          "review_required": false,
-          "declared_capabilities": [],
+          "review_required": true,
+          "declared_capabilities": [
+            "subprocess"
+          ],
           "capability_counts": {
             "network": 0,
             "file_write": 0,
-            "subprocess": 0,
+            "subprocess": 1,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -291,7 +304,7 @@
           "native_surface": "OpenAI-style interface metadata plus neutral Agent Skills source",
           "activation": {
             "policy": "Use frontmatter description for catalog routing and targets/openai/agents/openai.yaml for display name, default prompt, and compatibility metadata.",
-            "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+            "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
             "manual_activation_supported": true,
             "automatic_activation_note": "Depends on the target client route/catalog implementation."
           },
@@ -299,7 +312,7 @@
             "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
             "counts": {
               "references": 7,
-              "scripts": 4,
+              "scripts": 6,
               "assets": 0,
               "reports": 38
             },
@@ -310,14 +323,16 @@
           },
           "scripts": {
             "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-            "script_count": 4,
+            "script_count": 6,
             "help_smoke_failed_count": 0
           },
           "permissions": {
             "enforcement": "metadata-only",
             "native_enforcement": false,
-            "declared_capabilities": [],
-            "review_required": false
+            "declared_capabilities": [
+              "subprocess"
+            ],
+            "review_required": true
           },
           "review": {
             "artifacts": [
@@ -368,8 +383,10 @@
         "schema_version": "1.0",
         "source": "reports/security_trust_report.json",
         "source_available": true,
-        "declared_capabilities": [],
-        "review_required": false,
+        "declared_capabilities": [
+          "subprocess"
+        ],
+        "review_required": true,
         "capabilities": {
           "network": {
             "required": false,
@@ -384,10 +401,12 @@
             "review_reason": ""
           },
           "subprocess": {
-            "required": false,
-            "script_count": 0,
-            "scripts": [],
-            "review_reason": ""
+            "required": true,
+            "script_count": 1,
+            "scripts": [
+              "scripts/ci_test.py"
+            ],
+            "review_reason": "Scripts spawn local commands and need operator review."
           },
           "interactive": {
             "required": false,
@@ -404,7 +423,7 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 3,
+          "checked_count": 4,
           "failed_count": 0,
           "failed_scripts": []
         },
@@ -412,7 +431,7 @@
           "secret_findings": 0,
           "network_script_count": 0,
           "file_write_script_count": 0,
-          "subprocess_script_count": 0,
+          "subprocess_script_count": 1,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -423,12 +442,14 @@
         "permission_model": "metadata-only",
         "native_enforcement": false,
         "representation": "targets/openai/agents/openai.yaml::compatibility.permission_contract plus adapter.json",
-        "review_required": false,
-        "declared_capabilities": [],
+        "review_required": true,
+        "declared_capabilities": [
+          "subprocess"
+        ],
         "capability_counts": {
           "network": 0,
           "file_write": 0,
-          "subprocess": 0,
+          "subprocess": 1,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -440,7 +461,7 @@
         "native_surface": "OpenAI-style interface metadata plus neutral Agent Skills source",
         "activation": {
           "policy": "Use frontmatter description for catalog routing and targets/openai/agents/openai.yaml for display name, default prompt, and compatibility metadata.",
-          "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+          "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
           "manual_activation_supported": true,
           "automatic_activation_note": "Depends on the target client route/catalog implementation."
         },
@@ -448,7 +469,7 @@
           "strategy": "Ship the neutral source tree and expose OpenAI-facing interface metadata as a generated companion file.",
           "counts": {
             "references": 7,
-            "scripts": 4,
+            "scripts": 6,
             "assets": 0,
             "reports": 38
           },
@@ -459,14 +480,16 @@
         },
         "scripts": {
           "strategy": "Keep scripts as local package resources; expose help-smoke and permission metadata for reviewer approval before execution.",
-          "script_count": 4,
+          "script_count": 6,
           "help_smoke_failed_count": 0
         },
         "permissions": {
           "enforcement": "metadata-only",
           "native_enforcement": false,
-          "declared_capabilities": [],
-          "review_required": false
+          "declared_capabilities": [
+            "subprocess"
+          ],
+          "review_required": true
         },
         "review": {
           "artifacts": [
@@ -550,17 +573,19 @@
         "name": "agent-team-work",
         "title": "Agent Team Work",
         "version": "0.2.0",
-        "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+        "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
         "job_to_be_done": "在项目开始时通过菜单组建一个由当前会话担任 Leader、多个独立项目会话担任成员的 Codex 团队，并按阶段派单、收取报告、验收和恢复，直到整体交付完成或明确阻塞。",
         "trigger": {
-          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
           "should_trigger": [
             "为这个新项目组建团队，每个角色在项目栏有独立会话。",
             "通过菜单创建项目会话团队，由 Leader 分配各阶段工作。",
             "帮我建一个团队，研究、核验、综合各有自己的项目对话。",
             "继续 agent-team-work 的已有团队，验收上次成果后安排下一步。",
             "查看 agent-team-work 团队当前阶段，不要派发新任务。",
-            "使用 agent-team-work 调整成员职责，保留已有角色会话。"
+            "使用 agent-team-work 调整成员职责，保留已有角色会话。",
+            "第一轮已完成后修改数据来源，请继续使用项目会话团队处理。",
+            "团队完成后由 Lead 影响分析，再安排这次修改。"
           ],
           "should_not_trigger": [
             "解释什么是多智能体团队。",
@@ -578,7 +603,10 @@
             "只创建一个项目会话，名称叫开发记录。",
             "请通过 Cindy Helper 创建项目会话团队。",
             "帮我重命名现有对话。",
-            "讨论如何组建团队，不建团队，只解释流程。"
+            "讨论如何组建团队，不建团队，只解释流程。",
+            "把这个普通文档里的日期改一下，这是一次性编辑，不需要项目团队。",
+            "只解释完成后的影响分析是什么，不要操作或派发任务。",
+            "创建一个支持修订流程的新 skill，不要建立项目会话团队。"
           ]
         },
         "workflow": {
@@ -608,9 +636,11 @@
             "references/workflow.md"
           ],
           "scripts": [
+            "scripts/build_runtime_package.py",
             "scripts/ci_test.py",
             "scripts/import_telemetry_events.py",
             "scripts/local_output_eval_runner.py",
+            "scripts/runtime_package_check.py",
             "scripts/validate_team_state.py"
           ],
           "assets": [],
@@ -656,7 +686,7 @@
           ],
           "counts": {
             "references": 7,
-            "scripts": 4,
+            "scripts": 6,
             "assets": 0,
             "reports": 38
           }
@@ -729,8 +759,10 @@
           "schema_version": "1.0",
           "source": "reports/security_trust_report.json",
           "source_available": true,
-          "declared_capabilities": [],
-          "review_required": false,
+          "declared_capabilities": [
+            "subprocess"
+          ],
+          "review_required": true,
           "capabilities": {
             "network": {
               "required": false,
@@ -745,10 +777,12 @@
               "review_reason": ""
             },
             "subprocess": {
-              "required": false,
-              "script_count": 0,
-              "scripts": [],
-              "review_reason": ""
+              "required": true,
+              "script_count": 1,
+              "scripts": [
+                "scripts/ci_test.py"
+              ],
+              "review_reason": "Scripts spawn local commands and need operator review."
             },
             "interactive": {
               "required": false,
@@ -765,7 +799,7 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 3,
+            "checked_count": 4,
             "failed_count": 0,
             "failed_scripts": []
           },
@@ -773,7 +807,7 @@
             "secret_findings": 0,
             "network_script_count": 0,
             "file_write_script_count": 0,
-            "subprocess_script_count": 0,
+            "subprocess_script_count": 1,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -786,12 +820,14 @@
           "permission_model": "neutral-source-plus-adapter",
           "native_enforcement": false,
           "representation": "targets/claude/adapter.json::target_permission_contract and README notes",
-          "review_required": false,
-          "declared_capabilities": [],
+          "review_required": true,
+          "declared_capabilities": [
+            "subprocess"
+          ],
           "capability_counts": {
             "network": 0,
             "file_write": 0,
-            "subprocess": 0,
+            "subprocess": 1,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -803,7 +839,7 @@
           "native_surface": "Claude-compatible neutral source folder with adapter notes",
           "activation": {
             "policy": "Use SKILL.md frontmatter description as the primary activation contract and adapter.json for review metadata.",
-            "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+            "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
             "manual_activation_supported": true,
             "automatic_activation_note": "Depends on the target client route/catalog implementation."
           },
@@ -811,7 +847,7 @@
             "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
             "counts": {
               "references": 7,
-              "scripts": 4,
+              "scripts": 6,
               "assets": 0,
               "reports": 38
             },
@@ -822,14 +858,16 @@
           },
           "scripts": {
             "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-            "script_count": 4,
+            "script_count": 6,
             "help_smoke_failed_count": 0
           },
           "permissions": {
             "enforcement": "metadata-fallback",
             "native_enforcement": false,
-            "declared_capabilities": [],
-            "review_required": false
+            "declared_capabilities": [
+              "subprocess"
+            ],
+            "review_required": true
           },
           "review": {
             "artifacts": [
@@ -880,8 +918,10 @@
         "schema_version": "1.0",
         "source": "reports/security_trust_report.json",
         "source_available": true,
-        "declared_capabilities": [],
-        "review_required": false,
+        "declared_capabilities": [
+          "subprocess"
+        ],
+        "review_required": true,
         "capabilities": {
           "network": {
             "required": false,
@@ -896,10 +936,12 @@
             "review_reason": ""
           },
           "subprocess": {
-            "required": false,
-            "script_count": 0,
-            "scripts": [],
-            "review_reason": ""
+            "required": true,
+            "script_count": 1,
+            "scripts": [
+              "scripts/ci_test.py"
+            ],
+            "review_reason": "Scripts spawn local commands and need operator review."
           },
           "interactive": {
             "required": false,
@@ -916,7 +958,7 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 3,
+          "checked_count": 4,
           "failed_count": 0,
           "failed_scripts": []
         },
@@ -924,7 +966,7 @@
           "secret_findings": 0,
           "network_script_count": 0,
           "file_write_script_count": 0,
-          "subprocess_script_count": 0,
+          "subprocess_script_count": 1,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -935,12 +977,14 @@
         "permission_model": "neutral-source-plus-adapter",
         "native_enforcement": false,
         "representation": "targets/claude/adapter.json::target_permission_contract and README notes",
-        "review_required": false,
-        "declared_capabilities": [],
+        "review_required": true,
+        "declared_capabilities": [
+          "subprocess"
+        ],
         "capability_counts": {
           "network": 0,
           "file_write": 0,
-          "subprocess": 0,
+          "subprocess": 1,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -952,7 +996,7 @@
         "native_surface": "Claude-compatible neutral source folder with adapter notes",
         "activation": {
           "policy": "Use SKILL.md frontmatter description as the primary activation contract and adapter.json for review metadata.",
-          "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+          "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
           "manual_activation_supported": true,
           "automatic_activation_note": "Depends on the target client route/catalog implementation."
         },
@@ -960,7 +1004,7 @@
           "strategy": "Preserve the source tree directly; write target notes in targets/claude/README.md.",
           "counts": {
             "references": 7,
-            "scripts": 4,
+            "scripts": 6,
             "assets": 0,
             "reports": 38
           },
@@ -971,14 +1015,16 @@
         },
         "scripts": {
           "strategy": "Scripts remain local package resources and must be reviewed through trust and permission reports before use.",
-          "script_count": 4,
+          "script_count": 6,
           "help_smoke_failed_count": 0
         },
         "permissions": {
           "enforcement": "metadata-fallback",
           "native_enforcement": false,
-          "declared_capabilities": [],
-          "review_required": false
+          "declared_capabilities": [
+            "subprocess"
+          ],
+          "review_required": true
         },
         "review": {
           "artifacts": [
@@ -1062,17 +1108,19 @@
         "name": "agent-team-work",
         "title": "Agent Team Work",
         "version": "0.2.0",
-        "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+        "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
         "job_to_be_done": "在项目开始时通过菜单组建一个由当前会话担任 Leader、多个独立项目会话担任成员的 Codex 团队，并按阶段派单、收取报告、验收和恢复，直到整体交付完成或明确阻塞。",
         "trigger": {
-          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
           "should_trigger": [
             "为这个新项目组建团队，每个角色在项目栏有独立会话。",
             "通过菜单创建项目会话团队，由 Leader 分配各阶段工作。",
             "帮我建一个团队，研究、核验、综合各有自己的项目对话。",
             "继续 agent-team-work 的已有团队，验收上次成果后安排下一步。",
             "查看 agent-team-work 团队当前阶段，不要派发新任务。",
-            "使用 agent-team-work 调整成员职责，保留已有角色会话。"
+            "使用 agent-team-work 调整成员职责，保留已有角色会话。",
+            "第一轮已完成后修改数据来源，请继续使用项目会话团队处理。",
+            "团队完成后由 Lead 影响分析，再安排这次修改。"
           ],
           "should_not_trigger": [
             "解释什么是多智能体团队。",
@@ -1090,7 +1138,10 @@
             "只创建一个项目会话，名称叫开发记录。",
             "请通过 Cindy Helper 创建项目会话团队。",
             "帮我重命名现有对话。",
-            "讨论如何组建团队，不建团队，只解释流程。"
+            "讨论如何组建团队，不建团队，只解释流程。",
+            "把这个普通文档里的日期改一下，这是一次性编辑，不需要项目团队。",
+            "只解释完成后的影响分析是什么，不要操作或派发任务。",
+            "创建一个支持修订流程的新 skill，不要建立项目会话团队。"
           ]
         },
         "workflow": {
@@ -1120,9 +1171,11 @@
             "references/workflow.md"
           ],
           "scripts": [
+            "scripts/build_runtime_package.py",
             "scripts/ci_test.py",
             "scripts/import_telemetry_events.py",
             "scripts/local_output_eval_runner.py",
+            "scripts/runtime_package_check.py",
             "scripts/validate_team_state.py"
           ],
           "assets": [],
@@ -1168,7 +1221,7 @@
           ],
           "counts": {
             "references": 7,
-            "scripts": 4,
+            "scripts": 6,
             "assets": 0,
             "reports": 38
           }
@@ -1241,8 +1294,10 @@
           "schema_version": "1.0",
           "source": "reports/security_trust_report.json",
           "source_available": true,
-          "declared_capabilities": [],
-          "review_required": false,
+          "declared_capabilities": [
+            "subprocess"
+          ],
+          "review_required": true,
           "capabilities": {
             "network": {
               "required": false,
@@ -1257,10 +1312,12 @@
               "review_reason": ""
             },
             "subprocess": {
-              "required": false,
-              "script_count": 0,
-              "scripts": [],
-              "review_reason": ""
+              "required": true,
+              "script_count": 1,
+              "scripts": [
+                "scripts/ci_test.py"
+              ],
+              "review_reason": "Scripts spawn local commands and need operator review."
             },
             "interactive": {
               "required": false,
@@ -1277,7 +1334,7 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 3,
+            "checked_count": 4,
             "failed_count": 0,
             "failed_scripts": []
           },
@@ -1285,7 +1342,7 @@
             "secret_findings": 0,
             "network_script_count": 0,
             "file_write_script_count": 0,
-            "subprocess_script_count": 0,
+            "subprocess_script_count": 1,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -1298,12 +1355,14 @@
           "permission_model": "agent-skills-compatible-metadata",
           "native_enforcement": false,
           "representation": "targets/generic/adapter.json::target_permission_contract",
-          "review_required": false,
-          "declared_capabilities": [],
+          "review_required": true,
+          "declared_capabilities": [
+            "subprocess"
+          ],
           "capability_counts": {
             "network": 0,
             "file_write": 0,
-            "subprocess": 0,
+            "subprocess": 1,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -1315,7 +1374,7 @@
           "native_surface": "Agent Skills compatible neutral package",
           "activation": {
             "policy": "Use SKILL.md name and description; consumers decide automatic or manual activation.",
-            "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+            "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
             "manual_activation_supported": true,
             "automatic_activation_note": "Depends on the target client route/catalog implementation."
           },
@@ -1323,7 +1382,7 @@
             "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
             "counts": {
               "references": 7,
-              "scripts": 4,
+              "scripts": 6,
               "assets": 0,
               "reports": 38
             },
@@ -1333,14 +1392,16 @@
           },
           "scripts": {
             "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-            "script_count": 4,
+            "script_count": 6,
             "help_smoke_failed_count": 0
           },
           "permissions": {
             "enforcement": "consumer-enforced-or-metadata-only",
             "native_enforcement": false,
-            "declared_capabilities": [],
-            "review_required": false
+            "declared_capabilities": [
+              "subprocess"
+            ],
+            "review_required": true
           },
           "review": {
             "artifacts": [
@@ -1385,8 +1446,10 @@
         "schema_version": "1.0",
         "source": "reports/security_trust_report.json",
         "source_available": true,
-        "declared_capabilities": [],
-        "review_required": false,
+        "declared_capabilities": [
+          "subprocess"
+        ],
+        "review_required": true,
         "capabilities": {
           "network": {
             "required": false,
@@ -1401,10 +1464,12 @@
             "review_reason": ""
           },
           "subprocess": {
-            "required": false,
-            "script_count": 0,
-            "scripts": [],
-            "review_reason": ""
+            "required": true,
+            "script_count": 1,
+            "scripts": [
+              "scripts/ci_test.py"
+            ],
+            "review_reason": "Scripts spawn local commands and need operator review."
           },
           "interactive": {
             "required": false,
@@ -1421,7 +1486,7 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 3,
+          "checked_count": 4,
           "failed_count": 0,
           "failed_scripts": []
         },
@@ -1429,7 +1494,7 @@
           "secret_findings": 0,
           "network_script_count": 0,
           "file_write_script_count": 0,
-          "subprocess_script_count": 0,
+          "subprocess_script_count": 1,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -1440,12 +1505,14 @@
         "permission_model": "agent-skills-compatible-metadata",
         "native_enforcement": false,
         "representation": "targets/generic/adapter.json::target_permission_contract",
-        "review_required": false,
-        "declared_capabilities": [],
+        "review_required": true,
+        "declared_capabilities": [
+          "subprocess"
+        ],
         "capability_counts": {
           "network": 0,
           "file_write": 0,
-          "subprocess": 0,
+          "subprocess": 1,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -1457,7 +1524,7 @@
         "native_surface": "Agent Skills compatible neutral package",
         "activation": {
           "policy": "Use SKILL.md name and description; consumers decide automatic or manual activation.",
-          "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+          "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
           "manual_activation_supported": true,
           "automatic_activation_note": "Depends on the target client route/catalog implementation."
         },
@@ -1465,7 +1532,7 @@
           "strategy": "Preserve references, scripts, assets, evals, reports, and adapter metadata as relative package resources.",
           "counts": {
             "references": 7,
-            "scripts": 4,
+            "scripts": 6,
             "assets": 0,
             "reports": 38
           },
@@ -1475,14 +1542,16 @@
         },
         "scripts": {
           "strategy": "Expose script and permission metadata for downstream clients or installers to enforce.",
-          "script_count": 4,
+          "script_count": 6,
           "help_smoke_failed_count": 0
         },
         "permissions": {
           "enforcement": "consumer-enforced-or-metadata-only",
           "native_enforcement": false,
-          "declared_capabilities": [],
-          "review_required": false
+          "declared_capabilities": [
+            "subprocess"
+          ],
+          "review_required": true
         },
         "review": {
           "artifacts": [
@@ -1558,17 +1627,19 @@
         "name": "agent-team-work",
         "title": "Agent Team Work",
         "version": "0.2.0",
-        "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+        "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
         "job_to_be_done": "在项目开始时通过菜单组建一个由当前会话担任 Leader、多个独立项目会话担任成员的 Codex 团队，并按阶段派单、收取报告、验收和恢复，直到整体交付完成或明确阻塞。",
         "trigger": {
-          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
           "should_trigger": [
             "为这个新项目组建团队，每个角色在项目栏有独立会话。",
             "通过菜单创建项目会话团队，由 Leader 分配各阶段工作。",
             "帮我建一个团队，研究、核验、综合各有自己的项目对话。",
             "继续 agent-team-work 的已有团队，验收上次成果后安排下一步。",
             "查看 agent-team-work 团队当前阶段，不要派发新任务。",
-            "使用 agent-team-work 调整成员职责，保留已有角色会话。"
+            "使用 agent-team-work 调整成员职责，保留已有角色会话。",
+            "第一轮已完成后修改数据来源，请继续使用项目会话团队处理。",
+            "团队完成后由 Lead 影响分析，再安排这次修改。"
           ],
           "should_not_trigger": [
             "解释什么是多智能体团队。",
@@ -1586,7 +1657,10 @@
             "只创建一个项目会话，名称叫开发记录。",
             "请通过 Cindy Helper 创建项目会话团队。",
             "帮我重命名现有对话。",
-            "讨论如何组建团队，不建团队，只解释流程。"
+            "讨论如何组建团队，不建团队，只解释流程。",
+            "把这个普通文档里的日期改一下，这是一次性编辑，不需要项目团队。",
+            "只解释完成后的影响分析是什么，不要操作或派发任务。",
+            "创建一个支持修订流程的新 skill，不要建立项目会话团队。"
           ]
         },
         "workflow": {
@@ -1616,9 +1690,11 @@
             "references/workflow.md"
           ],
           "scripts": [
+            "scripts/build_runtime_package.py",
             "scripts/ci_test.py",
             "scripts/import_telemetry_events.py",
             "scripts/local_output_eval_runner.py",
+            "scripts/runtime_package_check.py",
             "scripts/validate_team_state.py"
           ],
           "assets": [],
@@ -1664,7 +1740,7 @@
           ],
           "counts": {
             "references": 7,
-            "scripts": 4,
+            "scripts": 6,
             "assets": 0,
             "reports": 38
           }
@@ -1737,8 +1813,10 @@
           "schema_version": "1.0",
           "source": "reports/security_trust_report.json",
           "source_available": true,
-          "declared_capabilities": [],
-          "review_required": false,
+          "declared_capabilities": [
+            "subprocess"
+          ],
+          "review_required": true,
           "capabilities": {
             "network": {
               "required": false,
@@ -1753,10 +1831,12 @@
               "review_reason": ""
             },
             "subprocess": {
-              "required": false,
-              "script_count": 0,
-              "scripts": [],
-              "review_reason": ""
+              "required": true,
+              "script_count": 1,
+              "scripts": [
+                "scripts/ci_test.py"
+              ],
+              "review_reason": "Scripts spawn local commands and need operator review."
             },
             "interactive": {
               "required": false,
@@ -1773,7 +1853,7 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 3,
+            "checked_count": 4,
             "failed_count": 0,
             "failed_scripts": []
           },
@@ -1781,7 +1861,7 @@
             "secret_findings": 0,
             "network_script_count": 0,
             "file_write_script_count": 0,
-            "subprocess_script_count": 0,
+            "subprocess_script_count": 1,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -1794,12 +1874,14 @@
           "permission_model": "metadata-only",
           "native_enforcement": false,
           "representation": "adapter metadata",
-          "review_required": false,
-          "declared_capabilities": [],
+          "review_required": true,
+          "declared_capabilities": [
+            "subprocess"
+          ],
           "capability_counts": {
             "network": 0,
             "file_write": 0,
-            "subprocess": 0,
+            "subprocess": 1,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -1811,7 +1893,7 @@
           "native_surface": "Agent Skills standard source tree",
           "activation": {
             "policy": "Use SKILL.md frontmatter name and description for progressive disclosure.",
-            "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+            "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
             "manual_activation_supported": true,
             "automatic_activation_note": "Depends on the target client route/catalog implementation."
           },
@@ -1819,7 +1901,7 @@
             "strategy": "Keep optional directories as relative resources next to SKILL.md.",
             "counts": {
               "references": 7,
-              "scripts": 4,
+              "scripts": 6,
               "assets": 0,
               "reports": 38
             },
@@ -1830,14 +1912,16 @@
           },
           "scripts": {
             "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-            "script_count": 4,
+            "script_count": 6,
             "help_smoke_failed_count": 0
           },
           "permissions": {
             "enforcement": "consumer-enforced-or-metadata-only",
             "native_enforcement": false,
-            "declared_capabilities": [],
-            "review_required": false
+            "declared_capabilities": [
+              "subprocess"
+            ],
+            "review_required": true
           },
           "review": {
             "artifacts": [
@@ -1881,8 +1965,10 @@
         "schema_version": "1.0",
         "source": "reports/security_trust_report.json",
         "source_available": true,
-        "declared_capabilities": [],
-        "review_required": false,
+        "declared_capabilities": [
+          "subprocess"
+        ],
+        "review_required": true,
         "capabilities": {
           "network": {
             "required": false,
@@ -1897,10 +1983,12 @@
             "review_reason": ""
           },
           "subprocess": {
-            "required": false,
-            "script_count": 0,
-            "scripts": [],
-            "review_reason": ""
+            "required": true,
+            "script_count": 1,
+            "scripts": [
+              "scripts/ci_test.py"
+            ],
+            "review_reason": "Scripts spawn local commands and need operator review."
           },
           "interactive": {
             "required": false,
@@ -1917,7 +2005,7 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 3,
+          "checked_count": 4,
           "failed_count": 0,
           "failed_scripts": []
         },
@@ -1925,7 +2013,7 @@
           "secret_findings": 0,
           "network_script_count": 0,
           "file_write_script_count": 0,
-          "subprocess_script_count": 0,
+          "subprocess_script_count": 1,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -1936,12 +2024,14 @@
         "permission_model": "metadata-only",
         "native_enforcement": false,
         "representation": "adapter metadata",
-        "review_required": false,
-        "declared_capabilities": [],
+        "review_required": true,
+        "declared_capabilities": [
+          "subprocess"
+        ],
         "capability_counts": {
           "network": 0,
           "file_write": 0,
-          "subprocess": 0,
+          "subprocess": 1,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -1953,7 +2043,7 @@
         "native_surface": "Agent Skills standard source tree",
         "activation": {
           "policy": "Use SKILL.md frontmatter name and description for progressive disclosure.",
-          "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+          "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
           "manual_activation_supported": true,
           "automatic_activation_note": "Depends on the target client route/catalog implementation."
         },
@@ -1961,7 +2051,7 @@
           "strategy": "Keep optional directories as relative resources next to SKILL.md.",
           "counts": {
             "references": 7,
-            "scripts": 4,
+            "scripts": 6,
             "assets": 0,
             "reports": 38
           },
@@ -1972,14 +2062,16 @@
         },
         "scripts": {
           "strategy": "Scripts remain local optional resources and should advertise --help when executable.",
-          "script_count": 4,
+          "script_count": 6,
           "help_smoke_failed_count": 0
         },
         "permissions": {
           "enforcement": "consumer-enforced-or-metadata-only",
           "native_enforcement": false,
-          "declared_capabilities": [],
-          "review_required": false
+          "declared_capabilities": [
+            "subprocess"
+          ],
+          "review_required": true
         },
         "review": {
           "artifacts": [
@@ -2054,17 +2146,19 @@
         "name": "agent-team-work",
         "title": "Agent Team Work",
         "version": "0.2.0",
-        "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+        "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
         "job_to_be_done": "在项目开始时通过菜单组建一个由当前会话担任 Leader、多个独立项目会话担任成员的 Codex 团队，并按阶段派单、收取报告、验收和恢复，直到整体交付完成或明确阻塞。",
         "trigger": {
-          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
           "should_trigger": [
             "为这个新项目组建团队，每个角色在项目栏有独立会话。",
             "通过菜单创建项目会话团队，由 Leader 分配各阶段工作。",
             "帮我建一个团队，研究、核验、综合各有自己的项目对话。",
             "继续 agent-team-work 的已有团队，验收上次成果后安排下一步。",
             "查看 agent-team-work 团队当前阶段，不要派发新任务。",
-            "使用 agent-team-work 调整成员职责，保留已有角色会话。"
+            "使用 agent-team-work 调整成员职责，保留已有角色会话。",
+            "第一轮已完成后修改数据来源，请继续使用项目会话团队处理。",
+            "团队完成后由 Lead 影响分析，再安排这次修改。"
           ],
           "should_not_trigger": [
             "解释什么是多智能体团队。",
@@ -2082,7 +2176,10 @@
             "只创建一个项目会话，名称叫开发记录。",
             "请通过 Cindy Helper 创建项目会话团队。",
             "帮我重命名现有对话。",
-            "讨论如何组建团队，不建团队，只解释流程。"
+            "讨论如何组建团队，不建团队，只解释流程。",
+            "把这个普通文档里的日期改一下，这是一次性编辑，不需要项目团队。",
+            "只解释完成后的影响分析是什么，不要操作或派发任务。",
+            "创建一个支持修订流程的新 skill，不要建立项目会话团队。"
           ]
         },
         "workflow": {
@@ -2112,9 +2209,11 @@
             "references/workflow.md"
           ],
           "scripts": [
+            "scripts/build_runtime_package.py",
             "scripts/ci_test.py",
             "scripts/import_telemetry_events.py",
             "scripts/local_output_eval_runner.py",
+            "scripts/runtime_package_check.py",
             "scripts/validate_team_state.py"
           ],
           "assets": [],
@@ -2160,7 +2259,7 @@
           ],
           "counts": {
             "references": 7,
-            "scripts": 4,
+            "scripts": 6,
             "assets": 0,
             "reports": 38
           }
@@ -2233,8 +2332,10 @@
           "schema_version": "1.0",
           "source": "reports/security_trust_report.json",
           "source_available": true,
-          "declared_capabilities": [],
-          "review_required": false,
+          "declared_capabilities": [
+            "subprocess"
+          ],
+          "review_required": true,
           "capabilities": {
             "network": {
               "required": false,
@@ -2249,10 +2350,12 @@
               "review_reason": ""
             },
             "subprocess": {
-              "required": false,
-              "script_count": 0,
-              "scripts": [],
-              "review_reason": ""
+              "required": true,
+              "script_count": 1,
+              "scripts": [
+                "scripts/ci_test.py"
+              ],
+              "review_reason": "Scripts spawn local commands and need operator review."
             },
             "interactive": {
               "required": false,
@@ -2269,7 +2372,7 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 3,
+            "checked_count": 4,
             "failed_count": 0,
             "failed_scripts": []
           },
@@ -2277,7 +2380,7 @@
             "secret_findings": 0,
             "network_script_count": 0,
             "file_write_script_count": 0,
-            "subprocess_script_count": 0,
+            "subprocess_script_count": 1,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
           }
@@ -2290,12 +2393,14 @@
           "permission_model": "vscode-workspace-trust-plus-metadata",
           "native_enforcement": false,
           "representation": "targets/vscode/adapter.json::target_permission_contract and targets/vscode/README.md install notes",
-          "review_required": false,
-          "declared_capabilities": [],
+          "review_required": true,
+          "declared_capabilities": [
+            "subprocess"
+          ],
           "capability_counts": {
             "network": 0,
             "file_write": 0,
-            "subprocess": 0,
+            "subprocess": 1,
             "interactive": 0
           },
           "evidence": "reports/security_trust_report.json",
@@ -2307,7 +2412,7 @@
           "native_surface": "VS Code/Copilot Agent Skills project or user scope",
           "activation": {
             "policy": "Use folder name plus SKILL.md name/description; keep description under platform limits.",
-            "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+            "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
             "manual_activation_supported": true,
             "automatic_activation_note": "Depends on the target client route/catalog implementation."
           },
@@ -2315,7 +2420,7 @@
             "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
             "counts": {
               "references": 7,
-              "scripts": 4,
+              "scripts": 6,
               "assets": 0,
               "reports": 38
             },
@@ -2326,14 +2431,16 @@
           },
           "scripts": {
             "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-            "script_count": 4,
+            "script_count": 6,
             "help_smoke_failed_count": 0
           },
           "permissions": {
             "enforcement": "client-or-workspace-trust",
             "native_enforcement": false,
-            "declared_capabilities": [],
-            "review_required": false
+            "declared_capabilities": [
+              "subprocess"
+            ],
+            "review_required": true
           },
           "review": {
             "artifacts": [
@@ -2381,8 +2488,10 @@
         "schema_version": "1.0",
         "source": "reports/security_trust_report.json",
         "source_available": true,
-        "declared_capabilities": [],
-        "review_required": false,
+        "declared_capabilities": [
+          "subprocess"
+        ],
+        "review_required": true,
         "capabilities": {
           "network": {
             "required": false,
@@ -2397,10 +2506,12 @@
             "review_reason": ""
           },
           "subprocess": {
-            "required": false,
-            "script_count": 0,
-            "scripts": [],
-            "review_reason": ""
+            "required": true,
+            "script_count": 1,
+            "scripts": [
+              "scripts/ci_test.py"
+            ],
+            "review_reason": "Scripts spawn local commands and need operator review."
           },
           "interactive": {
             "required": false,
@@ -2417,7 +2528,7 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 3,
+          "checked_count": 4,
           "failed_count": 0,
           "failed_scripts": []
         },
@@ -2425,7 +2536,7 @@
           "secret_findings": 0,
           "network_script_count": 0,
           "file_write_script_count": 0,
-          "subprocess_script_count": 0,
+          "subprocess_script_count": 1,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
         }
@@ -2436,12 +2547,14 @@
         "permission_model": "vscode-workspace-trust-plus-metadata",
         "native_enforcement": false,
         "representation": "targets/vscode/adapter.json::target_permission_contract and targets/vscode/README.md install notes",
-        "review_required": false,
-        "declared_capabilities": [],
+        "review_required": true,
+        "declared_capabilities": [
+          "subprocess"
+        ],
         "capability_counts": {
           "network": 0,
           "file_write": 0,
-          "subprocess": 0,
+          "subprocess": 1,
           "interactive": 0
         },
         "evidence": "reports/security_trust_report.json",
@@ -2453,7 +2566,7 @@
         "native_surface": "VS Code/Copilot Agent Skills project or user scope",
         "activation": {
           "policy": "Use folder name plus SKILL.md name/description; keep description under platform limits.",
-          "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+          "trigger_description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
           "manual_activation_supported": true,
           "automatic_activation_note": "Depends on the target client route/catalog implementation."
         },
@@ -2461,7 +2574,7 @@
           "strategy": "Install as project or user scoped skill source, preserving relative references and scripts.",
           "counts": {
             "references": 7,
-            "scripts": 4,
+            "scripts": 6,
             "assets": 0,
             "reports": 38
           },
@@ -2472,14 +2585,16 @@
         },
         "scripts": {
           "strategy": "Scripts require workspace trust and operator/client approval outside this compiler.",
-          "script_count": 4,
+          "script_count": 6,
           "help_smoke_failed_count": 0
         },
         "permissions": {
           "enforcement": "client-or-workspace-trust",
           "native_enforcement": false,
-          "declared_capabilities": [],
-          "review_required": false
+          "declared_capabilities": [
+            "subprocess"
+          ],
+          "review_required": true
         },
         "review": {
           "artifacts": [

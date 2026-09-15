@@ -1,14 +1,14 @@
 # Skill OS 2.0 Audit
 
-Generated at: `2026-09-14`
+Generated at: `2026-09-15`
 
 ## Summary
 
 - decision: `continue-iteration`
-- pass: `11` / `15`
+- pass: `10` / `15`
 - human required: `1`
 - external required: `3`
-- missing: `0`
+- missing: `1`
 - world-class ready: `false`
 - evidence plan: `reports/world_class_evidence_plan.md`
 
@@ -24,10 +24,10 @@ Generated at: `2026-09-14`
 | Benchmark Reproducibility | pass | artifacts 25; missing 0; failures 2 | Public methodology, reproducible commands, required artifacts, and failure disclosure are machine-checkable | Keep the manifest current with every benchmark, package, and release evidence change. |
 | Runtime Conformance | pass | 5/5 targets pass | Target package structure, metadata, relative paths, and degradation notes pass | Keep target conformance fixtures updated as platform contracts change. |
 | Trust Security | pass | secrets 0; scripts 4; help failures 0 | Secrets, scripts, dependencies, permissions, and package hash are reviewable | Keep high-permission approvals scoped, expiring, and target-mapped. |
-| Permission Metadata | pass | 4/4 target probes pass; metadata fallback 4; installer enforcement 0 | Packaged adapters expose explicit permission metadata, residual risks, and installer enforcement evidence when available | Preserve residual-risk notes until real native enforcement exists. |
-| Native Permission Enforcement | external-required | native-enforced targets 0; installer-enforced targets 0 | At least one target/client enforces approved permissions at runtime | Integrate a real target-client or external installer runtime guard before claiming native permission enforcement. |
-| Skill Atlas | pass | 1 skills; actionable collisions 0 | Workspace catalog, route overlap, stale/owner gaps, drift, and no-route opportunities | Feed real drift data into Atlas once client telemetry is installed. |
-| Registry Distribution | pass | zip entries 157; install failures 0; permission failures 0 | Package metadata, archive checksum, package verification, and install simulation pass | Regenerate registry after package verification so checksums stay aligned. |
+| Permission Metadata | pass | 4/4 target probes pass; metadata fallback 4; installer enforcement 4 | Packaged adapters expose explicit permission metadata, residual risks, and installer enforcement evidence when available | Preserve residual-risk notes until real native enforcement exists. |
+| Native Permission Enforcement | external-required | native-enforced targets 0; installer-enforced targets 4 | At least one target/client enforces approved permissions at runtime | Integrate a real target-client or external installer runtime guard before claiming native permission enforcement. |
+| Skill Atlas | missing | 2 skills; actionable collisions 2 | Workspace catalog, route overlap, stale/owner gaps, drift, and no-route opportunities | Feed real drift data into Atlas once client telemetry is installed. |
+| Registry Distribution | pass | zip entries 160; install failures 0; permission failures 0 | Package metadata, archive checksum, package verification, and install simulation pass | Regenerate registry after package verification so checksums stay aligned. |
 | Review Studio | pass | decision review; warnings 3; score 91 | One page shows gates, evidence paths, blockers, warnings, actions, waivers, and annotations | Resolve human/external warning gates before claiming full release readiness. |
 | Telemetry Drift | pass | events 1; risk low; recipes 5 | Local-first metadata-only event contract, aggregate drift report, hook recipes, and import path | Keep raw JSONL out of distributed packages and use aggregate reports for Atlas. |
 | Native Client Telemetry | external-required | external source events 0; adoption samples 1 | A real Browser/Chrome/provider client sends production metadata events | Install a real client against the native host and import production metadata-only events. |
@@ -37,6 +37,7 @@ Generated at: `2026-09-14`
 - `provider-holdout` (external-required): Run evidence-build with DEEPSEEK_API_KEY and keep raw outputs in the isolated run directory.
 - `human-adjudication` (human-required): Collect three controlled reviewer packets and adjudicate them against the private run answer key.
 - `native-permission-enforcement` (external-required): Integrate a real target-client or external installer runtime guard before claiming native permission enforcement.
+- `skill-atlas` (missing): Feed real drift data into Atlas once client telemetry is installed.
 - `native-client-telemetry` (external-required): Install a real client against the native host and import production metadata-only events.
 
 ## Evidence

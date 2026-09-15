@@ -5,6 +5,7 @@
 ## 使用范围
 
 - 适用：创建或继续 Codex 项目会话团队；每个角色拥有独立项目任务；需要阶段派单、汇报、验收和恢复。
+- 完成后的修改：团队已 `complete` 时，Lead 先进入 `impact_analysis`，记录新的 `revision_cycle` 和影响范围，再只复用原成员派发受影响阶段及必要下游阶段；确认零影响时记录规范标记后不派单。
 - 不适用：概念解释、编写或修改 skill、一次性改名、普通子代理、并行 worker、Orca team、Sub-Lead 或子团队。
 - 运行依赖：Codex 原生 project/thread 工具和用户已保存的项目。通用 Agent Skills 目标只保留协议和降级说明。
 
@@ -19,7 +20,7 @@
 
 ## 发布证据
 
-`reports/` 保存 IR、目标编译、conformance、信任、安装模拟、路线、输出评估和 Review Studio 证据。真实冒烟记录位于 `evals/history/2026-09-14-real-smoke.json`。本包不把本地命令执行、模板或待审查记录当作 provider 或人工证据；公共发布前仍需按 `reports/world_class_evidence_ledger.md` 的待办完成外部和人工证据收集。
+源码仓库的 `reports/`、`evals/`、`scripts/` 和其他审计资产只用于维护与发布验证，不进入 runtime-only 发布包；仅保留两个用于校验归档完整性的便携元数据文件。发布包只保留 Skill 入口、运行时参考、接口元数据、清单和许可证；本地命令执行、模板或待审查记录不会被当作 provider 或人工证据。
 
 ## 许可
 

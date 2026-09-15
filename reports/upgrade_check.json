@@ -1,7 +1,7 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-09-14",
+  "generated_at": "2026-09-15",
   "previous": {
     "name": "agent-team-work",
     "version": "0.1.0",
@@ -50,7 +50,7 @@
       {
         "field": "description",
         "from": "Previous agent-team-work route contract fixture used only for upgrade comparison.",
-        "to": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
+        "to": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
       },
       {
         "field": "license",
@@ -62,12 +62,12 @@
       {
         "field": "archive_sha256",
         "from": "",
-        "to": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27"
+        "to": "4805c02dd0cb9ba2b65f8a60c895ae420c9bb8f75e179394912a69a87504bd37"
       },
       {
         "field": "package_sha256",
         "from": "previous-fixture",
-        "to": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d"
+        "to": "3393c0524aade25d733d4bb668dcebc1ff724fd65773ba7ee57b6a3d50d82d58"
       }
     ]
   },

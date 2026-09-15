@@ -1,15 +1,15 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-09-14",
+  "generated_at": "2026-09-15",
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "package_dir": "/Volumes/Code/team-worker/agent-team-work/dist",
   "summary": {
     "target_count": 4,
     "adapter_count": 4,
     "archive_present": true,
-    "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
-    "archive_entry_count": 157,
+    "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
+    "archive_entry_count": 13,
     "nested_skill_entry_count": 0,
     "failure_count": 0,
     "warning_count": 0

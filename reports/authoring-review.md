@@ -18,4 +18,4 @@
 
 ## 发布边界
 
-Registry 已用 MIT 许可、四目标 adapter 和当前 archive checksum 通过；claim guard 0 violations；source commit `7cfd3ae` 的 clean-lock 已由 benchmark 证明。无条件公共 production 仍需真实 provider 40-call holdout、三名 reviewer 的盲评 adjudication、native permission enforcement 和外部客户端 telemetry。不得把 fixture、模板、waiver 或 metadata fallback 作为这些证据的替代品。
+Registry 已用 MIT 许可、四目标 adapter 和当前 archive checksum 通过；claim guard 0 violations；source commit `3674498` 的 clean-lock 已由 benchmark 证明。无条件公共 production 仍需真实 provider 40-call holdout、三名 reviewer 的盲评 adjudication、native permission enforcement 和外部客户端 telemetry。不得把 fixture、模板、waiver 或 metadata fallback 作为这些证据的替代品。

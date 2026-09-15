@@ -10,24 +10,24 @@ Runtime permission probes verify that generated target adapters expose high-perm
 - Failed: `0`
 - Native enforcement targets: `0`
 - Explicit metadata fallbacks: `4`
-- Installer enforcement source: `present`
+- Installer enforcement source: `package-mismatch`
 - Installer-enforced targets: `0`
 - Installer permission failures: `0`
 - World-class native evidence ready: `False`
-- Required capabilities: `none`
+- Required capabilities: `file_write, subprocess`
 
 | Target | Status | Assurance | Native Enforcement | Metadata Fallback | Installer Enforcement | Residual Risk |
 | --- | --- | --- | --- | --- | --- | --- |
-| `openai` | `pass` | `metadata-fallback-explicit` | `False` | `True` | `present` | Client-native permission enforcement is not provided by this target; installer or operator must honor metadata. |
-| `claude` | `pass` | `metadata-fallback-explicit` | `False` | `True` | `present` | Client-native permission enforcement is not provided by this target; installer or operator must honor metadata. |
-| `generic` | `pass` | `metadata-fallback-explicit` | `False` | `True` | `present` | Client-native permission enforcement is not provided by this target; installer or operator must honor metadata. |
-| `vscode` | `pass` | `metadata-fallback-explicit` | `False` | `True` | `present` | Client-native permission enforcement is not provided by this target; installer or operator must honor metadata. |
+| `openai` | `pass` | `metadata-fallback-explicit` | `False` | `True` | `package-mismatch` | Client-native permission enforcement is not provided by this target; installer or operator must honor metadata. |
+| `claude` | `pass` | `metadata-fallback-explicit` | `False` | `True` | `package-mismatch` | Client-native permission enforcement is not provided by this target; installer or operator must honor metadata. |
+| `generic` | `pass` | `metadata-fallback-explicit` | `False` | `True` | `package-mismatch` | Client-native permission enforcement is not provided by this target; installer or operator must honor metadata. |
+| `vscode` | `pass` | `metadata-fallback-explicit` | `False` | `True` | `package-mismatch` | Client-native permission enforcement is not provided by this target; installer or operator must honor metadata. |
 
 ## Installer Enforcement
 
 - Source: `reports/install_simulation.json`
-- Source status: `present`
-- Package dir matches probe: `True`
+- Source status: `package-mismatch`
+- Package dir matches probe: `False`
 
 Installer enforcement means the package install simulation blocks missing capability approvals or target enforcement notes. It is supporting local distribution evidence, not proof of target-client native enforcement.
 

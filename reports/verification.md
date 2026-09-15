@@ -19,6 +19,6 @@
 - 五个盲评 pair 尚无真实 reviewer judgments；phase-one 三名 reviewer adjudication 和 promotion 也未完成。
 - 四个目标都只有 metadata fallback，尚无目标客户端原生权限执行证明。
 - 尚无真实外部客户端 metadata-only telemetry 导入。
-- source commit `7cfd3ae` 已建立，benchmark 已证明 source clean-lock ready；生成报告仍保持为 generation-time evidence，不能替代 provider、human 或 native 证据。
+- source commit `3674498` 已建立，benchmark 已证明 source clean-lock ready；生成报告仍保持为 generation-time evidence，不能替代 provider、human 或 native 证据。
 
 这些缺口是 `missing evidence`，不以 waiver、fixture、模板或本地命令回放替代。

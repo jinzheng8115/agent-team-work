@@ -4,7 +4,7 @@
 - Package directory: `/Volumes/Code/team-worker/agent-team-work/dist`
 - Targets: `4 / 4` adapters present
 - Archive present: `True`
-- Archive SHA256: `fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27`
+- Archive SHA256: `c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0`
 - Nested SKILL.md entries: `0`
 - Failures: `0`
 - Warnings: `0`

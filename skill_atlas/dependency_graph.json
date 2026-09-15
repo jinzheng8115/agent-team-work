@@ -2,6 +2,10 @@
   "nodes": [
     {
       "name": "agent-team-work",
+      "path": ".release-dist.J16N8f/install-simulation/simulate-agent-team-work/agent-team-work"
+    },
+    {
+      "name": "agent-team-work",
       "path": "."
     }
   ],

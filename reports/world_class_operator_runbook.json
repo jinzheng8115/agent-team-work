@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-09-14",
+  "generated_at": "2026-09-15",
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "evidence_item_count": 4,
@@ -33,7 +33,7 @@
     ],
     "coordination_counts_as_completion": false,
     "release_gate_ready": false,
-    "release_gate_blocked_count": 4,
+    "release_gate_blocked_count": 5,
     "release_gate_check_count": 5,
     "release_gate_counts_as_completion": false,
     "ready_to_claim_world_class": false,
@@ -1322,7 +1322,7 @@
     "ready": false,
     "decision": "blocked-until-evidence-accepted",
     "check_count": 5,
-    "blocked_count": 4,
+    "blocked_count": 5,
     "checks": [
       {
         "key": "world_class_ledger_ready",
@@ -1352,15 +1352,15 @@
         "key": "review_studio_clean",
         "label": "Review Studio clean",
         "passed": false,
-        "current": "blockers 0; warnings 3",
+        "current": "blockers 0; warnings 4",
         "expected": "blocker_count == 0 and warning_count == 0",
         "artifact": "reports/review-studio.json"
       },
       {
         "key": "evidence_consistency_clean",
         "label": "Evidence consistency clean",
-        "passed": true,
-        "current": "consistent",
+        "passed": false,
+        "current": "evidence-drift-detected",
         "expected": "decision == consistent and fail_count == 0",
         "artifact": "reports/evidence_consistency.json"
       }
@@ -1394,9 +1394,17 @@
         "key": "review_studio_clean",
         "label": "Review Studio clean",
         "passed": false,
-        "current": "blockers 0; warnings 3",
+        "current": "blockers 0; warnings 4",
         "expected": "blocker_count == 0 and warning_count == 0",
         "artifact": "reports/review-studio.json"
+      },
+      {
+        "key": "evidence_consistency_clean",
+        "label": "Evidence consistency clean",
+        "passed": false,
+        "current": "evidence-drift-detected",
+        "expected": "decision == consistent and fail_count == 0",
+        "artifact": "reports/evidence_consistency.json"
       }
     ],
     "final_manual_check": "Run make ci-test in a clean worktree and verify GitHub Actions before converting the PR out of Draft.",

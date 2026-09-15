@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-09-14",
+  "generated_at": "2026-09-15",
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "check_count": 41,
@@ -192,11 +192,13 @@
         "non_pass_gate_keys": [
           "output-lab",
           "review-waivers",
+          "skill-atlas",
           "world-class-evidence"
         ],
         "action_gate_keys": [
           "output-lab",
           "review-waivers",
+          "skill-atlas",
           "world-class-evidence"
         ],
         "pass_gate_action_ids_empty": true,
@@ -210,6 +212,22 @@
             "source_ref_present": true,
             "verification_command_present": true,
             "top_level_action_id": "review-action-output-lab",
+            "top_level_action_status": "warn",
+            "top_level_title_present": true,
+            "top_level_next_step_present": true,
+            "top_level_reason_present": true,
+            "top_level_source_ref_present": true,
+            "top_level_verification_command_present": true
+          },
+          "skill-atlas": {
+            "review_action_id": "review-action-skill-atlas",
+            "review_action_status": "warn",
+            "title_present": true,
+            "next_step_present": true,
+            "reason_present": true,
+            "source_ref_present": true,
+            "verification_command_present": true,
+            "top_level_action_id": "review-action-skill-atlas",
             "top_level_action_status": "warn",
             "top_level_title_present": true,
             "top_level_next_step_present": true,
@@ -255,11 +273,13 @@
         "non_pass_gate_keys": [
           "output-lab",
           "review-waivers",
+          "skill-atlas",
           "world-class-evidence"
         ],
         "action_gate_keys": [
           "output-lab",
           "review-waivers",
+          "skill-atlas",
           "world-class-evidence"
         ],
         "pass_gate_action_ids_empty": true,
@@ -273,6 +293,22 @@
             "source_ref_present": true,
             "verification_command_present": true,
             "top_level_action_id": "review-action-output-lab",
+            "top_level_action_status": "warn",
+            "top_level_title_present": true,
+            "top_level_next_step_present": true,
+            "top_level_reason_present": true,
+            "top_level_source_ref_present": true,
+            "top_level_verification_command_present": true
+          },
+          "skill-atlas": {
+            "review_action_id": "review-action-skill-atlas",
+            "review_action_status": "warn",
+            "title_present": true,
+            "next_step_present": true,
+            "reason_present": true,
+            "source_ref_present": true,
+            "verification_command_present": true,
+            "top_level_action_id": "review-action-skill-atlas",
             "top_level_action_status": "warn",
             "top_level_title_present": true,
             "top_level_next_step_present": true,
@@ -324,13 +360,13 @@
       "label": "Release archive hash matches package, registry, and benchmark evidence",
       "status": "pass",
       "expected": {
-        "all_equal_to_actual_archive": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27"
+        "all_equal_to_actual_archive": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0"
       },
       "actual": {
-        "actual_archive": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
-        "package_verification": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
-        "registry": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
-        "benchmark": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27"
+        "actual_archive": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
+        "package_verification": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
+        "registry": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
+        "benchmark": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0"
       },
       "paths": [
         "dist/yao-meta-skill.zip",
@@ -383,8 +419,8 @@
       "key": "benchmark-release-lock-self-consistency",
       "label": "Benchmark release lock matches source dirty state",
       "status": "pass",
-      "expected": true,
-      "actual": true,
+      "expected": false,
+      "actual": false,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
@@ -398,7 +434,7 @@
       "actual": {
         "available": true,
         "clean": false,
-        "changed_file_count": 30
+        "changed_file_count": 88
       },
       "paths": [
         "reports/benchmark_reproducibility.json"
@@ -439,8 +475,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "317d1296a96d4839fca32bdb215713999e6ac2cc",
-      "actual": "317d1296a96d4839fca32bdb215713999e6ac2cc",
+      "expected": "5e8b81247a2bbaeebf81326863e6671a586f083b",
+      "actual": "5e8b81247a2bbaeebf81326863e6671a586f083b",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -452,36 +488,36 @@
       "label": "overview embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
-        "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
+        "source_contract_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3",
+        "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 8,
         "beta_test_ready": false,
-        "beta_test_blocker_count": 1,
+        "beta_test_blocker_count": 2,
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 6
+        "public_claim_blocker_count": 7
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
-        "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
+        "source_contract_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3",
+        "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 8,
         "beta_test_ready": false,
-        "beta_test_blocker_count": 1,
+        "beta_test_blocker_count": 2,
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 6
+        "public_claim_blocker_count": 7
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -591,8 +627,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "317d1296a96d4839fca32bdb215713999e6ac2cc",
-      "actual": "317d1296a96d4839fca32bdb215713999e6ac2cc",
+      "expected": "5e8b81247a2bbaeebf81326863e6671a586f083b",
+      "actual": "5e8b81247a2bbaeebf81326863e6671a586f083b",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -604,36 +640,36 @@
       "label": "interpretation embeds benchmark summary fields",
       "status": "pass",
       "expected": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
-        "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
+        "source_contract_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3",
+        "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 8,
         "beta_test_ready": false,
-        "beta_test_blocker_count": 1,
+        "beta_test_blocker_count": 2,
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 6
+        "public_claim_blocker_count": 7
       },
       "actual": {
-        "release_lock_ready": true,
+        "release_lock_ready": false,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "source_contract_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
-        "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
+        "source_contract_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3",
+        "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 8,
         "beta_test_ready": false,
-        "beta_test_blocker_count": 1,
+        "beta_test_blocker_count": 2,
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 6
+        "public_claim_blocker_count": 7
       },
       "paths": [
         "reports/benchmark_reproducibility.json",
@@ -781,7 +817,7 @@
           "label": "可维护性",
           "score": 80,
           "reasons": [
-            "SKILL.md 约 1028 个词/字。",
+            "SKILL.md 约 1176 个词/字。",
             "入口文件偏长，建议继续拆到 references/。",
             "references/ 已承载扩展指导。",
             "scripts/ 已承载确定性逻辑。",
@@ -802,7 +838,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 1028 个词/字，references 约 7796 个词/字。",
+            "入口约 1176 个词/字，references 约 9201 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -846,7 +882,7 @@
           "label": "可维护性",
           "score": 80,
           "reasons": [
-            "SKILL.md 约 1028 个词/字。",
+            "SKILL.md 约 1176 个词/字。",
             "入口文件偏长，建议继续拆到 references/。",
             "references/ 已承载扩展指导。",
             "scripts/ 已承载确定性逻辑。",
@@ -867,7 +903,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 1028 个词/字，references 约 7796 个词/字。",
+            "入口约 1176 个词/字，references 约 9201 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -997,7 +1033,7 @@
       "status": "pass",
       "expected": {
         "trigger": {
-          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
           "activation": "manual",
           "execution": "inline",
           "shell": "bash"
@@ -1025,7 +1061,7 @@
         "boundary_cards": [
           {
             "label": "Owned",
-            "body": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
+            "body": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
           },
           {
             "label": "Adjacent",
@@ -1039,7 +1075,7 @@
       },
       "actual": {
         "trigger": {
-          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+          "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
           "activation": "manual",
           "execution": "inline",
           "shell": "bash"
@@ -1067,7 +1103,7 @@
         "boundary_cards": [
           {
             "label": "Owned",
-            "body": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
+            "body": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
           },
           {
             "label": "Adjacent",
@@ -1099,7 +1135,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 1028 个词/字，references 约 7796 个词/字。"
+          "上下文成本需要补强：入口约 1176 个词/字，references 约 9201 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -1139,7 +1175,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 1028 个词/字，references 约 7796 个词/字。"
+          "上下文成本需要补强：入口约 1176 个词/字，references 约 9201 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -1206,7 +1242,7 @@
             "name": "包体膨胀风险",
             "impact": 2,
             "probability": 2,
-            "signal": "SKILL.md 约 1028 个词/字。",
+            "signal": "SKILL.md 约 1176 个词/字。",
             "response": "先补证据和边界，再增加包体复杂度。"
           },
           {
@@ -1338,7 +1374,7 @@
             "name": "包体膨胀风险",
             "impact": 2,
             "probability": 2,
-            "signal": "SKILL.md 约 1028 个词/字。",
+            "signal": "SKILL.md 约 1176 个词/字。",
             "response": "先补证据和边界，再增加包体复杂度。"
           },
           {
@@ -1655,7 +1691,7 @@
             "path": "evals",
             "label": "Trigger and quality checks",
             "kind": "folder",
-            "file_count": 13
+            "file_count": 14
           },
           {
             "path": "reports",
@@ -1664,7 +1700,7 @@
             "file_count": 114
           }
         ],
-        "file_count": 142,
+        "file_count": 143,
         "folder_count": 4,
         "distribution": [
           {
@@ -1693,7 +1729,7 @@
           },
           {
             "label": "evals",
-            "value": 13
+            "value": 14
           },
           {
             "label": "reports",
@@ -1743,7 +1779,7 @@
             "path": "evals",
             "label": "Trigger and quality checks",
             "kind": "folder",
-            "file_count": 13
+            "file_count": 14
           },
           {
             "path": "reports",
@@ -1752,7 +1788,7 @@
             "file_count": 114
           }
         ],
-        "file_count": 142,
+        "file_count": 143,
         "folder_count": 4,
         "distribution": [
           {
@@ -1781,7 +1817,7 @@
           },
           {
             "label": "evals",
-            "value": 13
+            "value": 14
           },
           {
             "label": "reports",
@@ -3659,19 +3695,19 @@
       "label": "Skill OS 2.0 review summary mirrors current evidence",
       "status": "pass",
       "expected": [
-        "score `91`",
+        "score `89`",
         "`16` gates",
-        "`3` warnings",
+        "`4` warnings",
         "`0` declared internal modules",
-        "`4 / 4` CLI help smoke checks passing across `4` scripts",
-        "`157` zip entries",
-        "archive with `157` entries",
+        "`6 / 6` CLI help smoke checks passing across `6` scripts",
+        "`13` zip entries",
+        "archive with `13` entries",
         "`0` installer permission checks enforced",
         "`0` permission failures",
         "`25` required artifacts",
         "`23` reproduction commands",
         "initial load `878/1000`",
-        "target count is `3`"
+        "target count is `5`"
       ],
       "actual": "all present",
       "paths": [

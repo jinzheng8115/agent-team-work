@@ -37,11 +37,11 @@
         "references resource resolves: references/team-protocol.md",
         "references resource resolves: references/team-scaling.md",
         "references resource resolves: references/workflow.md",
+        "scripts resource resolves: scripts/build_runtime_package.py",
         "scripts resource resolves: scripts/ci_test.py",
         "scripts resource resolves: scripts/import_telemetry_events.py",
         "scripts resource resolves: scripts/local_output_eval_runner.py",
-        "scripts resource resolves: scripts/validate_team_state.py",
-        "reports resource resolves: reports/benchmark_methodology.md"
+        "scripts resource resolves: scripts/runtime_package_check.py"
       ],
       "failures": [],
       "warnings": []
@@ -81,11 +81,11 @@
         "references resource resolves: references/team-protocol.md",
         "references resource resolves: references/team-scaling.md",
         "references resource resolves: references/workflow.md",
+        "scripts resource resolves: scripts/build_runtime_package.py",
         "scripts resource resolves: scripts/ci_test.py",
         "scripts resource resolves: scripts/import_telemetry_events.py",
         "scripts resource resolves: scripts/local_output_eval_runner.py",
-        "scripts resource resolves: scripts/validate_team_state.py",
-        "reports resource resolves: reports/benchmark_methodology.md"
+        "scripts resource resolves: scripts/runtime_package_check.py"
       ],
       "failures": [],
       "warnings": []
@@ -125,11 +125,11 @@
         "references resource resolves: references/team-protocol.md",
         "references resource resolves: references/team-scaling.md",
         "references resource resolves: references/workflow.md",
+        "scripts resource resolves: scripts/build_runtime_package.py",
         "scripts resource resolves: scripts/ci_test.py",
         "scripts resource resolves: scripts/import_telemetry_events.py",
         "scripts resource resolves: scripts/local_output_eval_runner.py",
-        "scripts resource resolves: scripts/validate_team_state.py",
-        "reports resource resolves: reports/benchmark_methodology.md"
+        "scripts resource resolves: scripts/runtime_package_check.py"
       ],
       "failures": [],
       "warnings": [
@@ -171,11 +171,11 @@
         "references resource resolves: references/team-protocol.md",
         "references resource resolves: references/team-scaling.md",
         "references resource resolves: references/workflow.md",
+        "scripts resource resolves: scripts/build_runtime_package.py",
         "scripts resource resolves: scripts/ci_test.py",
         "scripts resource resolves: scripts/import_telemetry_events.py",
         "scripts resource resolves: scripts/local_output_eval_runner.py",
-        "scripts resource resolves: scripts/validate_team_state.py",
-        "reports resource resolves: reports/benchmark_methodology.md"
+        "scripts resource resolves: scripts/runtime_package_check.py"
       ],
       "failures": [],
       "warnings": [
@@ -217,11 +217,11 @@
         "references resource resolves: references/team-protocol.md",
         "references resource resolves: references/team-scaling.md",
         "references resource resolves: references/workflow.md",
+        "scripts resource resolves: scripts/build_runtime_package.py",
         "scripts resource resolves: scripts/ci_test.py",
         "scripts resource resolves: scripts/import_telemetry_events.py",
         "scripts resource resolves: scripts/local_output_eval_runner.py",
-        "scripts resource resolves: scripts/validate_team_state.py",
-        "reports resource resolves: reports/benchmark_methodology.md"
+        "scripts resource resolves: scripts/runtime_package_check.py"
       ],
       "failures": [],
       "warnings": []

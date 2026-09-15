@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": false,
-  "generated_at": "2026-09-14",
+  "generated_at": "2026-09-15",
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "item_count": 21,
@@ -168,7 +168,7 @@
       "label": "Skill Atlas",
       "status": "missing",
       "objective": "Team skill portfolio reveals route collisions, stale ownership, dependency graph, and no-route opportunities.",
-      "current": "1 scanned skills; actionable collisions 0",
+      "current": "2 scanned skills; actionable collisions 2",
       "command": "python3 scripts/yao.py skill-atlas --workspace-root . --self",
       "test": "python3 tests/verify_skill_atlas.py",
       "evidence": [
@@ -205,7 +205,7 @@
       "label": "Registry Distribution",
       "status": "missing",
       "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-      "current": "archive entries 157; install failures 0",
+      "current": "archive entries 160; install failures 0",
       "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self && python3 scripts/yao.py registry-audit . --self",
       "test": "python3 tests/verify_registry_audit.py",
       "evidence": [
@@ -514,7 +514,7 @@
       "label": "Skill Atlas Generator",
       "status": "missing",
       "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
-      "current": "1 scanned skills",
+      "current": "2 scanned skills",
       "command": "make ci-test",
       "test": "tests/verify_skill_atlas.py",
       "evidence": [
@@ -750,11 +750,11 @@
           "exists": false
         },
         {
-          "path": "reports/skillops/daily/2026-09-14.json",
+          "path": "reports/skillops/daily/2026-09-15.json",
           "exists": true
         },
         {
-          "path": "reports/skillops/daily/2026-09-14.md",
+          "path": "reports/skillops/daily/2026-09-15.md",
           "exists": true
         }
       ],

@@ -3,9 +3,9 @@
     "name": "agent-team-work",
     "title": "项目会话团队",
     "display_name": "Agent Team Work",
-    "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+    "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
     "maturity": "governed",
-    "updated_at": "2026-09-14",
+    "updated_at": "2026-09-15",
     "core_value": "把一次性经验沉淀为可复用、可评估、可迁移的 Skill 包体。",
     "audience": "Skill 作者、复用团队和后续 reviewer。",
     "deliverables": [
@@ -81,7 +81,7 @@
       "label": "可维护性",
       "score": 80,
       "reasons": [
-        "SKILL.md 约 1028 个词/字。",
+        "SKILL.md 约 1176 个词/字。",
         "入口文件偏长，建议继续拆到 references/。",
         "references/ 已承载扩展指导。",
         "scripts/ 已承载确定性逻辑。",
@@ -102,7 +102,7 @@
       "label": "上下文成本",
       "score": 42,
       "reasons": [
-        "入口约 1028 个词/字，references 约 7796 个词/字。",
+        "入口约 1176 个词/字，references 约 9201 个词/字。",
         "分数越高代表上下文成本越低。",
         "上下文成本偏高，建议压缩入口或拆分 references。"
       ]
@@ -156,7 +156,7 @@
   },
   "contract_boundary": {
     "trigger": {
-      "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+      "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
       "activation": "manual",
       "execution": "inline",
       "shell": "bash"
@@ -184,7 +184,7 @@
     "boundary_cards": [
       {
         "label": "Owned",
-        "body": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
+        "body": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
       },
       {
         "label": "Adjacent",
@@ -206,7 +206,7 @@
       "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
     ],
     "gaps": [
-      "上下文成本需要补强：入口约 1028 个词/字，references 约 7796 个词/字。"
+      "上下文成本需要补强：入口约 1176 个词/字，references 约 9201 个词/字。"
     ],
     "recommendations": [
       "先改触发边界，再扩展工作流。",
@@ -263,7 +263,7 @@
         "name": "包体膨胀风险",
         "impact": 2,
         "probability": 2,
-        "signal": "SKILL.md 约 1028 个词/字。",
+        "signal": "SKILL.md 约 1176 个词/字。",
         "response": "先补证据和边界，再增加包体复杂度。"
       },
       {
@@ -485,7 +485,7 @@
         "path": "evals",
         "label": "Trigger and quality checks",
         "kind": "folder",
-        "file_count": 13
+        "file_count": 14
       },
       {
         "path": "reports",
@@ -494,7 +494,7 @@
         "file_count": 114
       }
     ],
-    "file_count": 142,
+    "file_count": 143,
     "folder_count": 4,
     "distribution": [
       {
@@ -523,7 +523,7 @@
       },
       {
         "label": "evals",
-        "value": 13
+        "value": 14
       },
       {
         "label": "reports",
@@ -602,7 +602,7 @@
   "name": "agent-team-work",
   "title": "项目会话团队",
   "display_name": "Agent Team Work",
-  "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+  "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
   "logic_steps": [
     "Understand the request",
     "Execute the main task",
@@ -610,7 +610,7 @@
   ],
   "usage_steps": [
     "Use $agent-team-work to set up one current-session Leader and independent Codex project sessions for each role, confirm once before mutations, and continue stages only after acceptance until complete or blocked.",
-    "Use this skill when the request matches: Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
+    "Use this skill when the request matches: Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
   ],
   "package_map": [
     {
@@ -653,7 +653,7 @@
       "path": "evals",
       "label": "Trigger and quality checks",
       "kind": "folder",
-      "file_count": 13
+      "file_count": 14
     },
     {
       "path": "reports",
@@ -676,7 +676,7 @@
     "已有原始资料，但还没有清晰输入、输出和后续迭代路径。"
   ],
   "trigger_contract": {
-    "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+    "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
     "activation": "manual",
     "execution": "inline",
     "shell": "bash"
@@ -763,7 +763,7 @@
     "schema_version": "2.0.0",
     "source_path": "reports/skill-ir.json",
     "target_count": 5,
-    "trigger_samples": 6,
+    "trigger_samples": 8,
     "output_eval_cases": 5
   },
   "compiled_targets": {
@@ -968,15 +968,15 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "9fe3fe07a9acbea9fd6a11837227f267b37d7e470b871725724645d11b6e3765",
-      "source_contract_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
-      "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
-      "output_case_count": 5,
-      "failure_disclosure_count": 2,
+      "evidence_bundle_sha256": "b3e91fef6d2744e2afd509a3372cbc6be41facef53b7f7ddf30c0e1bc45198e4",
+      "source_contract_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3",
+      "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
+      "output_case_count": 6,
+      "failure_disclosure_count": 3,
       "command_count": 23,
       "command_executed_count": 10,
       "timing_observed_count": 10,
@@ -989,25 +989,25 @@
       "phase1_quality_promotion_complete": false,
       "phase1_completion_ready": false,
       "world_class_ready": false,
-      "world_class_open_gap_count": 4,
+      "world_class_open_gap_count": 5,
       "world_class_task_count": 4,
       "world_class_ledger_pending_count": 4,
       "world_class_source_check_count": 14,
       "world_class_source_pass_count": 6,
       "world_class_source_blocked_count": 8,
       "beta_test_ready": false,
-      "beta_test_blocker_count": 1,
+      "beta_test_blocker_count": 2,
       "beta_test_deferred_evidence_count": 4,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 6,
+      "public_claim_blocker_count": 7,
       "working_tree_dirty": true,
-      "changed_file_count": 18,
-      "source_tree_dirty": false,
-      "source_changed_file_count": 0,
+      "changed_file_count": 88,
+      "source_tree_dirty": true,
+      "source_changed_file_count": 12,
       "generated_tree_dirty": true,
-      "generated_changed_file_count": 18
+      "generated_changed_file_count": 76
     },
-    "commit": "317d1296a96d4839fca32bdb215713999e6ac2cc",
+    "commit": "5e8b81247a2bbaeebf81326863e6671a586f083b",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -1031,9 +1031,9 @@
       "native_enforcement_count": 0,
       "metadata_fallback_count": 4,
       "residual_risk_count": 4,
-      "required_capability_count": 0,
+      "required_capability_count": 2,
       "failure_count": 0,
-      "installer_enforcement_source_status": "present",
+      "installer_enforcement_source_status": "package-mismatch",
       "installer_enforcement_target_count": 4,
       "installer_enforcement_pass_count": 0,
       "installer_permission_enforced_count": 0,
@@ -1042,7 +1042,10 @@
       "world_class_native_evidence_ready": false,
       "installer_enforcement_ready": false
     },
-    "expected_capabilities": [],
+    "expected_capabilities": [
+      "file_write",
+      "subprocess"
+    ],
     "targets": [
       {
         "target": "openai",
@@ -1088,8 +1091,8 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 35,
-    "script_count": 4,
+    "scanned_files": 40,
+    "script_count": 6,
     "internal_module_count": 0,
     "secret_findings": 0,
     "dependency_files": [
@@ -1098,31 +1101,31 @@
     "network_script_count": 0,
     "network_policy_covered_count": 0,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 0,
-    "permission_required_count": 0,
-    "permission_approved_count": 0,
+    "file_write_script_count": 2,
+    "permission_required_count": 2,
+    "permission_approved_count": 2,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 4,
+    "help_smoke_checked_count": 6,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 35,
-    "package_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d"
+    "package_hash_file_count": 40,
+    "package_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3"
   },
   "skill_atlas": {
-    "skill_count": 1,
-    "actionable_skill_count": 1,
-    "route_collision_count": 0,
-    "actionable_route_collision_count": 0,
+    "skill_count": 2,
+    "actionable_skill_count": 2,
+    "route_collision_count": 2,
+    "actionable_route_collision_count": 2,
     "owner_gap_count": 0,
     "actionable_owner_gap_count": 0,
     "stale_count": 0,
     "actionable_stale_count": 0,
     "shared_resource_count": 0,
     "no_route_opportunity_count": 0,
-    "telemetry_report_count": 1,
+    "telemetry_report_count": 2,
     "drift_signal_count": 0,
     "actionable_drift_signal_count": 0,
     "non_actionable_issue_count": 0
@@ -1133,7 +1136,7 @@
       "schema_version": "2.0",
       "name": "agent-team-work",
       "version": "0.2.0",
-      "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+      "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
       "targets": [
         "openai",
         "claude",
@@ -1147,8 +1150,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
-        "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27"
+        "package_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3",
+        "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0"
       },
       "compatibility": {
         "openai": "pass",
@@ -1179,12 +1182,12 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
+        "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
       },
-      "generated_at": "2026-09-14"
+      "generated_at": "2026-09-15"
     },
     "failures": [],
     "warnings": []
@@ -1195,8 +1198,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
-      "archive_entry_count": 157,
+      "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
+      "archive_entry_count": 13,
       "nested_skill_entry_count": 0,
       "failure_count": 0,
       "warning_count": 0
@@ -1208,7 +1211,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 157,
+      "archive_entry_count": 13,
       "nested_skill_entry_count": 0,
       "archive_extracted": true,
       "entrypoint_loaded": true,
@@ -1254,7 +1257,7 @@
         {
           "field": "description",
           "from": "Previous agent-team-work route contract fixture used only for upgrade comparison.",
-          "to": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
+          "to": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。"
         },
         {
           "field": "license",
@@ -1266,12 +1269,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27"
+          "to": "4805c02dd0cb9ba2b65f8a60c895ae420c9bb8f75e179394912a69a87504bd37"
         },
         {
           "field": "package_sha256",
           "from": "previous-fixture",
-          "to": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d"
+          "to": "3393c0524aade25d733d4bb668dcebc1ff724fd65773ba7ee57b6a3d50d82d58"
         }
       ]
     },
@@ -1428,7 +1431,7 @@
     "failures": []
   },
   "world_class_evidence_plan": {
-    "ok": true,
+    "ok": false,
     "summary": {
       "audit_decision": "continue-iteration",
       "world_class_ready": false,
@@ -1610,7 +1613,7 @@
     "source_audit": {
       "json": "reports/skill_os2_audit.json",
       "markdown": "reports/skill_os2_audit.md",
-      "open_gap_count": 4
+      "open_gap_count": 5
     }
   },
   "world_class_evidence_ledger": {
@@ -2133,6 +2136,6 @@
     ],
     "maturity_tier": "governed",
     "skill_archetype": "workflow",
-    "updated_at": "2026-09-14"
+    "updated_at": "2026-09-15"
   }
 }

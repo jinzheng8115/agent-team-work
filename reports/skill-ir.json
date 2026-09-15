@@ -4,14 +4,16 @@
   "title": "Agent Team Work",
   "job_to_be_done": "在项目开始时通过菜单组建一个由当前会话担任 Leader、多个独立项目会话担任成员的 Codex 团队，并按阶段派单、收取报告、验收和恢复，直到整体交付完成或明确阻塞。",
   "trigger_surface": {
-    "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+    "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
     "should_trigger": [
       "为这个新项目组建团队，每个角色在项目栏有独立会话。",
       "通过菜单创建项目会话团队，由 Leader 分配各阶段工作。",
       "帮我建一个团队，研究、核验、综合各有自己的项目对话。",
       "继续 agent-team-work 的已有团队，验收上次成果后安排下一步。",
       "查看 agent-team-work 团队当前阶段，不要派发新任务。",
-      "使用 agent-team-work 调整成员职责，保留已有角色会话。"
+      "使用 agent-team-work 调整成员职责，保留已有角色会话。",
+      "第一轮已完成后修改数据来源，请继续使用项目会话团队处理。",
+      "团队完成后由 Lead 影响分析，再安排这次修改。"
     ],
     "should_not_trigger": [
       "解释什么是多智能体团队。",
@@ -29,7 +31,10 @@
       "只创建一个项目会话，名称叫开发记录。",
       "请通过 Cindy Helper 创建项目会话团队。",
       "帮我重命名现有对话。",
-      "讨论如何组建团队，不建团队，只解释流程。"
+      "讨论如何组建团队，不建团队，只解释流程。",
+      "把这个普通文档里的日期改一下，这是一次性编辑，不需要项目团队。",
+      "只解释完成后的影响分析是什么，不要操作或派发任务。",
+      "创建一个支持修订流程的新 skill，不要建立项目会话团队。"
     ]
   },
   "workflow": {
@@ -59,9 +64,11 @@
       "references/workflow.md"
     ],
     "scripts": [
+      "scripts/build_runtime_package.py",
       "scripts/ci_test.py",
       "scripts/import_telemetry_events.py",
       "scripts/local_output_eval_runner.py",
+      "scripts/runtime_package_check.py",
       "scripts/validate_team_state.py"
     ],
     "assets": [],

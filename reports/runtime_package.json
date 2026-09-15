@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "profile": "runtime-only",
+  "package": "/Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip",
+  "package_name": "agent-team-work",
+  "entry_count": 13,
+  "entries": [
+    "LICENSE",
+    "SKILL.md",
+    "agents/interface.yaml",
+    "agents/openai.yaml",
+    "manifest.json",
+    "references/codex-tools.md",
+    "references/role-capabilities.md",
+    "references/role-presets.md",
+    "references/team-protocol.md",
+    "references/team-scaling.md",
+    "references/workflow.md",
+    "reports/.current-run.json",
+    "reports/artifact-index.json"
+  ],
+  "excluded_roots": [
+    "docs",
+    "evidence",
+    "evals",
+    "examples",
+    "failures",
+    "registry",
+    "reports",
+    "scripts",
+    "security",
+    "skill-ir",
+    "skill_atlas"
+  ]
+}

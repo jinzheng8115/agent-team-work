@@ -1,26 +1,26 @@
 {
   "schema_version": "1.0",
-  "ok": true,
-  "generated_at": "2026-09-14",
+  "ok": false,
+  "generated_at": "2026-09-15",
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "item_count": 15,
-    "pass_count": 11,
+    "pass_count": 10,
     "warn_count": 0,
     "human_required_count": 1,
     "external_required_count": 3,
-    "missing_count": 0,
-    "open_gap_count": 4,
-    "local_foundation_ready": true,
+    "missing_count": 1,
+    "open_gap_count": 5,
+    "local_foundation_ready": false,
     "world_class_ready": false,
     "decision": "continue-iteration"
   },
   "status_counts": {
-    "pass": 11,
+    "pass": 10,
     "warn": 0,
     "human_required": 1,
     "external_required": 3,
-    "missing": 0
+    "missing": 1
   },
   "items": [
     {
@@ -223,7 +223,7 @@
       "key": "runtime-permission-metadata",
       "label": "Permission Metadata",
       "status": "pass",
-      "current": "4/4 target probes pass; metadata fallback 4; installer enforcement 0",
+      "current": "4/4 target probes pass; metadata fallback 4; installer enforcement 4",
       "target": "Packaged adapters expose explicit permission metadata, residual risks, and installer enforcement evidence when available",
       "evidence": [
         {
@@ -241,7 +241,7 @@
       "key": "native-permission-enforcement",
       "label": "Native Permission Enforcement",
       "status": "external_required",
-      "current": "native-enforced targets 0; installer-enforced targets 0",
+      "current": "native-enforced targets 0; installer-enforced targets 4",
       "target": "At least one target/client enforces approved permissions at runtime",
       "evidence": [
         {
@@ -262,8 +262,8 @@
     {
       "key": "skill-atlas",
       "label": "Skill Atlas",
-      "status": "pass",
-      "current": "1 skills; actionable collisions 0",
+      "status": "missing",
+      "current": "2 skills; actionable collisions 2",
       "target": "Workspace catalog, route overlap, stale/owner gaps, drift, and no-route opportunities",
       "evidence": [
         {
@@ -289,7 +289,7 @@
       "key": "registry-distribution",
       "label": "Registry Distribution",
       "status": "pass",
-      "current": "zip entries 157; install failures 0; permission failures 0",
+      "current": "zip entries 160; install failures 0; permission failures 0",
       "target": "Package metadata, archive checksum, package verification, and install simulation pass",
       "evidence": [
         {
@@ -419,7 +419,7 @@
       "key": "native-permission-enforcement",
       "label": "Native Permission Enforcement",
       "status": "external_required",
-      "current": "native-enforced targets 0; installer-enforced targets 0",
+      "current": "native-enforced targets 0; installer-enforced targets 4",
       "target": "At least one target/client enforces approved permissions at runtime",
       "evidence": [
         {
@@ -436,6 +436,32 @@
         }
       ],
       "next_action": "Integrate a real target-client or external installer runtime guard before claiming native permission enforcement."
+    },
+    {
+      "key": "skill-atlas",
+      "label": "Skill Atlas",
+      "status": "missing",
+      "current": "2 skills; actionable collisions 2",
+      "target": "Workspace catalog, route overlap, stale/owner gaps, drift, and no-route opportunities",
+      "evidence": [
+        {
+          "path": "scripts/build_skill_atlas.py",
+          "exists": false
+        },
+        {
+          "path": "skill_atlas/catalog.json",
+          "exists": true
+        },
+        {
+          "path": "reports/skill_atlas.json",
+          "exists": true
+        },
+        {
+          "path": "skill_atlas/policy.json",
+          "exists": false
+        }
+      ],
+      "next_action": "Feed real drift data into Atlas once client telemetry is installed."
     },
     {
       "key": "native-client-telemetry",

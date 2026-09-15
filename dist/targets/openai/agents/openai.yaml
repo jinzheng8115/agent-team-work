@@ -12,8 +12,10 @@ compatibility:
   trust_level: local
   remote_inline_execution: forbid
   permission_contract:
-    review_required: false
-    declared_capabilities: []
+    review_required: true
+    declared_capabilities:
+    - file_write
+    - subprocess
     native_enforcement: false
     representation: targets/openai/agents/openai.yaml::compatibility.permission_contract
       plus adapter.json

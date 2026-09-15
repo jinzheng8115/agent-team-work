@@ -118,7 +118,7 @@ def validate(team_dir: Path) -> dict:
         failures.append("schema_version mismatch between team.json and tasks.json")
     if tasks_payload.get("team_id") != team.get("team_id"):
         failures.append("team_id mismatch between team.json and tasks.json")
-    if tasks_payload.get("revision", 0) < 1:
+    if _int_value(tasks_payload.get("revision", 0)) < 1:
         failures.append("tasks.json revision must be positive")
     if tasks_payload.get("last_writer_thread_id") != leader.get("thread_id"):
         failures.append("last_writer_thread_id must match the bound Leader")

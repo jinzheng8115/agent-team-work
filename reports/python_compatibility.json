@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-09-14",
+  "generated_at": "2026-09-15",
   "root": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "target_python": "3.11",
-    "file_count": 5,
+    "file_count": 8,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -23,7 +23,19 @@
   ],
   "files": [
     {
+      "path": "evals/revision_cycle_state_test.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
       "path": "evals/route_contract_test.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/build_runtime_package.py",
       "ok": true,
       "issue_count": 0,
       "issues": []
@@ -42,6 +54,12 @@
     },
     {
       "path": "scripts/local_output_eval_runner.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "scripts/runtime_package_check.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

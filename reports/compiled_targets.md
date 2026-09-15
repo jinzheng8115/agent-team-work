@@ -10,11 +10,11 @@
 
 | Target | Status | Native Surface | Adapter Mode | Permissions | Degradation | Generated Files |
 | --- | --- | --- | --- | --- | --- | --- |
-| `openai` | `pass` | OpenAI-style interface metadata plus neutral Agent Skills source | `metadata-adapter` | `none` | `native-Codex-runtime` | targets/openai/adapter.json, targets/openai/agents/openai.yaml |
-| `claude` | `pass` | Claude-compatible neutral source folder with adapter notes | `neutral-source-plus-adapter` | `none` | `neutral-source-without-Codex-session-runtime` | targets/claude/adapter.json, targets/claude/README.md |
-| `generic` | `pass` | Agent Skills compatible neutral package | `agent-skills-compatible` | `none` | `neutral-source` | targets/generic/adapter.json |
-| `agent-skills-compatible` | `pass` | Agent Skills standard source tree | `neutral-agent-skills-source` | `none` | `neutral-source` | SKILL.md, agents/interface.yaml |
-| `vscode` | `pass` | VS Code/Copilot Agent Skills project or user scope | `vscode-agent-skills-adapter` | `none` | `agent-skills-source-without-Codex-session-runtime` | targets/vscode/adapter.json, targets/vscode/README.md |
+| `openai` | `pass` | OpenAI-style interface metadata plus neutral Agent Skills source | `metadata-adapter` | `subprocess` | `native-Codex-runtime` | targets/openai/adapter.json, targets/openai/agents/openai.yaml |
+| `claude` | `pass` | Claude-compatible neutral source folder with adapter notes | `neutral-source-plus-adapter` | `subprocess` | `neutral-source-without-Codex-session-runtime` | targets/claude/adapter.json, targets/claude/README.md |
+| `generic` | `pass` | Agent Skills compatible neutral package | `agent-skills-compatible` | `subprocess` | `neutral-source` | targets/generic/adapter.json |
+| `agent-skills-compatible` | `pass` | Agent Skills standard source tree | `neutral-agent-skills-source` | `subprocess` | `neutral-source` | SKILL.md, agents/interface.yaml |
+| `vscode` | `pass` | VS Code/Copilot Agent Skills project or user scope | `vscode-agent-skills-adapter` | `subprocess` | `agent-skills-source-without-Codex-session-runtime` | targets/vscode/adapter.json, targets/vscode/README.md |
 
 ## Native Behavior Contracts
 

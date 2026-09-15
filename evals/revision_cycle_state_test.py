@@ -250,6 +250,17 @@ def test_malformed_numeric_task_identity_is_structured_failure():
     assert "must be numeric" in " ".join(result["failures"])
 
 
+def test_malformed_ledger_revision_is_structured_failure():
+    team_dir = write_fixture(schema_version=3, team_status="running", cycle=2,
+                             revision_tasks="planned")
+    tasks_payload = json.loads((team_dir / "tasks.json").read_text(encoding="utf-8"))
+    tasks_payload["revision"] = "oops"
+    (team_dir / "tasks.json").write_text(json.dumps(tasks_payload), encoding="utf-8")
+    result = validate(team_dir)
+    assert not result["ok"], result
+    assert "tasks.json revision must be positive" in " ".join(result["failures"])
+
+
 def test_all_prior_revision_records_are_required():
     team_dir = write_fixture(schema_version=3, team_status="running", cycle=3)
     (team_dir / "revisions" / "2.md").unlink()

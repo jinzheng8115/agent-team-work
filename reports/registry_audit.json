@@ -7,7 +7,7 @@
     "schema_version": "2.0",
     "name": "agent-team-work",
     "version": "0.2.0",
-    "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 用于菜单组建团队、创建项目会话团队、阶段派单、汇报、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
+    "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
     "targets": [
       "openai",
       "claude",
@@ -21,8 +21,8 @@
     "trust_level": "local",
     "license": "MIT",
     "checksums": {
-      "package_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d",
-      "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27"
+      "package_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3",
+      "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0"
     },
     "compatibility": {
       "openai": "pass",
@@ -53,16 +53,16 @@
     },
     "distribution": {
       "archive_verified": true,
-      "archive_sha256": "fb4256a3390acd125bb9451e8fe867bd7748c490da416a1d98a7694494e3cc27",
+      "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
       "package_verification": "reports/package_verification.json",
       "install_simulated": true,
       "install_simulation": "reports/install_simulation.json"
     },
-    "generated_at": "2026-09-14"
+    "generated_at": "2026-09-15"
   },
   "index": {
     "schema_version": "2.0",
-    "generated_at": "2026-09-14",
+    "generated_at": "2026-09-15",
     "package_count": 1,
     "packages": [
       {
@@ -78,7 +78,7 @@
           "vscode"
         ],
         "package_metadata": "registry/packages/agent-team-work.json",
-        "package_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d"
+        "package_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3"
       }
     ]
   },

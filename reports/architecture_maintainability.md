@@ -1,19 +1,19 @@
 # Architecture Maintainability
 
-Generated at: `2026-09-14`
+Generated at: `2026-09-15`
 
 ## Summary
 
 - decision: `pass`
-- python files: `4`
-- scripts: `4`
+- python files: `6`
+- scripts: `6`
 - tests: `0`
 - internal modules: `0`
-- CLI scripts: `4`
+- CLI scripts: `6`
 - Yao CLI command handlers: `0`
 - entrypoint command handlers: `0`
 - command modules: `0`
-- largest file lines: `136`
+- largest file lines: `279`
 - early watch threshold lines: `600`
 - early watchlist: `0`
 - watch threshold lines: `720`
@@ -39,9 +39,11 @@ No early watch files found.
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
+| `scripts/validate_team_state.py` | `279` | `cli-script` | `pass` |
+| `scripts/build_runtime_package.py` | `156` | `cli-script` | `pass` |
+| `scripts/runtime_package_check.py` | `156` | `cli-script` | `pass` |
 | `scripts/import_telemetry_events.py` | `136` | `cli-script` | `pass` |
-| `scripts/validate_team_state.py` | `131` | `cli-script` | `pass` |
-| `scripts/ci_test.py` | `76` | `cli-script` | `pass` |
+| `scripts/ci_test.py` | `100` | `cli-script` | `pass` |
 | `scripts/local_output_eval_runner.py` | `68` | `cli-script` | `pass` |
 
 ## Release Rule

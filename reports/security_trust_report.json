@@ -2,8 +2,8 @@
   "ok": true,
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
-    "scanned_files": 35,
-    "script_count": 4,
+    "scanned_files": 40,
+    "script_count": 6,
     "internal_module_count": 0,
     "secret_findings": 0,
     "dependency_files": [
@@ -12,23 +12,37 @@
     "network_script_count": 0,
     "network_policy_covered_count": 0,
     "network_policy_missing_count": 0,
-    "file_write_script_count": 0,
-    "permission_required_count": 0,
-    "permission_approved_count": 0,
+    "file_write_script_count": 2,
+    "permission_required_count": 2,
+    "permission_approved_count": 2,
     "permission_missing_count": 0,
     "permission_invalid_count": 0,
     "permission_expired_count": 0,
-    "help_smoke_checked_count": 4,
+    "help_smoke_checked_count": 6,
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 35,
-    "package_sha256": "c2d932635254d440d74173a9d737cfbfb3d7836fef3d015c787ee15a74e6ac8d"
+    "package_hash_file_count": 40,
+    "package_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3"
   },
   "failures": [],
   "warnings": [],
   "secrets": [],
   "scripts": [
+    {
+      "path": "scripts/build_runtime_package.py",
+      "interface": "cli",
+      "interface_declared": false,
+      "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
     {
       "path": "scripts/ci_test.py",
       "interface": "cli",
@@ -39,7 +53,7 @@
       "uses_input": false,
       "uses_network": false,
       "uses_file_write": false,
-      "uses_subprocess": false,
+      "uses_subprocess": true,
       "network_urls": [],
       "network_hosts": []
     },
@@ -67,6 +81,20 @@
       "uses_input": false,
       "uses_network": false,
       "uses_file_write": false,
+      "uses_subprocess": false,
+      "network_urls": [],
+      "network_hosts": []
+    },
+    {
+      "path": "scripts/runtime_package_check.py",
+      "interface": "cli",
+      "interface_declared": false,
+      "interface_reason": "Default CLI classification; add SCRIPT_INTERFACE for internal modules.",
+      "has_argparse": true,
+      "has_main_guard": true,
+      "uses_input": false,
+      "uses_network": false,
+      "uses_file_write": true,
       "uses_subprocess": false,
       "network_urls": [],
       "network_hosts": []
@@ -106,13 +134,23 @@
   "help_smoke": {
     "enabled": true,
     "timeout_seconds": 5.0,
-    "candidate_count": 4,
-    "checked_count": 4,
-    "passed_count": 4,
+    "candidate_count": 6,
+    "checked_count": 6,
+    "passed_count": 6,
     "failed_count": 0,
     "skipped_count": 0,
     "failed_scripts": [],
     "results": [
+      {
+        "path": "scripts/build_runtime_package.py",
+        "command": "python3 scripts/build_runtime_package.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: build_runtime_package.py [-h] [--package-dir PACKAGE_DIR]\n                                [--config CONFIG] [--output-json OUTPUT_JSON]\n                                [source_dir]\n\nBuild the runtime-only Agent Team Work package.\n\npo",
+        "stderr_excerpt": ""
+      },
       {
         "path": "scripts/ci_test.py",
         "command": "python3 scripts/ci_test.py --help",
@@ -144,6 +182,16 @@
         "stderr_excerpt": ""
       },
       {
+        "path": "scripts/runtime_package_check.py",
+        "command": "python3 scripts/runtime_package_check.py --help",
+        "returncode": 0,
+        "timed_out": false,
+        "passed": true,
+        "has_help_text": true,
+        "stdout_excerpt": "usage: runtime_package_check.py [-h] [--package-dir PACKAGE_DIR]\n                                [--config CONFIG] [--output-json OUTPUT_JSON]\n                                [--output-md OUTPUT_MD]\n                                [source_d",
+        "stderr_excerpt": ""
+      },
+      {
         "path": "scripts/validate_team_state.py",
         "command": "python3 scripts/validate_team_state.py --help",
         "returncode": 0,
@@ -160,18 +208,71 @@
     "present": true,
     "path": "security/permission_policy.json",
     "schema_version": "1.0",
-    "reviewed_at": "2026-09-14",
-    "required_capabilities": [],
-    "approved_capabilities": [],
+    "reviewed_at": "2026-09-15",
+    "required_capabilities": [
+      "file_write",
+      "subprocess"
+    ],
+    "approved_capabilities": [
+      "file_write",
+      "subprocess"
+    ],
     "missing_capabilities": [],
     "invalid_capabilities": [],
     "expired_capabilities": [],
-    "approval_count": 0,
-    "required_count": 0,
+    "approval_count": 2,
+    "required_count": 2,
     "missing_count": 0,
     "invalid_count": 0,
     "expired_count": 0,
-    "approvals": []
+    "approvals": [
+      {
+        "capability": "file_write",
+        "status": "approved",
+        "scripts": [
+          "scripts/build_runtime_package.py",
+          "scripts/runtime_package_check.py"
+        ],
+        "reviewer": "Local Codex Team",
+        "scope": "Maintainer-only local packaging and report refresh scripts may write bounded outputs inside the reviewed checkout; no arbitrary user-selected paths are permitted.",
+        "reason": "Release scripts generate the runtime archive, adapters, and deterministic evidence files under the checked-out skill directory.",
+        "expires_at": "2026-12-14",
+        "evidence": [
+          "scripts/build_runtime_package.py",
+          "scripts/ci_test.py",
+          "reports/security_trust_report.json"
+        ],
+        "target_enforcement": {
+          "openai": "Codex host controls tool execution; maintainer writes remain bounded to the reviewed checkout.",
+          "claude": "Consumer controls local script execution; only reviewed checkout outputs are approved.",
+          "generic": "Consumer controls local script execution; only reviewed checkout outputs are approved.",
+          "vscode": "Workspace trust controls local script execution; only reviewed checkout outputs are approved."
+        },
+        "validation": []
+      },
+      {
+        "capability": "subprocess",
+        "status": "approved",
+        "scripts": [
+          "scripts/ci_test.py"
+        ],
+        "reviewer": "Local Codex Team",
+        "scope": "Maintainer-only local checks may invoke the fixed regression command and package validators; no remote or user-supplied shell execution is permitted.",
+        "reason": "scripts/ci_test.py uses subprocess.run only to execute the bounded revision regression suite during local release checks.",
+        "expires_at": "2026-12-14",
+        "evidence": [
+          "scripts/ci_test.py",
+          "reports/security_trust_report.json"
+        ],
+        "target_enforcement": {
+          "openai": "Codex host controls tool execution; local maintainer subprocesses run only from the reviewed checkout.",
+          "claude": "Consumer controls local script execution; only the reviewed maintainer command is approved.",
+          "generic": "Consumer controls local script execution; only the reviewed maintainer command is approved.",
+          "vscode": "Workspace trust controls local script execution; only the reviewed maintainer command is approved."
+        },
+        "validation": []
+      }
+    ]
   },
   "trust_metadata": {
     "source_tier": "local",
