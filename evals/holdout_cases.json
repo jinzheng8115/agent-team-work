@@ -23,6 +23,22 @@
     {
       "text": "组建一支 Leader 负责验收、成员按序汇报的 Codex 团队。",
       "family": "create"
+    },
+    {
+      "text": "第一轮已完成后修改数据来源，请继续使用项目会话团队处理。",
+      "family": "revision"
+    },
+    {
+      "text": "团队完成后由 Lead 影响分析，再安排这次修改。",
+      "family": "revision"
+    },
+    {
+      "text": "完成后的需求变化只重跑受影响阶段和必要下游阶段。",
+      "family": "revision"
+    },
+    {
+      "text": "交付完成后发现问题，请复用原成员返修并重新验收。",
+      "family": "revision"
     }
   ],
   "should_not_trigger": [
@@ -49,6 +65,18 @@
     {
       "text": "我要 Orca worker 并行执行，不需要项目栏会话。",
       "family": "other-runtime"
+    },
+    {
+      "text": "把这个普通文档里的日期改一下，这是一次性编辑，不需要项目团队。",
+      "family": "one-off-edit"
+    },
+    {
+      "text": "只解释完成后的影响分析是什么，不要操作或派发任务。",
+      "family": "explain"
+    },
+    {
+      "text": "创建一个支持修订流程的新 skill，不要建立项目会话团队。",
+      "family": "authoring"
     }
   ],
   "near_neighbor": []

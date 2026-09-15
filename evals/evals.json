@@ -28,6 +28,34 @@
       "expected_output": "记录 needs_rework，attempt 加一，向原会话发送带失败 DoD 和复验方式的 rework。",
       "files": [],
       "assertions": ["reuses_original_role", "increments_attempt", "does_not_start_next_stage"]
+    },
+    {
+      "id": "revision-impact-analysis",
+      "prompt": "第一轮团队已经 complete，用户要求只修改交付物中的数据来源。请由 Lead 先做影响分析，再决定哪些原成员和下游阶段需要重新派发。",
+      "expected_output": "先进入 impact_analysis 并写修订记录；只派受影响阶段及必要下游阶段；复用原成员，逐阶段验收。",
+      "files": [],
+      "assertions": ["analysis_before_dispatch", "scoped_dispatch", "reuses_original_members", "serial_acceptance"]
+    },
+    {
+      "id": "revision-cross-stage-propagation",
+      "prompt": "团队已经 complete。用户修改了上游研究结论，而且该结论被写作和审查阶段使用。Lead 应如何安排这次跨阶段修订？",
+      "expected_output": "先分析变更影响和依赖链；复用原研究成员修订上游产物，再按依赖顺序仅派发写作和审查等必要下游阶段，每阶段验收后继续。",
+      "files": [],
+      "assertions": ["traces_cross_stage_dependencies", "scoped_dispatch", "reuses_original_members", "serial_acceptance"]
+    },
+    {
+      "id": "revision-stales-dispatched-task",
+      "prompt": "完成后的修订周期中，写作任务已经派发，但用户又改变了目标，使这项任务的输入失效。Lead 应如何处理成员回报和后续派发？",
+      "expected_output": "将已派发任务标记 stale 并记录替代关系；旧回报不能推进当前修订周期；按新目标创建替代任务并在当前周期重新验收。",
+      "files": [],
+      "assertions": ["marks_invalidated_task_stale", "rejects_stale_result", "records_superseding_task", "accepts_active_cycle_only"]
+    },
+    {
+      "id": "revision-no-impact-no-dispatch",
+      "prompt": "团队已经 complete，用户提出一项修改。Lead 影响分析后确认交付物、完成条件和任何阶段都不受影响。接下来怎么做？",
+      "expected_output": "写明零影响结论并从 impact_analysis 回到 complete；不创建修订任务，也不向任何成员派发消息。",
+      "files": [],
+      "assertions": ["records_no_impact_decision", "returns_to_complete", "does_not_create_revision_tasks", "does_not_dispatch"]
     }
   ]
 }
