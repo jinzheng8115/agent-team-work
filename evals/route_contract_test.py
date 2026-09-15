@@ -16,6 +16,10 @@ def must(text: str, needle: str, where: str) -> None:
         raise AssertionError(f"{where} missing {needle!r}")
 
 
+def normalize_case_text(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip().casefold()
+
+
 def main() -> None:
     entry = (ROOT / "SKILL.md").read_text(encoding="utf-8")
     front = entry.split("---", 2)
@@ -60,6 +64,22 @@ def main() -> None:
     holdout = json.loads((ROOT / "evals/holdout_cases.json").read_text(encoding="utf-8"))
     if len(holdout.get("should_trigger", [])) < 10 or len(holdout.get("should_not_trigger", [])) < 9:
         raise AssertionError("holdout fixture must contain ten positives and nine negatives")
+    development_texts = {
+        normalize_case_text(case["text"])
+        for bucket in ("should_trigger", "should_not_trigger", "near_neighbor")
+        for case in cases.get(bucket, [])
+    }
+    holdout_texts = {
+        normalize_case_text(case["text"])
+        for case in cases.get("holdout", [])
+    } | {
+        normalize_case_text(case["text"])
+        for bucket in ("should_trigger", "should_not_trigger", "near_neighbor")
+        for case in holdout.get(bucket, [])
+    }
+    overlapping_texts = development_texts & holdout_texts
+    if overlapping_texts:
+        raise AssertionError("trigger and holdout texts overlap: " + ", ".join(sorted(overlapping_texts)))
     evals = json.loads((ROOT / "evals/evals.json").read_text(encoding="utf-8"))
     eval_ids = {case.get("id") for case in evals.get("evals", [])}
     required_revision_ids = {
