@@ -11,6 +11,8 @@ from pathlib import Path
 LEGACY_DISPATCH_KEY = re.compile(r"^(?P<team>[^/]+)/(?P<epoch>\d+)/(?P<stage>[^/]+)/(?P<attempt>\d+)/(?P<kind>standby|work|rework|result|accept|snapshot)$")
 REVISION_DISPATCH_KEY = re.compile(r"^(?P<team>[^/]+)/(?P<epoch>\d+)/r(?P<cycle>\d+)/(?P<stage>[^/]+)/(?P<attempt>\d+)/(?P<kind>standby|work|rework|result|accept|snapshot)$")
 SUPPORTED_LEDGER_VERSIONS = {2, 3}
+REPORT_REQUIRED_STATUSES = {"reported", "accepted", "rework"}
+NO_IMPACT_MARKER = "impact_result: no_affected_stages"
 
 def parse_schema_version(value) -> int:
     try:
@@ -140,15 +142,26 @@ def validate(team_dir: Path) -> dict:
         cycle = task_cycle(task, team_schema)
         if cycle < 1:
             failures.append(f"{label} revision_cycle is invalid")
+        if team_schema == 2 and cycle != 1:
+            failures.append(f"{label} schema_version 2 tasks must resolve to revision_cycle 1")
+        if cycle > active_cycle:
+            failures.append(
+                f"{label} revision_cycle {cycle} exceeds team active revision_cycle {active_cycle}"
+            )
         if cycle > 1:
             if not isinstance(task.get("supersedes"), list):
                 failures.append(f"{label} missing supersedes list")
             if not isinstance(task.get("impact_basis"), str) or not task.get("impact_basis", "").strip():
                 failures.append(f"{label} missing impact_basis")
-        if team_schema == 3:
+        if cycle > 1:
             require(task, ["team_id", "ownership_epoch", "stage", "dispatch_kind", "source", "report_path"], label, failures)
-            if task.get("report_path") and not (team_dir / task["report_path"]).is_file():
-                failures.append(f"{label} report_path does not exist")
+            report_path = task.get("report_path")
+            if task.get("status") in REPORT_REQUIRED_STATUSES:
+                if isinstance(report_path, str) and report_path.strip():
+                    if not (team_dir / report_path).is_file():
+                        failures.append(f"{label} report_path does not exist")
+                elif report_path:
+                    failures.append(f"{label} report_path must be a non-empty string")
         key = task.get("dispatch_key")
         parsed = None
         if key:
@@ -156,10 +169,15 @@ def validate(team_dir: Path) -> dict:
             parsed = parse_dispatch_key(key)
             if not parsed:
                 failures.append(f"{label} dispatch_key format is invalid")
-            elif parsed["team"] != team.get("team_id") or parsed["epoch"] != ownership_epoch:
-                failures.append(f"{label} dispatch_key is bound to another team or epoch")
-            elif parsed["cycle"] != cycle:
-                failures.append(f"{label} revision dispatch_key cycle does not match task revision")
+            else:
+                if parsed["team"] != team.get("team_id") or parsed["epoch"] != ownership_epoch:
+                    failures.append(f"{label} dispatch_key is bound to another team or epoch")
+                if parsed["cycle"] > active_cycle:
+                    failures.append(
+                        f"{label} dispatch_key cycle exceeds team active revision_cycle"
+                    )
+                if parsed["cycle"] != cycle:
+                    failures.append(f"{label} revision dispatch_key cycle does not match task revision")
         identity = {
             "team": task.get("team_id", task.get("team")),
             "epoch": task.get("ownership_epoch", task.get("epoch")),
@@ -230,8 +248,23 @@ def validate(team_dir: Path) -> dict:
                     failures.append(f"stale task {task.get('task_id')} requires an accepted superseder")
             elif task.get("status") != "accepted":
                 failures.append("complete team must have every current cycle task accepted")
-        if not current and tasks:
-            failures.append("complete team has no tasks in the current cycle")
+        if not current:
+            no_impact_recorded = False
+            if team_schema == 3 and active_cycle > 1:
+                record_path = team_dir / "revisions" / f"{active_cycle}.md"
+                if record_path.is_file():
+                    try:
+                        no_impact_recorded = any(
+                            line.strip() == NO_IMPACT_MARKER
+                            for line in record_path.read_text(encoding="utf-8").splitlines()
+                        )
+                    except OSError:
+                        no_impact_recorded = False
+            if not no_impact_recorded:
+                failures.append(
+                    "complete team has no current cycle tasks without explicit "
+                    f"{NO_IMPACT_MARKER} analysis"
+                )
     return {"ok": not failures, "team_dir": str(team_dir), "team_id": team.get("team_id"), "status": team.get("status"), "revision": tasks_payload.get("revision"), "member_count": len(members), "task_count": len(tasks), "accepted_task_count": accepted_count, "failures": failures}
 
 def main() -> int:

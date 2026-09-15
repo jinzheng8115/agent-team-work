@@ -66,7 +66,7 @@
 
 Lead 在首次修订派单前写 `.team/revisions/<cycle>.md`，保存原修改请求、上述判断、保留验收的证据、受影响及下游阶段、成员与顺序，以及最终周期验收。已完成首轮是 `revision_cycle: 1`；每次在 `complete` 后收到新的用户修改才单调递增 `revision_cycle`。同一周期内因 DoD 未通过而返修只递增 `attempt`，不增加 cycle。
 
-影响分析完成后，为受影响阶段和必要下游阶段创建带 `revision_cycle`、`supersedes`、`impact_basis` 的新任务记录，并按依赖串行复用原成员。派单键为 `<team_id>/<ownership_epoch>/r<revision_cycle>/<stage>/<attempt>/<kind>`。正常状态流转为 `complete -> impact_analysis -> running -> complete`；若没有任何受影响阶段，记录理由后直接回到 `complete`，不创建或发送成员任务。
+影响分析完成后，为受影响阶段和必要下游阶段创建带 `revision_cycle`、`supersedes`、`impact_basis` 的新任务记录，并按依赖串行复用原成员。派单键为 `<team_id>/<ownership_epoch>/r<revision_cycle>/<stage>/<attempt>/<kind>`。正常状态流转为 `complete -> impact_analysis -> running -> complete`；若没有任何受影响阶段，在本 cycle 的追加保留记录中写入独立标记 `impact_result: no_affected_stages` 后直接回到 `complete`，不创建或发送成员任务。没有该标记的空 active cycle 不得完成。
 
 只有 active cycle 中每个非 stale 任务都 `accepted`、每个 stale 任务都由同周期或后续 attempt/cycle 的 accepted 任务通过 `supersedes` 指明替代，并且整体完成条件与最终产物复验通过，团队才能重新进入 `complete`。旧 cycle、旧 attempt 或已失效目标的结果只能作为历史证据，不能推进 active cycle。用户在周期进行中再次改变目标时，Lead 暂停新派单、补记影响分析；已派任务不得静默改写，失效结果记为 stale 并以新 key 建立替代任务。
 

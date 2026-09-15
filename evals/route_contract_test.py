@@ -36,7 +36,7 @@ def main() -> None:
         must(body, excluded, "entrypoint boundary")
     if "若已有授权覆盖" in body:
         raise AssertionError("entrypoint must not bypass the final team confirmation")
-    for term in ("impact_analysis", ".team/revisions/<cycle>.md", "旧 cycle"):
+    for term in ("impact_analysis", ".team/revisions/<cycle>.md", "旧 cycle", "impact_result: no_affected_stages"):
         must(body, term, "post-completion entrypoint")
 
     workflow = (ROOT / "references/workflow.md").read_text(encoding="utf-8")
@@ -52,8 +52,11 @@ def main() -> None:
         must(protocol, term, "protocol")
     for term in ("last_writer_thread_id", "revision", "revision 已变化", "leader.thread_id"):
         must(protocol, term, "single-writer fence")
-    for term in ("revision_cycle", "supersedes", "complete -> impact_analysis -> running -> complete", "active `revision_cycle`"):
+    for term in ("revision_cycle", "supersedes", "complete -> impact_analysis -> running -> complete",
+                 "active `revision_cycle`", "impact_result: no_affected_stages"):
         must(protocol, term, "revision protocol")
+    migration = (ROOT / "docs/migration-v2.md").read_text(encoding="utf-8")
+    must(migration, "impact_result: no_affected_stages", "schema-3 migration")
     capabilities = (ROOT / "references/role-capabilities.md").read_text(encoding="utf-8")
     must(capabilities, "PASS / MISSING / UNKNOWN", "capability gate")
     cases = json.loads((ROOT / "evals/trigger_cases.json").read_text(encoding="utf-8"))

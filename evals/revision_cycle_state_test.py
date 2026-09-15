@@ -54,7 +54,7 @@ def write_fixture(*, schema_version: int, team_status: str, cycle: int,
             "source": source,
             "report_path": "reports/evidence.md",
             "status": status,
-            "dispatch_state": "accepted" if status == "accepted" else "stale",
+            "dispatch_state": status,
             "dispatch_key": key_override or key,
             "supersedes": supersedes or [],
             "impact_basis": "requested revision" if task_cycle > 1 else "initial delivery",
@@ -70,6 +70,8 @@ def write_fixture(*, schema_version: int, team_status: str, cycle: int,
     if revision_tasks == "old-cycle-accepted":
         tasks.append(task("old", 1, "accepted", "team/1/stage/1/work"))
         tasks.append(task("current", cycle, "accepted", current_key))
+    elif revision_tasks == "no-current-cycle":
+        tasks.append(task("old", 1, "accepted", "team/1/stage/1/work"))
     elif revision_tasks == "stale-without-superseder":
         tasks.append(task("stale", cycle, "stale", current_key))
     elif revision_tasks == "planned":
@@ -128,10 +130,47 @@ def test_revision_requires_impact_record():
     assert "revision record" in " ".join(result["failures"])
 
 
+def test_planned_revision_may_declare_future_report_path():
+    team_dir = write_fixture(schema_version=3, team_status="running", cycle=2,
+                             revision_tasks="planned")
+    (team_dir / "reports/evidence.md").unlink()
+    result = validate(team_dir)
+    assert result["ok"], result
+
+
+def test_reported_revision_requires_existing_report_file():
+    team_dir = write_fixture(schema_version=3, team_status="running", cycle=2,
+                             revision_tasks="planned")
+    tasks_payload = json.loads((team_dir / "tasks.json").read_text(encoding="utf-8"))
+    tasks_payload["tasks"][0]["status"] = "reported"
+    tasks_payload["tasks"][0]["dispatch_state"] = "reported"
+    (team_dir / "tasks.json").write_text(json.dumps(tasks_payload), encoding="utf-8")
+    (team_dir / "reports/evidence.md").unlink()
+    result = validate(team_dir)
+    assert "report_path does not exist" in " ".join(result["failures"])
+
+
 def test_valid_retained_history_cannot_fail_active_cycle():
     result = validate(write_fixture(schema_version=3, team_status="complete", cycle=2,
                                    revision_record=True, revision_tasks="old-cycle-accepted"))
     assert result["ok"], result
+
+
+def test_complete_zero_impact_revision_needs_no_current_tasks():
+    team_dir = write_fixture(schema_version=3, team_status="complete", cycle=2,
+                             revision_tasks="no-current-cycle")
+    with (team_dir / "revisions/2.md").open("a", encoding="utf-8") as record:
+        record.write("\nimpact_result: no_affected_stages\n")
+    result = validate(team_dir)
+    assert result["ok"], result
+
+
+def test_complete_without_tasks_rejects_missing_zero_impact_marker():
+    team_dir = write_fixture(schema_version=3, team_status="complete", cycle=2,
+                             revision_tasks="no-current-cycle")
+    result = validate(team_dir)
+    assert "no current cycle tasks" in " ".join(result["failures"])
+    assert "no_affected_stages" in " ".join(result["failures"])
 
 
 def test_stale_task_needs_accepted_superseder():
@@ -144,6 +183,51 @@ def test_revision_dispatch_key_is_cycle_bound():
     result = validate(write_fixture(schema_version=3, team_status="running", cycle=2,
                                    revision_record=True, revision_tasks="wrong-cycle-key"))
     assert "revision" in " ".join(result["failures"])
+
+
+def test_future_cycle_task_and_key_are_rejected():
+    team_dir = write_fixture(schema_version=3, team_status="running", cycle=2)
+    tasks_payload = json.loads((team_dir / "tasks.json").read_text(encoding="utf-8"))
+    future = tasks_payload["tasks"][0]
+    future["revision_cycle"] = 3
+    future["dispatch_key"] = "team/1/r3/stage/1/work"
+    future["acceptance"]["evidence"][0]["dispatch_key"] = future["dispatch_key"]
+    (team_dir / "tasks.json").write_text(json.dumps(tasks_payload), encoding="utf-8")
+    result = validate(team_dir)
+    failures = " ".join(result["failures"])
+    assert "active revision_cycle" in failures, result
+    assert "dispatch_key cycle exceeds" in failures, result
+
+
+def test_schema_two_task_cannot_declare_revision_cycle_two():
+    team_dir = write_fixture(schema_version=2, team_status="running", cycle=1)
+    tasks_payload = json.loads((team_dir / "tasks.json").read_text(encoding="utf-8"))
+    revision_task = tasks_payload["tasks"][0]
+    revision_task["revision_cycle"] = 2
+    revision_task["dispatch_key"] = "team/1/r2/stage/1/work"
+    revision_task["supersedes"] = []
+    revision_task["impact_basis"] = "must not exist in schema 2"
+    revision_task["acceptance"]["evidence"][0]["dispatch_key"] = revision_task["dispatch_key"]
+    (team_dir / "tasks.json").write_text(json.dumps(tasks_payload), encoding="utf-8")
+    result = validate(team_dir)
+    assert "schema_version 2 tasks must resolve to revision_cycle 1" in " ".join(result["failures"])
+
+
+def test_migrated_schema_three_preserves_legacy_cycle_one_task_shape():
+    team_dir = write_fixture(schema_version=3, team_status="complete", cycle=2,
+                             revision_tasks="old-cycle-accepted")
+    tasks_payload = json.loads((team_dir / "tasks.json").read_text(encoding="utf-8"))
+    legacy = tasks_payload["tasks"][0]
+    for field in ("team_id", "ownership_epoch", "stage", "dispatch_kind", "source", "report_path"):
+        legacy.pop(field)
+    legacy["acceptance"] = {
+        "status": "accepted",
+        "evidence": ["reports/legacy-cycle-one.md"],
+    }
+    (team_dir / "reports/legacy-cycle-one.md").write_text("legacy evidence", encoding="utf-8")
+    (team_dir / "tasks.json").write_text(json.dumps(tasks_payload), encoding="utf-8")
+    result = validate(team_dir)
+    assert result["ok"], result
 
 
 def test_dispatch_key_stage_attempt_identity():
