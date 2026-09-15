@@ -38,6 +38,22 @@
 看一下当前团队状态。
 ```
 
+## Demo 项目实景
+
+下面的图片来自 Demo 项目一次真实团队交付的配图目录，不是为了文档另做的占位图。这个项目的启动目标类似于“创建一个创作团队，完成每周微信公众号的文章撰写工作”，由 Lead 先确认角色和阶段，再逐步推进研究、核验、写作、视觉和排版。
+
+![从一个 Agent 到一支 AI 团队](README-assets/demo-team-overview.jpg)
+
+*Demo 实际产物：把单一 Agent 的多种职责拆成可交接的团队角色。*
+
+![多 Agent 任务分工](README-assets/demo-task-division.jpg)
+
+*Demo 实际产物：从接收目标、拆分任务到检查结果和整合交付。*
+
+![团队责任网络](README-assets/demo-responsibility-network.jpg)
+
+*Demo 实际产物：把任务拆分、权限控制、人工确认和失败恢复纳入同一条交付链。*
+
 ## 进一步阅读
 
 - [完整工作流程](references/workflow.md)
