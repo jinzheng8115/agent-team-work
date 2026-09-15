@@ -13,3 +13,8 @@ Existing users should:
 
 There is no declared breaking workflow change, but old ledgers without identity and project verification fields must remain paused until they are migrated and checked.
 
+## Schema 2 to schema 3 revision ledgers
+
+Schema 2 remains read-compatible only as the initial `revision_cycle: 1`; missing cycle fields and the legacy dispatch key are interpreted that way. Do not write a post-completion revision into a schema-2 ledger.
+
+Before the first user-requested modification after `complete`, the bound Lead must upgrade both `team.json` and `tasks.json` to `schema_version: 3`, set their matching `revision_cycle`, preserve cycle-1 tasks and reports, and create `.team/revisions/<cycle>.md` before dispatch. New tasks must include `revision_cycle`, `supersedes`, and non-empty `impact_basis`, and use `<team_id>/<ownership_epoch>/r<revision_cycle>/<stage>/<attempt>/<kind>`. Run `python3 scripts/validate_team_state.py .team` after the upgrade and before sending work.

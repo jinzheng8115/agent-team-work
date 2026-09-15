@@ -21,6 +21,8 @@ description: "Use when a user explicitly asks to create or continue a Codex proj
 
 默认门控为 `automatic`：阶段 accepted 后继续下一阶段；用户选择 `confirmation` 时，每个 accepted 之后、下一次派单之前再确认。跨 worktree 交接先核验产物可访问。创建或派单结果不明时先查询，不重复执行。Leader 活跃时通过等待工具收取报告；中断后恢复状态，不承诺后台常驻。
 
+团队 `complete` 后收到用户修改请求时，Lead 先进入 `impact_analysis`，读取首轮验收和真实成员状态，写 `.team/revisions/<cycle>.md`，按影响范围创建新 cycle 的任务；完成影响分析前不得向成员发送修改消息。受影响阶段仍复用原成员，并沿用能力门、报告、验收、gate 和恢复规则。分析确认没有受影响阶段时，不派单并直接回到 `complete`；旧 cycle 的结果只能作为历史证据，不能推进新 cycle。
+
 ## 输入与交付契约
 
 每次运行先把以下信息写入菜单摘要和 `.team/team.json`：项目归属与允许的 checkout、目标和首要交付物、完成判定、成员职责与阶段顺序、输入/依赖路径、工作范围，以及 `automatic` 或 `confirmation` 门控。缺少目标项目、首要交付物或完成判定时停在菜单，不创建会话。

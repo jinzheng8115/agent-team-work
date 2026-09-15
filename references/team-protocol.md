@@ -4,16 +4,17 @@
 
 在用户选定的项目根目录维护 `.team/`。如果已有同名目录但不是本 skill 的数据，先选择其他状态目录，不覆盖。所有任务单都带上该目录的绝对路径；不同 worktree 使用同一个 Leader 状态目录，不能各自初始化一套。
 
-- `team.json`：`schema_version`（本版为 2）、`skill`（agent-team-work）、`team_id`、`project_id`、`project_root`、`goal`、`completion_criteria`、`status`、`gate`（`automatic`/`confirmation`）、`ownership_epoch`、`active_stage`、`leader`、`members`。
+- `team.json`：`schema_version`（新修订账本为 3）、`skill`（agent-team-work）、`team_id`、`project_id`、`project_root`、`goal`、`completion_criteria`、`status`、`gate`（`automatic`/`confirmation`）、`ownership_epoch`、`revision_cycle`、`active_stage`、`leader`、`members`。schema 2 账本缺少 cycle 字段时只读为首轮 `revision_cycle: 1`；开始首个完成后修订前必须整体升级为 schema 3。
 - `leader`：真实 `thread_id`、可用的 `host_id`、`title`。每个 member：`label`、`role`、`responsibility`、`title`、`thread_id`、`host_id`、`client_thread_id`（仅 pending）、`checkout_path`、`created`、`title_synced`、`project_verified`、`status`。
-- `tasks.json`：`schema_version`、`team_id`、`revision`、`last_writer_thread_id`、`current_task_id`、`tasks`。每项任务：`task_id`、`attempt`、`role_label`、`objective`、`inputs`、`allowed_paths`、`deliverables`、`acceptance_criteria`、`dependencies`、`status`、`dispatch_state`、`dispatch_key`、`report_path`、`wait_cursor`、`acceptance`。`dispatch_key` 固定为 `<team_id>/<ownership_epoch>/<stage>/<attempt>/<kind>`。
+- `tasks.json`：`schema_version`、`team_id`、`revision`、`last_writer_thread_id`、`revision_cycle`、`current_task_id`、`tasks`。每项任务：`task_id`、`revision_cycle`、`supersedes`、`impact_basis`、`attempt`、`role_label`、`objective`、`inputs`、`allowed_paths`、`deliverables`、`acceptance_criteria`、`dependencies`、`status`、`dispatch_state`、`dispatch_key`、`report_path`、`wait_cursor`、`acceptance`。schema 3 的 `dispatch_key` 固定为 `<team_id>/<ownership_epoch>/r<revision_cycle>/<stage>/<attempt>/<kind>`；schema 2 首轮继续兼容旧键 `<team_id>/<ownership_epoch>/<stage>/<attempt>/<kind>`。
+- `revisions/<cycle>.md`：绑定 Lead 的影响分析记录。cycle 2 起每一轮都必须存在，且首次派单前已写入；记录用户请求、七项影响判断、保留验收证据、阶段顺序和最终周期验收，不覆盖之前 cycle 的记录。
 - `reports/<task_id>-<attempt>.md`：阶段报告。一个任务尝试一份报告，不覆盖旧报告；成员只写自己获派的报告，不能修改团队或任务账本。
 
 维护者可运行 `python3 scripts/validate_team_state.py .team` 做只读账本校验；它不能替代 Leader 对真实会话、产物和报告的验收。
 
 Leader 是两个 JSON 账本的唯一写入者。写入前必须确认当前会话 ID 等于 `team.json.leader.thread_id`，读取两个账本并记下 `revision`；写入时保留已绑定 ID 和未受影响任务，写入 `last_writer_thread_id`，使用临时文件加原子替换并递增 revision。执行会话工具后再次读取账本；若 revision 已变化，停止后续 mutation，记录 `blocked`/`conflict` 并由绑定 Leader 重新核对。`ownership_epoch` 首次绑定为 1；只有明确的用户接管流程才能递增，当前版本不自动执行跨 Leader takeover。跨文件更新中断时，先核对 team_id、current_task_id、epoch、revision 和实际会话再修复，不根据单个文件推断成功。该单写者版本栅栏降低重复派单风险；账本仍不是跨进程原子锁，不能宣称 exactly-once 或后台常驻监督。
 
-角色状态可为 pending、waiting、working、blocked；团队可为 ready、running、paused、blocked、complete。任务状态可为 planned、sending、dispatched、reported、accepted、rework、blocked、stale、duplicate。分别记录创建、标题、项目核验，不能用一个 ready 值代替所有证据。
+角色状态可为 pending、waiting、working、blocked；团队可为 ready、running、paused、blocked、impact_analysis、complete。完成后修改的正常流转是 `complete -> impact_analysis -> running -> complete`；分析无受影响阶段时从 `impact_analysis` 直接回到 `complete`，不派单。任务状态可为 planned、sending、dispatched、reported、accepted、rework、blocked、stale、duplicate。分别记录创建、标题、项目核验，不能用一个 ready 值代替所有证据。
 
 ## 任务单
 
@@ -54,7 +55,7 @@ Recommendation：返修或后续工作的建议
 
 ## 验收与交接
 
-任务状态流转：planned → sending → dispatched → reported → accepted；reported 也可转为 rework 或 blocked。只有依赖均 accepted 的任务可派发。attempt 在返修重派时递增；已有旧报告不满足新一次尝试。只有当前 epoch/stage/attempt/key 完全匹配的证据可推进；旧或重复结果仅记 stale/duplicate。
+任务状态流转：planned → sending → dispatched → reported → accepted；reported 也可转为 rework 或 blocked。只有依赖均 accepted 或由当前影响分析明确保留的任务可派发。`attempt` 仅在同一 `revision_cycle` 内返修重派时递增；`revision_cycle` 只在团队完成后收到新的用户修改时递增。已有旧报告不满足新一次尝试。只有当前 team/epoch/revision_cycle/stage/attempt/key/source 完全匹配的证据可推进；旧 cycle、旧 attempt、重复结果或被新目标失效的结果仅记 stale/duplicate。
 
 Leader 验收须记录：结论、实际检查证据、接受或退回的原因。检查强度取决于交付物：代码检查实际改动和必要测试，研究检查来源与关键论断，文档检查范围与一致性。不要机械重复全部测试，也不能仅信成员的“完成”。`reported` 不是 `accepted`；验收前不得派下一阶段。`automatic` accepted 后继续，`confirmation` accepted 后先展示摘要并等待确认。
 
@@ -72,3 +73,5 @@ Leader 验收须记录：结论、实际检查证据、接受或退回的原因�
 8. revision 冲突、同一阻塞或同一不确定发送连续返修两次仍无新证据时，向用户说明原因和所需决定，避免无止境地重复派单。
 
 团队完成必须覆盖用户的整体完成条件、全部必要依赖与最终产物；成员会话回合全部结束只是状态证据之一。
+
+完成后的修订以 active `revision_cycle` 判定：该 cycle 的所有非 stale 任务必须 `accepted`；每个 stale 任务必须被同周期或后续 attempt/cycle 的 accepted 任务在 `supersedes` 中点名，并重新核对整体完成条件和最终产物。较早 cycle 的 accepted 任务保持不可变历史，不能单独满足 active cycle。影响分析确认零受影响阶段时，Lead 将结论写入 `.team/revisions/<cycle>.md` 后可直接保持 `complete`，不调用成员派单工具。

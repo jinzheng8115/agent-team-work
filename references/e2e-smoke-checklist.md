@@ -19,6 +19,7 @@
 - 一次缺失 DoD 的 `rework`（attempt 递增）或可证明的阻塞；确认旧报告不能推进新 attempt。
 - Git worktree 场景下，前序产物在下一成员目录中的可访问性检查。
 - 一次中断后恢复：核对真实会话、cursor 和账本，证明没有重复创建或重复发送。
+- 一次有范围的完成后修订：首轮 `complete` 后请求只修改一个上游产物，记录 `complete -> impact_analysis -> running -> complete`、`.team/revisions/2.md` 和 cycle 2 任务；证明只复用受影响原成员及必要下游复核者，未联系无关成员，并确认 cycle 1 结果不能推进 cycle 2。
 
 ## 结束判定
 
