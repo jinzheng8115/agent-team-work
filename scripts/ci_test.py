@@ -15,7 +15,7 @@ from pathlib import Path
 SCRIPT_INTERFACE = "cli"
 SCRIPT_INTERFACE_REASON = "Runs local, dependency-free route, syntax, and package-shape checks before release."
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_TARGETS = ["route-contract", "python-compile", "package-shape"]
+DEFAULT_TARGETS = ["route-contract", "python-compile", "package-shape", "revision-state"]
 
 
 def route_contract() -> None:

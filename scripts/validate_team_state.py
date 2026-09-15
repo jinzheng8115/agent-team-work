@@ -27,6 +27,12 @@ def task_cycle(task: dict, schema_version: int) -> int:
     except (TypeError, ValueError):
         return 0
 
+def _int_value(value, default=0) -> int:
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return default
+
 def parse_dispatch_key(key: str) -> dict | None:
     for pattern in (REVISION_DISPATCH_KEY, LEGACY_DISPATCH_KEY):
         match = pattern.match(key)
@@ -91,16 +97,18 @@ def validate(team_dir: Path) -> dict:
         ownership_epoch = 0
     if ownership_epoch < 1:
         failures.append("team.json ownership_epoch must be positive")
-    try:
-        active_cycle = int(team.get("revision_cycle", 1))
-    except (TypeError, ValueError):
-        active_cycle = 0
+    if team_schema == 3 and "revision_cycle" not in team:
+        failures.append("team.json missing revision_cycle for schema_version 3")
+    active_cycle = _int_value(team.get("revision_cycle", 1 if team_schema == 2 else 0))
     if active_cycle < 1:
         failures.append("team.json revision_cycle must be positive")
     if active_cycle > 1 and team_schema != 3:
         failures.append("revision_cycle above 1 requires schema_version 3")
-    if active_cycle > 1 and not (team_dir / "revisions" / f"{active_cycle}.md").is_file():
-        failures.append(f"missing revision record for cycle {active_cycle}")
+    if active_cycle > 1:
+        missing_records = [str(cycle) for cycle in range(2, active_cycle + 1)
+                           if not (team_dir / "revisions" / f"{cycle}.md").is_file()]
+        if missing_records:
+            failures.append("missing revision record(s) for cycle(s) " + ", ".join(missing_records))
     require(tasks_payload, ["schema_version", "team_id", "revision", "last_writer_thread_id", "tasks"], "tasks.json", failures)
     if tasks_schema == 0:
         failures.append("tasks.json schema_version is unsupported")
@@ -112,6 +120,8 @@ def validate(team_dir: Path) -> dict:
         failures.append("tasks.json revision must be positive")
     if tasks_payload.get("last_writer_thread_id") != leader.get("thread_id"):
         failures.append("last_writer_thread_id must match the bound Leader")
+    if team_schema == 3 and "revision_cycle" not in tasks_payload:
+        failures.append("tasks.json missing revision_cycle for schema_version 3")
     if tasks_payload.get("revision_cycle", active_cycle) != active_cycle:
         failures.append("revision_cycle mismatch between team.json and tasks.json")
     tasks = tasks_payload.get("tasks", []) if isinstance(tasks_payload.get("tasks"), list) else []
@@ -134,6 +144,10 @@ def validate(team_dir: Path) -> dict:
                 failures.append(f"{label} missing supersedes list")
             if not isinstance(task.get("impact_basis"), str) or not task.get("impact_basis", "").strip():
                 failures.append(f"{label} missing impact_basis")
+        if team_schema == 3:
+            require(task, ["team_id", "ownership_epoch", "stage", "dispatch_kind", "source", "report_path"], label, failures)
+            if task.get("report_path") and not (team_dir / task["report_path"]).is_file():
+                failures.append(f"{label} report_path does not exist")
         key = task.get("dispatch_key")
         parsed = None
         if key:
@@ -145,8 +159,23 @@ def validate(team_dir: Path) -> dict:
                 failures.append(f"{label} dispatch_key is bound to another team or epoch")
             elif parsed["cycle"] != cycle:
                 failures.append(f"{label} revision dispatch_key cycle does not match task revision")
-            elif parsed["cycle"] != active_cycle:
-                failures.append(f"{label} cannot advance the current cycle")
+        identity = {
+            "team": task.get("team_id", task.get("team")),
+            "epoch": task.get("ownership_epoch", task.get("epoch")),
+            "stage": task.get("stage", task.get("stage_label")),
+            "attempt": task.get("attempt"),
+            "kind": task.get("dispatch_kind", task.get("kind")),
+        }
+        if parsed:
+            expected = {"team": identity["team"], "epoch": identity["epoch"],
+                        "stage": identity["stage"], "attempt": identity["attempt"],
+                        "kind": identity["kind"]}
+            for field, expected_value in expected.items():
+                if expected_value is not None and parsed[field] != (int(expected_value) if field in {"epoch", "attempt"} else expected_value):
+                    failures.append(f"{label} dispatch_key {field} does not match task identity")
+        if cycle < active_cycle and task.get("status") == "accepted":
+            # Historical accepted tasks are immutable evidence, not current work.
+            pass
         parsed_tasks.append((task, cycle))
         if task.get("status") == "accepted":
             accepted_count += 1
@@ -155,6 +184,18 @@ def validate(team_dir: Path) -> dict:
                 failures.append(f"accepted task {task.get('task_id', index)} lacks accepted acceptance evidence")
             if not acceptance.get("evidence"):
                 failures.append(f"accepted task {task.get('task_id', index)} lacks evidence paths")
+            if cycle > 1:
+                evidence = acceptance.get("evidence")
+                if not isinstance(evidence, list) or any(not isinstance(item, dict) for item in evidence):
+                    failures.append(f"accepted task {task.get('task_id', index)} evidence must bind to task identity")
+                else:
+                    for item in evidence:
+                        if item.get("task_id") != task.get("task_id") or item.get("dispatch_key") != key:
+                            failures.append(f"accepted task {task.get('task_id', index)} evidence is not bound to task")
+                        if item.get("source") != task.get("source"):
+                            failures.append(f"accepted task {task.get('task_id', index)} evidence source does not match task")
+                        if item.get("path") != task.get("report_path"):
+                            failures.append(f"accepted task {task.get('task_id', index)} evidence path does not match report")
     if len(dispatch_keys) != len(set(dispatch_keys)):
         failures.append("dispatch_key values must be unique")
     if team.get("status") == "complete":
