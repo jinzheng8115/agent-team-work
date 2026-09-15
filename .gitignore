@@ -1,7 +1,0 @@
-.DS_Store
-__pycache__/
-*.pyc
-dist/install-simulation/
-reports/telemetry_events.jsonl
-reports/output_blind_answer_key.json
-evidence/world_class/submissions/*.json
