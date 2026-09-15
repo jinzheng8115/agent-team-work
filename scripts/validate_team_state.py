@@ -134,7 +134,8 @@ def validate(team_dir: Path) -> dict:
             continue
         label = f"task {task.get('task_id', index)}"
         require(task, ["task_id", "attempt", "status", "dispatch_state", "dispatch_key"], label, failures)
-        if task.get("attempt", 0) < 1:
+        attempt_value = _int_value(task.get("attempt", 0))
+        if attempt_value < 1:
             failures.append(f"{label} attempt must be positive")
         cycle = task_cycle(task, team_schema)
         if cycle < 1:
@@ -171,7 +172,15 @@ def validate(team_dir: Path) -> dict:
                         "stage": identity["stage"], "attempt": identity["attempt"],
                         "kind": identity["kind"]}
             for field, expected_value in expected.items():
-                if expected_value is not None and parsed[field] != (int(expected_value) if field in {"epoch", "attempt"} else expected_value):
+                if expected_value is None:
+                    continue
+                if field in {"epoch", "attempt"}:
+                    try:
+                        expected_value = int(expected_value)
+                    except (TypeError, ValueError):
+                        failures.append(f"{label} task identity {field} must be numeric")
+                        continue
+                if parsed[field] != expected_value:
                     failures.append(f"{label} dispatch_key {field} does not match task identity")
         if cycle < active_cycle and task.get("status") == "accepted":
             # Historical accepted tasks are immutable evidence, not current work.

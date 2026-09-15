@@ -84,6 +84,10 @@ def write_fixture(*, schema_version: int, team_status: str, cycle: int,
         wrong_source_task = task("current", cycle, "accepted", current_key)
         wrong_source_task["acceptance"]["evidence"][0]["source"] = "other"
         tasks.append(wrong_source_task)
+    elif revision_tasks == "malformed-identity":
+        malformed_task = task("current", cycle, "accepted", current_key)
+        malformed_task["ownership_epoch"] = "oops"
+        tasks.append(malformed_task)
     else:
         tasks.append(task("current", cycle, "accepted", current_key))
 
@@ -153,6 +157,13 @@ def test_acceptance_evidence_source_is_bound():
     result = validate(write_fixture(schema_version=3, team_status="running", cycle=2,
                                    revision_tasks="wrong-source"))
     assert "source" in " ".join(result["failures"])
+
+
+def test_malformed_numeric_task_identity_is_structured_failure():
+    result = validate(write_fixture(schema_version=3, team_status="running", cycle=2,
+                                   revision_tasks="malformed-identity"))
+    assert not result["ok"], result
+    assert "must be numeric" in " ".join(result["failures"])
 
 
 def test_all_prior_revision_records_are_required():
