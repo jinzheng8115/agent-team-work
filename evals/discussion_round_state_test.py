@@ -314,6 +314,16 @@ def test_new_work_task_requires_discussion_policy():
     assert "task task missing discussion_policy for enabled current work/rework task" in result["failures"]
 
 
+def test_null_task_kind_cannot_bypass_enabled_work_policy():
+    result = validate(write_fixture(
+        with_policy=False,
+        discussions=[],
+        task_overrides={"dispatch_kind": None},
+    ))
+    assert not result["ok"], result
+    assert "task task missing discussion_policy for enabled current work/rework task" in result["failures"]
+
+
 def test_discussion_protocol_marker_must_exist_in_both_ledgers():
     result = validate(write_fixture(tasks_protocol_version=None))
     assert not result["ok"], result

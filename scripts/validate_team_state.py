@@ -430,7 +430,7 @@ def validate(team_dir: Path) -> dict:
         policy = task.get("discussion_policy")
         if policy is not None and policy != DEFAULT_DISCUSSION_POLICY:
             failures.append(f"{label} discussion_policy must match the worker_can_request default")
-        task_kind = task.get("dispatch_kind", parsed.get("kind") if parsed else None)
+        task_kind = parsed["kind"] if parsed else task.get("dispatch_kind")
         is_enabled_current_work = (
             discussion_protocol_enabled
             and cycle == active_cycle
