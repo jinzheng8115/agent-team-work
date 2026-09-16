@@ -5,15 +5,15 @@
   "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
   "summary": {
     "check_count": 41,
-    "pass_count": 39,
+    "pass_count": 40,
     "warn_count": 0,
-    "fail_count": 2,
+    "fail_count": 1,
     "decision": "evidence-drift-detected"
   },
   "status_counts": {
-    "pass": 39,
+    "pass": 40,
     "warn": 0,
-    "fail": 2
+    "fail": 1
   },
   "checks": [
     {
@@ -3711,7 +3711,7 @@
     {
       "key": "skill-os-2-review-current-evidence",
       "label": "Skill OS 2.0 review summary mirrors current evidence",
-      "status": "fail",
+      "status": "pass",
       "expected": [
         "score `86`",
         "`16` gates",
@@ -3727,13 +3727,7 @@
         "initial load `878/1000`",
         "target count is `6`"
       ],
-      "actual": {
-        "missing": [
-          "score `86`",
-          "`5` warnings",
-          "target count is `6`"
-        ]
-      },
+      "actual": "all present",
       "paths": [
         "reports/skill-os-2-review.md",
         "reports/review-studio.json",

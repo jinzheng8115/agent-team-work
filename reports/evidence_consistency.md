@@ -6,9 +6,9 @@ Generated at: `2026-09-17`
 
 - decision: `evidence-drift-detected`
 - checks: `41`
-- pass: `39`
+- pass: `40`
 - warn: `0`
-- fail: `2`
+- fail: `1`
 
 This gate compares generated evidence reports against each other. It does not create provider, human, native-client, or permission-enforcement evidence; it only catches drift between reports that already exist.
 
@@ -56,7 +56,7 @@ This gate compares generated evidence reports against each other. It does not cr
 | Review Studio does not overclaim pending world-class evidence | `pass` | When world-class evidence is pending, Review Studio must stay in a review or warning posture. | `reports/world_class_evidence_ledger.json`, `reports/review-studio.json` |
 | Claim guard covers package and runtime claim surfaces | `pass` | The overclaim guard must scan package manifests, adapter metadata, security policy, and ledger surfaces before public readiness can be trusted. | `reports/world_class_claim_guard.json`, `manifest.json`, `agents/interface.yaml`, `dist/manifest.json`, `dist/targets/openai/adapter.json`, `evidence/world_class/README.md`, `security/permission_policy.json`, `reports/world_class_evidence_ledger.json` |
 | World-class evidence workflows cover every pending ledger entry | `pass` | Every pending world-class evidence key must have matching plan, intake, submission review, operator runbook, and Review Studio actions without counting planned work as completion. | `reports/world_class_evidence_ledger.json`, `reports/world_class_evidence_plan.json`, `reports/world_class_evidence_intake.json`, `reports/world_class_submission_review.json`, `reports/world_class_operator_runbook.json`, `reports/review-studio.json` |
-| Skill OS 2.0 review summary mirrors current evidence | `fail` | Manual 2.0 review summaries must not drift from generated gate, package, trust, context, benchmark, or CI evidence. | `reports/skill-os-2-review.md`, `reports/review-studio.json`, `reports/package_verification.json`, `reports/install_simulation.json`, `reports/security_trust_report.json`, `reports/context_budget.json`, `reports/benchmark_reproducibility.json`, `scripts/ci_test.py` |
+| Skill OS 2.0 review summary mirrors current evidence | `pass` | Manual 2.0 review summaries must not drift from generated gate, package, trust, context, benchmark, or CI evidence. | `reports/skill-os-2-review.md`, `reports/review-studio.json`, `reports/package_verification.json`, `reports/install_simulation.json`, `reports/security_trust_report.json`, `reports/context_budget.json`, `reports/benchmark_reproducibility.json`, `scripts/ci_test.py` |
 
 ## Failures
 
@@ -65,9 +65,3 @@ This gate compares generated evidence reports against each other. It does not cr
 - key: `release-archive-hash-lockstep`
 - expected: `{"all_equal_to_actual_archive": ""}`
 - actual: `{"actual_archive": "", "benchmark": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144", "package_verification": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144", "registry": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144"}`
-
-### Skill OS 2.0 review summary mirrors current evidence
-
-- key: `skill-os-2-review-current-evidence`
-- expected: `["score `86`", "`16` gates", "`5` warnings", "`0` declared internal modules", "`6 / 6` CLI help smoke checks passing across `6` scripts", "`13` zip entries", "archive with `13` entries", "`0` installer permission checks enforced", "`0` permission failures", "`25` required artifacts", "`23` reproduction commands", "initial load `878/1000`", "target count is `6`"]`
-- actual: `{"missing": ["score `86`", "`5` warnings", "target count is `6`"]}`
