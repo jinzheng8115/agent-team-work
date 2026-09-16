@@ -10,6 +10,17 @@ from pathlib import Path
 
 LEGACY_DISPATCH_KEY = re.compile(r"^(?P<team>[^/]+)/(?P<epoch>\d+)/(?P<stage>[^/]+)/(?P<attempt>\d+)/(?P<kind>standby|work|rework|result|accept|snapshot)$")
 REVISION_DISPATCH_KEY = re.compile(r"^(?P<team>[^/]+)/(?P<epoch>\d+)/r(?P<cycle>\d+)/(?P<stage>[^/]+)/(?P<attempt>\d+)/(?P<kind>standby|work|rework|result|accept|snapshot)$")
+DISCUSSION_KEY = re.compile(
+    r"^(?P<team>[^/]+)/(?P<epoch>\d+)/r(?P<cycle>\d+)/"
+    r"(?P<stage>[^/]+)/(?P<task>[^/]+)/d(?P<sequence>\d+)$"
+)
+DISCUSSION_STATUSES = {
+    "requested", "approved", "open", "proposing", "challenging",
+    "decision_pending", "decided", "lead_accepted", "closed",
+    "rejected", "blocked", "expired", "cancelled",
+}
+DISCUSSION_MESSAGE_KINDS = {"proposal", "challenge", "evidence", "response", "decision"}
+TERMINAL_DISCUSSION_STATUSES = {"closed", "rejected", "blocked", "expired", "cancelled"}
 SUPPORTED_LEDGER_VERSIONS = {2, 3}
 REPORT_REQUIRED_STATUSES = {"reported", "accepted", "rework"}
 NO_IMPACT_MARKER = "impact_result: no_affected_stages"
@@ -46,6 +57,18 @@ def parse_dispatch_key(key: str) -> dict | None:
             return data
     return None
 
+def parse_discussion_key(key: str) -> dict | None:
+    if not isinstance(key, str):
+        return None
+    match = DISCUSSION_KEY.match(key)
+    if not match:
+        return None
+    data = match.groupdict()
+    data["epoch"] = int(data["epoch"])
+    data["cycle"] = int(data["cycle"])
+    data["sequence"] = int(data["sequence"])
+    return data
+
 def load_json(path: Path, failures: list[str]) -> dict:
     if not path.exists():
         failures.append(f"missing file: {path}")
@@ -64,6 +87,189 @@ def require(payload: dict, fields: list[str], label: str, failures: list[str]) -
     for field in fields:
         if not payload.get(field):
             failures.append(f"{label} missing {field}")
+
+def _require_keys(payload: dict, fields: list[str], label: str, failures: list[str]) -> None:
+    for field in fields:
+        if field not in payload:
+            failures.append(f"{label} missing {field}")
+
+def validate_discussion_record(team_dir: Path, team: dict, tasks_by_id: dict,
+                               record: dict, failures: list[str]) -> None:
+    """Validate one discussion and its transcript/decision without mutating state."""
+    discussion_id = record.get("discussion_id")
+    label = f"discussion {discussion_id or '<missing>'}"
+    require(record, [
+        "discussion_id", "team_id", "ownership_epoch", "revision_cycle", "stage",
+        "task_id", "dispatch_key", "status", "trigger", "question", "opened_by",
+        "participants", "decision_owner", "max_rounds", "deadline",
+        "transcript_path", "decision_path", "affected_tasks",
+    ], label, failures)
+    parsed = parse_discussion_key(discussion_id)
+    if not parsed:
+        failures.append(f"{label} discussion_id format is invalid")
+        return
+
+    ownership_epoch = _int_value(team.get("ownership_epoch"))
+    active_cycle = _int_value(team.get("revision_cycle", 1))
+    expected_record_identity = {
+        "team_id": parsed["team"],
+        "ownership_epoch": parsed["epoch"],
+        "revision_cycle": parsed["cycle"],
+        "stage": parsed["stage"],
+        "task_id": parsed["task"],
+    }
+    for field, expected in expected_record_identity.items():
+        actual = record.get(field)
+        if field in {"ownership_epoch", "revision_cycle"}:
+            actual = _int_value(actual, -1)
+        if actual != expected:
+            failures.append(f"{label} {field} does not match discussion identity")
+    if parsed["team"] != team.get("team_id") or parsed["epoch"] != ownership_epoch:
+        failures.append(f"{label} is bound to another team or ownership_epoch")
+    if parsed["cycle"] != active_cycle:
+        failures.append(f"{label} revision_cycle does not match active cycle")
+    if parsed["stage"] != team.get("active_stage"):
+        failures.append(f"{label} stage does not match team active_stage")
+
+    task = tasks_by_id.get(parsed["task"])
+    if not task:
+        failures.append(f"{label} has no matching active task")
+    else:
+        if task.get("status") in {"stale", "duplicate"}:
+            failures.append(f"{label} cannot advance stale or duplicate task {parsed['task']}")
+        if record.get("dispatch_key") != task.get("dispatch_key"):
+            failures.append(f"{label} dispatch_key does not match task identity")
+        if task.get("stage") != parsed["stage"]:
+            failures.append(f"{label} stage does not match task identity")
+        if task_cycle(task, 3) != parsed["cycle"]:
+            failures.append(f"{label} revision_cycle does not match task identity")
+
+    if record.get("status") not in DISCUSSION_STATUSES:
+        failures.append(f"{label} status is invalid")
+    if _int_value(record.get("max_rounds")) < 1:
+        failures.append(f"{label} max_rounds must be positive")
+
+    members = team.get("members", []) if isinstance(team.get("members"), list) else []
+    members_by_label = {
+        member.get("label"): member for member in members
+        if isinstance(member, dict) and member.get("label")
+    }
+    participants = record.get("participants")
+    participant_labels: set[str] = set()
+    if not isinstance(participants, list) or not participants:
+        failures.append(f"{label} participants must be a non-empty list")
+    else:
+        for index, participant in enumerate(participants):
+            if not isinstance(participant, dict):
+                failures.append(f"{label} participant {index} must contain label and role")
+                continue
+            participant_label = participant.get("label")
+            if not participant_label or not participant.get("role"):
+                failures.append(f"{label} participant {index} missing label or role")
+                continue
+            member = members_by_label.get(participant_label)
+            if not member:
+                failures.append(f"{label} participant {participant_label} is not a team member")
+                continue
+            participant_labels.add(participant_label)
+            if participant.get("role") != member.get("role"):
+                failures.append(f"{label} participant {participant_label} role does not match member binding")
+            if participant.get("thread_id") is not None and participant.get("thread_id") != member.get("thread_id"):
+                failures.append(f"{label} participant {participant_label} thread_id does not match member binding")
+    decision_owner = record.get("decision_owner")
+    if decision_owner not in participant_labels:
+        failures.append(f"{label} decision_owner must be a participant")
+
+    expected_transcript = f"discussions/{parsed['task']}/d{parsed['sequence']}/messages.jsonl"
+    expected_decision = f"discussions/{parsed['task']}/d{parsed['sequence']}/decision.json"
+    if record.get("transcript_path") != expected_transcript:
+        failures.append(f"{label} transcript_path does not match discussion identity")
+    if record.get("decision_path") != expected_decision:
+        failures.append(f"{label} decision_path does not match discussion identity")
+
+    transcript_path = team_dir / expected_transcript
+    if not transcript_path.is_file():
+        failures.append(f"{label} missing messages transcript: {transcript_path}")
+    else:
+        message_sequences: set[int] = set()
+        message_ids: set[str] = set()
+        try:
+            lines = transcript_path.read_text(encoding="utf-8").splitlines()
+        except OSError as exc:
+            failures.append(f"{label} cannot read messages transcript: {exc}")
+            lines = []
+        for line_number, line in enumerate(lines, 1):
+            message_label = f"{label} message line {line_number}"
+            try:
+                message = json.loads(line)
+            except json.JSONDecodeError as exc:
+                failures.append(f"{message_label} is invalid JSON: {exc}")
+                continue
+            if not isinstance(message, dict):
+                failures.append(f"{message_label} must be an object")
+                continue
+            _require_keys(message, [
+                "message_id", "discussion_id", "sender", "recipients", "sequence",
+                "kind", "in_reply_to", "body", "created_at",
+            ], message_label, failures)
+            if message.get("discussion_id") != discussion_id:
+                failures.append(f"{message_label} discussion_id does not match record")
+            sequence = _int_value(message.get("sequence"), -1)
+            if sequence < 1:
+                failures.append(f"{message_label} sequence must be positive")
+            elif sequence in message_sequences:
+                failures.append(f"{message_label} has duplicate sequence {sequence}")
+            else:
+                message_sequences.add(sequence)
+            message_id = message.get("message_id")
+            if message_id in message_ids:
+                failures.append(f"{message_label} has duplicate message_id")
+            elif isinstance(message_id, str) and message_id:
+                message_ids.add(message_id)
+            if message.get("sender") not in participant_labels:
+                failures.append(f"{message_label} sender is not a known participant")
+            recipients = message.get("recipients")
+            if (not isinstance(recipients, list) or not recipients
+                    or any(recipient not in participant_labels for recipient in recipients)):
+                failures.append(f"{message_label} recipients must be known participant labels")
+            if message.get("kind") not in DISCUSSION_MESSAGE_KINDS:
+                failures.append(f"{message_label} kind is invalid")
+            if message.get("kind") == "decision" and message.get("sender") != decision_owner:
+                failures.append(f"{message_label} decision sender must match decision_owner")
+
+    status = record.get("status")
+    decision_path = team_dir / expected_decision
+    decision_required = status in {"decided", "lead_accepted", "closed"}
+    if decision_required and not decision_path.is_file():
+        failures.append(f"{label} missing decision.json for status {status}")
+        return
+    if not decision_path.is_file():
+        return
+    decision = load_json(decision_path, failures)
+    if not decision:
+        return
+    if decision.get("discussion_id") not in {None, discussion_id}:
+        failures.append(f"{label} decision discussion_id does not match record")
+    if status == "closed":
+        require(decision, [
+            "chosen_option", "rationale", "evidence", "rejected_alternatives",
+            "affected_tasks", "decision_owner", "lead_acceptance",
+        ], f"{label} decision", failures)
+    if decision.get("decision_owner") is not None and decision.get("decision_owner") != decision_owner:
+        failures.append(f"{label} decision_owner does not match record")
+    owner_member = members_by_label.get(decision_owner)
+    owner_thread_id = decision.get("decision_owner_thread_id")
+    if status in {"lead_accepted", "closed"} and owner_thread_id is not None:
+        if not owner_member or owner_thread_id != owner_member.get("thread_id"):
+            failures.append(f"{label} decision owner identity does not match member binding")
+    if status in {"lead_accepted", "closed"}:
+        acceptance = decision.get("lead_acceptance")
+        if not isinstance(acceptance, dict):
+            failures.append(f"{label} decision missing lead_acceptance identity")
+        else:
+            acceptance_thread = acceptance.get("thread_id", acceptance.get("leader_thread_id"))
+            if acceptance_thread != (team.get("leader") or {}).get("thread_id"):
+                failures.append(f"{label} lead_acceptance identity does not match bound Leader")
 
 def validate(team_dir: Path) -> dict:
     failures: list[str] = []
@@ -223,6 +429,40 @@ def validate(team_dir: Path) -> dict:
                             failures.append(f"accepted task {task.get('task_id', index)} evidence source does not match task")
                         if item.get("path") != task.get("report_path"):
                             failures.append(f"accepted task {task.get('task_id', index)} evidence path does not match report")
+    tasks_by_id = {
+        task.get("task_id"): task for task, _ in parsed_tasks
+        if isinstance(task.get("task_id"), str) and task.get("task_id")
+    }
+    active_discussions_by_task: dict[str, list[str]] = {}
+    discussions_dir = team_dir / "discussions"
+    if discussions_dir.is_dir():
+        for discussion_dir in sorted(path for path in discussions_dir.glob("*/*") if path.is_dir()):
+            record_path = discussion_dir / "record.json"
+            if not record_path.is_file():
+                failures.append(f"discussion directory missing record.json: {discussion_dir}")
+                continue
+            record = load_json(record_path, failures)
+            if not record:
+                continue
+            parsed_discussion = parse_discussion_key(record.get("discussion_id"))
+            if parsed_discussion:
+                expected_dir = discussions_dir / parsed_discussion["task"] / f"d{parsed_discussion['sequence']}"
+                if discussion_dir != expected_dir:
+                    failures.append(
+                        f"discussion {record.get('discussion_id')} record path does not match discussion identity"
+                    )
+            validate_discussion_record(team_dir, team, tasks_by_id, record, failures)
+            if record.get("status") not in TERMINAL_DISCUSSION_STATUSES:
+                task_id = record.get("task_id")
+                active_discussions_by_task.setdefault(task_id, []).append(
+                    record.get("discussion_id", str(record_path))
+                )
+        for task_id, discussion_ids in active_discussions_by_task.items():
+            if len(discussion_ids) > 1:
+                failures.append(
+                    f"duplicate active discussion records for task {task_id}: "
+                    + ", ".join(discussion_ids)
+                )
     if len(dispatch_keys) != len(set(dispatch_keys)):
         failures.append("dispatch_key values must be unique")
     if team.get("status") == "complete":
