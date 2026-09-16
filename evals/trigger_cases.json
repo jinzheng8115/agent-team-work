@@ -39,6 +39,30 @@
     {
       "text": "交付完成后发现问题，请复用原成员返修并重新验收。",
       "family": "revision"
+    },
+    {
+      "text": "两个成员共用的 API 请求格式还没有定稿，先由当前 worker 提交讨论请求再继续依赖实现。",
+      "family": "discussion"
+    },
+    {
+      "text": "研究员和审查员对同一数据给出了冲突报告，需要在当前阶段发起有界讨论。",
+      "family": "discussion"
+    },
+    {
+      "text": "事件驱动和批处理是两个都可行的架构方案，请让相关成员比较权衡后由决策负责人选择。",
+      "family": "discussion"
+    },
+    {
+      "text": "今晚的发布决定可能导致不可逆数据迁移，必须先由 Lead 批准高风险讨论。",
+      "family": "discussion"
+    },
+    {
+      "text": "新证据改变了原先的关键假设且会影响写作与审查，请暂停依赖结论并请求讨论。",
+      "family": "discussion"
+    },
+    {
+      "text": "worker 报告遇到跨角色决策，并明确要求 Lead 审批一次 discussion_request。",
+      "family": "discussion"
     }
   ],
   "should_not_trigger": [
@@ -65,6 +89,30 @@
     {
       "text": "不用创建会话，只给出组建团队的建议。",
       "family": "proposal"
+    },
+    {
+      "text": "实现方案只有已确定的一种，请成员直接按接口文档编码。",
+      "family": "implementation"
+    },
+    {
+      "text": "只需确认测试环境的端口号是多少，不需要讨论方案。",
+      "family": "clarification"
+    },
+    {
+      "text": "成员缺少数据库凭据而无法开始，请按 blocked 回报所需输入。",
+      "family": "blocked"
+    },
+    {
+      "text": "成员正在按既定计划实施，这条只是百分之六十的进度汇报。",
+      "family": "status"
+    },
+    {
+      "text": "把说明文档里的一个错别字修正，不改变任何决策。",
+      "family": "one-off-edit"
+    },
+    {
+      "text": "技术负责人已决定使用 PostgreSQL，请直接执行已验收的实现。",
+      "family": "implementation"
     }
   ],
   "near_neighbor": [

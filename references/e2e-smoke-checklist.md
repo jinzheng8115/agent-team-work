@@ -21,6 +21,20 @@
 - 一次中断后恢复：核对真实会话、cursor 和账本，证明没有重复创建或重复发送。
 - 一次有范围的完成后修订：首轮 `complete` 后请求只修改一个上游产物，记录 `complete -> impact_analysis -> running -> complete`、`.team/revisions/2.md` 和 cycle 2 任务；证明只复用受影响原成员及必要下游复核者，未联系无关成员，并确认 cycle 1 结果不能推进 cycle 2。
 
+## Worker-to-worker discussion 实跑场景
+
+在当前 `work` 任务中选择一个会影响其他成员交付物的未决合同，完成下列一次真实场景。每项都填写实际 ID、时间戳、工具结果和对应文件路径，不得用预期值代替运行证据。
+
+- Request：记录 worker 提交的 `discussion_request`，包括 team/epoch/revision/stage/task/dispatch identity、trigger、question、options、evidence、affected tasks 和 suggested owner；确认 worker 没有自行创建 discussion record。
+- Lead participant/owner：记录 Lead 批准时选定的二至四名 participant，逐个填写 label、role 和真实 `thread_id`；另记录 `decision_owner` 及其 `thread_id`、`max_rounds` 和 deadline。
+- Peer message 1：保留第一条 peer message 的 `message_id`、sender/recipients、sequence、kind、body、发送结果及 `messages.jsonl` 行号。
+- Peer message 2：保留来自另一 participant 的第二条 peer message，记录 `in_reply_to`、完整身份、发送结果及 transcript 行号。
+- Decision：记录 decision owner 发出的 `decision` message 和 `decision.json`，核对选项、rationale、evidence、rejected alternatives 与 affected tasks。
+- Lead acceptance：保留 Lead 对身份、证据、范围和依赖的实际检查，以及写入 `lead_accepted` 和 `closed` 的时间戳。
+- 未提前派发：对比 `discussion_request`、decision、Lead acceptance 与下一阶段 `send_message_to_thread` 的时间；附上成员历史和账本差异，证明验收前没有后续阶段消息或状态推进。
+- Stale 检查：在 `closed` 后使用原 discussion identity 发送一条测试消息；记录它被保留为 `stale` 历史，且 decision、task status 和下一阶段派发均未变化。
+- timeout/block 检查：用一个独立演练 discussion 到达 deadline 但不产生 owner decision；确认 Lead 将其标记 `expired`，把依赖工作标记 `blocked` 或只向用户提一个具体问题，并证明没有派发下一阶段。
+
 ## 结束判定
 
 只有 Leader 根据整体 DoD、依赖和最终产物完成检查后才能写 `complete`。记录仍未验证的侧边栏可见性、送达、后台存活或 exactly-once 事实为 `unknown`，不要用成员回合结束代替验收。

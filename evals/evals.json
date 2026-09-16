@@ -56,6 +56,55 @@
       "expected_output": "写明零影响结论并从 impact_analysis 回到 complete；不创建修订任务，也不向任何成员派发消息。",
       "files": [],
       "assertions": ["records_no_impact_decision", "returns_to_complete", "does_not_create_revision_tasks", "does_not_dispatch"]
+    },
+    {
+      "id": "discussion-triage-hard-trigger",
+      "prompt": "成员发现自己正要确定会影响其他角色的 API 合同，但尚无共识。应如何处理？",
+      "expected_output": "worker submits a discussion_request，只暂停依赖该决定的工作；成员不自行开放讨论，且 does not dispatch the next stage。",
+      "files": [],
+      "assertions": ["worker_requests_instead_of_opens", "hard_trigger_pauses_dependent_work", "does_not_dispatch_next_stage"]
+    },
+    {
+      "id": "discussion-triage-soft-threshold",
+      "prompt": "一项任务同时出现多角色依赖和返工成本较高两个软触发项，但没有硬触发项。",
+      "expected_output": "达到 soft_trigger_threshold: 2 后 worker submits a discussion_request；请求本身不会开放讨论，且 does not dispatch the next stage。",
+      "files": [],
+      "assertions": ["counts_soft_triggers", "worker_requests_at_threshold", "does_not_dispatch_next_stage"]
+    },
+    {
+      "id": "discussion-clarification-not-discussion",
+      "prompt": "成员只需要查明一个已记录的配置值，不存在选项、冲突或跨角色决定。",
+      "expected_output": "作为普通事实澄清处理，不创建 discussion_request，不打开讨论，且 does not dispatch the next stage。",
+      "files": [],
+      "assertions": ["routes_one_fact_clarification", "does_not_request_discussion", "does_not_dispatch_next_stage"]
+    },
+    {
+      "id": "discussion-lead-approval",
+      "prompt": "Lead 收到一个有效 discussion_request 后，怎样批准并建立受控讨论？",
+      "expected_output": "Lead approves 前核验触发条件，仅选择二至四名已有成员的真实 thread ID，指定 decision_owner、轮次和期限；讨论 does not dispatch the next stage。",
+      "files": [],
+      "assertions": ["lead_approves_request", "lead_selects_participants", "lead_assigns_decision_owner", "does_not_dispatch_next_stage"]
+    },
+    {
+      "id": "discussion-decision-owner",
+      "prompt": "参与者已完成提案和挑战，讨论应如何决策并恢复原任务？",
+      "expected_output": "decision_owner 写入选项、理由、证据、被拒绝备选和受影响任务；只有记录 Lead acceptance 后才恢复依赖工作，在此之前 does not dispatch the next stage。",
+      "files": [],
+      "assertions": ["owner_records_decision", "lead_accepts_before_resume", "does_not_dispatch_next_stage"]
+    },
+    {
+      "id": "discussion-timeout-escalation",
+      "prompt": "讨论到达 deadline 但 owner 仍无法决定，后续工作依赖这个结论。",
+      "expected_output": "Lead 将讨论标记 expired，把依赖工作标记 blocked 或只向用户提一个具体问题；超时路径 does not dispatch the next stage。",
+      "files": [],
+      "assertions": ["expires_timed_out_discussion", "blocks_or_escalates", "does_not_dispatch_next_stage"]
+    },
+    {
+      "id": "discussion-stale-message",
+      "prompt": "讨论已 closed，随后到达一条带旧 dispatch identity 的 peer message。",
+      "expected_output": "将该消息保留为 stale 历史，不改写 decision 或任务状态，不重开讨论，且 does not dispatch the next stage。",
+      "files": [],
+      "assertions": ["records_post_close_message_as_stale", "does_not_mutate_closed_decision", "does_not_dispatch_next_stage"]
     }
   ]
 }
