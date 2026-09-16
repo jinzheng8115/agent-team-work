@@ -59,13 +59,6 @@ def write_fixture(*, schema_version: int, team_status: str, cycle: int,
             "supersedes": supersedes or [],
             "impact_basis": "requested revision" if task_cycle > 1 else "initial delivery",
         }
-        if key.startswith("team/1/r"):
-            value["discussion_policy"] = {
-                "mode": "worker_can_request",
-                "soft_trigger_threshold": 2,
-                "max_rounds": 2,
-                "deadline": "Lead-defined",
-            }
         if status == "accepted":
             value["acceptance"] = {"status": "accepted", "evidence": [{
                 "task_id": task_id, "dispatch_key": key_override or key,

@@ -19,7 +19,8 @@ _FIXTURES: list[Path] = []
 def write_fixture(*, status="closed", with_policy=True, discussions=["d1"],
                   statuses=None, record_overrides=None, message_overrides=None,
                   decision_overrides=None, task_status="reported",
-                  task_overrides=None, legacy_task=False) -> Path:
+                  task_overrides=None, team_protocol_version=1,
+                  tasks_protocol_version=1) -> Path:
     """Create a temporary schema-3 team with optional discussion evidence."""
     team_dir = Path(tempfile.mkdtemp())
     _FIXTURES.append(team_dir)
@@ -53,6 +54,8 @@ def write_fixture(*, status="closed", with_policy=True, discussions=["d1"],
             },
         ],
     }
+    if team_protocol_version is not None:
+        team["discussion_protocol_version"] = team_protocol_version
     task = {
         "task_id": "task",
         "revision_cycle": 1,
@@ -64,10 +67,7 @@ def write_fixture(*, status="closed", with_policy=True, discussions=["d1"],
         "source": "worker",
         "status": task_status,
         "dispatch_state": task_status,
-        "dispatch_key": (
-            "team/1/implementation/1/work" if legacy_task
-            else "team/1/r1/implementation/1/work"
-        ),
+        "dispatch_key": "team/1/r1/implementation/1/work",
         "report_path": "reports/task.md",
         "discussion_ids": [f"team/1/r1/implementation/task/{item}" for item in discussions],
     }
@@ -89,6 +89,8 @@ def write_fixture(*, status="closed", with_policy=True, discussions=["d1"],
         "last_writer_thread_id": "leader-thread",
         "tasks": [task],
     }
+    if tasks_protocol_version is not None:
+        tasks["discussion_protocol_version"] = tasks_protocol_version
     (team_dir / "team.json").write_text(json.dumps(team), encoding="utf-8")
     (team_dir / "tasks.json").write_text(json.dumps(tasks), encoding="utf-8")
     reports_dir = team_dir / "reports"
@@ -197,7 +199,12 @@ def test_valid_closed_discussion():
 
 
 def test_legacy_team_without_discussion_policy_remains_valid():
-    result = validate(write_fixture(with_policy=False, discussions=[], legacy_task=True))
+    result = validate(write_fixture(
+        with_policy=False,
+        discussions=[],
+        team_protocol_version=None,
+        tasks_protocol_version=None,
+    ))
     assert result["ok"], result
 
 
@@ -296,15 +303,34 @@ def test_lead_acceptance_must_be_affirmative():
 def test_present_discussion_policy_must_match_default_contract():
     result = validate(write_fixture(task_overrides={
         "discussion_policy": {"mode": "disabled", "max_rounds": 99}
-    }))
+    }, team_protocol_version=None, tasks_protocol_version=None))
     assert not result["ok"], result
     assert "task task discussion_policy must match the worker_can_request default" in result["failures"]
 
 
 def test_new_work_task_requires_discussion_policy():
-    result = validate(write_fixture(with_policy=False))
+    result = validate(write_fixture(with_policy=False, discussions=[]))
     assert not result["ok"], result
-    assert "task task missing discussion_policy for revision work/rework task" in result["failures"]
+    assert "task task missing discussion_policy for enabled current work/rework task" in result["failures"]
+
+
+def test_discussion_protocol_marker_must_exist_in_both_ledgers():
+    result = validate(write_fixture(tasks_protocol_version=None))
+    assert not result["ok"], result
+    assert "discussion_protocol_version must be present in both team.json and tasks.json" in result["failures"]
+
+
+def test_discussion_protocol_markers_must_match():
+    result = validate(write_fixture(tasks_protocol_version=2))
+    assert not result["ok"], result
+    assert "discussion_protocol_version mismatch between team.json and tasks.json" in result["failures"]
+
+
+def test_discussion_protocol_marker_must_be_integer_one():
+    result = validate(write_fixture(team_protocol_version="1", tasks_protocol_version="1"))
+    assert not result["ok"], result
+    assert "team.json discussion_protocol_version must be integer 1" in result["failures"]
+    assert "tasks.json discussion_protocol_version must be integer 1" in result["failures"]
 
 
 def test_present_discussion_index_must_match_task_identity():

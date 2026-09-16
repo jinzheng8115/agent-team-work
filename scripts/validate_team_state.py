@@ -351,6 +351,30 @@ def validate(team_dir: Path) -> dict:
         failures.append("tasks.json missing revision_cycle for schema_version 3")
     if tasks_payload.get("revision_cycle", active_cycle) != active_cycle:
         failures.append("revision_cycle mismatch between team.json and tasks.json")
+    team_has_discussion_protocol = "discussion_protocol_version" in team
+    tasks_have_discussion_protocol = "discussion_protocol_version" in tasks_payload
+    if team_has_discussion_protocol != tasks_have_discussion_protocol:
+        failures.append(
+            "discussion_protocol_version must be present in both team.json and tasks.json"
+        )
+    team_discussion_protocol = team.get("discussion_protocol_version")
+    tasks_discussion_protocol = tasks_payload.get("discussion_protocol_version")
+    if (team_has_discussion_protocol
+            and (type(team_discussion_protocol) is not int or team_discussion_protocol != 1)):
+        failures.append("team.json discussion_protocol_version must be integer 1")
+    if (tasks_have_discussion_protocol
+            and (type(tasks_discussion_protocol) is not int or tasks_discussion_protocol != 1)):
+        failures.append("tasks.json discussion_protocol_version must be integer 1")
+    if (team_has_discussion_protocol and tasks_have_discussion_protocol
+            and team_discussion_protocol != tasks_discussion_protocol):
+        failures.append("discussion_protocol_version mismatch between team.json and tasks.json")
+    discussion_protocol_enabled = (
+        team_has_discussion_protocol
+        and tasks_have_discussion_protocol
+        and type(team_discussion_protocol) is int
+        and type(tasks_discussion_protocol) is int
+        and team_discussion_protocol == tasks_discussion_protocol == 1
+    )
     tasks = tasks_payload.get("tasks", []) if isinstance(tasks_payload.get("tasks"), list) else []
     dispatch_keys = []
     parsed_tasks = []
@@ -406,14 +430,14 @@ def validate(team_dir: Path) -> dict:
         policy = task.get("discussion_policy")
         if policy is not None and policy != DEFAULT_DISCUSSION_POLICY:
             failures.append(f"{label} discussion_policy must match the worker_can_request default")
-        is_revision_work = (
-            isinstance(key, str)
-            and REVISION_DISPATCH_KEY.match(key) is not None
-            and parsed is not None
-            and parsed.get("kind") in {"work", "rework"}
+        task_kind = task.get("dispatch_kind", parsed.get("kind") if parsed else None)
+        is_enabled_current_work = (
+            discussion_protocol_enabled
+            and cycle == active_cycle
+            and task_kind in {"work", "rework"}
         )
-        if is_revision_work and policy is None:
-            failures.append(f"{label} missing discussion_policy for revision work/rework task")
+        if is_enabled_current_work and policy is None:
+            failures.append(f"{label} missing discussion_policy for enabled current work/rework task")
         if "discussion_ids" in task:
             discussion_ids = task.get("discussion_ids")
             if not isinstance(discussion_ids, list):
