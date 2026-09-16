@@ -11,6 +11,23 @@
 - 每个 work/rework 阶段先通过最小只读能力门；角色报告 `PASS / MISSING / UNKNOWN + evidence`。能力不足时不得把任务写成已开始或已完成。
 - 本 skill 只规定流程，不是常驻调度服务。Leader 活跃时通过等待工具收取结果；中断后依靠项目状态恢复，不承诺关掉任务后仍自动运行。
 
+### Decision triage
+
+新建或显式启用讨论的 `work`/`rework` 任务携带 `discussion_policy`；默认值必须原样为 `mode: worker_can_request`、`soft_trigger_threshold: 2`、`max_rounds: 2`、`deadline: Lead-defined`。旧任务没有 `discussion_policy` 时保持既有行为，不隐式获得讨论能力。成员在任务开始时、不可逆工作之前、新证据改变假设之后，以及最终确定跨角色决定之前，按以下规则检查：
+
+```text
+Can I complete the task with the current requirements and accepted inputs?
+yes -> proceed and record non-blocking assumptions
+no + one missing fact/input/permission -> ask Lead or return blocked
+no + cross-role options/conflict/high-impact choice -> discussion_request
+```
+
+以下任一 hard trigger 都必须先提交 `discussion_request`，再继续依赖该决定的工作：影响其他成员的 API、文件格式、接口或验收合同尚未确定；两个以上可行选项存在实质权衡；另一成员的证据或 accepted output 与当前结论冲突；决定涉及发布、安全、权限、破坏性迁移或其他高影响外部变更；需求的多个解释会产生实质不同结果；错误选择会使大量下游工作失效。
+
+以下 soft trigger 达到两个时必须请求讨论：需要另一角色持有的上下文；关键证据或假设未经核验；无权替另一角色决定；选择会改变下游任务或其 DoD；存在有意义的质量、成本、速度或兼容性权衡。一个 soft trigger 不足以开放讨论：记录假设后继续，或向 Lead 做简单澄清。缺少工具、路径、权限或必需输入应报告 `blocked`，除非解决它本身还要求跨角色决定。
+
+验收时若报告含 `decision_status: unresolved`、冲突证据、未经批准的跨阶段变更或未处理的下游依赖，Lead 必须把它作为 safety net 重新执行 trigger 判断；达到门槛时开放讨论，不能用自动覆盖或直接验收替代。
+
 ## 1. 预检与恢复
 
 先读 [Codex 工具规则](codex-tools.md)，检查必需工具是否可调用；缺失时报告缺失能力，不假装已建队，也不自动改用其他平台。
@@ -51,6 +68,30 @@
 5. 用户中途调整目标时先更新当前阶段与受影响依赖，避免向忙碌成员重复投递；旧 epoch、旧 attempt、错误阶段和重复结果标记为 stale/duplicate，不能通过新版目标验收。
 
 所有计划交付都被验收后，Leader 提供成果位置、验证结果及剩余限制，标记团队 `complete`；不自动归档成员会话。结束/暂停意味着停止新派单，不代表在途回合已经被取消。最后阶段完成只能由 Leader 根据整体 DoD 判断，不能由模板最后一名角色的自述触发。
+
+### 讨论请求与审批生命周期
+
+`discussion_request` 是结构化决策请求，不是聊天邀请，必须包含：
+
+```text
+team_id / ownership_epoch / revision_cycle
+stage / task_id / dispatch_key
+question
+why_now
+options
+evidence
+affected_tasks
+suggested_participants
+suggested_decision_owner
+impact_if_wrong
+paused_work
+```
+
+成员仅暂停依赖未决结论或不可逆的部分，可以继续独立工作。Lead 按 trigger policy 审核请求，选择二至四名既有成员、指定 `decision_owner`、轮次上限和期限，再批准或拒绝；默认最多两轮，期限由 Lead 定义。正常状态流为 `requested -> approved -> open -> proposing/challenging -> decision_pending -> decided -> lead_accepted -> closed`，其中 `proposing` 和 `challenging` 是同一讨论窗口内可交替出现的活动状态；替代终态为 `rejected`、`blocked`、`expired`、`cancelled`。
+
+Worker 负责 triage，并在批准后提交有界的 `proposal`、`challenge`、`evidence` 或 `response`；`decision_owner` 必须选择一个选项或明确升级，并提交 `decision`，说明 rationale、evidence、rejected alternatives 和 affected tasks，不能静默扩大任务范围。Lead 验证完整身份、证据、范围和依赖后，记录 `lead_accepted` 或退回澄清；只有 Lead 可以把 accepted decision 附到原任务并关闭讨论。期限到达时不得继续收取可推进状态的消息；Lead 将讨论标为 `expired`，若 owner 仍无法决定则把依赖工作标为 `blocked`，或只向用户提出一个具体问题。参与者不可用时只能缩减既有 participant set 或标为 `blocked`，不能静默换角色；讨论不能无限保持开放。
+
+讨论是当前任务内的决策子流程，永远不会创建或启动一个后续交付阶段，也不能覆盖 accepted task。`closed` 后原成员按决定恢复工作；后续阶段仍只能在当前任务按正常报告和验收门成为 `accepted` 后，由 Lead 依原 gate 派发。
 
 ## 5. 完成后的修改周期
 

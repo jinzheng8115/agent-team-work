@@ -7,12 +7,27 @@
 - `team.json`：`schema_version`（新修订账本为 3）、`skill`（agent-team-work）、`team_id`、`project_id`、`project_root`、`goal`、`completion_criteria`、`status`、`gate`（`automatic`/`confirmation`）、`ownership_epoch`、`revision_cycle`、`active_stage`、`leader`、`members`。schema 2 账本缺少 cycle 字段时只读为首轮 `revision_cycle: 1`；开始首个完成后修订前必须整体升级为 schema 3。
 - `leader`：真实 `thread_id`、可用的 `host_id`、`title`。每个 member：`label`、`role`、`responsibility`、`title`、`thread_id`、`host_id`、`client_thread_id`（仅 pending）、`checkout_path`、`created`、`title_synced`、`project_verified`、`status`。
 - `tasks.json`：`schema_version`、`team_id`、`revision`、`last_writer_thread_id`、`revision_cycle`、`current_task_id`、`tasks`。每项修订任务：`task_id`、`revision_cycle`、`supersedes`、`impact_basis`、`attempt`、`role_label`、`objective`、`inputs`、`allowed_paths`、`deliverables`、`acceptance_criteria`、`dependencies`、`status`、`dispatch_state`、`dispatch_key`、`report_path`、`wait_cursor`、`acceptance`，以及身份字段 `team_id`、`ownership_epoch`、`stage`、`dispatch_kind`、`source`。schema 3 的修订任务和 `dispatch_key` 固定为 `<team_id>/<ownership_epoch>/r<revision_cycle>/<stage>/<attempt>/<kind>`；schema 2 任务只属于 cycle 1 并继续兼容旧键 `<team_id>/<ownership_epoch>/<stage>/<attempt>/<kind>`。升级到 schema 3 时，保留的 cycle-1 历史任务可以维持原 schema-2 字段及验收 evidence 路径格式；只有 cycle 2 及以后任务强制使用完整新身份和 evidence 绑定。任何任务或派单键的 cycle 都不得大于团队 active `revision_cycle`。
+- 新建或讨论启用的 task 可增加 `discussion_policy` 和可选的 `discussion_ids`；`discussion_policy` 默认为 `mode: worker_can_request`、`soft_trigger_threshold: 2`、`max_rounds: 2`、`deadline: Lead-defined`，`discussion_ids` 只索引与该任务绑定的稳定讨论 ID。旧 task 缺少这些字段时保持 legacy behavior。
 - `revisions/<cycle>.md`：绑定 Lead 的影响分析记录。cycle 2 起每一轮都必须存在，且首次派单前已写入；记录用户请求、七项影响判断、保留验收证据、阶段顺序和最终周期验收，不覆盖之前 cycle 的记录。若分析结论为零受影响阶段，追加独立一行规范标记 `impact_result: no_affected_stages`；这是空 active cycle 可以回到 `complete` 的唯一标记，不能用自由文本替代。
 - `reports/<task_id>-<attempt>.md`：阶段报告。一个任务尝试一份报告，不覆盖旧报告；成员只写自己获派的报告，不能修改团队或任务账本。
 
 维护者可运行 `python3 scripts/validate_team_state.py .team` 做只读账本校验；它不能替代 Leader 对真实会话、产物和报告的验收。
 
 Leader 是两个 JSON 账本的唯一写入者。写入前必须确认当前会话 ID 等于 `team.json.leader.thread_id`，读取两个账本并记下 `revision`；写入时保留已绑定 ID 和未受影响任务，写入 `last_writer_thread_id`，使用临时文件加原子替换并递增 revision。执行会话工具后再次读取账本；若 revision 已变化，停止后续 mutation，记录 `blocked`/`conflict` 并由绑定 Leader 重新核对。`ownership_epoch` 首次绑定为 1；只有明确的用户接管流程才能递增，当前版本不自动执行跨 Leader takeover。跨文件更新中断时，先核对 team_id、current_task_id、epoch、revision 和实际会话再修复，不根据单个文件推断成功。该单写者版本栅栏降低重复派单风险；账本仍不是跨进程原子锁，不能宣称 exactly-once 或后台常驻监督。
+
+## 讨论记录与消息
+
+每个讨论的稳定身份为 `{team_id}/{ownership_epoch}/r{revision_cycle}/{stage}/{task_id}/d{sequence}`。这里及下列路径中的花括号表示必须替换的身份占位符，不是文件名中的字面字符。讨论文件固定为：
+
+- record：`.team/discussions/{task_id}/d{sequence}/record.json`
+- transcript：`.team/discussions/{task_id}/d{sequence}/messages.jsonl`
+- decision：`.team/discussions/{task_id}/d{sequence}/decision.json`
+
+`record.json` 由 Lead 建立和维护，至少包含 `discussion_id`、`team_id`、`ownership_epoch`、`revision_cycle`、`stage`、`task_id`、`dispatch_key`、`status`、`trigger`、`question`、`opened_by`、participants（label 和 role）、`decision_owner`、`max_rounds`、`deadline`、transcript path、decision path、`affected_tasks`。允许的状态为 `requested`、`approved`、`open`、`proposing`、`challenging`、`decision_pending`、`decided`、`lead_accepted`、`closed`，以及终态 `rejected`、`blocked`、`expired`、`cancelled`。
+
+`messages.jsonl` 仅追加，每条消息必须包含 `message_id`、`discussion_id`、`sender`、`recipients`、`sequence`、`kind`、`in_reply_to`、`body`、`created_at`；允许的 `kind` 只有 `proposal | challenge | evidence | response | decision`。`decision.json` 保存 owner 选项或升级结论、rationale、evidence、rejected alternatives、affected tasks，以及 Lead 的核验与接受/退回证据。讨论消息只写 transcript，不能修改 `team.json` 或 `tasks.json`；这两个 JSON 账本仍只有绑定 Lead 可以写。Lead 可把有效 ID 加入 task 的 `discussion_ids`，但消息投递本身不得更新该字段或推进 task 状态。
+
+每次请求、消息、决定和接受都必须匹配 active task 的 team、epoch、revision、stage、task、dispatch key 与完整 `discussion_id`；sender/recipients 必须是 record 中按真实 thread ID 绑定的 participant，owner 的 `decision` 还必须匹配 `decision_owner`。任一身份不匹配都记为 `stale`，不得推进讨论或任务。相同 active task 的重复请求应合并到现有讨论或标记 `duplicate`，不能创建第二个 active discussion；无 matching active task 的请求为 `stale`。终态后的消息保留为历史，但不能改变决定或任务。用户在 active discussion 中改变目标时，Lead 暂停新消息，把失效工作记为 `stale`，并按新 revision record 重新做 impact analysis。讨论决定只是 Lead 验收的证据，不等于任务已 accepted。
 
 角色状态可为 pending、waiting、working、blocked；团队可为 ready、running、paused、blocked、impact_analysis、complete。完成后修改的正常流转是 `complete -> impact_analysis -> running -> complete`；分析无受影响阶段时写入规范零影响标记，从 `impact_analysis` 直接回到 `complete`，不派单。任务状态可为 planned、sending、dispatched、reported、accepted、rework、blocked、stale、duplicate。`report_path` 可在 planned、sending、dispatched 时先声明未来路径而不要求文件已生成；reported、accepted、rework 声明报告或结果已存在，因此对应文件必须存在。分别记录创建、标题、项目核验，不能用一个 ready 值代替所有证据。
 

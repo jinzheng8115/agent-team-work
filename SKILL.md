@@ -11,13 +11,15 @@ description: "Use when a user explicitly asks to create or continue a Codex proj
 
 ## 执行入口
 
-- 新建团队：读 [工作流程](references/workflow.md) 和 [工具规则](references/codex-tools.md)，核实项目与当前 Leader；菜单确认目标、角色、阶段、门控及工作目录。
-- 选择角色：按需读 [角色预设](references/role-presets.md)，允许增删修改。
-- 继续或查看团队：先读 [状态协议](references/team-protocol.md) 和现有 `.team/` 记录，再核验真实会话、当前 Leader 和 ownership epoch，不重复建队。只查状态时不派单。
+- 新建团队：读 [工作流程](references/workflow.md) 和 [工具规则](references/codex-tools.md)，核实项目与当前 Leader；菜单确认目标、角色、阶段、门控及工作目录。新任务需要 worker-to-worker 决策时，按工作流程中的 Decision triage 和讨论生命周期执行。
+- 选择角色：按需读 [角色预设](references/role-presets.md) 和 [角色能力门](references/role-capabilities.md)，允许增删修改。
+- 继续或查看团队：先读 [状态协议](references/team-protocol.md) 和现有 `.team/` 记录，再核验真实会话、当前 Leader 和 ownership epoch，不重复建队。讨论恢复也必须核对讨论记录、消息身份和真实会话；只查状态时不派单。
 
 ## 调度约束
 
 当前项目会话为默认 Leader；它本身就是项目栏中的 Leader 会话，不另建隐形协调器。只有与 `team.json.leader.thread_id` 完全匹配的当前会话可以写账本、派单或验收；其他会话只能读取状态并引导用户回到已绑定 Leader，不创建第二个 Leader，也不代写账本。成员使用同一项目内真实独立会话，禁止用普通子代理或临时子代理替代。全部创建并核验后只启动当前阶段。待命回复不算任务完成；成员报告需匹配 team、epoch、stage、attempt 和 dispatch key，Leader 检查产物后才能验收和派发下一阶段。返修复用原成员。
+
+Worker-to-worker discussion 是当前阶段内、由成员请求且由 Lead 批准的有界决策能力，不是自由聊天或新的交付阶段。成员可以提交 `discussion_request`，但不能自行开放/关闭讨论、修改两个 JSON 账本、验收任务或派发后续阶段；只有已批准讨论的既有真实成员会话可以按 [状态协议](references/team-protocol.md) 和 [工具规则](references/codex-tools.md) 交换身份绑定消息。该能力不引入并行 worker、Orca team、Sub-Lead、子团队或自主阶段调度，现有串行 stage gate 和 Lead 验收继续适用。
 
 默认门控为 `automatic`：阶段 accepted 后继续下一阶段；用户选择 `confirmation` 时，每个 accepted 之后、下一次派单之前再确认。跨 worktree 交接先核验产物可访问。创建或派单结果不明时先查询，不重复执行。Leader 活跃时通过等待工具收取报告；中断后恢复状态，不承诺后台常驻。
 
