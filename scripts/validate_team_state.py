@@ -21,6 +21,12 @@ DISCUSSION_STATUSES = {
 }
 DISCUSSION_MESSAGE_KINDS = {"proposal", "challenge", "evidence", "response", "decision"}
 TERMINAL_DISCUSSION_STATUSES = {"closed", "rejected", "blocked", "expired", "cancelled"}
+DEFAULT_DISCUSSION_POLICY = {
+    "mode": "worker_can_request",
+    "soft_trigger_threshold": 2,
+    "max_rounds": 2,
+    "deadline": "Lead-defined",
+}
 SUPPORTED_LEDGER_VERSIONS = {2, 3}
 REPORT_REQUIRED_STATUSES = {"reported", "accepted", "rework"}
 NO_IMPACT_MARKER = "impact_result: no_affected_stages"
@@ -188,6 +194,7 @@ def validate_discussion_record(team_dir: Path, team: dict, tasks_by_id: dict,
         failures.append(f"{label} decision_path does not match discussion identity")
 
     transcript_path = team_dir / expected_transcript
+    owner_decision_message = False
     if not transcript_path.is_file():
         failures.append(f"{label} missing messages transcript: {transcript_path}")
     else:
@@ -236,6 +243,10 @@ def validate_discussion_record(team_dir: Path, team: dict, tasks_by_id: dict,
                 failures.append(f"{message_label} kind is invalid")
             if message.get("kind") == "decision" and message.get("sender") != decision_owner:
                 failures.append(f"{message_label} decision sender must match decision_owner")
+            if (message.get("kind") == "decision"
+                    and message.get("sender") == decision_owner
+                    and message.get("discussion_id") == discussion_id):
+                owner_decision_message = True
 
     status = record.get("status")
     decision_path = team_dir / expected_decision
@@ -246,27 +257,35 @@ def validate_discussion_record(team_dir: Path, team: dict, tasks_by_id: dict,
     if not decision_path.is_file():
         return
     decision = load_json(decision_path, failures)
-    if not decision:
-        return
     if decision.get("discussion_id") not in {None, discussion_id}:
         failures.append(f"{label} decision discussion_id does not match record")
-    if status == "closed":
-        require(decision, [
+    if status in {"lead_accepted", "closed"}:
+        _require_keys(decision, [
             "chosen_option", "rationale", "evidence", "rejected_alternatives",
-            "affected_tasks", "decision_owner", "lead_acceptance",
+            "affected_tasks", "decision_owner", "decision_owner_thread_id",
+            "lead_acceptance",
         ], f"{label} decision", failures)
+        require(decision, [
+            "chosen_option", "rationale", "evidence", "affected_tasks",
+            "decision_owner", "decision_owner_thread_id",
+        ], f"{label} decision", failures)
+        if not owner_decision_message:
+            failures.append(f"{label} missing decision message from decision_owner")
     if decision.get("decision_owner") is not None and decision.get("decision_owner") != decision_owner:
         failures.append(f"{label} decision_owner does not match record")
     owner_member = members_by_label.get(decision_owner)
     owner_thread_id = decision.get("decision_owner_thread_id")
-    if status in {"lead_accepted", "closed"} and owner_thread_id is not None:
-        if not owner_member or owner_thread_id != owner_member.get("thread_id"):
-            failures.append(f"{label} decision owner identity does not match member binding")
     if status in {"lead_accepted", "closed"}:
+        if not owner_thread_id:
+            failures.append(f"{label} decision missing decision_owner_thread_id")
+        elif not owner_member or owner_thread_id != owner_member.get("thread_id"):
+            failures.append(f"{label} decision owner identity does not match member binding")
         acceptance = decision.get("lead_acceptance")
         if not isinstance(acceptance, dict):
             failures.append(f"{label} decision missing lead_acceptance identity")
         else:
+            if acceptance.get("status") != "accepted":
+                failures.append(f"{label} lead_acceptance status must be accepted")
             acceptance_thread = acceptance.get("thread_id", acceptance.get("leader_thread_id"))
             if acceptance_thread != (team.get("leader") or {}).get("thread_id"):
                 failures.append(f"{label} lead_acceptance identity does not match bound Leader")
@@ -384,6 +403,41 @@ def validate(team_dir: Path) -> dict:
                     )
                 if parsed["cycle"] != cycle:
                     failures.append(f"{label} revision dispatch_key cycle does not match task revision")
+        policy = task.get("discussion_policy")
+        if policy is not None and policy != DEFAULT_DISCUSSION_POLICY:
+            failures.append(f"{label} discussion_policy must match the worker_can_request default")
+        is_revision_work = (
+            isinstance(key, str)
+            and REVISION_DISPATCH_KEY.match(key) is not None
+            and parsed is not None
+            and parsed.get("kind") in {"work", "rework"}
+        )
+        if is_revision_work and policy is None:
+            failures.append(f"{label} missing discussion_policy for revision work/rework task")
+        if "discussion_ids" in task:
+            discussion_ids = task.get("discussion_ids")
+            if not isinstance(discussion_ids, list):
+                failures.append(f"{label} discussion_ids must be a list")
+            else:
+                for discussion_id in discussion_ids:
+                    discussion = parse_discussion_key(discussion_id)
+                    if not discussion:
+                        failures.append(f"{label} discussion_ids entry {discussion_id} is invalid")
+                        continue
+                    expected_discussion_identity = {
+                        "team": team.get("team_id"),
+                        "epoch": ownership_epoch,
+                        "cycle": cycle,
+                        "stage": task.get("stage", parsed.get("stage") if parsed else None),
+                        "task": task.get("task_id"),
+                    }
+                    if any(
+                        discussion[field] != expected
+                        for field, expected in expected_discussion_identity.items()
+                    ):
+                        failures.append(
+                            f"{label} discussion_ids entry {discussion_id} does not match task identity"
+                        )
         identity = {
             "team": task.get("team_id", task.get("team")),
             "epoch": task.get("ownership_epoch", task.get("epoch")),
@@ -442,8 +496,6 @@ def validate(team_dir: Path) -> dict:
                 failures.append(f"discussion directory missing record.json: {discussion_dir}")
                 continue
             record = load_json(record_path, failures)
-            if not record:
-                continue
             parsed_discussion = parse_discussion_key(record.get("discussion_id"))
             if parsed_discussion:
                 expected_dir = discussions_dir / parsed_discussion["task"] / f"d{parsed_discussion['sequence']}"

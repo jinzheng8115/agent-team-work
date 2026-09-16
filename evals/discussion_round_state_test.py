@@ -18,7 +18,8 @@ _FIXTURES: list[Path] = []
 
 def write_fixture(*, status="closed", with_policy=True, discussions=["d1"],
                   statuses=None, record_overrides=None, message_overrides=None,
-                  decision_overrides=None, task_status="reported") -> Path:
+                  decision_overrides=None, task_status="reported",
+                  task_overrides=None, legacy_task=False) -> Path:
     """Create a temporary schema-3 team with optional discussion evidence."""
     team_dir = Path(tempfile.mkdtemp())
     _FIXTURES.append(team_dir)
@@ -63,7 +64,10 @@ def write_fixture(*, status="closed", with_policy=True, discussions=["d1"],
         "source": "worker",
         "status": task_status,
         "dispatch_state": task_status,
-        "dispatch_key": "team/1/r1/implementation/1/work",
+        "dispatch_key": (
+            "team/1/implementation/1/work" if legacy_task
+            else "team/1/r1/implementation/1/work"
+        ),
         "report_path": "reports/task.md",
         "discussion_ids": [f"team/1/r1/implementation/task/{item}" for item in discussions],
     }
@@ -74,6 +78,8 @@ def write_fixture(*, status="closed", with_policy=True, discussions=["d1"],
             "max_rounds": 2,
             "deadline": "Lead-defined",
         }
+    if task_overrides:
+        task.update(task_overrides)
     tasks = {
         "schema_version": 3,
         "team_id": "team",
@@ -145,6 +151,17 @@ def write_fixture(*, status="closed", with_policy=True, discussions=["d1"],
                 "body": "Option A needs compatibility evidence.",
                 "created_at": "2026-09-17T10:05:00+08:00",
             },
+            {
+                "message_id": f"{discussion_id}/m3",
+                "discussion_id": discussion_id,
+                "sender": "worker",
+                "recipients": ["reviewer"],
+                "sequence": 3,
+                "kind": "decision",
+                "in_reply_to": f"{discussion_id}/m2",
+                "body": "Choose option A based on the compatibility evidence.",
+                "created_at": "2026-09-17T10:10:00+08:00",
+            },
         ]
         if message_overrides and index == 0:
             for message_index, overrides in enumerate(message_overrides):
@@ -180,43 +197,127 @@ def test_valid_closed_discussion():
 
 
 def test_legacy_team_without_discussion_policy_remains_valid():
-    result = validate(write_fixture(with_policy=False, discussions=[]))
+    result = validate(write_fixture(with_policy=False, discussions=[], legacy_task=True))
     assert result["ok"], result
 
 
 def test_discussion_key_must_match_task_identity():
     result = validate(write_fixture(record_overrides={"discussion_id": "team/1/r2/other/task/d1"}))
-    assert "discussion" in " ".join(result["failures"])
+    assert not result["ok"], result
+    assert "discussion team/1/r2/other/task/d1 revision_cycle does not match active cycle" in result["failures"]
 
 
 def test_unknown_participant_is_rejected():
     result = validate(write_fixture(record_overrides={"participants": ["missing"]}))
-    assert "participant" in " ".join(result["failures"])
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 participant 0 must contain label and role" in result["failures"]
 
 
 def test_decision_owner_must_be_a_participant():
     result = validate(write_fixture(record_overrides={"decision_owner": "missing"}))
-    assert "decision_owner" in " ".join(result["failures"])
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 decision_owner must be a participant" in result["failures"]
 
 
 def test_closed_discussion_requires_lead_acceptance():
     result = validate(write_fixture(status="closed", decision_overrides={"lead_acceptance": None}))
-    assert "lead_acceptance" in " ".join(result["failures"])
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 decision missing lead_acceptance identity" in result["failures"]
 
 
 def test_message_identity_and_sequence_are_checked():
     result = validate(write_fixture(message_overrides=[{"discussion_id": "other", "sequence": 1}]))
-    assert "message" in " ".join(result["failures"])
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 message line 1 discussion_id does not match record" in result["failures"]
 
 
 def test_duplicate_active_discussion_is_rejected():
     result = validate(write_fixture(discussions=["d1", "d2"], statuses=["open", "proposing"]))
-    assert "duplicate" in " ".join(result["failures"])
+    assert not result["ok"], result
+    assert "duplicate active discussion records for task task: team/1/r1/implementation/task/d1, team/1/r1/implementation/task/d2" in result["failures"]
 
 
 def test_stale_task_cannot_advance_from_discussion():
     result = validate(write_fixture(task_status="stale", status="lead_accepted"))
-    assert "stale" in " ".join(result["failures"])
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 cannot advance stale or duplicate task task" in result["failures"]
+
+
+def test_empty_record_is_rejected():
+    team_dir = write_fixture()
+    (team_dir / "discussions/task/d1/record.json").write_text("{}", encoding="utf-8")
+    result = validate(team_dir)
+    assert not result["ok"], result
+    assert "discussion <missing> missing discussion_id" in result["failures"]
+
+
+def test_empty_closed_decision_is_rejected():
+    team_dir = write_fixture()
+    (team_dir / "discussions/task/d1/decision.json").write_text("{}", encoding="utf-8")
+    result = validate(team_dir)
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 decision missing chosen_option" in result["failures"]
+
+
+def test_sparse_lead_accepted_decision_is_rejected():
+    team_dir = write_fixture(status="lead_accepted")
+    sparse = {"lead_acceptance": {"status": "accepted", "thread_id": "leader-thread"}}
+    (team_dir / "discussions/task/d1/decision.json").write_text(json.dumps(sparse), encoding="utf-8")
+    result = validate(team_dir)
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 decision missing decision_owner" in result["failures"]
+
+
+def test_lead_accepted_requires_owner_thread_binding():
+    result = validate(write_fixture(
+        status="lead_accepted", decision_overrides={"decision_owner_thread_id": None}
+    ))
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 decision missing decision_owner_thread_id" in result["failures"]
+
+
+def test_lead_accepted_requires_owner_authored_decision_message():
+    result = validate(write_fixture(
+        status="lead_accepted", message_overrides=[{}, {}, {"kind": "response"}]
+    ))
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 missing decision message from decision_owner" in result["failures"]
+
+
+def test_lead_acceptance_must_be_affirmative():
+    for status in (None, "rejected"):
+        result = validate(write_fixture(decision_overrides={
+            "lead_acceptance": {"status": status, "thread_id": "leader-thread"}
+        }))
+        assert not result["ok"], result
+        assert "discussion team/1/r1/implementation/task/d1 lead_acceptance status must be accepted" in result["failures"]
+
+
+def test_present_discussion_policy_must_match_default_contract():
+    result = validate(write_fixture(task_overrides={
+        "discussion_policy": {"mode": "disabled", "max_rounds": 99}
+    }))
+    assert not result["ok"], result
+    assert "task task discussion_policy must match the worker_can_request default" in result["failures"]
+
+
+def test_new_work_task_requires_discussion_policy():
+    result = validate(write_fixture(with_policy=False))
+    assert not result["ok"], result
+    assert "task task missing discussion_policy for revision work/rework task" in result["failures"]
+
+
+def test_present_discussion_index_must_match_task_identity():
+    result = validate(write_fixture(task_overrides={"discussion_ids": ["garbage"]}))
+    assert not result["ok"], result
+    assert "task task discussion_ids entry garbage is invalid" in result["failures"]
+
+
+def test_well_formed_discussion_index_must_match_task_identity():
+    wrong_id = "team/1/r1/other/task/d1"
+    result = validate(write_fixture(task_overrides={"discussion_ids": [wrong_id]}))
+    assert not result["ok"], result
+    assert f"task task discussion_ids entry {wrong_id} does not match task identity" in result["failures"]
 
 
 def main() -> int:
