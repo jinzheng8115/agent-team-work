@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-09-15",
-  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+  "generated_at": "2026-09-17",
+  "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
   "summary": {
     "target_count": 5,
     "pass_count": 5,
@@ -24,7 +24,7 @@
         "ir_schema_version": "2.0.0"
       },
       "source": {
-        "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+        "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
         "canonical_metadata": "agents/interface.yaml",
         "declared_targets": [
           "openai",
@@ -225,6 +225,7 @@
           "source": "reports/security_trust_report.json",
           "source_available": true,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "review_required": true,
@@ -236,10 +237,13 @@
               "review_reason": ""
             },
             "file_write": {
-              "required": false,
-              "script_count": 0,
-              "scripts": [],
-              "review_reason": ""
+              "required": true,
+              "script_count": 2,
+              "scripts": [
+                "scripts/build_runtime_package.py",
+                "scripts/runtime_package_check.py"
+              ],
+              "review_reason": "Scripts write local files or generated artifacts."
             },
             "subprocess": {
               "required": true,
@@ -264,14 +268,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 4,
+            "checked_count": 6,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 0,
-            "file_write_script_count": 0,
+            "file_write_script_count": 2,
             "subprocess_script_count": 1,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -287,11 +291,12 @@
           "representation": "targets/openai/agents/openai.yaml::compatibility.permission_contract plus adapter.json",
           "review_required": true,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "capability_counts": {
             "network": 0,
-            "file_write": 0,
+            "file_write": 2,
             "subprocess": 1,
             "interactive": 0
           },
@@ -330,6 +335,7 @@
             "enforcement": "metadata-only",
             "native_enforcement": false,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "review_required": true
@@ -384,6 +390,7 @@
         "source": "reports/security_trust_report.json",
         "source_available": true,
         "declared_capabilities": [
+          "file_write",
           "subprocess"
         ],
         "review_required": true,
@@ -395,10 +402,13 @@
             "review_reason": ""
           },
           "file_write": {
-            "required": false,
-            "script_count": 0,
-            "scripts": [],
-            "review_reason": ""
+            "required": true,
+            "script_count": 2,
+            "scripts": [
+              "scripts/build_runtime_package.py",
+              "scripts/runtime_package_check.py"
+            ],
+            "review_reason": "Scripts write local files or generated artifacts."
           },
           "subprocess": {
             "required": true,
@@ -423,14 +433,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 4,
+          "checked_count": 6,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 0,
-          "file_write_script_count": 0,
+          "file_write_script_count": 2,
           "subprocess_script_count": 1,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -444,11 +454,12 @@
         "representation": "targets/openai/agents/openai.yaml::compatibility.permission_contract plus adapter.json",
         "review_required": true,
         "declared_capabilities": [
+          "file_write",
           "subprocess"
         ],
         "capability_counts": {
           "network": 0,
-          "file_write": 0,
+          "file_write": 2,
           "subprocess": 1,
           "interactive": 0
         },
@@ -487,6 +498,7 @@
           "enforcement": "metadata-only",
           "native_enforcement": false,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "review_required": true
@@ -559,7 +571,7 @@
         "ir_schema_version": "2.0.0"
       },
       "source": {
-        "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+        "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
         "canonical_metadata": "agents/interface.yaml",
         "declared_targets": [
           "openai",
@@ -760,6 +772,7 @@
           "source": "reports/security_trust_report.json",
           "source_available": true,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "review_required": true,
@@ -771,10 +784,13 @@
               "review_reason": ""
             },
             "file_write": {
-              "required": false,
-              "script_count": 0,
-              "scripts": [],
-              "review_reason": ""
+              "required": true,
+              "script_count": 2,
+              "scripts": [
+                "scripts/build_runtime_package.py",
+                "scripts/runtime_package_check.py"
+              ],
+              "review_reason": "Scripts write local files or generated artifacts."
             },
             "subprocess": {
               "required": true,
@@ -799,14 +815,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 4,
+            "checked_count": 6,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 0,
-            "file_write_script_count": 0,
+            "file_write_script_count": 2,
             "subprocess_script_count": 1,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -822,11 +838,12 @@
           "representation": "targets/claude/adapter.json::target_permission_contract and README notes",
           "review_required": true,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "capability_counts": {
             "network": 0,
-            "file_write": 0,
+            "file_write": 2,
             "subprocess": 1,
             "interactive": 0
           },
@@ -865,6 +882,7 @@
             "enforcement": "metadata-fallback",
             "native_enforcement": false,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "review_required": true
@@ -919,6 +937,7 @@
         "source": "reports/security_trust_report.json",
         "source_available": true,
         "declared_capabilities": [
+          "file_write",
           "subprocess"
         ],
         "review_required": true,
@@ -930,10 +949,13 @@
             "review_reason": ""
           },
           "file_write": {
-            "required": false,
-            "script_count": 0,
-            "scripts": [],
-            "review_reason": ""
+            "required": true,
+            "script_count": 2,
+            "scripts": [
+              "scripts/build_runtime_package.py",
+              "scripts/runtime_package_check.py"
+            ],
+            "review_reason": "Scripts write local files or generated artifacts."
           },
           "subprocess": {
             "required": true,
@@ -958,14 +980,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 4,
+          "checked_count": 6,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 0,
-          "file_write_script_count": 0,
+          "file_write_script_count": 2,
           "subprocess_script_count": 1,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -979,11 +1001,12 @@
         "representation": "targets/claude/adapter.json::target_permission_contract and README notes",
         "review_required": true,
         "declared_capabilities": [
+          "file_write",
           "subprocess"
         ],
         "capability_counts": {
           "network": 0,
-          "file_write": 0,
+          "file_write": 2,
           "subprocess": 1,
           "interactive": 0
         },
@@ -1022,6 +1045,7 @@
           "enforcement": "metadata-fallback",
           "native_enforcement": false,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "review_required": true
@@ -1094,7 +1118,7 @@
         "ir_schema_version": "2.0.0"
       },
       "source": {
-        "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+        "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
         "canonical_metadata": "agents/interface.yaml",
         "declared_targets": [
           "openai",
@@ -1295,6 +1319,7 @@
           "source": "reports/security_trust_report.json",
           "source_available": true,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "review_required": true,
@@ -1306,10 +1331,13 @@
               "review_reason": ""
             },
             "file_write": {
-              "required": false,
-              "script_count": 0,
-              "scripts": [],
-              "review_reason": ""
+              "required": true,
+              "script_count": 2,
+              "scripts": [
+                "scripts/build_runtime_package.py",
+                "scripts/runtime_package_check.py"
+              ],
+              "review_reason": "Scripts write local files or generated artifacts."
             },
             "subprocess": {
               "required": true,
@@ -1334,14 +1362,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 4,
+            "checked_count": 6,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 0,
-            "file_write_script_count": 0,
+            "file_write_script_count": 2,
             "subprocess_script_count": 1,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -1357,11 +1385,12 @@
           "representation": "targets/generic/adapter.json::target_permission_contract",
           "review_required": true,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "capability_counts": {
             "network": 0,
-            "file_write": 0,
+            "file_write": 2,
             "subprocess": 1,
             "interactive": 0
           },
@@ -1399,6 +1428,7 @@
             "enforcement": "consumer-enforced-or-metadata-only",
             "native_enforcement": false,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "review_required": true
@@ -1447,6 +1477,7 @@
         "source": "reports/security_trust_report.json",
         "source_available": true,
         "declared_capabilities": [
+          "file_write",
           "subprocess"
         ],
         "review_required": true,
@@ -1458,10 +1489,13 @@
             "review_reason": ""
           },
           "file_write": {
-            "required": false,
-            "script_count": 0,
-            "scripts": [],
-            "review_reason": ""
+            "required": true,
+            "script_count": 2,
+            "scripts": [
+              "scripts/build_runtime_package.py",
+              "scripts/runtime_package_check.py"
+            ],
+            "review_reason": "Scripts write local files or generated artifacts."
           },
           "subprocess": {
             "required": true,
@@ -1486,14 +1520,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 4,
+          "checked_count": 6,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 0,
-          "file_write_script_count": 0,
+          "file_write_script_count": 2,
           "subprocess_script_count": 1,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -1507,11 +1541,12 @@
         "representation": "targets/generic/adapter.json::target_permission_contract",
         "review_required": true,
         "declared_capabilities": [
+          "file_write",
           "subprocess"
         ],
         "capability_counts": {
           "network": 0,
-          "file_write": 0,
+          "file_write": 2,
           "subprocess": 1,
           "interactive": 0
         },
@@ -1549,6 +1584,7 @@
           "enforcement": "consumer-enforced-or-metadata-only",
           "native_enforcement": false,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "review_required": true
@@ -1613,7 +1649,7 @@
         "ir_schema_version": "2.0.0"
       },
       "source": {
-        "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+        "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
         "canonical_metadata": "agents/interface.yaml",
         "declared_targets": [
           "openai",
@@ -1814,6 +1850,7 @@
           "source": "reports/security_trust_report.json",
           "source_available": true,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "review_required": true,
@@ -1825,10 +1862,13 @@
               "review_reason": ""
             },
             "file_write": {
-              "required": false,
-              "script_count": 0,
-              "scripts": [],
-              "review_reason": ""
+              "required": true,
+              "script_count": 2,
+              "scripts": [
+                "scripts/build_runtime_package.py",
+                "scripts/runtime_package_check.py"
+              ],
+              "review_reason": "Scripts write local files or generated artifacts."
             },
             "subprocess": {
               "required": true,
@@ -1853,14 +1893,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 4,
+            "checked_count": 6,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 0,
-            "file_write_script_count": 0,
+            "file_write_script_count": 2,
             "subprocess_script_count": 1,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -1876,11 +1916,12 @@
           "representation": "adapter metadata",
           "review_required": true,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "capability_counts": {
             "network": 0,
-            "file_write": 0,
+            "file_write": 2,
             "subprocess": 1,
             "interactive": 0
           },
@@ -1919,6 +1960,7 @@
             "enforcement": "consumer-enforced-or-metadata-only",
             "native_enforcement": false,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "review_required": true
@@ -1966,6 +2008,7 @@
         "source": "reports/security_trust_report.json",
         "source_available": true,
         "declared_capabilities": [
+          "file_write",
           "subprocess"
         ],
         "review_required": true,
@@ -1977,10 +2020,13 @@
             "review_reason": ""
           },
           "file_write": {
-            "required": false,
-            "script_count": 0,
-            "scripts": [],
-            "review_reason": ""
+            "required": true,
+            "script_count": 2,
+            "scripts": [
+              "scripts/build_runtime_package.py",
+              "scripts/runtime_package_check.py"
+            ],
+            "review_reason": "Scripts write local files or generated artifacts."
           },
           "subprocess": {
             "required": true,
@@ -2005,14 +2051,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 4,
+          "checked_count": 6,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 0,
-          "file_write_script_count": 0,
+          "file_write_script_count": 2,
           "subprocess_script_count": 1,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -2026,11 +2072,12 @@
         "representation": "adapter metadata",
         "review_required": true,
         "declared_capabilities": [
+          "file_write",
           "subprocess"
         ],
         "capability_counts": {
           "network": 0,
-          "file_write": 0,
+          "file_write": 2,
           "subprocess": 1,
           "interactive": 0
         },
@@ -2069,6 +2116,7 @@
           "enforcement": "consumer-enforced-or-metadata-only",
           "native_enforcement": false,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "review_required": true
@@ -2132,7 +2180,7 @@
         "ir_schema_version": "2.0.0"
       },
       "source": {
-        "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+        "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
         "canonical_metadata": "agents/interface.yaml",
         "declared_targets": [
           "openai",
@@ -2333,6 +2381,7 @@
           "source": "reports/security_trust_report.json",
           "source_available": true,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "review_required": true,
@@ -2344,10 +2393,13 @@
               "review_reason": ""
             },
             "file_write": {
-              "required": false,
-              "script_count": 0,
-              "scripts": [],
-              "review_reason": ""
+              "required": true,
+              "script_count": 2,
+              "scripts": [
+                "scripts/build_runtime_package.py",
+                "scripts/runtime_package_check.py"
+              ],
+              "review_reason": "Scripts write local files or generated artifacts."
             },
             "subprocess": {
               "required": true,
@@ -2372,14 +2424,14 @@
           },
           "help_smoke": {
             "enabled": true,
-            "checked_count": 4,
+            "checked_count": 6,
             "failed_count": 0,
             "failed_scripts": []
           },
           "trust_summary": {
             "secret_findings": 0,
             "network_script_count": 0,
-            "file_write_script_count": 0,
+            "file_write_script_count": 2,
             "subprocess_script_count": 1,
             "interactive_script_count": 0,
             "help_smoke_failed_count": 0
@@ -2395,11 +2447,12 @@
           "representation": "targets/vscode/adapter.json::target_permission_contract and targets/vscode/README.md install notes",
           "review_required": true,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "capability_counts": {
             "network": 0,
-            "file_write": 0,
+            "file_write": 2,
             "subprocess": 1,
             "interactive": 0
           },
@@ -2438,6 +2491,7 @@
             "enforcement": "client-or-workspace-trust",
             "native_enforcement": false,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "review_required": true
@@ -2489,6 +2543,7 @@
         "source": "reports/security_trust_report.json",
         "source_available": true,
         "declared_capabilities": [
+          "file_write",
           "subprocess"
         ],
         "review_required": true,
@@ -2500,10 +2555,13 @@
             "review_reason": ""
           },
           "file_write": {
-            "required": false,
-            "script_count": 0,
-            "scripts": [],
-            "review_reason": ""
+            "required": true,
+            "script_count": 2,
+            "scripts": [
+              "scripts/build_runtime_package.py",
+              "scripts/runtime_package_check.py"
+            ],
+            "review_reason": "Scripts write local files or generated artifacts."
           },
           "subprocess": {
             "required": true,
@@ -2528,14 +2586,14 @@
         },
         "help_smoke": {
           "enabled": true,
-          "checked_count": 4,
+          "checked_count": 6,
           "failed_count": 0,
           "failed_scripts": []
         },
         "trust_summary": {
           "secret_findings": 0,
           "network_script_count": 0,
-          "file_write_script_count": 0,
+          "file_write_script_count": 2,
           "subprocess_script_count": 1,
           "interactive_script_count": 0,
           "help_smoke_failed_count": 0
@@ -2549,11 +2607,12 @@
         "representation": "targets/vscode/adapter.json::target_permission_contract and targets/vscode/README.md install notes",
         "review_required": true,
         "declared_capabilities": [
+          "file_write",
           "subprocess"
         ],
         "capability_counts": {
           "network": 0,
-          "file_write": 0,
+          "file_write": 2,
           "subprocess": 1,
           "interactive": 0
         },
@@ -2592,6 +2651,7 @@
           "enforcement": "client-or-workspace-trust",
           "native_enforcement": false,
           "declared_capabilities": [
+            "file_write",
             "subprocess"
           ],
           "review_required": true
@@ -2653,7 +2713,7 @@
   "failures": [],
   "warnings": [],
   "artifacts": {
-    "json": "/Volumes/Code/team-worker/agent-team-work/reports/compiled_targets.json",
-    "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/compiled_targets.md"
+    "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/compiled_targets.json",
+    "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/compiled_targets.md"
   }
 }

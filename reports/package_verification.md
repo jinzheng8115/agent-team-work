@@ -1,10 +1,10 @@
 # Package Verification
 
 - OK: `True`
-- Package directory: `/Volumes/Code/team-worker/agent-team-work/dist`
+- Package directory: `/Volumes/Code/team-worker/worker-discussion-round-worktree/dist`
 - Targets: `4 / 4` adapters present
 - Archive present: `True`
-- Archive SHA256: `c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0`
+- Archive SHA256: `dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144`
 - Nested SKILL.md entries: `0`
 - Failures: `0`
 - Warnings: `0`
@@ -13,7 +13,7 @@
 
 | Check | Status | Detail |
 | --- | --- | --- |
-| `package-manifest` | `pass` | Package manifest exists: /Volumes/Code/team-worker/agent-team-work/dist/manifest.json |
+| `package-manifest` | `pass` | Package manifest exists: /Volumes/Code/team-worker/worker-discussion-round-worktree/dist/manifest.json |
 | `openai-adapter` | `pass` | Adapter exists for target: openai |
 | `openai-field-name` | `pass` | openai adapter includes field: name |
 | `openai-field-description` | `pass` | openai adapter includes field: description |

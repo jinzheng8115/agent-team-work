@@ -1,6 +1,6 @@
 # World-Class Evidence Intake
 
-Generated at: `2026-09-15`
+Generated at: `2026-09-17`
 
 ## Summary
 

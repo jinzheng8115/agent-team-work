@@ -1,14 +1,14 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-09-15",
-  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
-  "package_dir": "/Volumes/Code/team-worker/agent-team-work/dist",
+  "generated_at": "2026-09-17",
+  "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+  "package_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree/dist",
   "summary": {
     "target_count": 4,
     "adapter_count": 4,
     "archive_present": true,
-    "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
+    "archive_sha256": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144",
     "archive_entry_count": 13,
     "nested_skill_entry_count": 0,
     "failure_count": 0,
@@ -18,7 +18,7 @@
     {
       "id": "package-manifest",
       "status": "pass",
-      "detail": "Package manifest exists: /Volumes/Code/team-worker/agent-team-work/dist/manifest.json"
+      "detail": "Package manifest exists: /Volumes/Code/team-worker/worker-discussion-round-worktree/dist/manifest.json"
     },
     {
       "id": "openai-adapter",
@@ -664,9 +664,9 @@
   "failures": [],
   "warnings": [],
   "artifacts": {
-    "manifest": "/Volumes/Code/team-worker/agent-team-work/dist/manifest.json",
-    "archive": "/Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip",
-    "json": "/Volumes/Code/team-worker/agent-team-work/reports/package_verification.json",
-    "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/package_verification.md"
+    "manifest": "/Volumes/Code/team-worker/worker-discussion-round-worktree/dist/manifest.json",
+    "archive": "/Volumes/Code/team-worker/worker-discussion-round-worktree/dist/agent-team-work.zip",
+    "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/package_verification.json",
+    "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/package_verification.md"
   }
 }

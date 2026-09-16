@@ -1,6 +1,6 @@
 # Skill OS 2.0 Blueprint Coverage
 
-Generated at: `2026-09-15`
+Generated at: `2026-09-17`
 
 ## Summary
 
@@ -26,11 +26,11 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Skill IR | `missing` | schema 2.0.0; targets 5 | `python3 scripts/yao.py skill-ir . --self` | `python3 tests/verify_skill_ir.py` |
 | Output Eval Lab | `missing` | 5 cases; delta 100.0; execution 10 | `python3 scripts/yao.py output-exec --self && python3 scripts/yao.py output-review --self` | `python3 tests/verify_output_eval_lab.py` |
 | Runtime Conformance | `missing` | 5/5 targets pass | `python3 scripts/yao.py conformance . --self` | `python3 tests/verify_conformance_suite.py` |
-| Trust Security | `missing` | 4 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust . --self` | `python3 tests/verify_trust_check.py` |
-| Skill Atlas | `missing` | 2 scanned skills; actionable collisions 2 | `python3 scripts/yao.py skill-atlas --workspace-root . --self` | `python3 tests/verify_skill_atlas.py` |
-| Registry Distribution | `missing` | archive entries 160; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self && python3 scripts/yao.py registry-audit . --self` | `python3 tests/verify_registry_audit.py` |
-| Review Studio | `missing` | 16 gates; decision review; warnings 3 | `python3 scripts/yao.py review-studio . --self` | `python3 tests/verify_review_studio.py` |
-| Telemetry Drift | `missing` | events 1; recipes 5; risk low | `python3 scripts/yao.py telemetry-hooks . --self && python3 scripts/yao.py adoption-drift . --self` | `python3 tests/verify_telemetry_hooks.py` |
+| Trust Security | `missing` | 6 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust . --self` | `python3 tests/verify_trust_check.py` |
+| Skill Atlas | `missing` | 1 scanned skills; actionable collisions 0 | `python3 scripts/yao.py skill-atlas --workspace-root . --self` | `python3 tests/verify_skill_atlas.py` |
+| Registry Distribution | `missing` | archive entries 13; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self && python3 scripts/yao.py registry-audit . --self` | `python3 tests/verify_registry_audit.py` |
+| Review Studio | `missing` | 16 gates; decision review; warnings 5 | `python3 scripts/yao.py review-studio . --self` | `python3 tests/verify_review_studio.py` |
+| Telemetry Drift | `missing` | events 0; recipes 5; risk no-data | `python3 scripts/yao.py telemetry-hooks . --self && python3 scripts/yao.py adoption-drift . --self` | `python3 tests/verify_telemetry_hooks.py` |
 
 ## Recommended PR Coverage
 
@@ -44,7 +44,7 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Compiler Refactor | `missing` | 5/5 compiled targets | `make ci-test` | `tests/verify_compile_skill.py` |
 | Agent Skills Conformance | `missing` | agent-skills target present | `make ci-test` | `tests/verify_conformance_suite.py` |
 | Trust Check | `missing` | secret findings 0 | `make ci-test` | `tests/verify_trust_check.py` |
-| Skill Atlas Generator | `missing` | 2 scanned skills | `make ci-test` | `tests/verify_skill_atlas.py` |
+| Skill Atlas Generator | `missing` | 1 scanned skills | `make ci-test` | `tests/verify_skill_atlas.py` |
 | Registry Package Format | `missing` | registry ok True | `make ci-test` | `tests/verify_registry_audit.py` |
 | Review Studio 2.0 | `missing` | 16 review gates | `make ci-test` | `tests/verify_review_studio.py` |
 | Migration V2 Docs | `pass` | migration guide present | `make ci-test` | `docs review` |
@@ -257,7 +257,7 @@ These extension tracks come from the user-supplied 2.0 reference plan. They are 
 
 - objective: Daily operations layer summarizes explicit-source conversation patterns, proposal-only adaptation work, approval state, release locks, and world-class evidence gaps.
 - status: `partial`
-- existing evidence: `reports/skillops/daily/2026-09-15.json`, `reports/skillops/daily/2026-09-15.md`
+- existing evidence: `reports/skillops/daily/2026-09-17.json`, `reports/skillops/daily/2026-09-17.md`
 - missing evidence: `scripts/render_daily_skillops_report.py`, `tests/verify_daily_skillops.py`
 - next action: Keep Daily SkillOps report aligned with proposal, approval, coverage, and world-class ledger contracts as the operations layer evolves.
 

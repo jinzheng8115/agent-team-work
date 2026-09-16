@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+  "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
   "source": "reports/review_annotations_input.json",
   "summary": {
     "annotation_count": 0,

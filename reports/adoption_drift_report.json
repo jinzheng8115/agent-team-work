@@ -1,8 +1,8 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-09-15",
-  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+  "generated_at": "2026-09-17",
+  "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
   "privacy_contract": {
     "storage": "local-first",
     "event_scope": "metadata-only",
@@ -24,63 +24,39 @@
     ]
   },
   "summary": {
-    "event_count": 1,
-    "adoption_sample_count": 1,
-    "activation_count": 1,
-    "accepted_count": 1,
+    "event_count": 0,
+    "adoption_sample_count": 0,
+    "activation_count": 0,
+    "accepted_count": 0,
     "edited_count": 0,
     "rejected_count": 0,
     "missed_count": 0,
     "failed_count": 0,
-    "adoption_rate": 100.0,
+    "adoption_rate": 0,
     "missed_trigger_count": 0,
     "wrong_trigger_count": 0,
     "bad_output_count": 0,
     "script_error_count": 0,
     "missing_resource_count": 0,
     "review_overdue_count": 0,
-    "risk_band": "low",
-    "event_types": {
-      "skill_activation": 1
-    },
+    "risk_band": "no-data",
+    "event_types": {},
     "failure_types": {},
-    "source_types": {
-      "manual": 1
-    },
-    "command_counts": {
-      "real_smoke": 1
-    }
+    "source_types": {},
+    "command_counts": {}
   },
-  "adoption_by_skill": [
+  "adoption_by_skill": [],
+  "next_iteration_candidates": [
     {
-      "skill": "agent-team-work",
-      "events": 1,
-      "adoption_events": 1,
-      "accepted": 1,
-      "edited": 0,
-      "rejected": 0,
-      "missed": 0,
-      "adoption_rate": 100.0
+      "signal": "no telemetry",
+      "recommendation": "Start with a small metadata-only sample before using telemetry for release decisions."
     }
   ],
-  "next_iteration_candidates": [],
-  "recent_events": [
-    {
-      "command": "real_smoke",
-      "event": "skill_activation",
-      "skill": "agent-team-work",
-      "source": "manual",
-      "version": "0.2.0",
-      "activation_type": "explicit",
-      "outcome": "accepted",
-      "failure_type": "none",
-      "timestamp": "2026-09-14T09:24:24Z"
-    }
-  ],
+  "recent_events": [],
   "failures": [],
   "artifacts": {
-    "events_jsonl": "/Volumes/Code/team-worker/agent-team-work/reports/telemetry_events.jsonl",
-    "json": "/Volumes/Code/team-worker/agent-team-work/reports/adoption_drift_report.json",
-    "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/adoption_drift_report.md"
+    "events_jsonl": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/telemetry_events.jsonl",
+    "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/adoption_drift_report.json",
+    "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/adoption_drift_report.md"
   }
 }

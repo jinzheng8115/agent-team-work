@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "ok": false,
-  "generated_at": "2026-09-15",
-  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+  "generated_at": "2026-09-17",
+  "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
   "summary": {
     "item_count": 21,
     "module_count": 8,
@@ -131,7 +131,7 @@
       "label": "Trust Security",
       "status": "missing",
       "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-      "current": "4 scripts; secrets 0; help failures 0",
+      "current": "6 scripts; secrets 0; help failures 0",
       "command": "python3 scripts/yao.py trust . --self",
       "test": "python3 tests/verify_trust_check.py",
       "evidence": [
@@ -168,7 +168,7 @@
       "label": "Skill Atlas",
       "status": "missing",
       "objective": "Team skill portfolio reveals route collisions, stale ownership, dependency graph, and no-route opportunities.",
-      "current": "2 scanned skills; actionable collisions 2",
+      "current": "1 scanned skills; actionable collisions 0",
       "command": "python3 scripts/yao.py skill-atlas --workspace-root . --self",
       "test": "python3 tests/verify_skill_atlas.py",
       "evidence": [
@@ -205,7 +205,7 @@
       "label": "Registry Distribution",
       "status": "missing",
       "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-      "current": "archive entries 160; install failures 0",
+      "current": "archive entries 13; install failures 0",
       "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self && python3 scripts/yao.py registry-audit . --self",
       "test": "python3 tests/verify_registry_audit.py",
       "evidence": [
@@ -246,7 +246,7 @@
       "label": "Review Studio",
       "status": "missing",
       "objective": "One HTML page supports first-pass production review across trigger, output, runtime, trust, release, and evidence actions.",
-      "current": "16 gates; decision review; warnings 3",
+      "current": "16 gates; decision review; warnings 5",
       "command": "python3 scripts/yao.py review-studio . --self",
       "test": "python3 tests/verify_review_studio.py",
       "evidence": [
@@ -275,7 +275,7 @@
       "label": "Telemetry Drift",
       "status": "missing",
       "objective": "Real usage feedback is captured as metadata-only local-first drift signals.",
-      "current": "events 1; recipes 5; risk low",
+      "current": "events 0; recipes 5; risk no-data",
       "command": "python3 scripts/yao.py telemetry-hooks . --self && python3 scripts/yao.py adoption-drift . --self",
       "test": "python3 tests/verify_telemetry_hooks.py",
       "evidence": [
@@ -514,7 +514,7 @@
       "label": "Skill Atlas Generator",
       "status": "missing",
       "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
-      "current": "2 scanned skills",
+      "current": "1 scanned skills",
       "command": "make ci-test",
       "test": "tests/verify_skill_atlas.py",
       "evidence": [
@@ -750,11 +750,11 @@
           "exists": false
         },
         {
-          "path": "reports/skillops/daily/2026-09-15.json",
+          "path": "reports/skillops/daily/2026-09-17.json",
           "exists": true
         },
         {
-          "path": "reports/skillops/daily/2026-09-15.md",
+          "path": "reports/skillops/daily/2026-09-17.md",
           "exists": true
         }
       ],

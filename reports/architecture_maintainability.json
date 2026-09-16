@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-09-15",
+  "generated_at": "2026-09-17",
   "skill_dir": ".",
   "summary": {
     "python_file_count": 6,
@@ -16,7 +16,7 @@
     "watch_line_threshold": 720,
     "early_watch_line_threshold": 600,
     "block_line_threshold": 1500,
-    "largest_file_lines": 279,
+    "largest_file_lines": 595,
     "watchlist_count": 0,
     "early_watchlist_count": 0,
     "hotspot_count": 0,
@@ -26,15 +26,7 @@
   "largest_files": [
     {
       "path": "scripts/validate_team_state.py",
-      "lines": 279,
-      "kind": "cli-script",
-      "severity": "pass",
-      "early_watch": false,
-      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-    },
-    {
-      "path": "scripts/build_runtime_package.py",
-      "lines": 156,
+      "lines": 595,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": false,
@@ -42,7 +34,15 @@
     },
     {
       "path": "scripts/runtime_package_check.py",
-      "lines": 156,
+      "lines": 163,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": false,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    },
+    {
+      "path": "scripts/build_runtime_package.py",
+      "lines": 160,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": false,
@@ -58,7 +58,7 @@
     },
     {
       "path": "scripts/ci_test.py",
-      "lines": 100,
+      "lines": 111,
       "kind": "cli-script",
       "severity": "pass",
       "early_watch": false,

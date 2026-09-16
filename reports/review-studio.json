@@ -4,12 +4,12 @@
   "skill_dir": ".",
   "summary": {
     "decision": "review",
-    "world_class_score": 89,
+    "world_class_score": 86,
     "gate_count": 16,
     "gate_contract_ok": true,
     "blocker_count": 0,
-    "warning_count": 4,
-    "action_count": 4,
+    "warning_count": 5,
+    "action_count": 5,
     "annotation_count": 0,
     "open_annotation_count": 0,
     "open_annotation_blocker_count": 0,
@@ -110,7 +110,7 @@
       "key": "python-compat",
       "label": "Python 兼容",
       "status": "pass",
-      "detail": "Python 3.11; 8 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
+      "detail": "Python 3.11; 9 files; 0 compatibility issues; 0 syntax; 0 f-string 3.11 hazards",
       "evidence": "reports/python_compatibility.json",
       "link": "python_compatibility.md",
       "review_action_id": "",
@@ -125,7 +125,7 @@
       "key": "architecture-maintainability",
       "label": "架构维护",
       "status": "pass",
-      "detail": "6 Python files; 0 hotspots; 0 watchlist files; 0 early watch files; 0 blockers; largest 279 lines; 0 CLI handlers; 0 in entrypoint",
+      "detail": "6 Python files; 0 hotspots; 0 watchlist files; 0 early watch files; 0 blockers; largest 595 lines; 0 CLI handlers; 0 in entrypoint",
       "evidence": "reports/architecture_maintainability.json",
       "link": "architecture_maintainability.md",
       "review_action_id": "",
@@ -170,7 +170,7 @@
       "key": "skill-atlas",
       "label": "组合治理",
       "status": "warn",
-      "detail": "2 skills, 2 actionable; 2 actionable route collisions; 0 actionable owner gaps; 0 actionable stale; 0 actionable drift; 0 scoped non-actionable issues",
+      "detail": "1 skills, 1 actionable; 0 actionable route collisions; 0 actionable owner gaps; 0 actionable stale; 1 actionable drift; 0 scoped non-actionable issues",
       "evidence": "reports/skill_atlas.json",
       "link": "skill_atlas.html",
       "review_action_id": "review-action-skill-atlas",
@@ -184,23 +184,23 @@
     {
       "key": "operations-loop",
       "label": "运营回路",
-      "status": "pass",
-      "detail": "1 metadata events; adoption 100.0; missed 0; bad-output 0; risk low; daily proposals 0; daily decision monitor; daily release lock false; weekly queue 0 unique; weekly ready 0; weekly top 0; weekly release lock false",
+      "status": "warn",
+      "detail": "0 metadata events; adoption 0; missed 0; bad-output 0; risk no-data; daily proposals 0; daily decision monitor; daily release lock true; weekly queue 0 unique; weekly ready 0; weekly top 0; weekly release lock true",
       "evidence": "reports/adoption_drift_report.json + reports/skillops/daily + reports/skillops/weekly",
       "link": "adoption_drift_report.md",
-      "review_action_id": "",
-      "review_action_status": "",
-      "review_action_title": "",
-      "review_action_next_step": "",
-      "review_action_reason": "",
-      "review_action_source_ref_count": 0,
-      "review_action_verification_command": ""
+      "review_action_id": "review-action-operations-loop",
+      "review_action_status": "warn",
+      "review_action_title": "运营回路",
+      "review_action_next_step": "记录 metadata-only 使用事件，或明确当前 release 缺少真实使用信号。",
+      "review_action_reason": "没有运营回路时，reviewer 无法判断采用率、误触发、坏输出和 review overdue 的真实影响。",
+      "review_action_source_ref_count": 2,
+      "review_action_verification_command": "python3 scripts/render_adoption_drift_report.py . --record-event skill_activation --activation-type explicit --outcome accepted"
     },
     {
       "key": "review-waivers",
       "label": "人工批准",
       "status": "warn",
-      "detail": "0 active waivers; 2 warning gates still need reviewer decision",
+      "detail": "0 active waivers; 3 warning gates still need reviewer decision",
       "evidence": "reports/review_waivers.json",
       "link": "review_waivers.md",
       "review_action_id": "review-action-review-waivers",
@@ -215,7 +215,7 @@
       "key": "world-class-evidence",
       "label": "世界证据",
       "status": "warn",
-      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 6/14 pass; 8 blocked; overclaim guard true",
+      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 5/14 pass; 9 blocked; overclaim guard true",
       "evidence": "reports/world_class_evidence_ledger.json",
       "link": "world_class_evidence_ledger.md",
       "review_action_id": "review-action-world-class-evidence",
@@ -323,7 +323,7 @@
       "key": "skill-atlas",
       "label": "组合治理",
       "status": "warn",
-      "detail": "2 skills, 2 actionable; 2 actionable route collisions; 0 actionable owner gaps; 0 actionable stale; 0 actionable drift; 0 scoped non-actionable issues",
+      "detail": "1 skills, 1 actionable; 0 actionable route collisions; 0 actionable owner gaps; 0 actionable stale; 1 actionable drift; 0 scoped non-actionable issues",
       "evidence": "reports/skill_atlas.json",
       "link": "skill_atlas.html",
       "review_action_id": "review-action-skill-atlas",
@@ -335,10 +335,25 @@
       "review_action_verification_command": "python3 scripts/build_skill_atlas.py --workspace-root ."
     },
     {
+      "key": "operations-loop",
+      "label": "运营回路",
+      "status": "warn",
+      "detail": "0 metadata events; adoption 0; missed 0; bad-output 0; risk no-data; daily proposals 0; daily decision monitor; daily release lock true; weekly queue 0 unique; weekly ready 0; weekly top 0; weekly release lock true",
+      "evidence": "reports/adoption_drift_report.json + reports/skillops/daily + reports/skillops/weekly",
+      "link": "adoption_drift_report.md",
+      "review_action_id": "review-action-operations-loop",
+      "review_action_status": "warn",
+      "review_action_title": "运营回路",
+      "review_action_next_step": "记录 metadata-only 使用事件，或明确当前 release 缺少真实使用信号。",
+      "review_action_reason": "没有运营回路时，reviewer 无法判断采用率、误触发、坏输出和 review overdue 的真实影响。",
+      "review_action_source_ref_count": 2,
+      "review_action_verification_command": "python3 scripts/render_adoption_drift_report.py . --record-event skill_activation --activation-type explicit --outcome accepted"
+    },
+    {
       "key": "review-waivers",
       "label": "人工批准",
       "status": "warn",
-      "detail": "0 active waivers; 2 warning gates still need reviewer decision",
+      "detail": "0 active waivers; 3 warning gates still need reviewer decision",
       "evidence": "reports/review_waivers.json",
       "link": "review_waivers.md",
       "review_action_id": "review-action-review-waivers",
@@ -353,7 +368,7 @@
       "key": "world-class-evidence",
       "label": "世界证据",
       "status": "warn",
-      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 6/14 pass; 8 blocked; overclaim guard true",
+      "detail": "4 pending world-class evidence entries; 1 human pending; 3 external pending; source checks 5/14 pass; 9 blocked; overclaim guard true",
       "evidence": "reports/world_class_evidence_ledger.json",
       "link": "world_class_evidence_ledger.md",
       "review_action_id": "review-action-world-class-evidence",
@@ -462,7 +477,7 @@
           "path": "skill_atlas/catalog.json",
           "label": "skill atlas catalog",
           "kind": "atlas",
-          "line": 174,
+          "line": 92,
           "matched_pattern": "summary",
           "excerpt": "\"summary\": {",
           "exists": true,
@@ -492,6 +507,45 @@
       "evidence": "reports/skill_atlas.json",
       "evidence_link": "skill_atlas.html",
       "verification_command": "python3 scripts/build_skill_atlas.py --workspace-root .",
+      "evidence_steps": []
+    },
+    {
+      "action_id": "review-action-operations-loop",
+      "gate_key": "operations-loop",
+      "title": "运营回路",
+      "label": "运营回路",
+      "status": "warn",
+      "priority": "warning",
+      "next_step": "记录 metadata-only 使用事件，或明确当前 release 缺少真实使用信号。",
+      "summary": "记录 metadata-only 使用事件，或明确当前 release 缺少真实使用信号。",
+      "reason": "没有运营回路时，reviewer 无法判断采用率、误触发、坏输出和 review overdue 的真实影响。",
+      "why": "没有运营回路时，reviewer 无法判断采用率、误触发、坏输出和 review overdue 的真实影响。",
+      "source_fix": "reports/adoption_drift_report.md",
+      "source_refs": [
+        {
+          "path": "reports/adoption_drift_report.md",
+          "label": "adoption drift report",
+          "kind": "report",
+          "line": 1,
+          "matched_pattern": "# Adoption",
+          "excerpt": "# Adoption And Drift Report",
+          "exists": true,
+          "link": "adoption_drift_report.md"
+        },
+        {
+          "path": "references/telemetry-drift-method.md",
+          "label": "telemetry method",
+          "kind": "method",
+          "line": null,
+          "matched_pattern": "",
+          "excerpt": "",
+          "exists": false,
+          "link": ""
+        }
+      ],
+      "evidence": "reports/adoption_drift_report.json + reports/skillops/daily + reports/skillops/weekly",
+      "evidence_link": "adoption_drift_report.md",
+      "verification_command": "python3 scripts/render_adoption_drift_report.py . --record-event skill_activation --activation-type explicit --outcome accepted",
       "evidence_steps": []
     },
     {
@@ -1365,12 +1419,12 @@
           "category": "external",
           "status": "pending",
           "readiness": "awaiting-submission",
-          "current": "external source events 0; adoption samples 1",
+          "current": "external source events 0; adoption samples 0",
           "next_action": "Install a real client against the native host and import production metadata-only events.",
           "submission_path": "evidence/world_class/submissions/native-client-telemetry.json",
           "template_path": "evidence/world_class/templates/native-client-telemetry.intake.json",
-          "source_pass_count": 2,
-          "source_blocked_count": 1,
+          "source_pass_count": 1,
+          "source_blocked_count": 2,
           "blocked_checks": [
             {
               "label": "External events",
@@ -1379,6 +1433,14 @@
               "expected": ">0",
               "status": "blocked",
               "next_action": "Import at least one metadata-only event from a real client."
+            },
+            {
+              "label": "Adoption sample",
+              "field": "adoption_sample_count",
+              "actual": 0,
+              "expected": ">0",
+              "status": "blocked",
+              "next_action": "Telemetry must include adoption outcome evidence."
             }
           ],
           "repair_rows": [
@@ -1409,6 +1471,19 @@
               "counts_as_completion": false
             },
             {
+              "action_id": "native-client-telemetry-source-check-adoption_sample_count",
+              "repair_type": "source-check",
+              "target": "adoption_sample_count",
+              "phase": "collect-source",
+              "priority": 40,
+              "owner": "Browser/Chrome/IDE/provider client integrator",
+              "status": "blocked",
+              "blocking_reason": "Current value 0 does not satisfy '>0'.",
+              "next_action": "Telemetry must include adoption outcome evidence.",
+              "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
+              "counts_as_completion": false
+            },
+            {
               "action_id": "native-client-telemetry-source-check-external_source_events",
               "repair_type": "source-check",
               "target": "external_source_events",
@@ -1422,7 +1497,7 @@
               "counts_as_completion": false
             }
           ],
-          "repair_blocked_count": 3,
+          "repair_blocked_count": 4,
           "repair_counts_as_completion": false,
           "phase_queue": [
             {
@@ -1448,16 +1523,16 @@
               "label": "Collect source",
               "priority": 40,
               "status": "blocked",
-              "blocked_count": 1,
-              "row_count": 1,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
               "evidence_keys": [
                 "native-client-telemetry"
               ],
-              "next_action_id": "native-client-telemetry-source-check-external_source_events",
-              "next_action": "Import at least one metadata-only event from a real client.",
+              "next_action_id": "native-client-telemetry-source-check-adoption_sample_count",
+              "next_action": "Telemetry must include adoption outcome evidence.",
               "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
               "counts_as_completion": false
             }
@@ -1592,7 +1667,7 @@
     "upgrade_check": "reports/upgrade_check.md",
     "migration": "docs/migration-v2.md",
     "skill_ir": "reports/skill-ir.json",
-    "daily_skillops": "reports/skillops/daily/2026-09-15.md",
+    "daily_skillops": "reports/skillops/daily/2026-09-17.md",
     "weekly_curator": "reports/skillops/weekly/2026-W38.md"
   },
   "data": {
@@ -1617,7 +1692,6 @@
           "reports/output_review_kit.md",
           "reports/output_review_adjudication.md",
           "reports/benchmark_reproducibility.md",
-          "reports/output_blind_answer_key.json",
           "reports/conformance_matrix.md",
           "reports/security_trust_report.md",
           "reports/runtime_permission_probes.md",
@@ -1679,7 +1753,7 @@
           "label": "可维护性",
           "score": 80,
           "reasons": [
-            "SKILL.md 约 1176 个词/字。",
+            "SKILL.md 约 1388 个词/字。",
             "入口文件偏长，建议继续拆到 references/。",
             "references/ 已承载扩展指导。",
             "scripts/ 已承载确定性逻辑。",
@@ -1700,7 +1774,7 @@
           "label": "上下文成本",
           "score": 42,
           "reasons": [
-            "入口约 1176 个词/字，references 约 9201 个词/字。",
+            "入口约 1388 个词/字，references 约 11598 个词/字。",
             "分数越高代表上下文成本越低。",
             "上下文成本偏高，建议压缩入口或拆分 references。"
           ]
@@ -1804,7 +1878,7 @@
           "已生成 Output Review Adjudication，可记录盲评决策、一致率和待评审项。"
         ],
         "gaps": [
-          "上下文成本需要补强：入口约 1176 个词/字，references 约 9201 个词/字。"
+          "上下文成本需要补强：入口约 1388 个词/字，references 约 11598 个词/字。"
         ],
         "recommendations": [
           "先改触发边界，再扩展工作流。",
@@ -1861,7 +1935,7 @@
             "name": "包体膨胀风险",
             "impact": 2,
             "probability": 2,
-            "signal": "SKILL.md 约 1176 个词/字。",
+            "signal": "SKILL.md 约 1388 个词/字。",
             "response": "先补证据和边界，再增加包体复杂度。"
           },
           {
@@ -1975,7 +2049,7 @@
         "external_pending_count": 3,
         "human_pending_count": 1,
         "source_check_count": 14,
-        "source_pass_count": 6,
+        "source_pass_count": 5,
         "conclusion_zh": "世界级证据尚未完成：4 项待补，0 项已接受。",
         "conclusion_en": "World-class evidence is not complete: 4 pending, 0 accepted.",
         "entries": [
@@ -2036,7 +2110,8 @@
             "summary_zh": "真实外部客户端 metadata-only 事件仍未导入。",
             "summary_en": "Real external-client metadata-only events have not been imported yet.",
             "blocked_checks": [
-              "External events"
+              "External events",
+              "Adoption sample"
             ]
           }
         ]
@@ -2077,22 +2152,22 @@
             "path": "scripts",
             "label": "Deterministic helpers or local tooling",
             "kind": "folder",
-            "file_count": 4
+            "file_count": 6
           },
           {
             "path": "evals",
             "label": "Trigger and quality checks",
             "kind": "folder",
-            "file_count": 14
+            "file_count": 15
           },
           {
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 114
+            "file_count": 117
           }
         ],
-        "file_count": 143,
+        "file_count": 149,
         "folder_count": 4,
         "distribution": [
           {
@@ -2117,15 +2192,15 @@
           },
           {
             "label": "scripts",
-            "value": 4
+            "value": 6
           },
           {
             "label": "evals",
-            "value": 14
+            "value": 15
           },
           {
             "label": "reports",
-            "value": 114
+            "value": 117
           }
         ]
       },
@@ -2245,19 +2320,19 @@
           "path": "scripts",
           "label": "Deterministic helpers or local tooling",
           "kind": "folder",
-          "file_count": 4
+          "file_count": 6
         },
         {
           "path": "evals",
           "label": "Trigger and quality checks",
           "kind": "folder",
-          "file_count": 14
+          "file_count": 15
         },
         {
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 114
+          "file_count": 117
         }
       ],
       "strengths": [
@@ -2566,14 +2641,14 @@
         "ok": true,
         "summary": {
           "reproducibility_ready": true,
-          "release_lock_ready": false,
+          "release_lock_ready": true,
           "methodology_complete": true,
           "required_artifact_count": 25,
           "missing_artifact_count": 0,
-          "evidence_bundle_sha256": "b3e91fef6d2744e2afd509a3372cbc6be41facef53b7f7ddf30c0e1bc45198e4",
-          "source_contract_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3",
-          "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
-          "output_case_count": 6,
+          "evidence_bundle_sha256": "ccaf2321e1bf8fb18844282fcf65738ce1055ea90fe24441e6c8b455e9faef1e",
+          "source_contract_sha256": "71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc",
+          "archive_sha256": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144",
+          "output_case_count": 13,
           "failure_disclosure_count": 3,
           "command_count": 23,
           "command_executed_count": 10,
@@ -2587,25 +2662,25 @@
           "phase1_quality_promotion_complete": false,
           "phase1_completion_ready": false,
           "world_class_ready": false,
-          "world_class_open_gap_count": 5,
+          "world_class_open_gap_count": 4,
           "world_class_task_count": 4,
           "world_class_ledger_pending_count": 4,
           "world_class_source_check_count": 14,
-          "world_class_source_pass_count": 6,
-          "world_class_source_blocked_count": 8,
+          "world_class_source_pass_count": 5,
+          "world_class_source_blocked_count": 9,
           "beta_test_ready": false,
-          "beta_test_blocker_count": 2,
+          "beta_test_blocker_count": 1,
           "beta_test_deferred_evidence_count": 4,
           "public_claim_ready": false,
-          "public_claim_blocker_count": 7,
+          "public_claim_blocker_count": 6,
           "working_tree_dirty": true,
-          "changed_file_count": 88,
-          "source_tree_dirty": true,
-          "source_changed_file_count": 12,
+          "changed_file_count": 65,
+          "source_tree_dirty": false,
+          "source_changed_file_count": 0,
           "generated_tree_dirty": true,
-          "generated_changed_file_count": 76
+          "generated_changed_file_count": 65
         },
-        "commit": "5e8b81247a2bbaeebf81326863e6671a586f083b",
+        "commit": "5287cb518da352b484cfd5a6c82536e4d2f18224",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -2689,7 +2764,7 @@
         "failures": []
       },
       "trust_security": {
-        "scanned_files": 40,
+        "scanned_files": 43,
         "script_count": 6,
         "internal_module_count": 0,
         "secret_findings": 0,
@@ -2709,23 +2784,23 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 40,
-        "package_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3"
+        "package_hash_file_count": 43,
+        "package_sha256": "71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc"
       },
       "skill_atlas": {
-        "skill_count": 2,
-        "actionable_skill_count": 2,
-        "route_collision_count": 2,
-        "actionable_route_collision_count": 2,
+        "skill_count": 1,
+        "actionable_skill_count": 1,
+        "route_collision_count": 0,
+        "actionable_route_collision_count": 0,
         "owner_gap_count": 0,
         "actionable_owner_gap_count": 0,
         "stale_count": 0,
         "actionable_stale_count": 0,
         "shared_resource_count": 0,
         "no_route_opportunity_count": 0,
-        "telemetry_report_count": 2,
-        "drift_signal_count": 0,
-        "actionable_drift_signal_count": 0,
+        "telemetry_report_count": 1,
+        "drift_signal_count": 1,
+        "actionable_drift_signal_count": 1,
         "non_actionable_issue_count": 0
       },
       "registry_distribution": {
@@ -2748,8 +2823,8 @@
           "trust_level": "local",
           "license": "MIT",
           "checksums": {
-            "package_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3",
-            "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0"
+            "package_sha256": "71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc",
+            "archive_sha256": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144"
           },
           "compatibility": {
             "openai": "pass",
@@ -2760,7 +2835,7 @@
             "agent-skills-compatible": "pass"
           },
           "source": {
-            "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+            "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
             "skill_ir": "reports/skill-ir.json",
             "ir_schema_version": "2.0.0",
             "canonical_metadata": "agents/interface.yaml"
@@ -2780,12 +2855,12 @@
           },
           "distribution": {
             "archive_verified": true,
-            "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
+            "archive_sha256": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144",
             "package_verification": "reports/package_verification.json",
             "install_simulated": true,
             "install_simulation": "reports/install_simulation.json"
           },
-          "generated_at": "2026-09-15"
+          "generated_at": "2026-09-17"
         },
         "failures": [],
         "warnings": []
@@ -2796,7 +2871,7 @@
           "target_count": 4,
           "adapter_count": 4,
           "archive_present": true,
-          "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
+          "archive_sha256": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144",
           "archive_entry_count": 13,
           "nested_skill_entry_count": 0,
           "failure_count": 0,
@@ -2867,12 +2942,12 @@
             {
               "field": "archive_sha256",
               "from": "",
-              "to": "4805c02dd0cb9ba2b65f8a60c895ae420c9bb8f75e179394912a69a87504bd37"
+              "to": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144"
             },
             {
               "field": "package_sha256",
               "from": "previous-fixture",
-              "to": "3393c0524aade25d733d4bb668dcebc1ff724fd65773ba7ee57b6a3d50d82d58"
+              "to": "71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc"
             }
           ]
         },
@@ -2887,34 +2962,33 @@
       "adoption_drift": {
         "ok": true,
         "summary": {
-          "event_count": 1,
-          "adoption_sample_count": 1,
-          "activation_count": 1,
-          "accepted_count": 1,
+          "event_count": 0,
+          "adoption_sample_count": 0,
+          "activation_count": 0,
+          "accepted_count": 0,
           "edited_count": 0,
           "rejected_count": 0,
           "missed_count": 0,
           "failed_count": 0,
-          "adoption_rate": 100.0,
+          "adoption_rate": 0,
           "missed_trigger_count": 0,
           "wrong_trigger_count": 0,
           "bad_output_count": 0,
           "script_error_count": 0,
           "missing_resource_count": 0,
           "review_overdue_count": 0,
-          "risk_band": "low",
-          "event_types": {
-            "skill_activation": 1
-          },
+          "risk_band": "no-data",
+          "event_types": {},
           "failure_types": {},
-          "source_types": {
-            "manual": 1
-          },
-          "command_counts": {
-            "real_smoke": 1
-          }
+          "source_types": {},
+          "command_counts": {}
         },
-        "next_iteration_candidates": [],
+        "next_iteration_candidates": [
+          {
+            "signal": "no telemetry",
+            "recommendation": "Start with a small metadata-only sample before using telemetry for release decisions."
+          }
+        ],
         "privacy_contract": {
           "storage": "local-first",
           "event_scope": "metadata-only",
@@ -3029,7 +3103,7 @@
         "failures": []
       },
       "world_class_evidence_plan": {
-        "ok": false,
+        "ok": true,
         "summary": {
           "audit_decision": "continue-iteration",
           "world_class_ready": false,
@@ -3175,7 +3249,7 @@
             "status": "external_required",
             "category": "external",
             "owner": "Browser/Chrome/IDE/provider client integrator",
-            "current": "external source events 0; adoption samples 1",
+            "current": "external source events 0; adoption samples 0",
             "objective": "Import production metadata-only events from a real external client into the local drift loop.",
             "runbook": [
               "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -3211,7 +3285,7 @@
         "source_audit": {
           "json": "reports/skill_os2_audit.json",
           "markdown": "reports/skill_os2_audit.md",
-          "open_gap_count": 5
+          "open_gap_count": 4
         }
       },
       "world_class_evidence_ledger": {
@@ -3228,8 +3302,8 @@
           "missing_submission_count": 4,
           "invalid_submission_count": 0,
           "source_check_count": 14,
-          "source_pass_count": 6,
-          "source_blocked_count": 8,
+          "source_pass_count": 5,
+          "source_blocked_count": 9,
           "submitted_but_pending_count": 0,
           "source_accepted_without_valid_submission_count": 0,
           "overclaim_guard_active": true,
@@ -3593,7 +3667,7 @@
             "status": "pending",
             "source_status": "external_required",
             "source_accepted": false,
-            "current": "external source events 0; adoption samples 1",
+            "current": "external source events 0; adoption samples 0",
             "objective": "Import production metadata-only events from a real external client into the local drift loop.",
             "runbook": [
               "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -3630,9 +3704,9 @@
             ],
             "observed_state": {
               "external_source_events": 0,
-              "adoption_sample_count": 1,
+              "adoption_sample_count": 0,
               "raw_content_allowed": false,
-              "risk_band": "low",
+              "risk_band": "no-data",
               "accepted": false
             },
             "source_checklist": [
@@ -3651,8 +3725,8 @@
                 "label": "Adoption sample",
                 "field": "adoption_sample_count",
                 "expected": ">0",
-                "actual": 1,
-                "status": "pass",
+                "actual": 0,
+                "status": "blocked",
                 "source_accepted": false,
                 "next_action": "Telemetry must include adoption outcome evidence."
               },
@@ -3668,8 +3742,8 @@
               }
             ],
             "source_check_count": 3,
-            "source_pass_count": 2,
-            "source_blocked_count": 1,
+            "source_pass_count": 1,
+            "source_blocked_count": 2,
             "submission_state": {
               "status": "missing",
               "path": "evidence/world_class/submissions/native-client-telemetry.json",
@@ -5861,58 +5935,45 @@
     "benchmark_reproducibility": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-09-15",
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
-      "commit": "5e8b81247a2bbaeebf81326863e6671a586f083b",
+      "generated_at": "2026-09-17",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+      "commit": "5287cb518da352b484cfd5a6c82536e4d2f18224",
       "git_status": {
         "available": true,
         "dirty": true,
-        "changed_file_count": 88,
+        "changed_file_count": 65,
         "generated_dirty": true,
-        "generated_changed_file_count": 76,
-        "source_dirty": true,
-        "source_changed_file_count": 12,
+        "generated_changed_file_count": 65,
+        "source_dirty": false,
+        "source_changed_file_count": 0,
         "sample": [
-          " M AGENTS.md",
-          " M README.md",
-          " M SKILL.md",
           " M dist/agent-team-work.zip",
-          " M dist/manifest.json",
-          " M dist/targets/claude/adapter.json",
-          " M dist/targets/generic/adapter.json",
-          " M dist/targets/openai/adapter.json",
-          " M dist/targets/openai/agents/openai.yaml",
-          " M dist/targets/vscode/adapter.json",
-          " M evals/revision_cycle_state_test.py",
-          " M evals/semantic-config.json"
-        ],
-        "source_sample": [
-          " M AGENTS.md",
-          " M README.md",
-          " M SKILL.md",
-          " M evals/revision_cycle_state_test.py",
-          " M evals/semantic-config.json",
-          " M manifest.json",
-          " M scripts/ci_test.py",
-          " M scripts/validate_team_state.py",
-          " M security/permission_policy.json",
-          "?? package-runtime.json",
-          "?? scripts/build_runtime_package.py",
-          "?? scripts/runtime_package_check.py"
-        ],
-        "generated_sample": [
-          " M dist/agent-team-work.zip",
-          " M dist/manifest.json",
-          " M dist/targets/claude/adapter.json",
-          " M dist/targets/generic/adapter.json",
-          " M dist/targets/openai/adapter.json",
-          " M dist/targets/openai/agents/openai.yaml",
-          " M dist/targets/vscode/adapter.json",
           " M registry/index.json",
           " M registry/packages/agent-team-work.json",
           " M reports/adoption_drift_report.json",
+          " M reports/adoption_drift_report.md",
           " M reports/architecture_maintainability.json",
-          " M reports/architecture_maintainability.md"
+          " M reports/architecture_maintainability.md",
+          " M reports/benchmark_reproducibility.json",
+          " M reports/benchmark_reproducibility.md",
+          " M reports/compiled_targets.json",
+          " M reports/compiled_targets.md",
+          " M reports/evidence_consistency.json"
+        ],
+        "source_sample": [],
+        "generated_sample": [
+          " M dist/agent-team-work.zip",
+          " M registry/index.json",
+          " M registry/packages/agent-team-work.json",
+          " M reports/adoption_drift_report.json",
+          " M reports/adoption_drift_report.md",
+          " M reports/architecture_maintainability.json",
+          " M reports/architecture_maintainability.md",
+          " M reports/benchmark_reproducibility.json",
+          " M reports/benchmark_reproducibility.md",
+          " M reports/compiled_targets.json",
+          " M reports/compiled_targets.md",
+          " M reports/evidence_consistency.json"
         ],
         "generated_dirty_prefixes": [
           "dist/",
@@ -5926,14 +5987,14 @@
       },
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
-        "evidence_bundle_sha256": "b3e91fef6d2744e2afd509a3372cbc6be41facef53b7f7ddf30c0e1bc45198e4",
-        "source_contract_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3",
-        "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
-        "output_case_count": 6,
+        "evidence_bundle_sha256": "ccaf2321e1bf8fb18844282fcf65738ce1055ea90fe24441e6c8b455e9faef1e",
+        "source_contract_sha256": "71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc",
+        "archive_sha256": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144",
+        "output_case_count": 13,
         "failure_disclosure_count": 3,
         "command_count": 23,
         "command_executed_count": 10,
@@ -5947,29 +6008,28 @@
         "phase1_quality_promotion_complete": false,
         "phase1_completion_ready": false,
         "world_class_ready": false,
-        "world_class_open_gap_count": 5,
+        "world_class_open_gap_count": 4,
         "world_class_task_count": 4,
         "world_class_ledger_pending_count": 4,
         "world_class_source_check_count": 14,
-        "world_class_source_pass_count": 6,
-        "world_class_source_blocked_count": 8,
+        "world_class_source_pass_count": 5,
+        "world_class_source_blocked_count": 9,
         "beta_test_ready": false,
-        "beta_test_blocker_count": 2,
+        "beta_test_blocker_count": 1,
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 7,
+        "public_claim_blocker_count": 6,
         "working_tree_dirty": true,
-        "changed_file_count": 88,
-        "source_tree_dirty": true,
-        "source_changed_file_count": 12,
+        "changed_file_count": 65,
+        "source_tree_dirty": false,
+        "source_changed_file_count": 0,
         "generated_tree_dirty": true,
-        "generated_changed_file_count": 76
+        "generated_changed_file_count": 65
       },
       "beta_test_release": {
         "ready": false,
         "scope": "beta/public test release without superiority, fully-reviewed, or world-class claims",
         "blockers": [
-          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout source evidence is incomplete"
         ],
         "allowed_deferred_evidence": [
@@ -6001,23 +6061,22 @@
         "ready": false,
         "scope": "public benchmark or world-class readiness claim",
         "blockers": [
-          "release lock is not clean or commit is unavailable",
           "provider-backed model holdout evidence is incomplete",
           "human blind-review adjudication is incomplete",
           "phase-one provider matrix is incomplete",
           "phase-one three-reviewer adjudication is incomplete",
-          "world-class evidence is not accepted yet (5 open gaps, 4 ledger pending)",
-          "world-class source checks are not all accepted (6/14 pass, 8 blocked)"
+          "world-class evidence is not accepted yet (4 open gaps, 4 ledger pending)",
+          "world-class source checks are not all accepted (5/14 pass, 9 blocked)"
         ],
         "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
       },
       "release_lock": {
-        "ready": false,
-        "commit": "5e8b81247a2bbaeebf81326863e6671a586f083b",
+        "ready": true,
+        "commit": "5287cb518da352b484cfd5a6c82536e4d2f18224",
         "status_scope": "generation-time status before this report is written",
-        "source_changed_file_count": 12,
-        "generated_changed_file_count": 76,
-        "reason": "source files were dirty at generation time"
+        "source_changed_file_count": 0,
+        "generated_changed_file_count": 65,
+        "reason": "only generated evidence artifacts were dirty at generation time"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -6025,7 +6084,7 @@
         "existing_count": 25,
         "missing_count": 0,
         "missing_paths": [],
-        "sha256": "b3e91fef6d2744e2afd509a3372cbc6be41facef53b7f7ddf30c0e1bc45198e4"
+        "sha256": "ccaf2321e1bf8fb18844282fcf65738ce1055ea90fe24441e6c8b455e9faef1e"
       },
       "methodology": {
         "path": "reports/benchmark_methodology.md",
@@ -6077,8 +6136,8 @@
           "label": "output_cases",
           "path": "evals/output/cases.jsonl",
           "exists": true,
-          "bytes": 5942,
-          "sha256": "84372998a4bbb3874e290ca3d1bcd29abca305f07d64a8b7179972b110b2de8c"
+          "bytes": 12466,
+          "sha256": "f902853cb36081b4d7e4c29bc0dfd2cb3f00aa4f7f6f64f44cf86ae722a2f42b"
         },
         {
           "label": "output_schema",
@@ -6133,106 +6192,106 @@
           "label": "trust_report",
           "path": "reports/security_trust_report.json",
           "exists": true,
-          "bytes": 10977,
-          "sha256": "7880e510aa523d76ffc02552cd87be81330de7bfb7e63a0ab22b96440c4548ff"
+          "bytes": 11028,
+          "sha256": "bb69f2f7af6bcba6900c2e0537f0dad5eca727e1b8bce71abb93ab1a56f24d35"
         },
         {
           "label": "python_compatibility",
           "path": "reports/python_compatibility.json",
           "exists": true,
-          "bytes": 1784,
-          "sha256": "7e649cfdccacd5fccf3940ed083935a645e11f3c36b925cd846d4224bc0d97aa"
+          "bytes": 1929,
+          "sha256": "91e62411f0a8833fdfa57a511333b58de64884ec1e431ca4e5553a9467c3b760"
         },
         {
           "label": "registry_audit",
           "path": "reports/registry_audit.json",
           "exists": true,
-          "bytes": 3750,
-          "sha256": "e8b9d0991ab7b60c6273a970d909e4af805bc3ef70f4dc26ddeffc96da180033"
+          "bytes": 3869,
+          "sha256": "1c02c0e72c31081eafa6fef741036f9432557511e8c5bb6dc4cbf4f67110747d"
         },
         {
           "label": "package_verification",
           "path": "reports/package_verification.json",
           "exists": true,
-          "bytes": 20003,
-          "sha256": "227923d352ff26a6023d1ea99b6a9bd6fd6a42f7f7cb19c1433c801b8a9d9c87"
+          "bytes": 20122,
+          "sha256": "e1d47dcd48a6458d4c69946a9267f9327ef955e0c2cd600830d570009aa9b066"
         },
         {
           "label": "install_simulation",
           "path": "reports/install_simulation.json",
           "exists": true,
-          "bytes": 2171,
-          "sha256": "79a5e733b4c710d31c6826a43e6c89c8ef7bbc66c60c82561b51a17a7c349cfa"
+          "bytes": 2363,
+          "sha256": "16a30c7362fe7e7b8faa320a961bb1fdc19f9f4bf5a97716346f04d44263b019"
         },
         {
           "label": "skill_os2_audit",
           "path": "reports/skill_os2_audit.json",
           "exists": true,
-          "bytes": 15597,
-          "sha256": "c45dbc706fb1aacb14bffa7e2043953011af77deb86dd407f9114d1adbd0d45e"
+          "bytes": 14863,
+          "sha256": "32a901e50902a0cd9ced764be6e1e4333195d08b4be3b7f48a5939e5a18b9c3d"
         },
         {
           "label": "world_class_evidence_plan",
           "path": "reports/world_class_evidence_plan.json",
           "exists": true,
-          "bytes": 22207,
-          "sha256": "c1c72f970a490a2708ae1d816d0b3fe406af0140ca3da139355565463fd52a71"
+          "bytes": 22223,
+          "sha256": "bcfad535672d0c982d07bf062f1f0a8a2cefb58a7dd5945f8359f5fd3c38b508"
         },
         {
           "label": "world_class_evidence_ledger",
           "path": "reports/world_class_evidence_ledger.json",
           "exists": true,
-          "bytes": 23315,
-          "sha256": "886fdf225292178784adf10cb63ced83a841bf223b35044b2b2a68d9bfdd3608"
+          "bytes": 23339,
+          "sha256": "14f5c0b338811e9fb4633b40ad78d1a16fe0b62a1ee25933c4769235e3ecbbc0"
         },
         {
           "label": "world_class_evidence_intake",
           "path": "reports/world_class_evidence_intake.json",
           "exists": true,
-          "bytes": 20163,
-          "sha256": "04268e2148a7480b0abad6de326d0b112894f20a65d58b2c00c2fd946faf2d1d"
+          "bytes": 20184,
+          "sha256": "45ab4f056438fff67401d55bc3838e374eff202b5939a10078357635a5669abd"
         },
         {
           "label": "world_class_evidence_preflight",
           "path": "reports/world_class_evidence_preflight.json",
           "exists": true,
-          "bytes": 103555,
-          "sha256": "203431e637139d2599fc8173f22394557c150123107d9409ac515f60de13df8b"
+          "bytes": 107115,
+          "sha256": "d42ad973695c8fb83f7305af5128f36543ea5732b399708e58408430fc126e1c"
         },
         {
           "label": "world_class_submission_review",
           "path": "reports/world_class_submission_review.json",
           "exists": true,
-          "bytes": 14315,
-          "sha256": "f52fadbb642d749c61b6c4fa92d7ff4916d51daddd04649b6f5e0451ebea0cdb"
+          "bytes": 14339,
+          "sha256": "ab5b86f3c35127349644f06ab730b7e5063131ff1b7b14c87c5214f4439ef962"
         },
         {
           "label": "world_class_operator_runbook",
           "path": "reports/world_class_operator_runbook.json",
           "exists": true,
-          "bytes": 99536,
-          "sha256": "adc97099770be56fc31cde5a0530bdde59529ee10b3ba0c145fc339973c71ab3"
+          "bytes": 103158,
+          "sha256": "d2f25040ff7df140deeb9693184137a68365158d5d4b58bdf74cc7a70a8829f5"
         },
         {
           "label": "world_class_operator_runbook_markdown",
           "path": "reports/world_class_operator_runbook.md",
           "exists": true,
-          "bytes": 24456,
-          "sha256": "79877dbece42ce0e6481b94b0cce206523225fd81781392e56b94f6268b16a63"
+          "bytes": 24501,
+          "sha256": "0854da46c6be1c6ad53382f8c04b1475490e0c75307fc442f26b89cb9f2c2cbb"
         },
         {
           "label": "world_class_operator_runbook_html",
           "path": "reports/world_class_operator_runbook.html",
           "exists": true,
-          "bytes": 32905,
-          "sha256": "763b80cd49d830474a53e78ab877cedcce3c41d5f1a904c87100796fc1f1092a"
+          "bytes": 32956,
+          "sha256": "7af76fe20ee9a104328f227f68d28369c238470875988389473bc0e55a5b728c"
         },
         {
           "label": "world_class_claim_guard",
           "path": "reports/world_class_claim_guard.json",
           "exists": true,
-          "bytes": 15109,
-          "sha256": "de2f99ea26c67c40e43734ffc9723e5af4afdb1cd6ed7d6c4b62317892dac09f"
+          "bytes": 15465,
+          "sha256": "cbe5eda3c9d0ee1c0ea87b567aab4ebfcd06073d485b288c6845b9fca81ffed9"
         }
       ],
       "missing_artifacts": [],
@@ -6373,8 +6432,8 @@
     "skill_os2_coverage": {
       "schema_version": "1.0",
       "ok": false,
-      "generated_at": "2026-09-15",
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+      "generated_at": "2026-09-17",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "summary": {
         "item_count": 21,
         "module_count": 8,
@@ -6503,7 +6562,7 @@
           "label": "Trust Security",
           "status": "missing",
           "objective": "Scripts, dependencies, permissions, secrets, and package hash are reviewable for team distribution.",
-          "current": "4 scripts; secrets 0; help failures 0",
+          "current": "6 scripts; secrets 0; help failures 0",
           "command": "python3 scripts/yao.py trust . --self",
           "test": "python3 tests/verify_trust_check.py",
           "evidence": [
@@ -6540,7 +6599,7 @@
           "label": "Skill Atlas",
           "status": "missing",
           "objective": "Team skill portfolio reveals route collisions, stale ownership, dependency graph, and no-route opportunities.",
-          "current": "2 scanned skills; actionable collisions 2",
+          "current": "1 scanned skills; actionable collisions 0",
           "command": "python3 scripts/yao.py skill-atlas --workspace-root . --self",
           "test": "python3 tests/verify_skill_atlas.py",
           "evidence": [
@@ -6577,7 +6636,7 @@
           "label": "Registry Distribution",
           "status": "missing",
           "objective": "Skill packages are installable, versioned, checksumed, and upgrade-reviewable.",
-          "current": "archive entries 160; install failures 0",
+          "current": "archive entries 13; install failures 0",
           "command": "python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self && python3 scripts/yao.py registry-audit . --self",
           "test": "python3 tests/verify_registry_audit.py",
           "evidence": [
@@ -6618,7 +6677,7 @@
           "label": "Review Studio",
           "status": "missing",
           "objective": "One HTML page supports first-pass production review across trigger, output, runtime, trust, release, and evidence actions.",
-          "current": "16 gates; decision review; warnings 3",
+          "current": "16 gates; decision review; warnings 5",
           "command": "python3 scripts/yao.py review-studio . --self",
           "test": "python3 tests/verify_review_studio.py",
           "evidence": [
@@ -6647,7 +6706,7 @@
           "label": "Telemetry Drift",
           "status": "missing",
           "objective": "Real usage feedback is captured as metadata-only local-first drift signals.",
-          "current": "events 1; recipes 5; risk low",
+          "current": "events 0; recipes 5; risk no-data",
           "command": "python3 scripts/yao.py telemetry-hooks . --self && python3 scripts/yao.py adoption-drift . --self",
           "test": "python3 tests/verify_telemetry_hooks.py",
           "evidence": [
@@ -6886,7 +6945,7 @@
           "label": "Skill Atlas Generator",
           "status": "missing",
           "objective": "Recommended Skill OS 2.0 implementation PR from the upgrade plan.",
-          "current": "2 scanned skills",
+          "current": "1 scanned skills",
           "command": "make ci-test",
           "test": "tests/verify_skill_atlas.py",
           "evidence": [
@@ -7122,11 +7181,11 @@
               "exists": false
             },
             {
-              "path": "reports/skillops/daily/2026-09-15.json",
+              "path": "reports/skillops/daily/2026-09-17.json",
               "exists": true
             },
             {
-              "path": "reports/skillops/daily/2026-09-15.md",
+              "path": "reports/skillops/daily/2026-09-17.md",
               "exists": true
             }
           ],
@@ -7185,8 +7244,8 @@
     "compiled_targets": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-09-15",
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+      "generated_at": "2026-09-17",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "summary": {
         "target_count": 5,
         "pass_count": 5,
@@ -7208,7 +7267,7 @@
             "ir_schema_version": "2.0.0"
           },
           "source": {
-            "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+            "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
             "canonical_metadata": "agents/interface.yaml",
             "declared_targets": [
               "openai",
@@ -7409,6 +7468,7 @@
               "source": "reports/security_trust_report.json",
               "source_available": true,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "review_required": true,
@@ -7420,10 +7480,13 @@
                   "review_reason": ""
                 },
                 "file_write": {
-                  "required": false,
-                  "script_count": 0,
-                  "scripts": [],
-                  "review_reason": ""
+                  "required": true,
+                  "script_count": 2,
+                  "scripts": [
+                    "scripts/build_runtime_package.py",
+                    "scripts/runtime_package_check.py"
+                  ],
+                  "review_reason": "Scripts write local files or generated artifacts."
                 },
                 "subprocess": {
                   "required": true,
@@ -7448,14 +7511,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 4,
+                "checked_count": 6,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 0,
-                "file_write_script_count": 0,
+                "file_write_script_count": 2,
                 "subprocess_script_count": 1,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -7471,11 +7534,12 @@
               "representation": "targets/openai/agents/openai.yaml::compatibility.permission_contract plus adapter.json",
               "review_required": true,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "capability_counts": {
                 "network": 0,
-                "file_write": 0,
+                "file_write": 2,
                 "subprocess": 1,
                 "interactive": 0
               },
@@ -7514,6 +7578,7 @@
                 "enforcement": "metadata-only",
                 "native_enforcement": false,
                 "declared_capabilities": [
+                  "file_write",
                   "subprocess"
                 ],
                 "review_required": true
@@ -7568,6 +7633,7 @@
             "source": "reports/security_trust_report.json",
             "source_available": true,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "review_required": true,
@@ -7579,10 +7645,13 @@
                 "review_reason": ""
               },
               "file_write": {
-                "required": false,
-                "script_count": 0,
-                "scripts": [],
-                "review_reason": ""
+                "required": true,
+                "script_count": 2,
+                "scripts": [
+                  "scripts/build_runtime_package.py",
+                  "scripts/runtime_package_check.py"
+                ],
+                "review_reason": "Scripts write local files or generated artifacts."
               },
               "subprocess": {
                 "required": true,
@@ -7607,14 +7676,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 4,
+              "checked_count": 6,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 0,
-              "file_write_script_count": 0,
+              "file_write_script_count": 2,
               "subprocess_script_count": 1,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -7628,11 +7697,12 @@
             "representation": "targets/openai/agents/openai.yaml::compatibility.permission_contract plus adapter.json",
             "review_required": true,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "capability_counts": {
               "network": 0,
-              "file_write": 0,
+              "file_write": 2,
               "subprocess": 1,
               "interactive": 0
             },
@@ -7671,6 +7741,7 @@
               "enforcement": "metadata-only",
               "native_enforcement": false,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "review_required": true
@@ -7743,7 +7814,7 @@
             "ir_schema_version": "2.0.0"
           },
           "source": {
-            "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+            "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
             "canonical_metadata": "agents/interface.yaml",
             "declared_targets": [
               "openai",
@@ -7944,6 +8015,7 @@
               "source": "reports/security_trust_report.json",
               "source_available": true,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "review_required": true,
@@ -7955,10 +8027,13 @@
                   "review_reason": ""
                 },
                 "file_write": {
-                  "required": false,
-                  "script_count": 0,
-                  "scripts": [],
-                  "review_reason": ""
+                  "required": true,
+                  "script_count": 2,
+                  "scripts": [
+                    "scripts/build_runtime_package.py",
+                    "scripts/runtime_package_check.py"
+                  ],
+                  "review_reason": "Scripts write local files or generated artifacts."
                 },
                 "subprocess": {
                   "required": true,
@@ -7983,14 +8058,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 4,
+                "checked_count": 6,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 0,
-                "file_write_script_count": 0,
+                "file_write_script_count": 2,
                 "subprocess_script_count": 1,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -8006,11 +8081,12 @@
               "representation": "targets/claude/adapter.json::target_permission_contract and README notes",
               "review_required": true,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "capability_counts": {
                 "network": 0,
-                "file_write": 0,
+                "file_write": 2,
                 "subprocess": 1,
                 "interactive": 0
               },
@@ -8049,6 +8125,7 @@
                 "enforcement": "metadata-fallback",
                 "native_enforcement": false,
                 "declared_capabilities": [
+                  "file_write",
                   "subprocess"
                 ],
                 "review_required": true
@@ -8103,6 +8180,7 @@
             "source": "reports/security_trust_report.json",
             "source_available": true,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "review_required": true,
@@ -8114,10 +8192,13 @@
                 "review_reason": ""
               },
               "file_write": {
-                "required": false,
-                "script_count": 0,
-                "scripts": [],
-                "review_reason": ""
+                "required": true,
+                "script_count": 2,
+                "scripts": [
+                  "scripts/build_runtime_package.py",
+                  "scripts/runtime_package_check.py"
+                ],
+                "review_reason": "Scripts write local files or generated artifacts."
               },
               "subprocess": {
                 "required": true,
@@ -8142,14 +8223,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 4,
+              "checked_count": 6,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 0,
-              "file_write_script_count": 0,
+              "file_write_script_count": 2,
               "subprocess_script_count": 1,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -8163,11 +8244,12 @@
             "representation": "targets/claude/adapter.json::target_permission_contract and README notes",
             "review_required": true,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "capability_counts": {
               "network": 0,
-              "file_write": 0,
+              "file_write": 2,
               "subprocess": 1,
               "interactive": 0
             },
@@ -8206,6 +8288,7 @@
               "enforcement": "metadata-fallback",
               "native_enforcement": false,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "review_required": true
@@ -8278,7 +8361,7 @@
             "ir_schema_version": "2.0.0"
           },
           "source": {
-            "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+            "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
             "canonical_metadata": "agents/interface.yaml",
             "declared_targets": [
               "openai",
@@ -8479,6 +8562,7 @@
               "source": "reports/security_trust_report.json",
               "source_available": true,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "review_required": true,
@@ -8490,10 +8574,13 @@
                   "review_reason": ""
                 },
                 "file_write": {
-                  "required": false,
-                  "script_count": 0,
-                  "scripts": [],
-                  "review_reason": ""
+                  "required": true,
+                  "script_count": 2,
+                  "scripts": [
+                    "scripts/build_runtime_package.py",
+                    "scripts/runtime_package_check.py"
+                  ],
+                  "review_reason": "Scripts write local files or generated artifacts."
                 },
                 "subprocess": {
                   "required": true,
@@ -8518,14 +8605,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 4,
+                "checked_count": 6,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 0,
-                "file_write_script_count": 0,
+                "file_write_script_count": 2,
                 "subprocess_script_count": 1,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -8541,11 +8628,12 @@
               "representation": "targets/generic/adapter.json::target_permission_contract",
               "review_required": true,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "capability_counts": {
                 "network": 0,
-                "file_write": 0,
+                "file_write": 2,
                 "subprocess": 1,
                 "interactive": 0
               },
@@ -8583,6 +8671,7 @@
                 "enforcement": "consumer-enforced-or-metadata-only",
                 "native_enforcement": false,
                 "declared_capabilities": [
+                  "file_write",
                   "subprocess"
                 ],
                 "review_required": true
@@ -8631,6 +8720,7 @@
             "source": "reports/security_trust_report.json",
             "source_available": true,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "review_required": true,
@@ -8642,10 +8732,13 @@
                 "review_reason": ""
               },
               "file_write": {
-                "required": false,
-                "script_count": 0,
-                "scripts": [],
-                "review_reason": ""
+                "required": true,
+                "script_count": 2,
+                "scripts": [
+                  "scripts/build_runtime_package.py",
+                  "scripts/runtime_package_check.py"
+                ],
+                "review_reason": "Scripts write local files or generated artifacts."
               },
               "subprocess": {
                 "required": true,
@@ -8670,14 +8763,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 4,
+              "checked_count": 6,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 0,
-              "file_write_script_count": 0,
+              "file_write_script_count": 2,
               "subprocess_script_count": 1,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -8691,11 +8784,12 @@
             "representation": "targets/generic/adapter.json::target_permission_contract",
             "review_required": true,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "capability_counts": {
               "network": 0,
-              "file_write": 0,
+              "file_write": 2,
               "subprocess": 1,
               "interactive": 0
             },
@@ -8733,6 +8827,7 @@
               "enforcement": "consumer-enforced-or-metadata-only",
               "native_enforcement": false,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "review_required": true
@@ -8797,7 +8892,7 @@
             "ir_schema_version": "2.0.0"
           },
           "source": {
-            "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+            "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
             "canonical_metadata": "agents/interface.yaml",
             "declared_targets": [
               "openai",
@@ -8998,6 +9093,7 @@
               "source": "reports/security_trust_report.json",
               "source_available": true,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "review_required": true,
@@ -9009,10 +9105,13 @@
                   "review_reason": ""
                 },
                 "file_write": {
-                  "required": false,
-                  "script_count": 0,
-                  "scripts": [],
-                  "review_reason": ""
+                  "required": true,
+                  "script_count": 2,
+                  "scripts": [
+                    "scripts/build_runtime_package.py",
+                    "scripts/runtime_package_check.py"
+                  ],
+                  "review_reason": "Scripts write local files or generated artifacts."
                 },
                 "subprocess": {
                   "required": true,
@@ -9037,14 +9136,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 4,
+                "checked_count": 6,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 0,
-                "file_write_script_count": 0,
+                "file_write_script_count": 2,
                 "subprocess_script_count": 1,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -9060,11 +9159,12 @@
               "representation": "adapter metadata",
               "review_required": true,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "capability_counts": {
                 "network": 0,
-                "file_write": 0,
+                "file_write": 2,
                 "subprocess": 1,
                 "interactive": 0
               },
@@ -9103,6 +9203,7 @@
                 "enforcement": "consumer-enforced-or-metadata-only",
                 "native_enforcement": false,
                 "declared_capabilities": [
+                  "file_write",
                   "subprocess"
                 ],
                 "review_required": true
@@ -9150,6 +9251,7 @@
             "source": "reports/security_trust_report.json",
             "source_available": true,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "review_required": true,
@@ -9161,10 +9263,13 @@
                 "review_reason": ""
               },
               "file_write": {
-                "required": false,
-                "script_count": 0,
-                "scripts": [],
-                "review_reason": ""
+                "required": true,
+                "script_count": 2,
+                "scripts": [
+                  "scripts/build_runtime_package.py",
+                  "scripts/runtime_package_check.py"
+                ],
+                "review_reason": "Scripts write local files or generated artifacts."
               },
               "subprocess": {
                 "required": true,
@@ -9189,14 +9294,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 4,
+              "checked_count": 6,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 0,
-              "file_write_script_count": 0,
+              "file_write_script_count": 2,
               "subprocess_script_count": 1,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -9210,11 +9315,12 @@
             "representation": "adapter metadata",
             "review_required": true,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "capability_counts": {
               "network": 0,
-              "file_write": 0,
+              "file_write": 2,
               "subprocess": 1,
               "interactive": 0
             },
@@ -9253,6 +9359,7 @@
               "enforcement": "consumer-enforced-or-metadata-only",
               "native_enforcement": false,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "review_required": true
@@ -9316,7 +9423,7 @@
             "ir_schema_version": "2.0.0"
           },
           "source": {
-            "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+            "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
             "canonical_metadata": "agents/interface.yaml",
             "declared_targets": [
               "openai",
@@ -9517,6 +9624,7 @@
               "source": "reports/security_trust_report.json",
               "source_available": true,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "review_required": true,
@@ -9528,10 +9636,13 @@
                   "review_reason": ""
                 },
                 "file_write": {
-                  "required": false,
-                  "script_count": 0,
-                  "scripts": [],
-                  "review_reason": ""
+                  "required": true,
+                  "script_count": 2,
+                  "scripts": [
+                    "scripts/build_runtime_package.py",
+                    "scripts/runtime_package_check.py"
+                  ],
+                  "review_reason": "Scripts write local files or generated artifacts."
                 },
                 "subprocess": {
                   "required": true,
@@ -9556,14 +9667,14 @@
               },
               "help_smoke": {
                 "enabled": true,
-                "checked_count": 4,
+                "checked_count": 6,
                 "failed_count": 0,
                 "failed_scripts": []
               },
               "trust_summary": {
                 "secret_findings": 0,
                 "network_script_count": 0,
-                "file_write_script_count": 0,
+                "file_write_script_count": 2,
                 "subprocess_script_count": 1,
                 "interactive_script_count": 0,
                 "help_smoke_failed_count": 0
@@ -9579,11 +9690,12 @@
               "representation": "targets/vscode/adapter.json::target_permission_contract and targets/vscode/README.md install notes",
               "review_required": true,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "capability_counts": {
                 "network": 0,
-                "file_write": 0,
+                "file_write": 2,
                 "subprocess": 1,
                 "interactive": 0
               },
@@ -9622,6 +9734,7 @@
                 "enforcement": "client-or-workspace-trust",
                 "native_enforcement": false,
                 "declared_capabilities": [
+                  "file_write",
                   "subprocess"
                 ],
                 "review_required": true
@@ -9673,6 +9786,7 @@
             "source": "reports/security_trust_report.json",
             "source_available": true,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "review_required": true,
@@ -9684,10 +9798,13 @@
                 "review_reason": ""
               },
               "file_write": {
-                "required": false,
-                "script_count": 0,
-                "scripts": [],
-                "review_reason": ""
+                "required": true,
+                "script_count": 2,
+                "scripts": [
+                  "scripts/build_runtime_package.py",
+                  "scripts/runtime_package_check.py"
+                ],
+                "review_reason": "Scripts write local files or generated artifacts."
               },
               "subprocess": {
                 "required": true,
@@ -9712,14 +9829,14 @@
             },
             "help_smoke": {
               "enabled": true,
-              "checked_count": 4,
+              "checked_count": 6,
               "failed_count": 0,
               "failed_scripts": []
             },
             "trust_summary": {
               "secret_findings": 0,
               "network_script_count": 0,
-              "file_write_script_count": 0,
+              "file_write_script_count": 2,
               "subprocess_script_count": 1,
               "interactive_script_count": 0,
               "help_smoke_failed_count": 0
@@ -9733,11 +9850,12 @@
             "representation": "targets/vscode/adapter.json::target_permission_contract and targets/vscode/README.md install notes",
             "review_required": true,
             "declared_capabilities": [
+              "file_write",
               "subprocess"
             ],
             "capability_counts": {
               "network": 0,
-              "file_write": 0,
+              "file_write": 2,
               "subprocess": 1,
               "interactive": 0
             },
@@ -9776,6 +9894,7 @@
               "enforcement": "client-or-workspace-trust",
               "native_enforcement": false,
               "declared_capabilities": [
+                "file_write",
                 "subprocess"
               ],
               "review_required": true
@@ -9837,8 +9956,8 @@
       "failures": [],
       "warnings": [],
       "artifacts": {
-        "json": "/Volumes/Code/team-worker/agent-team-work/reports/compiled_targets.json",
-        "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/compiled_targets.md"
+        "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/compiled_targets.json",
+        "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/compiled_targets.md"
       }
     },
     "conformance": {
@@ -10472,9 +10591,9 @@
     },
     "trust": {
       "ok": true,
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "summary": {
-        "scanned_files": 40,
+        "scanned_files": 43,
         "script_count": 6,
         "internal_module_count": 0,
         "secret_findings": 0,
@@ -10494,8 +10613,8 @@
         "help_smoke_failed_count": 0,
         "interactive_script_count": 0,
         "package_hash_scope": "source-contract-without-generated-reports",
-        "package_hash_file_count": 40,
-        "package_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3"
+        "package_hash_file_count": 43,
+        "package_sha256": "71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc"
       },
       "failures": [],
       "warnings": [],
@@ -10752,18 +10871,18 @@
         "remote_metadata_policy": "allow-metadata-only"
       },
       "artifacts": {
-        "json": "/Volumes/Code/team-worker/agent-team-work/reports/security_trust_report.json",
-        "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/security_trust_report.md"
+        "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/security_trust_report.json",
+        "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/security_trust_report.md"
       }
     },
     "python_compatibility": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-09-15",
-      "root": "/Volumes/Code/team-worker/agent-team-work",
+      "generated_at": "2026-09-17",
+      "root": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "summary": {
         "target_python": "3.11",
-        "file_count": 8,
+        "file_count": 9,
         "issue_count": 0,
         "syntax_error_count": 0,
         "fstring_311_violation_count": 0,
@@ -10780,6 +10899,12 @@
         }
       ],
       "files": [
+        {
+          "path": "evals/discussion_round_state_test.py",
+          "ok": true,
+          "issue_count": 0,
+          "issues": []
+        },
         {
           "path": "evals/revision_cycle_state_test.py",
           "ok": true,
@@ -10838,7 +10963,7 @@
     "architecture_maintainability": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-09-15",
+      "generated_at": "2026-09-17",
       "skill_dir": ".",
       "summary": {
         "python_file_count": 6,
@@ -10853,7 +10978,7 @@
         "watch_line_threshold": 720,
         "early_watch_line_threshold": 600,
         "block_line_threshold": 1500,
-        "largest_file_lines": 279,
+        "largest_file_lines": 595,
         "watchlist_count": 0,
         "early_watchlist_count": 0,
         "hotspot_count": 0,
@@ -10863,15 +10988,7 @@
       "largest_files": [
         {
           "path": "scripts/validate_team_state.py",
-          "lines": 279,
-          "kind": "cli-script",
-          "severity": "pass",
-          "early_watch": false,
-          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
-        },
-        {
-          "path": "scripts/build_runtime_package.py",
-          "lines": 156,
+          "lines": 595,
           "kind": "cli-script",
           "severity": "pass",
           "early_watch": false,
@@ -10879,7 +10996,15 @@
         },
         {
           "path": "scripts/runtime_package_check.py",
-          "lines": 156,
+          "lines": 163,
+          "kind": "cli-script",
+          "severity": "pass",
+          "early_watch": false,
+          "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+        },
+        {
+          "path": "scripts/build_runtime_package.py",
+          "lines": 160,
           "kind": "cli-script",
           "severity": "pass",
           "early_watch": false,
@@ -10895,7 +11020,7 @@
         },
         {
           "path": "scripts/ci_test.py",
-          "lines": 100,
+          "lines": 111,
           "kind": "cli-script",
           "severity": "pass",
           "early_watch": false,
@@ -11007,21 +11132,21 @@
     },
     "atlas": {
       "ok": true,
-      "workspace_root": "/Volumes/Code/team-worker/agent-team-work",
+      "workspace_root": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "summary": {
-        "skill_count": 2,
-        "actionable_skill_count": 2,
-        "route_collision_count": 2,
-        "actionable_route_collision_count": 2,
+        "skill_count": 1,
+        "actionable_skill_count": 1,
+        "route_collision_count": 0,
+        "actionable_route_collision_count": 0,
         "owner_gap_count": 0,
         "actionable_owner_gap_count": 0,
         "stale_count": 0,
         "actionable_stale_count": 0,
         "shared_resource_count": 0,
         "no_route_opportunity_count": 0,
-        "telemetry_report_count": 2,
-        "drift_signal_count": 0,
-        "actionable_drift_signal_count": 0,
+        "telemetry_report_count": 1,
+        "drift_signal_count": 1,
+        "actionable_drift_signal_count": 1,
         "non_actionable_issue_count": 0
       },
       "scope_policy": {
@@ -11030,93 +11155,9 @@
         "rules": []
       },
       "catalog": {
-        "workspace_root": "/Volumes/Code/team-worker/agent-team-work",
-        "generated_at": "2026-09-15",
+        "workspace_root": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+        "generated_at": "2026-09-17",
         "skills": [
-          {
-            "name": "agent-team-work",
-            "path": ".release-dist.J16N8f/install-simulation/simulate-agent-team-work/agent-team-work",
-            "description": "Use when a user explicitly asks to create or continue a Codex project team with one Leader and independent role sessions visible in the project sidebar, then dispatch work strictly by accepted stages. 也用于团队完成后的修改：Lead 先做影响分析、启动修订周期，再只派受影响阶段和必要下游并复用原成员。用于创建/继续项目会话团队、阶段派单、验收和恢复；不用于解释概念、编写或修改 skill、单次会话管理、普通子代理、并行 worker 或 Orca team。",
-            "owner": "Local Codex Team",
-            "version": "0.2.0",
-            "status": "active",
-            "maturity": "governed",
-            "updated_at": "2026-09-15",
-            "review_cadence": "monthly",
-            "targets": [
-              "openai",
-              "claude",
-              "generic",
-              "agent-skills-compatible",
-              "vscode"
-            ],
-            "resources": [
-              "scripts/ci_test.py",
-              "scripts/import_telemetry_events.py",
-              "scripts/local_output_eval_runner.py",
-              "scripts/validate_team_state.py",
-              "references/codex-tools.md",
-              "references/e2e-smoke-checklist.md",
-              "references/role-capabilities.md",
-              "references/role-presets.md",
-              "references/team-protocol.md",
-              "references/team-scaling.md",
-              "references/workflow.md"
-            ],
-            "token_set": [
-              "accepted",
-              "asks",
-              "by",
-              "codex",
-              "continue",
-              "dispatch",
-              "explicitly",
-              "in",
-              "independent",
-              "lead",
-              "leader",
-              "one",
-              "or",
-              "orca",
-              "project",
-              "role",
-              "sessions",
-              "sidebar",
-              "stages",
-              "strictly",
-              "team",
-              "then",
-              "user",
-              "visible",
-              "work",
-              "worker",
-              "不用于解释概念",
-              "也用于团队完成后的修改",
-              "先做影响分析",
-              "再只派受影响阶段和必要下游并复用原成员",
-              "单次会话管理",
-              "启动修订周期",
-              "并行",
-              "普通子代理",
-              "用于创建",
-              "继续项目会话团队",
-              "编写或修改",
-              "阶段派单",
-              "验收和恢复"
-            ],
-            "atlas_scope": "release",
-            "actionable": true,
-            "scope_reason": "default release-actionable skill",
-            "telemetry": {
-              "report_present": true,
-              "report": ".release-dist.J16N8f/install-simulation/simulate-agent-team-work/agent-team-work/reports/adoption_drift_report.json",
-              "risk_band": "low",
-              "event_count": 1,
-              "adoption_sample_count": 1,
-              "adoption_rate": 100.0,
-              "candidate_count": 0
-            }
-          },
           {
             "name": "agent-team-work",
             "path": ".",
@@ -11135,9 +11176,11 @@
               "vscode"
             ],
             "resources": [
+              "scripts/build_runtime_package.py",
               "scripts/ci_test.py",
               "scripts/import_telemetry_events.py",
               "scripts/local_output_eval_runner.py",
+              "scripts/runtime_package_check.py",
               "scripts/validate_team_state.py",
               "references/codex-tools.md",
               "references/e2e-smoke-checklist.md",
@@ -11194,85 +11237,35 @@
             "telemetry": {
               "report_present": true,
               "report": "reports/adoption_drift_report.json",
-              "risk_band": "low",
-              "event_count": 1,
-              "adoption_sample_count": 1,
-              "adoption_rate": 100.0,
-              "candidate_count": 0
+              "risk_band": "no-data",
+              "event_count": 0,
+              "adoption_sample_count": 0,
+              "adoption_rate": 0,
+              "candidate_count": 1
             }
           }
         ],
         "summary": {
-          "skill_count": 2,
-          "actionable_skill_count": 2,
-          "route_collision_count": 2,
-          "actionable_route_collision_count": 2,
+          "skill_count": 1,
+          "actionable_skill_count": 1,
+          "route_collision_count": 0,
+          "actionable_route_collision_count": 0,
           "owner_gap_count": 0,
           "actionable_owner_gap_count": 0,
           "stale_count": 0,
           "actionable_stale_count": 0,
           "shared_resource_count": 0,
           "no_route_opportunity_count": 0,
-          "telemetry_report_count": 2,
-          "drift_signal_count": 0,
-          "actionable_drift_signal_count": 0,
+          "telemetry_report_count": 1,
+          "drift_signal_count": 1,
+          "actionable_drift_signal_count": 1,
           "non_actionable_issue_count": 0
         }
       },
-      "route_collisions": [
-        {
-          "skill_a": "agent-team-work",
-          "skill_b": "agent-team-work",
-          "path_a": ".release-dist.J16N8f/install-simulation/simulate-agent-team-work/agent-team-work",
-          "path_b": ".",
-          "score": 1.0,
-          "status": "collision",
-          "actionable": true,
-          "scope_a": "release",
-          "scope_b": "release"
-        },
-        {
-          "skill_a": "agent-team-work",
-          "skill_b": "agent-team-work",
-          "path_a": ".release-dist.J16N8f/install-simulation/simulate-agent-team-work/agent-team-work",
-          "path_b": ".",
-          "score": 1.0,
-          "status": "duplicate-name",
-          "actionable": true,
-          "scope_a": "release",
-          "scope_b": "release"
-        }
-      ],
-      "actionable_route_collisions": [
-        {
-          "skill_a": "agent-team-work",
-          "skill_b": "agent-team-work",
-          "path_a": ".release-dist.J16N8f/install-simulation/simulate-agent-team-work/agent-team-work",
-          "path_b": ".",
-          "score": 1.0,
-          "status": "collision",
-          "actionable": true,
-          "scope_a": "release",
-          "scope_b": "release"
-        },
-        {
-          "skill_a": "agent-team-work",
-          "skill_b": "agent-team-work",
-          "path_a": ".release-dist.J16N8f/install-simulation/simulate-agent-team-work/agent-team-work",
-          "path_b": ".",
-          "score": 1.0,
-          "status": "duplicate-name",
-          "actionable": true,
-          "scope_a": "release",
-          "scope_b": "release"
-        }
-      ],
+      "route_collisions": [],
+      "actionable_route_collisions": [],
       "dependency_graph": {
         "nodes": [
-          {
-            "name": "agent-team-work",
-            "path": ".release-dist.J16N8f/install-simulation/simulate-agent-team-work/agent-team-work"
-          },
           {
             "name": "agent-team-work",
             "path": "."
@@ -11284,26 +11277,74 @@
       "actionable_stale_skills": [],
       "owner_review_gaps": [],
       "actionable_owner_review_gaps": [],
-      "drift_signals": [],
-      "actionable_drift_signals": [],
+      "drift_signals": [
+        {
+          "name": "agent-team-work",
+          "path": ".",
+          "source": "reports/adoption_drift_report.json",
+          "risk_band": "no-data",
+          "signal_types": [
+            "no telemetry"
+          ],
+          "recommendation": "Start with a small metadata-only sample before using telemetry for release decisions.",
+          "actionable": true,
+          "scope": "release",
+          "summary": {
+            "event_count": 0,
+            "adoption_sample_count": 0,
+            "adoption_rate": 0,
+            "missed_trigger_count": 0,
+            "wrong_trigger_count": 0,
+            "bad_output_count": 0,
+            "missing_resource_count": 0,
+            "script_error_count": 0,
+            "review_overdue_count": 0
+          }
+        }
+      ],
+      "actionable_drift_signals": [
+        {
+          "name": "agent-team-work",
+          "path": ".",
+          "source": "reports/adoption_drift_report.json",
+          "risk_band": "no-data",
+          "signal_types": [
+            "no telemetry"
+          ],
+          "recommendation": "Start with a small metadata-only sample before using telemetry for release decisions.",
+          "actionable": true,
+          "scope": "release",
+          "summary": {
+            "event_count": 0,
+            "adoption_sample_count": 0,
+            "adoption_rate": 0,
+            "missed_trigger_count": 0,
+            "wrong_trigger_count": 0,
+            "bad_output_count": 0,
+            "missing_resource_count": 0,
+            "script_error_count": 0,
+            "review_overdue_count": 0
+          }
+        }
+      ],
       "no_route_opportunities": [],
       "artifacts": {
-        "catalog": "/Volumes/Code/team-worker/agent-team-work/skill_atlas/catalog.json",
-        "route_overlap_matrix": "/Volumes/Code/team-worker/agent-team-work/skill_atlas/route_overlap_matrix.csv",
-        "dependency_graph": "/Volumes/Code/team-worker/agent-team-work/skill_atlas/dependency_graph.json",
-        "stale_skills": "/Volumes/Code/team-worker/agent-team-work/skill_atlas/stale_skills.json",
-        "owner_review_gaps": "/Volumes/Code/team-worker/agent-team-work/skill_atlas/owner_review_gaps.json",
-        "drift_signals": "/Volumes/Code/team-worker/agent-team-work/skill_atlas/drift_signals.json",
-        "no_route_opportunities": "/Volumes/Code/team-worker/agent-team-work/skill_atlas/no_route_opportunities.json",
-        "report_json": "/Volumes/Code/team-worker/agent-team-work/reports/skill_atlas.json",
-        "report_html": "/Volumes/Code/team-worker/agent-team-work/reports/skill_atlas.html"
+        "catalog": "/Volumes/Code/team-worker/worker-discussion-round-worktree/skill_atlas/catalog.json",
+        "route_overlap_matrix": "/Volumes/Code/team-worker/worker-discussion-round-worktree/skill_atlas/route_overlap_matrix.csv",
+        "dependency_graph": "/Volumes/Code/team-worker/worker-discussion-round-worktree/skill_atlas/dependency_graph.json",
+        "stale_skills": "/Volumes/Code/team-worker/worker-discussion-round-worktree/skill_atlas/stale_skills.json",
+        "owner_review_gaps": "/Volumes/Code/team-worker/worker-discussion-round-worktree/skill_atlas/owner_review_gaps.json",
+        "drift_signals": "/Volumes/Code/team-worker/worker-discussion-round-worktree/skill_atlas/drift_signals.json",
+        "no_route_opportunities": "/Volumes/Code/team-worker/worker-discussion-round-worktree/skill_atlas/no_route_opportunities.json",
+        "report_json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/skill_atlas.json",
+        "report_html": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/skill_atlas.html"
       }
     },
     "adoption_drift": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-09-15",
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+      "generated_at": "2026-09-17",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "privacy_contract": {
         "storage": "local-first",
         "event_scope": "metadata-only",
@@ -11325,70 +11366,46 @@
         ]
       },
       "summary": {
-        "event_count": 1,
-        "adoption_sample_count": 1,
-        "activation_count": 1,
-        "accepted_count": 1,
+        "event_count": 0,
+        "adoption_sample_count": 0,
+        "activation_count": 0,
+        "accepted_count": 0,
         "edited_count": 0,
         "rejected_count": 0,
         "missed_count": 0,
         "failed_count": 0,
-        "adoption_rate": 100.0,
+        "adoption_rate": 0,
         "missed_trigger_count": 0,
         "wrong_trigger_count": 0,
         "bad_output_count": 0,
         "script_error_count": 0,
         "missing_resource_count": 0,
         "review_overdue_count": 0,
-        "risk_band": "low",
-        "event_types": {
-          "skill_activation": 1
-        },
+        "risk_band": "no-data",
+        "event_types": {},
         "failure_types": {},
-        "source_types": {
-          "manual": 1
-        },
-        "command_counts": {
-          "real_smoke": 1
-        }
+        "source_types": {},
+        "command_counts": {}
       },
-      "adoption_by_skill": [
+      "adoption_by_skill": [],
+      "next_iteration_candidates": [
         {
-          "skill": "agent-team-work",
-          "events": 1,
-          "adoption_events": 1,
-          "accepted": 1,
-          "edited": 0,
-          "rejected": 0,
-          "missed": 0,
-          "adoption_rate": 100.0
+          "signal": "no telemetry",
+          "recommendation": "Start with a small metadata-only sample before using telemetry for release decisions."
         }
       ],
-      "next_iteration_candidates": [],
-      "recent_events": [
-        {
-          "command": "real_smoke",
-          "event": "skill_activation",
-          "skill": "agent-team-work",
-          "source": "manual",
-          "version": "0.2.0",
-          "activation_type": "explicit",
-          "outcome": "accepted",
-          "failure_type": "none",
-          "timestamp": "2026-09-14T09:24:24Z"
-        }
-      ],
+      "recent_events": [],
       "failures": [],
       "artifacts": {
-        "events_jsonl": "/Volumes/Code/team-worker/agent-team-work/reports/telemetry_events.jsonl",
-        "json": "/Volumes/Code/team-worker/agent-team-work/reports/adoption_drift_report.json",
-        "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/adoption_drift_report.md"
+        "events_jsonl": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/telemetry_events.jsonl",
+        "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/adoption_drift_report.json",
+        "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/adoption_drift_report.md"
       }
     },
     "daily_skillops": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-09-15",
+      "generated_at": "2026-09-17",
       "skill_dir": ".",
       "decision": "monitor",
       "source_supplied": false,
@@ -11401,8 +11418,8 @@
       "local_blueprint_ready": false,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
-      "release_lock_ready": false,
-      "evidence_consistency_ok": true,
+      "release_lock_ready": true,
+      "evidence_consistency_ok": false,
       "writes_source_files": false,
       "auto_patch_enabled": false,
       "failure_count": 0,
@@ -11418,8 +11435,8 @@
         "local_blueprint_ready": false,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": false,
-        "evidence_consistency_ok": true,
+        "release_lock_ready": true,
+        "evidence_consistency_ok": false,
         "writes_source_files": false,
         "auto_patch_enabled": false,
         "failure_count": 0
@@ -11511,8 +11528,8 @@
         "local_blueprint_ready": false,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
-        "release_lock_ready": false,
-        "evidence_consistency_ok": true
+        "release_lock_ready": true,
+        "evidence_consistency_ok": false
       },
       "actions": [
         {
@@ -11524,6 +11541,11 @@
           "key": "close-world-class-evidence",
           "priority": "high",
           "action": "Collect accepted external or human evidence for the pending world-class ledger entries."
+        },
+        {
+          "key": "refresh-evidence-consistency",
+          "priority": "high",
+          "action": "Regenerate evidence-consistency before using this report for release decisions."
         }
       ],
       "failures": [],
@@ -11538,19 +11560,19 @@
         "benchmark_reproducibility": "reports/benchmark_reproducibility.json"
       },
       "artifacts": {
-        "json": "reports/skillops/daily/2026-09-15.json",
-        "markdown": "reports/skillops/daily/2026-09-15.md"
+        "json": "reports/skillops/daily/2026-09-17.json",
+        "markdown": "reports/skillops/daily/2026-09-17.md"
       },
-      "source_path": "reports/skillops/daily/2026-09-15.json"
+      "source_path": "reports/skillops/daily/2026-09-17.json"
     },
     "weekly_curator": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-09-15",
+      "generated_at": "2026-09-17",
       "skill_dir": ".",
       "decision": "curator-review",
       "week_id": "2026-W38",
-      "daily_report_count": 2,
+      "daily_report_count": 3,
       "opportunity_count": 0,
       "unique_opportunity_count": 0,
       "ready_for_approval_review_count": 0,
@@ -11558,10 +11580,10 @@
       "observe_more_evidence_count": 0,
       "report_only_count": 0,
       "top_score": 0,
-      "skill_count": 2,
-      "actionable_portfolio_issue_count": 2,
-      "release_lock_ready": false,
-      "evidence_consistency_ok": true,
+      "skill_count": 1,
+      "actionable_portfolio_issue_count": 1,
+      "release_lock_ready": true,
+      "evidence_consistency_ok": false,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
       "writes_source_files": false,
@@ -11570,7 +11592,7 @@
       "summary": {
         "decision": "curator-review",
         "week_id": "2026-W38",
-        "daily_report_count": 2,
+        "daily_report_count": 3,
         "opportunity_count": 0,
         "unique_opportunity_count": 0,
         "ready_for_approval_review_count": 0,
@@ -11578,10 +11600,10 @@
         "observe_more_evidence_count": 0,
         "report_only_count": 0,
         "top_score": 0,
-        "skill_count": 2,
-        "actionable_portfolio_issue_count": 2,
-        "release_lock_ready": false,
-        "evidence_consistency_ok": true,
+        "skill_count": 1,
+        "actionable_portfolio_issue_count": 1,
+        "release_lock_ready": true,
+        "evidence_consistency_ok": false,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
         "writes_source_files": false,
@@ -11635,7 +11657,8 @@
       },
       "daily_reports": [
         "reports/skillops/daily/2026-09-14.json",
-        "reports/skillops/daily/2026-09-15.json"
+        "reports/skillops/daily/2026-09-15.json",
+        "reports/skillops/daily/2026-09-17.json"
       ],
       "opportunity_summary": {
         "action_type_counts": {},
@@ -11644,21 +11667,21 @@
       },
       "curator_queue": [],
       "portfolio": {
-        "skill_count": 2,
-        "actionable_issue_count": 2,
-        "route_collision_count": 2,
-        "actionable_route_collision_count": 2,
+        "skill_count": 1,
+        "actionable_issue_count": 1,
+        "route_collision_count": 0,
+        "actionable_route_collision_count": 0,
         "owner_gap_count": 0,
         "actionable_owner_gap_count": 0,
         "stale_count": 0,
         "actionable_stale_count": 0,
-        "drift_signal_count": 0,
-        "actionable_drift_signal_count": 0,
+        "drift_signal_count": 1,
+        "actionable_drift_signal_count": 1,
         "no_route_opportunity_count": 0
       },
       "release_state": {
-        "release_lock_ready": false,
-        "evidence_consistency_ok": true,
+        "release_lock_ready": true,
+        "evidence_consistency_ok": false,
         "public_world_class_ready": false,
         "world_class_pending_count": 4
       },
@@ -11672,6 +11695,11 @@
           "key": "close-world-class-evidence",
           "priority": "high",
           "action": "Collect accepted external or human evidence for pending world-class ledger entries before public claims."
+        },
+        {
+          "key": "refresh-evidence-consistency",
+          "priority": "high",
+          "action": "Regenerate evidence consistency before using this curator report for release decisions."
         }
       ],
       "failures": [],
@@ -11691,8 +11719,8 @@
     "review_waivers": {
       "schema_version": "1.0",
       "ok": true,
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
-      "generated_at": "2026-09-15",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+      "generated_at": "2026-09-17",
       "summary": {
         "waiver_count": 0,
         "active_count": 0,
@@ -11782,7 +11810,7 @@
             "Reviewer links output_review_adjudication or output_execution evidence."
           ],
           "suggested_evidence": "reports/output_review_adjudication.md",
-          "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-09-15 --evidence reports/output_review_adjudication.md --self",
+          "suggested_command": "python3 scripts/yao.py review-waivers . --add-waiver --gate-key output-lab --reviewer \"<reviewer>\" --reason \"Output Lab has pending human/provider evidence; accepted only for this bounded review scope.\" --expires-at 2027-09-17 --evidence reports/output_review_adjudication.md --self",
           "world_class_boundary": "Does not count as provider, human, or public world-class completion evidence."
         },
         {
@@ -11804,14 +11832,14 @@
       "failures": [],
       "warnings": [],
       "artifacts": {
-        "json": "/Volumes/Code/team-worker/agent-team-work/reports/review_waivers.json",
-        "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/review_waivers.md"
+        "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/review_waivers.json",
+        "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/review_waivers.md"
       }
     },
     "review_annotations": {
       "schema_version": "1.0",
       "ok": true,
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "source": "reports/review_annotations_input.json",
       "summary": {
         "annotation_count": 0,
@@ -11838,8 +11866,8 @@
     "world_class_evidence_ledger": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-09-15",
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+      "generated_at": "2026-09-17",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "decision": "evidence-pending",
       "ready_to_claim_world_class": false,
       "ledger_entry_count": 4,
@@ -11853,8 +11881,8 @@
       "missing_submission_count": 4,
       "invalid_submission_count": 0,
       "source_check_count": 14,
-      "source_pass_count": 6,
-      "source_blocked_count": 8,
+      "source_pass_count": 5,
+      "source_blocked_count": 9,
       "submitted_but_pending_count": 0,
       "source_accepted_without_valid_submission_count": 0,
       "overclaim_guard_active": true,
@@ -11870,8 +11898,8 @@
         "missing_submission_count": 4,
         "invalid_submission_count": 0,
         "source_check_count": 14,
-        "source_pass_count": 6,
-        "source_blocked_count": 8,
+        "source_pass_count": 5,
+        "source_blocked_count": 9,
         "submitted_but_pending_count": 0,
         "source_accepted_without_valid_submission_count": 0,
         "overclaim_guard_active": true,
@@ -12261,7 +12289,7 @@
           "status": "pending",
           "source_status": "external_required",
           "source_accepted": false,
-          "current": "external source events 0; adoption samples 1",
+          "current": "external source events 0; adoption samples 0",
           "objective": "Import production metadata-only events from a real external client into the local drift loop.",
           "runbook": [
             "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
@@ -12298,9 +12326,9 @@
           ],
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 1,
+            "adoption_sample_count": 0,
             "raw_content_allowed": false,
-            "risk_band": "low",
+            "risk_band": "no-data",
             "accepted": false
           },
           "source_checklist": [
@@ -12319,8 +12347,8 @@
               "label": "Adoption sample",
               "field": "adoption_sample_count",
               "expected": ">0",
-              "actual": 1,
-              "status": "pass",
+              "actual": 0,
+              "status": "blocked",
               "source_accepted": false,
               "next_action": "Telemetry must include adoption outcome evidence."
             },
@@ -12336,8 +12364,8 @@
             }
           ],
           "source_check_count": 3,
-          "source_pass_count": 2,
-          "source_blocked_count": 1,
+          "source_pass_count": 1,
+          "source_blocked_count": 2,
           "submission_state": {
             "status": "missing",
             "path": "evidence/world_class/submissions/native-client-telemetry.json",
@@ -12378,8 +12406,8 @@
     "world_class_evidence_intake": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-09-15",
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+      "generated_at": "2026-09-17",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "summary": {
         "schema_present": true,
         "ledger_entry_count": 4,
@@ -12693,9 +12721,9 @@
           "source_accepted": false,
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 1,
+            "adoption_sample_count": 0,
             "raw_content_allowed": false,
-            "risk_band": "low",
+            "risk_band": "no-data",
             "accepted": false
           },
           "template_path": "evidence/world_class/templates/native-client-telemetry.intake.json",
@@ -12764,8 +12792,8 @@
     "world_class_evidence_preflight": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-09-15",
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+      "generated_at": "2026-09-17",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "summary": {
         "evidence_item_count": 4,
         "precheck_count": 13,
@@ -12777,14 +12805,14 @@
         "collection_ready_count": 0,
         "collection_blocked_count": 4,
         "source_check_count": 14,
-        "source_pass_count": 6,
-        "source_blocked_count": 8,
-        "repair_checklist_count": 16,
-        "repair_blocked_count": 16,
+        "source_pass_count": 5,
+        "source_blocked_count": 9,
+        "repair_checklist_count": 17,
+        "repair_blocked_count": 17,
         "repair_ready_count": 0,
         "repair_phase_counts": {
           "unblock-access": 8,
-          "collect-source": 8
+          "collect-source": 9
         },
         "next_repair_action_id": "human-adjudication-precheck-decision-template",
         "next_repair_phase": "unblock-access",
@@ -12793,7 +12821,7 @@
         "repair_counts_as_completion": false,
         "phase_queue_count": 2,
         "phase_queue_blocked_count": 2,
-        "phase_queue_row_count": 16,
+        "phase_queue_row_count": 17,
         "phase_queue_next_phase": "unblock-access",
         "phase_queue_next_action_id": "human-adjudication-precheck-decision-template",
         "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
@@ -13832,8 +13860,8 @@
               "label": "Adoption sample",
               "field": "adoption_sample_count",
               "expected": ">0",
-              "actual": 1,
-              "status": "pass",
+              "actual": 0,
+              "status": "blocked",
               "source_accepted": false,
               "next_action": "Telemetry must include adoption outcome evidence."
             },
@@ -13933,6 +13961,21 @@
               "counts_as_completion": false
             },
             {
+              "action_id": "native-client-telemetry-source-check-adoption_sample_count",
+              "evidence_key": "native-client-telemetry",
+              "repair_type": "source-check",
+              "target": "adoption_sample_count",
+              "phase": "collect-source",
+              "priority": 40,
+              "owner": "Browser/Chrome/IDE/provider client integrator",
+              "status": "blocked",
+              "blocking_reason": "Current value 0 does not satisfy '>0'.",
+              "next_action": "Telemetry must include adoption outcome evidence.",
+              "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            },
+            {
               "action_id": "native-client-telemetry-source-check-external_source_events",
               "evidence_key": "native-client-telemetry",
               "repair_type": "source-check",
@@ -14004,19 +14047,34 @@
               "label": "Collect source",
               "priority": 40,
               "status": "blocked",
-              "blocked_count": 1,
-              "row_count": 1,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
               "evidence_keys": [
                 "native-client-telemetry"
               ],
-              "next_action_id": "native-client-telemetry-source-check-external_source_events",
-              "next_action": "Import at least one metadata-only event from a real client.",
+              "next_action_id": "native-client-telemetry-source-check-adoption_sample_count",
+              "next_action": "Telemetry must include adoption outcome evidence.",
               "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
               "counts_as_completion": false,
               "rows": [
+                {
+                  "action_id": "native-client-telemetry-source-check-adoption_sample_count",
+                  "evidence_key": "native-client-telemetry",
+                  "repair_type": "source-check",
+                  "target": "adoption_sample_count",
+                  "phase": "collect-source",
+                  "priority": 40,
+                  "owner": "Browser/Chrome/IDE/provider client integrator",
+                  "status": "blocked",
+                  "blocking_reason": "Current value 0 does not satisfy '>0'.",
+                  "next_action": "Telemetry must include adoption outcome evidence.",
+                  "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
+                  "source": "source_checklist",
+                  "counts_as_completion": false
+                },
                 {
                   "action_id": "native-client-telemetry-source-check-external_source_events",
                   "evidence_key": "native-client-telemetry",
@@ -14319,8 +14377,8 @@
           "label": "Adoption sample",
           "field": "adoption_sample_count",
           "expected": ">0",
-          "actual": 1,
-          "status": "pass",
+          "actual": 0,
+          "status": "blocked",
           "source_accepted": false,
           "next_action": "Telemetry must include adoption outcome evidence."
         },
@@ -14498,6 +14556,21 @@
           "blocking_reason": "Current value 0 does not satisfy '==3'.",
           "next_action": "Collect reviewer-a, reviewer-b, and reviewer-c.",
           "verification_command": "python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <A.json> --decisions <B.json> --decisions <C.json> --reviewer-registry <registry.json> --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "action_id": "native-client-telemetry-source-check-adoption_sample_count",
+          "evidence_key": "native-client-telemetry",
+          "repair_type": "source-check",
+          "target": "adoption_sample_count",
+          "phase": "collect-source",
+          "priority": 40,
+          "owner": "Browser/Chrome/IDE/provider client integrator",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '>0'.",
+          "next_action": "Telemetry must include adoption outcome evidence.",
+          "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
           "source": "source_checklist",
           "counts_as_completion": false
         },
@@ -14729,8 +14802,8 @@
           "label": "Collect source",
           "priority": 40,
           "status": "blocked",
-          "blocked_count": 8,
-          "row_count": 8,
+          "blocked_count": 9,
+          "row_count": 9,
           "owners": [
             "Browser/Chrome/IDE/provider client integrator",
             "human reviewer",
@@ -14790,6 +14863,21 @@
               "blocking_reason": "Current value 0 does not satisfy '==3'.",
               "next_action": "Collect reviewer-a, reviewer-b, and reviewer-c.",
               "verification_command": "python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <A.json> --decisions <B.json> --decisions <C.json> --reviewer-registry <registry.json> --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            },
+            {
+              "action_id": "native-client-telemetry-source-check-adoption_sample_count",
+              "evidence_key": "native-client-telemetry",
+              "repair_type": "source-check",
+              "target": "adoption_sample_count",
+              "phase": "collect-source",
+              "priority": 40,
+              "owner": "Browser/Chrome/IDE/provider client integrator",
+              "status": "blocked",
+              "blocking_reason": "Current value 0 does not satisfy '>0'.",
+              "next_action": "Telemetry must include adoption outcome evidence.",
+              "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
               "source": "source_checklist",
               "counts_as_completion": false
             },
@@ -14926,8 +15014,8 @@
     "world_class_submission_review": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-09-15",
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+      "generated_at": "2026-09-17",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "decision": "awaiting-submissions",
       "ready_to_claim_world_class": false,
       "review_item_count": 4,
@@ -14939,8 +15027,8 @@
       "unmatched_submission_count": 0,
       "invalid_submission_count": 0,
       "source_check_count": 14,
-      "source_pass_count": 6,
-      "source_blocked_count": 8,
+      "source_pass_count": 5,
+      "source_blocked_count": 9,
       "review_counts_submission_as_completion": false,
       "summary": {
         "review_item_count": 4,
@@ -14952,8 +15040,8 @@
         "unmatched_submission_count": 0,
         "invalid_submission_count": 0,
         "source_check_count": 14,
-        "source_pass_count": 6,
-        "source_blocked_count": 8,
+        "source_pass_count": 5,
+        "source_blocked_count": 9,
         "ready_to_claim_world_class": false,
         "review_counts_submission_as_completion": false,
         "decision": "awaiting-submissions"
@@ -15241,9 +15329,9 @@
           "intake_errors": [],
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 1,
+            "adoption_sample_count": 0,
             "raw_content_allowed": false,
-            "risk_band": "low",
+            "risk_band": "no-data",
             "accepted": false
           },
           "source_checklist": [
@@ -15262,8 +15350,8 @@
               "label": "Adoption sample",
               "field": "adoption_sample_count",
               "expected": ">0",
-              "actual": 1,
-              "status": "pass",
+              "actual": 0,
+              "status": "blocked",
               "source_accepted": false,
               "next_action": "Telemetry must include adoption outcome evidence."
             },
@@ -15279,8 +15367,8 @@
             }
           ],
           "source_check_count": 3,
-          "source_pass_count": 2,
-          "source_blocked_count": 1,
+          "source_pass_count": 1,
+          "source_blocked_count": 2,
           "success_checks": [
             "reports/adoption_drift_report.json summary.source_types.external > 0",
             "reports/adoption_drift_report.json summary.adoption_sample_count > 0",
@@ -15306,8 +15394,8 @@
     "world_class_operator_runbook": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-09-15",
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+      "generated_at": "2026-09-17",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "summary": {
         "evidence_item_count": 4,
         "pending_count": 4,
@@ -15317,13 +15405,13 @@
         "valid_packet_source_incomplete_count": 0,
         "invalid_submission_count": 0,
         "source_check_count": 14,
-        "source_pass_count": 6,
-        "source_blocked_count": 8,
-        "repair_checklist_count": 16,
-        "repair_blocked_count": 16,
+        "source_pass_count": 5,
+        "source_blocked_count": 9,
+        "repair_checklist_count": 17,
+        "repair_blocked_count": 17,
         "phase_queue_count": 2,
         "phase_queue_blocked_count": 2,
-        "phase_queue_row_count": 16,
+        "phase_queue_row_count": 17,
         "phase_queue_next_phase": "unblock-access",
         "phase_queue_next_action_id": "human-adjudication-precheck-decision-template",
         "phase_queue_next_command": "python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
@@ -16285,7 +16373,7 @@
           "review_state": "awaiting-submission",
           "source_accepted": false,
           "objective": "Import production metadata-only events from a real external client into the local drift loop.",
-          "current": "external source events 0; adoption samples 1",
+          "current": "external source events 0; adoption samples 0",
           "execution_runbook": [
             "python3 scripts/telemetry_native_host.py . --write-launcher /tmp/yao-telemetry-host.sh --write-manifest /tmp/yao-telemetry-host.json --allowed-origin chrome-extension://<extension-id>/",
             "Install the generated native messaging manifest for the real client and send at least one accepted skill_activation or skill_output event.",
@@ -16333,9 +16421,9 @@
           ],
           "observed_state": {
             "external_source_events": 0,
-            "adoption_sample_count": 1,
+            "adoption_sample_count": 0,
             "raw_content_allowed": false,
-            "risk_band": "low",
+            "risk_band": "no-data",
             "accepted": false
           },
           "source_checklist": [
@@ -16354,8 +16442,8 @@
               "label": "Adoption sample",
               "field": "adoption_sample_count",
               "expected": ">0",
-              "actual": 1,
-              "status": "pass",
+              "actual": 0,
+              "status": "blocked",
               "source_accepted": false,
               "next_action": "Telemetry must include adoption outcome evidence."
             },
@@ -16370,9 +16458,10 @@
               "next_action": "Telemetry must stay metadata-only."
             }
           ],
-          "blocked_source_check_count": 1,
+          "blocked_source_check_count": 2,
           "next_source_actions": [
-            "Import at least one metadata-only event from a real client."
+            "Import at least one metadata-only event from a real client.",
+            "Telemetry must include adoption outcome evidence."
           ],
           "repair_checklist": [
             {
@@ -16406,6 +16495,21 @@
               "counts_as_completion": false
             },
             {
+              "action_id": "native-client-telemetry-source-check-adoption_sample_count",
+              "evidence_key": "native-client-telemetry",
+              "repair_type": "source-check",
+              "target": "adoption_sample_count",
+              "phase": "collect-source",
+              "priority": 40,
+              "owner": "Browser/Chrome/IDE/provider client integrator",
+              "status": "blocked",
+              "blocking_reason": "Current value 0 does not satisfy '>0'.",
+              "next_action": "Telemetry must include adoption outcome evidence.",
+              "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            },
+            {
               "action_id": "native-client-telemetry-source-check-external_source_events",
               "evidence_key": "native-client-telemetry",
               "repair_type": "source-check",
@@ -16421,7 +16525,7 @@
               "counts_as_completion": false
             }
           ],
-          "repair_blocked_count": 3,
+          "repair_blocked_count": 4,
           "repair_counts_as_completion": false,
           "phase_queue": [
             {
@@ -16479,19 +16583,34 @@
               "label": "Collect source",
               "priority": 40,
               "status": "blocked",
-              "blocked_count": 1,
-              "row_count": 1,
+              "blocked_count": 2,
+              "row_count": 2,
               "owners": [
                 "Browser/Chrome/IDE/provider client integrator"
               ],
               "evidence_keys": [
                 "native-client-telemetry"
               ],
-              "next_action_id": "native-client-telemetry-source-check-external_source_events",
-              "next_action": "Import at least one metadata-only event from a real client.",
+              "next_action_id": "native-client-telemetry-source-check-adoption_sample_count",
+              "next_action": "Telemetry must include adoption outcome evidence.",
               "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
               "counts_as_completion": false,
               "rows": [
+                {
+                  "action_id": "native-client-telemetry-source-check-adoption_sample_count",
+                  "evidence_key": "native-client-telemetry",
+                  "repair_type": "source-check",
+                  "target": "adoption_sample_count",
+                  "phase": "collect-source",
+                  "priority": 40,
+                  "owner": "Browser/Chrome/IDE/provider client integrator",
+                  "status": "blocked",
+                  "blocking_reason": "Current value 0 does not satisfy '>0'.",
+                  "next_action": "Telemetry must include adoption outcome evidence.",
+                  "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
+                  "source": "source_checklist",
+                  "counts_as_completion": false
+                },
                 {
                   "action_id": "native-client-telemetry-source-check-external_source_events",
                   "evidence_key": "native-client-telemetry",
@@ -16657,7 +16776,7 @@
             "key": "review_studio_clean",
             "label": "Review Studio clean",
             "passed": false,
-            "current": "blockers 0; warnings 4",
+            "current": "blockers 0; warnings 5",
             "expected": "blocker_count == 0 and warning_count == 0",
             "artifact": "reports/review-studio.json"
           },
@@ -16699,7 +16818,7 @@
             "key": "review_studio_clean",
             "label": "Review Studio clean",
             "passed": false,
-            "current": "blockers 0; warnings 4",
+            "current": "blockers 0; warnings 5",
             "expected": "blocker_count == 0 and warning_count == 0",
             "artifact": "reports/review-studio.json"
           },
@@ -16878,6 +16997,21 @@
           "blocking_reason": "Current value 0 does not satisfy '==3'.",
           "next_action": "Collect reviewer-a, reviewer-b, and reviewer-c.",
           "verification_command": "python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <A.json> --decisions <B.json> --decisions <C.json> --reviewer-registry <registry.json> --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
+          "source": "source_checklist",
+          "counts_as_completion": false
+        },
+        {
+          "action_id": "native-client-telemetry-source-check-adoption_sample_count",
+          "evidence_key": "native-client-telemetry",
+          "repair_type": "source-check",
+          "target": "adoption_sample_count",
+          "phase": "collect-source",
+          "priority": 40,
+          "owner": "Browser/Chrome/IDE/provider client integrator",
+          "status": "blocked",
+          "blocking_reason": "Current value 0 does not satisfy '>0'.",
+          "next_action": "Telemetry must include adoption outcome evidence.",
+          "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
           "source": "source_checklist",
           "counts_as_completion": false
         },
@@ -17109,8 +17243,8 @@
           "label": "Collect source",
           "priority": 40,
           "status": "blocked",
-          "blocked_count": 8,
-          "row_count": 8,
+          "blocked_count": 9,
+          "row_count": 9,
           "owners": [
             "Browser/Chrome/IDE/provider client integrator",
             "human reviewer",
@@ -17170,6 +17304,21 @@
               "blocking_reason": "Current value 0 does not satisfy '==3'.",
               "next_action": "Collect reviewer-a, reviewer-b, and reviewer-c.",
               "verification_command": "python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <A.json> --decisions <B.json> --decisions <C.json> --reviewer-registry <registry.json> --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
+              "source": "source_checklist",
+              "counts_as_completion": false
+            },
+            {
+              "action_id": "native-client-telemetry-source-check-adoption_sample_count",
+              "evidence_key": "native-client-telemetry",
+              "repair_type": "source-check",
+              "target": "adoption_sample_count",
+              "phase": "collect-source",
+              "priority": 40,
+              "owner": "Browser/Chrome/IDE/provider client integrator",
+              "status": "blocked",
+              "blocking_reason": "Current value 0 does not satisfy '>0'.",
+              "next_action": "Telemetry must include adoption outcome evidence.",
+              "verification_command": "python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self",
               "source": "source_checklist",
               "counts_as_completion": false
             },
@@ -17267,12 +17416,12 @@
     "world_class_claim_guard": {
       "schema_version": "1.0",
       "ok": true,
-      "generated_at": "2026-09-15",
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+      "generated_at": "2026-09-17",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "summary": {
         "ledger_ready_to_claim_world_class": false,
         "ledger_pending_count": 4,
-        "claim_surface_count": 144,
+        "claim_surface_count": 147,
         "json_claim_surface_count": 77,
         "metadata_claim_surface_count": 79,
         "package_claim_surface_count": 11,
@@ -17361,7 +17510,15 @@
           "violation_count": 0
         },
         {
+          "path": "docs/superpowers/plans/2026-09-16-worker-discussion-round.md",
+          "violation_count": 0
+        },
+        {
           "path": "docs/superpowers/specs/2026-09-15-post-completion-revision-cycle-design.md",
+          "violation_count": 0
+        },
+        {
+          "path": "docs/superpowers/specs/2026-09-16-worker-discussion-round-design.md",
           "violation_count": 0
         },
         {
@@ -17526,10 +17683,6 @@
         },
         {
           "path": "reports/output-risk-profile.md",
-          "violation_count": 0
-        },
-        {
-          "path": "reports/output_blind_answer_key.json",
           "violation_count": 0
         },
         {
@@ -17773,6 +17926,14 @@
           "violation_count": 0
         },
         {
+          "path": "reports/skillops/daily/2026-09-17.json",
+          "violation_count": 0
+        },
+        {
+          "path": "reports/skillops/daily/2026-09-17.md",
+          "violation_count": 0
+        },
+        {
           "path": "reports/skillops/weekly/2026-W38.json",
           "violation_count": 0
         },
@@ -17898,8 +18059,8 @@
     "registry": {
       "ok": true,
       "schema_version": "2.0",
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
-      "registry_dir": "/Volumes/Code/team-worker/agent-team-work/registry",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+      "registry_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree/registry",
       "package": {
         "schema_version": "2.0",
         "name": "agent-team-work",
@@ -17918,8 +18079,8 @@
         "trust_level": "local",
         "license": "MIT",
         "checksums": {
-          "package_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3",
-          "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0"
+          "package_sha256": "71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc",
+          "archive_sha256": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144"
         },
         "compatibility": {
           "openai": "pass",
@@ -17930,7 +18091,7 @@
           "agent-skills-compatible": "pass"
         },
         "source": {
-          "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+          "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
           "skill_ir": "reports/skill-ir.json",
           "ir_schema_version": "2.0.0",
           "canonical_metadata": "agents/interface.yaml"
@@ -17950,16 +18111,16 @@
         },
         "distribution": {
           "archive_verified": true,
-          "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
+          "archive_sha256": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144",
           "package_verification": "reports/package_verification.json",
           "install_simulated": true,
           "install_simulation": "reports/install_simulation.json"
         },
-        "generated_at": "2026-09-15"
+        "generated_at": "2026-09-17"
       },
       "index": {
         "schema_version": "2.0",
-        "generated_at": "2026-09-15",
+        "generated_at": "2026-09-17",
         "package_count": 1,
         "packages": [
           {
@@ -17975,30 +18136,30 @@
               "vscode"
             ],
             "package_metadata": "registry/packages/agent-team-work.json",
-            "package_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3"
+            "package_sha256": "71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc"
           }
         ]
       },
       "failures": [],
       "warnings": [],
       "artifacts": {
-        "index": "/Volumes/Code/team-worker/agent-team-work/registry/index.json",
-        "package": "/Volumes/Code/team-worker/agent-team-work/registry/packages/agent-team-work.json",
-        "json": "/Volumes/Code/team-worker/agent-team-work/reports/registry_audit.json",
-        "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/registry_audit.md"
+        "index": "/Volumes/Code/team-worker/worker-discussion-round-worktree/registry/index.json",
+        "package": "/Volumes/Code/team-worker/worker-discussion-round-worktree/registry/packages/agent-team-work.json",
+        "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/registry_audit.json",
+        "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/registry_audit.md"
       }
     },
     "package_verification": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-09-15",
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
-      "package_dir": "/Volumes/Code/team-worker/agent-team-work/dist",
+      "generated_at": "2026-09-17",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+      "package_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree/dist",
       "summary": {
         "target_count": 4,
         "adapter_count": 4,
         "archive_present": true,
-        "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
+        "archive_sha256": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144",
         "archive_entry_count": 13,
         "nested_skill_entry_count": 0,
         "failure_count": 0,
@@ -18008,7 +18169,7 @@
         {
           "id": "package-manifest",
           "status": "pass",
-          "detail": "Package manifest exists: /Volumes/Code/team-worker/agent-team-work/dist/manifest.json"
+          "detail": "Package manifest exists: /Volumes/Code/team-worker/worker-discussion-round-worktree/dist/manifest.json"
         },
         {
           "id": "openai-adapter",
@@ -18654,17 +18815,17 @@
       "failures": [],
       "warnings": [],
       "artifacts": {
-        "manifest": "/Volumes/Code/team-worker/agent-team-work/dist/manifest.json",
-        "archive": "/Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip",
-        "json": "/Volumes/Code/team-worker/agent-team-work/reports/package_verification.json",
-        "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/package_verification.md"
+        "manifest": "/Volumes/Code/team-worker/worker-discussion-round-worktree/dist/manifest.json",
+        "archive": "/Volumes/Code/team-worker/worker-discussion-round-worktree/dist/agent-team-work.zip",
+        "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/package_verification.json",
+        "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/package_verification.md"
       }
     },
     "install_simulation": {
       "ok": true,
       "schema_version": "2.0",
       "profile": "runtime-only",
-      "package": "/Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip",
+      "package": "/Volumes/Code/team-worker/worker-discussion-round-worktree/dist/agent-team-work.zip",
       "entry_count": 13,
       "summary": {
         "archive_present": true,
@@ -18687,12 +18848,17 @@
         {
           "id": "archive-present",
           "status": "pass",
-          "detail": "archive exists: /Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip"
+          "detail": "archive exists: /Volumes/Code/team-worker/worker-discussion-round-worktree/dist/agent-team-work.zip"
         },
         {
           "id": "archive-safe-paths",
           "status": "pass",
           "detail": "archive has no absolute or parent-traversal paths"
+        },
+        {
+          "id": "archive-root",
+          "status": "pass",
+          "detail": "archive entries use the package root: []"
         },
         {
           "id": "runtime-allowlist",
@@ -18733,14 +18899,14 @@
       "failures": [],
       "warnings": [],
       "artifacts": {
-        "archive": "/Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip",
-        "package_manifest": "/Volumes/Code/team-worker/agent-team-work/dist/manifest.json"
+        "archive": "/Volumes/Code/team-worker/worker-discussion-round-worktree/dist/agent-team-work.zip",
+        "package_manifest": "/Volumes/Code/team-worker/worker-discussion-round-worktree/dist/manifest.json"
       }
     },
     "upgrade_check": {
       "ok": true,
       "schema_version": "2.0",
-      "generated_at": "2026-09-15",
+      "generated_at": "2026-09-17",
       "previous": {
         "name": "agent-team-work",
         "version": "0.1.0",
@@ -18801,12 +18967,12 @@
           {
             "field": "archive_sha256",
             "from": "",
-            "to": "4805c02dd0cb9ba2b65f8a60c895ae420c9bb8f75e179394912a69a87504bd37"
+            "to": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144"
           },
           {
             "field": "package_sha256",
             "from": "previous-fixture",
-            "to": "3393c0524aade25d733d4bb668dcebc1ff724fd65773ba7ee57b6a3d50d82d58"
+            "to": "71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc"
           }
         ]
       },
@@ -18818,10 +18984,10 @@
       "failures": [],
       "warnings": [],
       "artifacts": {
-        "previous_package": "/Volumes/Code/team-worker/agent-team-work/registry/examples/yao-meta-skill-1.0.0.json",
-        "current_package": "/Volumes/Code/team-worker/agent-team-work/reports/registry_audit.json",
-        "json": "/Volumes/Code/team-worker/agent-team-work/reports/upgrade_check.json",
-        "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/upgrade_check.md"
+        "previous_package": "/Volumes/Code/team-worker/worker-discussion-round-worktree/registry/examples/yao-meta-skill-1.0.0.json",
+        "current_package": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/registry_audit.json",
+        "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/upgrade_check.json",
+        "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/upgrade_check.md"
       }
     },
     "manifest": {

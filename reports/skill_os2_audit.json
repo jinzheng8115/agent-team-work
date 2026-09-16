@@ -1,26 +1,26 @@
 {
   "schema_version": "1.0",
-  "ok": false,
-  "generated_at": "2026-09-15",
-  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+  "ok": true,
+  "generated_at": "2026-09-17",
+  "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
   "summary": {
     "item_count": 15,
-    "pass_count": 10,
+    "pass_count": 11,
     "warn_count": 0,
     "human_required_count": 1,
     "external_required_count": 3,
-    "missing_count": 1,
-    "open_gap_count": 5,
-    "local_foundation_ready": false,
+    "missing_count": 0,
+    "open_gap_count": 4,
+    "local_foundation_ready": true,
     "world_class_ready": false,
     "decision": "continue-iteration"
   },
   "status_counts": {
-    "pass": 10,
+    "pass": 11,
     "warn": 0,
     "human_required": 1,
     "external_required": 3,
-    "missing": 1
+    "missing": 0
   },
   "items": [
     {
@@ -149,7 +149,7 @@
       "key": "benchmark-reproducibility",
       "label": "Benchmark Reproducibility",
       "status": "pass",
-      "current": "artifacts 25; missing 0; failures 2",
+      "current": "artifacts 25; missing 0; failures 3",
       "target": "Public methodology, reproducible commands, required artifacts, and failure disclosure are machine-checkable",
       "evidence": [
         {
@@ -201,7 +201,7 @@
       "key": "trust-security",
       "label": "Trust Security",
       "status": "pass",
-      "current": "secrets 0; scripts 4; help failures 0",
+      "current": "secrets 0; scripts 6; help failures 0",
       "target": "Secrets, scripts, dependencies, permissions, and package hash are reviewable",
       "evidence": [
         {
@@ -223,7 +223,7 @@
       "key": "runtime-permission-metadata",
       "label": "Permission Metadata",
       "status": "pass",
-      "current": "4/4 target probes pass; metadata fallback 4; installer enforcement 4",
+      "current": "4/4 target probes pass; metadata fallback 4; installer enforcement 0",
       "target": "Packaged adapters expose explicit permission metadata, residual risks, and installer enforcement evidence when available",
       "evidence": [
         {
@@ -241,7 +241,7 @@
       "key": "native-permission-enforcement",
       "label": "Native Permission Enforcement",
       "status": "external_required",
-      "current": "native-enforced targets 0; installer-enforced targets 4",
+      "current": "native-enforced targets 0; installer-enforced targets 0",
       "target": "At least one target/client enforces approved permissions at runtime",
       "evidence": [
         {
@@ -262,8 +262,8 @@
     {
       "key": "skill-atlas",
       "label": "Skill Atlas",
-      "status": "missing",
-      "current": "2 skills; actionable collisions 2",
+      "status": "pass",
+      "current": "1 skills; actionable collisions 0",
       "target": "Workspace catalog, route overlap, stale/owner gaps, drift, and no-route opportunities",
       "evidence": [
         {
@@ -289,7 +289,7 @@
       "key": "registry-distribution",
       "label": "Registry Distribution",
       "status": "pass",
-      "current": "zip entries 160; install failures 0; permission failures 0",
+      "current": "zip entries 13; install failures 0; permission failures 0",
       "target": "Package metadata, archive checksum, package verification, and install simulation pass",
       "evidence": [
         {
@@ -311,7 +311,7 @@
       "key": "review-studio",
       "label": "Review Studio",
       "status": "pass",
-      "current": "decision review; warnings 3; score 91",
+      "current": "decision review; warnings 5; score 86",
       "target": "One page shows gates, evidence paths, blockers, warnings, actions, waivers, and annotations",
       "evidence": [
         {
@@ -333,7 +333,7 @@
       "key": "telemetry-drift",
       "label": "Telemetry Drift",
       "status": "pass",
-      "current": "events 1; risk low; recipes 5",
+      "current": "events 0; risk no-data; recipes 5",
       "target": "Local-first metadata-only event contract, aggregate drift report, hook recipes, and import path",
       "evidence": [
         {
@@ -355,7 +355,7 @@
       "key": "native-client-telemetry",
       "label": "Native Client Telemetry",
       "status": "external_required",
-      "current": "external source events 0; adoption samples 1",
+      "current": "external source events 0; adoption samples 0",
       "target": "A real Browser/Chrome/provider client sends production metadata events",
       "evidence": [
         {
@@ -419,7 +419,7 @@
       "key": "native-permission-enforcement",
       "label": "Native Permission Enforcement",
       "status": "external_required",
-      "current": "native-enforced targets 0; installer-enforced targets 4",
+      "current": "native-enforced targets 0; installer-enforced targets 0",
       "target": "At least one target/client enforces approved permissions at runtime",
       "evidence": [
         {
@@ -438,36 +438,10 @@
       "next_action": "Integrate a real target-client or external installer runtime guard before claiming native permission enforcement."
     },
     {
-      "key": "skill-atlas",
-      "label": "Skill Atlas",
-      "status": "missing",
-      "current": "2 skills; actionable collisions 2",
-      "target": "Workspace catalog, route overlap, stale/owner gaps, drift, and no-route opportunities",
-      "evidence": [
-        {
-          "path": "scripts/build_skill_atlas.py",
-          "exists": false
-        },
-        {
-          "path": "skill_atlas/catalog.json",
-          "exists": true
-        },
-        {
-          "path": "reports/skill_atlas.json",
-          "exists": true
-        },
-        {
-          "path": "skill_atlas/policy.json",
-          "exists": false
-        }
-      ],
-      "next_action": "Feed real drift data into Atlas once client telemetry is installed."
-    },
-    {
       "key": "native-client-telemetry",
       "label": "Native Client Telemetry",
       "status": "external_required",
-      "current": "external source events 0; adoption samples 1",
+      "current": "external source events 0; adoption samples 0",
       "target": "A real Browser/Chrome/provider client sends production metadata events",
       "evidence": [
         {

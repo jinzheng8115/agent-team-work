@@ -8,7 +8,7 @@
 
 ## Checks
 
-- `pass` archive-present: archive exists: /Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip
+- `pass` archive-present: archive exists: /Volumes/Code/team-worker/worker-discussion-round-worktree/dist/agent-team-work.zip
 - `pass` archive-safe-paths: archive has no absolute or parent-traversal paths
 - `pass` archive-root: archive entries use the package root: []
 - `pass` runtime-allowlist: archive entries match runtime allowlist (13 files)

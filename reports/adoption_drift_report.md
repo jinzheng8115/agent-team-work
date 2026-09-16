@@ -4,15 +4,15 @@ Local-first, metadata-only telemetry for skill operations. Raw prompts, outputs,
 
 ## Summary
 
-- Events: `1`
-- Adoption samples: `1`
-- Activation events: `1`
-- Adoption rate: `100.0`
+- Events: `0`
+- Adoption samples: `0`
+- Activation events: `0`
+- Adoption rate: `0`
 - Missed trigger signals: `0`
 - Bad output signals: `0`
 - Script error signals: `0`
 - Review overdue signals: `0`
-- Risk band: `low`
+- Risk band: `no-data`
 
 ## Privacy Contract
 
@@ -25,12 +25,12 @@ Local-first, metadata-only telemetry for skill operations. Raw prompts, outputs,
 
 | Skill | Events | Adoption Samples | Accepted | Edited | Rejected | Missed | Adoption Rate |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| `agent-team-work` | 1 | 1 | 1 | 0 | 0 | 0 | 100.0 |
+| `none` | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
 ## Next Iteration Candidates
 
-- No telemetry-driven iteration candidate yet.
+- `no telemetry`: Start with a small metadata-only sample before using telemetry for release decisions.
 
 ## Recent Metadata Events
 
-- `2026-09-14T09:24:24Z` `agent-team-work` event=`skill_activation` source=`manual` command=`real_smoke` activation=`explicit` outcome=`accepted` failure=`none`
+- No metadata events captured yet.

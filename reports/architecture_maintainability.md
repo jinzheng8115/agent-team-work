@@ -1,6 +1,6 @@
 # Architecture Maintainability
 
-Generated at: `2026-09-15`
+Generated at: `2026-09-17`
 
 ## Summary
 
@@ -13,7 +13,7 @@ Generated at: `2026-09-15`
 - Yao CLI command handlers: `0`
 - entrypoint command handlers: `0`
 - command modules: `0`
-- largest file lines: `279`
+- largest file lines: `595`
 - early watch threshold lines: `600`
 - early watchlist: `0`
 - watch threshold lines: `720`
@@ -39,11 +39,11 @@ No early watch files found.
 
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
-| `scripts/validate_team_state.py` | `279` | `cli-script` | `pass` |
-| `scripts/build_runtime_package.py` | `156` | `cli-script` | `pass` |
-| `scripts/runtime_package_check.py` | `156` | `cli-script` | `pass` |
+| `scripts/validate_team_state.py` | `595` | `cli-script` | `pass` |
+| `scripts/runtime_package_check.py` | `163` | `cli-script` | `pass` |
+| `scripts/build_runtime_package.py` | `160` | `cli-script` | `pass` |
 | `scripts/import_telemetry_events.py` | `136` | `cli-script` | `pass` |
-| `scripts/ci_test.py` | `100` | `cli-script` | `pass` |
+| `scripts/ci_test.py` | `111` | `cli-script` | `pass` |
 | `scripts/local_output_eval_runner.py` | `68` | `cli-script` | `pass` |
 
 ## Release Rule

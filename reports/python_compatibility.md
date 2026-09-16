@@ -1,12 +1,12 @@
 # Python Compatibility
 
-Generated at: `2026-09-15`
+Generated at: `2026-09-17`
 
 ## Summary
 
 - decision: `pass`
 - target python: `3.11`
-- files scanned: `8`
+- files scanned: `9`
 - issues: `0`
 - syntax errors: `0`
 - f-string 3.11 violations: `0`

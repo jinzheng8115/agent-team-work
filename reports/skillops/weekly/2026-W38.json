@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "generated_at": "2026-09-15",
+  "generated_at": "2026-09-17",
   "skill_dir": ".",
   "decision": "curator-review",
   "week_id": "2026-W38",
-  "daily_report_count": 2,
+  "daily_report_count": 3,
   "opportunity_count": 0,
   "unique_opportunity_count": 0,
   "ready_for_approval_review_count": 0,
@@ -13,10 +13,10 @@
   "observe_more_evidence_count": 0,
   "report_only_count": 0,
   "top_score": 0,
-  "skill_count": 2,
-  "actionable_portfolio_issue_count": 2,
-  "release_lock_ready": false,
-  "evidence_consistency_ok": true,
+  "skill_count": 1,
+  "actionable_portfolio_issue_count": 1,
+  "release_lock_ready": true,
+  "evidence_consistency_ok": false,
   "public_world_class_ready": false,
   "world_class_pending_count": 4,
   "writes_source_files": false,
@@ -25,7 +25,7 @@
   "summary": {
     "decision": "curator-review",
     "week_id": "2026-W38",
-    "daily_report_count": 2,
+    "daily_report_count": 3,
     "opportunity_count": 0,
     "unique_opportunity_count": 0,
     "ready_for_approval_review_count": 0,
@@ -33,10 +33,10 @@
     "observe_more_evidence_count": 0,
     "report_only_count": 0,
     "top_score": 0,
-    "skill_count": 2,
-    "actionable_portfolio_issue_count": 2,
-    "release_lock_ready": false,
-    "evidence_consistency_ok": true,
+    "skill_count": 1,
+    "actionable_portfolio_issue_count": 1,
+    "release_lock_ready": true,
+    "evidence_consistency_ok": false,
     "public_world_class_ready": false,
     "world_class_pending_count": 4,
     "writes_source_files": false,
@@ -90,7 +90,8 @@
   },
   "daily_reports": [
     "reports/skillops/daily/2026-09-14.json",
-    "reports/skillops/daily/2026-09-15.json"
+    "reports/skillops/daily/2026-09-15.json",
+    "reports/skillops/daily/2026-09-17.json"
   ],
   "opportunity_summary": {
     "action_type_counts": {},
@@ -99,21 +100,21 @@
   },
   "curator_queue": [],
   "portfolio": {
-    "skill_count": 2,
-    "actionable_issue_count": 2,
-    "route_collision_count": 2,
-    "actionable_route_collision_count": 2,
+    "skill_count": 1,
+    "actionable_issue_count": 1,
+    "route_collision_count": 0,
+    "actionable_route_collision_count": 0,
     "owner_gap_count": 0,
     "actionable_owner_gap_count": 0,
     "stale_count": 0,
     "actionable_stale_count": 0,
-    "drift_signal_count": 0,
-    "actionable_drift_signal_count": 0,
+    "drift_signal_count": 1,
+    "actionable_drift_signal_count": 1,
     "no_route_opportunity_count": 0
   },
   "release_state": {
-    "release_lock_ready": false,
-    "evidence_consistency_ok": true,
+    "release_lock_ready": true,
+    "evidence_consistency_ok": false,
     "public_world_class_ready": false,
     "world_class_pending_count": 4
   },
@@ -127,6 +128,11 @@
       "key": "close-world-class-evidence",
       "priority": "high",
       "action": "Collect accepted external or human evidence for pending world-class ledger entries before public claims."
+    },
+    {
+      "key": "refresh-evidence-consistency",
+      "priority": "high",
+      "action": "Regenerate evidence consistency before using this curator report for release decisions."
     }
   ],
   "failures": [],

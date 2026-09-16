@@ -1,7 +1,7 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "generated_at": "2026-09-15",
+  "generated_at": "2026-09-17",
   "previous": {
     "name": "agent-team-work",
     "version": "0.1.0",
@@ -62,12 +62,12 @@
       {
         "field": "archive_sha256",
         "from": "",
-        "to": "4805c02dd0cb9ba2b65f8a60c895ae420c9bb8f75e179394912a69a87504bd37"
+        "to": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144"
       },
       {
         "field": "package_sha256",
         "from": "previous-fixture",
-        "to": "3393c0524aade25d733d4bb668dcebc1ff724fd65773ba7ee57b6a3d50d82d58"
+        "to": "71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc"
       }
     ]
   },
@@ -79,9 +79,9 @@
   "failures": [],
   "warnings": [],
   "artifacts": {
-    "previous_package": "/Volumes/Code/team-worker/agent-team-work/registry/examples/yao-meta-skill-1.0.0.json",
-    "current_package": "/Volumes/Code/team-worker/agent-team-work/reports/registry_audit.json",
-    "json": "/Volumes/Code/team-worker/agent-team-work/reports/upgrade_check.json",
-    "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/upgrade_check.md"
+    "previous_package": "/Volumes/Code/team-worker/worker-discussion-round-worktree/registry/examples/yao-meta-skill-1.0.0.json",
+    "current_package": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/registry_audit.json",
+    "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/upgrade_check.json",
+    "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/upgrade_check.md"
   }
 }

@@ -2,7 +2,7 @@
   "ok": true,
   "schema_version": "2.0",
   "profile": "runtime-only",
-  "package": "/Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip",
+  "package": "/Volumes/Code/team-worker/worker-discussion-round-worktree/dist/agent-team-work.zip",
   "entry_count": 13,
   "summary": {
     "archive_present": true,
@@ -25,7 +25,7 @@
     {
       "id": "archive-present",
       "status": "pass",
-      "detail": "archive exists: /Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip"
+      "detail": "archive exists: /Volumes/Code/team-worker/worker-discussion-round-worktree/dist/agent-team-work.zip"
     },
     {
       "id": "archive-safe-paths",
@@ -76,7 +76,7 @@
   "failures": [],
   "warnings": [],
   "artifacts": {
-    "archive": "/Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip",
-    "package_manifest": "/Volumes/Code/team-worker/agent-team-work/dist/manifest.json"
+    "archive": "/Volumes/Code/team-worker/worker-discussion-round-worktree/dist/agent-team-work.zip",
+    "package_manifest": "/Volumes/Code/team-worker/worker-discussion-round-worktree/dist/manifest.json"
   }
 }

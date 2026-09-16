@@ -1,7 +1,7 @@
 {
   "ok": true,
   "profile": "runtime-only",
-  "package": "/Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip",
+  "package": "/Volumes/Code/team-worker/worker-discussion-round-worktree/dist/agent-team-work.zip",
   "package_name": "agent-team-work",
   "entry_count": 13,
   "entries": [

@@ -1,8 +1,8 @@
 {
   "ok": true,
   "schema_version": "2.0",
-  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
-  "registry_dir": "/Volumes/Code/team-worker/agent-team-work/registry",
+  "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+  "registry_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree/registry",
   "package": {
     "schema_version": "2.0",
     "name": "agent-team-work",
@@ -21,8 +21,8 @@
     "trust_level": "local",
     "license": "MIT",
     "checksums": {
-      "package_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3",
-      "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0"
+      "package_sha256": "71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc",
+      "archive_sha256": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144"
     },
     "compatibility": {
       "openai": "pass",
@@ -33,7 +33,7 @@
       "agent-skills-compatible": "pass"
     },
     "source": {
-      "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
+      "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
       "skill_ir": "reports/skill-ir.json",
       "ir_schema_version": "2.0.0",
       "canonical_metadata": "agents/interface.yaml"
@@ -53,16 +53,16 @@
     },
     "distribution": {
       "archive_verified": true,
-      "archive_sha256": "c912505a624bf4b67ecd97432a3f581c9f8242eecfe6561947cc72ca87cccec0",
+      "archive_sha256": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144",
       "package_verification": "reports/package_verification.json",
       "install_simulated": true,
       "install_simulation": "reports/install_simulation.json"
     },
-    "generated_at": "2026-09-15"
+    "generated_at": "2026-09-17"
   },
   "index": {
     "schema_version": "2.0",
-    "generated_at": "2026-09-15",
+    "generated_at": "2026-09-17",
     "package_count": 1,
     "packages": [
       {
@@ -78,16 +78,16 @@
           "vscode"
         ],
         "package_metadata": "registry/packages/agent-team-work.json",
-        "package_sha256": "7fc78ea3f8283a5e98703697d10e7b77d25b2d5993f0caba46bc3fb2049f1bc3"
+        "package_sha256": "71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc"
       }
     ]
   },
   "failures": [],
   "warnings": [],
   "artifacts": {
-    "index": "/Volumes/Code/team-worker/agent-team-work/registry/index.json",
-    "package": "/Volumes/Code/team-worker/agent-team-work/registry/packages/agent-team-work.json",
-    "json": "/Volumes/Code/team-worker/agent-team-work/reports/registry_audit.json",
-    "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/registry_audit.md"
+    "index": "/Volumes/Code/team-worker/worker-discussion-round-worktree/registry/index.json",
+    "package": "/Volumes/Code/team-worker/worker-discussion-round-worktree/registry/packages/agent-team-work.json",
+    "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/registry_audit.json",
+    "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/registry_audit.md"
   }
 }
