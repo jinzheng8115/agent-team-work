@@ -6,14 +6,14 @@
   "summary": {
     "check_count": 41,
     "pass_count": 39,
-    "warn_count": 1,
-    "fail_count": 1,
+    "warn_count": 0,
+    "fail_count": 2,
     "decision": "evidence-drift-detected"
   },
   "status_counts": {
     "pass": 39,
-    "warn": 1,
-    "fail": 1
+    "warn": 0,
+    "fail": 2
   },
   "checks": [
     {
@@ -394,7 +394,7 @@
     {
       "key": "release-archive-hash-lockstep",
       "label": "Release archive hash matches package, registry, and benchmark evidence",
-      "status": "warn",
+      "status": "fail",
       "expected": {
         "all_equal_to_actual_archive": ""
       },
@@ -466,16 +466,12 @@
       "key": "benchmark-clean-worktree-release-lock",
       "label": "Clean worktree keeps a clean benchmark release lock",
       "status": "pass",
-      "expected": "checked only when git is available and the current worktree is clean",
-      "actual": {
-        "available": true,
-        "clean": false,
-        "changed_file_count": 65
-      },
+      "expected": true,
+      "actual": true,
       "paths": [
         "reports/benchmark_reproducibility.json"
       ],
-      "detail": "Dirty or non-git worktrees cannot prove final release-lock freshness, so this check is advisory until the final clean-lock pass."
+      "detail": "If the current worktree is clean, the committed benchmark report must not still carry a dirty release lock from an earlier generation."
     },
     {
       "key": "skill-ir-evidence-path-contract",
@@ -511,8 +507,8 @@
       "key": "overview-benchmark-commit",
       "label": "overview embeds the benchmark commit",
       "status": "pass",
-      "expected": "5287cb518da352b484cfd5a6c82536e4d2f18224",
-      "actual": "5287cb518da352b484cfd5a6c82536e4d2f18224",
+      "expected": "cdac77ab814680cc2b9d69bfdc87e4cb77450e0e",
+      "actual": "cdac77ab814680cc2b9d69bfdc87e4cb77450e0e",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-overview.json"
@@ -655,8 +651,8 @@
       "key": "interpretation-benchmark-commit",
       "label": "interpretation embeds the benchmark commit",
       "status": "pass",
-      "expected": "5287cb518da352b484cfd5a6c82536e4d2f18224",
-      "actual": "5287cb518da352b484cfd5a6c82536e4d2f18224",
+      "expected": "cdac77ab814680cc2b9d69bfdc87e4cb77450e0e",
+      "actual": "cdac77ab814680cc2b9d69bfdc87e4cb77450e0e",
       "paths": [
         "reports/benchmark_reproducibility.json",
         "reports/skill-interpretation.json"
@@ -1719,10 +1715,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 117
+            "file_count": 119
           }
         ],
-        "file_count": 149,
+        "file_count": 151,
         "folder_count": 4,
         "distribution": [
           {
@@ -1755,7 +1751,7 @@
           },
           {
             "label": "reports",
-            "value": 117
+            "value": 119
           }
         ]
       },
@@ -1807,10 +1803,10 @@
             "path": "reports",
             "label": "Generated evidence and overview artifacts",
             "kind": "folder",
-            "file_count": 117
+            "file_count": 119
           }
         ],
-        "file_count": 149,
+        "file_count": 151,
         "folder_count": 4,
         "distribution": [
           {
@@ -1843,7 +1839,7 @@
           },
           {
             "label": "reports",
-            "value": 117
+            "value": 119
           }
         ]
       },

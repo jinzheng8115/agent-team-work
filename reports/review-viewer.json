@@ -492,10 +492,10 @@
           "path": "reports",
           "label": "Generated evidence and overview artifacts",
           "kind": "folder",
-          "file_count": 117
+          "file_count": 119
         }
       ],
-      "file_count": 149,
+      "file_count": 151,
       "folder_count": 4,
       "distribution": [
         {
@@ -528,7 +528,7 @@
         },
         {
           "label": "reports",
-          "value": 117
+          "value": 119
         }
       ]
     },
@@ -660,7 +660,7 @@
         "path": "reports",
         "label": "Generated evidence and overview artifacts",
         "kind": "folder",
-        "file_count": 117
+        "file_count": 119
       }
     ],
     "strengths": [
@@ -1001,14 +1001,14 @@
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
         "public_claim_blocker_count": 6,
-        "working_tree_dirty": true,
-        "changed_file_count": 65,
+        "working_tree_dirty": false,
+        "changed_file_count": 0,
         "source_tree_dirty": false,
         "source_changed_file_count": 0,
-        "generated_tree_dirty": true,
-        "generated_changed_file_count": 65
+        "generated_tree_dirty": false,
+        "generated_changed_file_count": 0
       },
-      "commit": "5287cb518da352b484cfd5a6c82536e4d2f18224",
+      "commit": "cdac77ab814680cc2b9d69bfdc87e4cb77450e0e",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",

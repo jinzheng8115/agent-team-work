@@ -1,10 +1,10 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-09-17`
-Commit: `5287cb518da352b484cfd5a6c82536e4d2f18224`
-Working tree dirty at generation: `true`
+Commit: `cdac77ab814680cc2b9d69bfdc87e4cb77450e0e`
+Working tree dirty at generation: `false`
 Source tree dirty at generation: `false`
-Generated evidence dirty at generation: `true`
+Generated evidence dirty at generation: `false`
 Evidence bundle SHA256: `ccaf2321e1bf8fb18844282fcf65738ce1055ea90fe24441e6c8b455e9faef1e`
 
 ## Summary
@@ -31,9 +31,9 @@ Evidence bundle SHA256: `ccaf2321e1bf8fb18844282fcf65738ce1055ea90fe24441e6c8b45
 - beta deferred evidence: `4`
 - public claim ready: `false`
 - public claim blockers: `6`
-- changed files at generation: `65`
+- changed files at generation: `0`
 - source changed files at generation: `0`
-- generated changed files at generation: `65`
+- generated changed files at generation: `0`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit and dirty samples are generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -73,7 +73,7 @@ This report proves local benchmark reproducibility only. It keeps external provi
 ## Release Lock
 
 - ready: `true`
-- reason: only generated evidence artifacts were dirty at generation time
+- reason: clean source tree at generation-time HEAD
 - status scope: generation-time status before this report is written
 
 ## Evidence Bundle

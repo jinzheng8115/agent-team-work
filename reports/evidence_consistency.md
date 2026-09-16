@@ -7,8 +7,8 @@ Generated at: `2026-09-17`
 - decision: `evidence-drift-detected`
 - checks: `41`
 - pass: `39`
-- warn: `1`
-- fail: `1`
+- warn: `0`
+- fail: `2`
 
 This gate compares generated evidence reports against each other. It does not create provider, human, native-client, or permission-enforcement evidence; it only catches drift between reports that already exist.
 
@@ -19,11 +19,11 @@ This gate compares generated evidence reports against each other. It does not cr
 | Required report artifacts are readable | `pass` | The consistency gate can only be trusted when every source JSON report parses and every source Markdown report is readable. | `reports/benchmark_reproducibility.json`, `reports/skill-overview.json`, `reports/skill-interpretation.json`, `reports/adoption_drift_report.json`, `reports/world_class_evidence_ledger.json`, `reports/world_class_evidence_plan.json`, `reports/world_class_evidence_intake.json`, `reports/world_class_evidence_preflight.json`, `reports/world_class_submission_review.json`, `reports/world_class_operator_runbook.json`, `reports/skill_os2_coverage.json`, `reports/review-studio.json`, `reports/package_verification.json`, `reports/registry_audit.json`, `reports/provider_output_evaluation.json`, `reports/skill_os2_audit.json`, `reports/install_simulation.json`, `reports/security_trust_report.json`, `reports/context_budget.json`, `reports/world_class_claim_guard.json`, `reports/skill-os-2-review.md` |
 | Release evidence flow covers first-class reports | `pass` | Release refresh and clean-lock instructions must regenerate every first-class report before evidence consistency can be trusted. | `AGENTS.md`, `reports/output_execution_runs.json`, `reports/install_simulation.json`, `reports/security_trust_report.json`, `reports/registry_audit.json`, `reports/package_verification.json`, `reports/upgrade_check.json`, `reports/adoption_drift_report.json`, `reports/architecture_maintainability.json`, `reports/python_compatibility.json`, `reports/runtime_permission_probes.json`, `reports/review_waivers.json`, `reports/review_annotations.json`, `reports/skill_atlas.json`, `reports/skill_os2_audit.json`, `reports/skill_os2_coverage.json`, `reports/context_budget.json`, `reports/context_budget_summary.json`, `reports/benchmark_reproducibility.json`, `reports/skill-overview.json`, `reports/skill-interpretation.json`, `reports/review-viewer.json`, `reports/world_class_evidence_preflight.json`, `reports/skillops/daily`, `reports/skillops/weekly`, `reports/review-studio.json`, `reports/evidence_consistency.json` |
 | Review Studio gates mirror review actions | `pass` | Every non-pass Review Studio gate must have exactly one top-level review action and a gate-local action summary with source refs and a verification command. | `reports/review-studio.json` |
-| Release archive hash matches package, registry, and benchmark evidence | `warn` | The release archive is deterministic and all release-facing checksum consumers must name its current SHA256. A dirty authoring worktree records drift as advisory; a clean release candidate treats drift as a failure. | `dist/yao-meta-skill.zip`, `reports/package_verification.json`, `reports/registry_audit.json`, `reports/benchmark_reproducibility.json` |
+| Release archive hash matches package, registry, and benchmark evidence | `fail` | The release archive is deterministic and all release-facing checksum consumers must name its current SHA256. A dirty authoring worktree records drift as advisory; a clean release candidate treats drift as a failure. | `dist/yao-meta-skill.zip`, `reports/package_verification.json`, `reports/registry_audit.json`, `reports/benchmark_reproducibility.json` |
 | Phase-one provider status is consistent across evaluation, benchmark, and Skill OS audit | `pass` | Legacy model runs remain visible as legacy evidence and cannot mark the fixed 40-call phase-one matrix complete. | `reports/provider_output_evaluation.json`, `reports/benchmark_reproducibility.json`, `reports/skill_os2_audit.json` |
 | Review Studio mirrors context budget governance | `pass` | Review Studio must not keep stale context warnings after context reports prove large deferred resources are governed. | `reports/context_budget.json`, `reports/review-studio.json` |
 | Benchmark release lock matches source dirty state | `pass` | The benchmark release lock must be blocked by source changes, while generated evidence artifacts are tracked as generation context. | `reports/benchmark_reproducibility.json` |
-| Clean worktree keeps a clean benchmark release lock | `pass` | Dirty or non-git worktrees cannot prove final release-lock freshness, so this check is advisory until the final clean-lock pass. | `reports/benchmark_reproducibility.json` |
+| Clean worktree keeps a clean benchmark release lock | `pass` | If the current worktree is clean, the committed benchmark report must not still carry a dirty release lock from an earlier generation. | `reports/benchmark_reproducibility.json` |
 | Human-facing reports expose the canonical Skill IR artifact | `pass` | Skill IR is the 2.0 platform-neutral semantic source, so user-facing reports must link to the artifact that actually exists. | `reports/skill-overview.json`, `reports/skill-interpretation.json`, `reports/review-studio.json`, `reports/skill-ir.json` |
 | overview embeds the benchmark commit | `pass` | Human-facing reports must point to the same benchmark release-lock commit. | `reports/benchmark_reproducibility.json`, `reports/skill-overview.json` |
 | overview embeds benchmark summary fields | `pass` | Selected summary fields must match exactly across generated reports. | `reports/benchmark_reproducibility.json`, `reports/skill-overview.json` |
@@ -59,6 +59,12 @@ This gate compares generated evidence reports against each other. It does not cr
 | Skill OS 2.0 review summary mirrors current evidence | `fail` | Manual 2.0 review summaries must not drift from generated gate, package, trust, context, benchmark, or CI evidence. | `reports/skill-os-2-review.md`, `reports/review-studio.json`, `reports/package_verification.json`, `reports/install_simulation.json`, `reports/security_trust_report.json`, `reports/context_budget.json`, `reports/benchmark_reproducibility.json`, `scripts/ci_test.py` |
 
 ## Failures
+
+### Release archive hash matches package, registry, and benchmark evidence
+
+- key: `release-archive-hash-lockstep`
+- expected: `{"all_equal_to_actual_archive": ""}`
+- actual: `{"actual_archive": "", "benchmark": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144", "package_verification": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144", "registry": "dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144"}`
 
 ### Skill OS 2.0 review summary mirrors current evidence
 
