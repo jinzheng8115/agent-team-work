@@ -33,6 +33,8 @@ Leader 是两个 JSON 账本的唯一写入者。写入前必须确认当前会�
 
 ## 任务单
 
+Worker 回报的可读顺序和展示边界见 [Worker 可读回报契约](worker-readable-report.md)。任务单可以保持结构化，但要求成员在最终回复中先写独立标题行 `Human-readable summary`，再写独立标题行 `Technical details`；字段不能顶替标题，也不要把内部身份字段作为用户看到的第一段业务内容。
+
 ## 能力门
 
 每个 `work`/`rework` 由目标角色先做最小、只读探测：核对工作目录和输入路径可读；按 DoD 用 `command -v`、工具发现或等价方式确认所需工具；确认回传 Leader 的能力可用。只记录当前阶段真正需要的项目，避免为文档任务强制数据库或浏览器。核心项全部为 `PASS` 才能记录 `started`；`MISSING` 或 `UNKNOWN` 时不执行项目修改，返回 `blocked` 和证据。探测结果应随 `result` 或 `blocked` 回传，Lead 不能由发送成功推断能力门通过。
@@ -48,7 +50,7 @@ Inputs/Dependencies：项目摘要、已确认决策、前序验收摘要与可�
 Capability Gate：本阶段最小能力探测、PASS/MISSING/UNKNOWN 及证据
 Workspace/Scope：实际工作目录、可修改范围、状态目录；不得修改的既有工作
 Deliverables & DoD：交付物、报告路径、验证方式、完成条件
-Return to Leader：按下述格式写报告，并在本回合最终回复中给出报告摘要与路径；完成后等待 Leader 的新任务
+Return to Leader：按 [Worker 可读回报契约](worker-readable-report.md) 输出最终回复：ATW 标记后必须先有独立标题行 `Human-readable summary` 及规定字段，再有独立标题行 `Technical details`；字段不能顶替标题。同时给出报告摘要与路径，完成后等待 Leader 的新任务
 ```
 
 首个任务执行前先记录 `dispatch_state = sending`。发送工具返回明确成功时更新为 sent/dispatched；这只表示宿主接受发送，不表示角色已读取、通过能力门或已开始。明确未发送时记 failed，可针对同一任务、目标和 key 安全重试一次。超时或结果不明记 unknown，先查询成员历史与状态；未排除已送达前禁止重发。当前工具若无队列语义，不要把 busy 当作自动入队。
@@ -56,23 +58,32 @@ Return to Leader：按下述格式写报告，并在本回合最终回复中给�
 ## 成员报告
 
 ```text
-Task / Attempt：与任务单一致
-Identity：team、epoch、stage、attempt、dispatch_key、来源 Leader thread id
+[ATW team=<id> epoch=<n> stage=<label> attempt=<n> kind=result]
+
+Human-readable summary
+Role：角色名与职责
 Status：completed / blocked / failed
+Summary：1–3 句自然语言结论
 Completed：完成内容及与要求的对应关系
 Artifacts：文件绝对路径；如有，提供 checkout、分支和提交
 Verification：执行的检查、结果、未执行的检查及原因
-Issues：未解决问题、依赖、需要 Leader 的决定
+Issues：未解决问题、依赖、需要 Leader 的决定；没有时写“无”
 Recommendation：返修或后续工作的建议
+
+Technical details
+Task / Attempt：与任务单一致
+Identity：team、epoch、stage、attempt、dispatch_key、来源 Leader thread id
+Capability Gate：PASS / MISSING / UNKNOWN + evidence
+Evidence：必要的命令、来源或原始输出
 ```
 
-报告正文不得虚构已执行的检查。成员仅确认待命时不写业务完成报告；无 report 文件但最终回复已包含完整可核实结果时，Leader 可保存该回复并标注来源，不冒充成员生成的文件。
+报告正文不得虚构已执行的检查。`Human-readable summary` 和 `Technical details` 必须作为独立标题行原样出现，不能用字段顶替，也不能写成 `Technical details：`。`Summary` 必须位于 `Technical details` 之前；`dispatch_key` 不得进入摘要正文。能力探测、完整身份和原始命令输出只放技术详情，不在摘要中重复。普通进度只在开始、blocked、关键发现和完成四类 milestone 更新。成员仅确认待命时不写业务完成报告；无 report 文件但最终回复已包含完整可核实结果时，Leader 可保存该回复并标注来源，不冒充成员生成的文件。缺少规定标题的回报不得验收。
 
 ## 验收与交接
 
 任务状态流转：planned → sending → dispatched → reported → accepted；reported 也可转为 rework 或 blocked。只有依赖均 accepted 或由当前影响分析明确保留的任务可派发。`attempt` 仅在同一 `revision_cycle` 内返修重派时递增；`revision_cycle` 只在团队完成后收到新的用户修改时递增。已有旧报告不满足新一次尝试。只有当前 team/epoch/revision_cycle/stage/attempt/key/source 完全匹配的证据可推进；旧 cycle、旧 attempt、重复结果或被新目标失效的结果仅记 stale/duplicate。
 
-Leader 验收须记录：结论、实际检查证据、接受或退回的原因。检查强度取决于交付物：代码检查实际改动和必要测试，研究检查来源与关键论断，文档检查范围与一致性。不要机械重复全部测试，也不能仅信成员的“完成”。`reported` 不是 `accepted`；验收前不得派下一阶段。`automatic` accepted 后继续，`confirmation` accepted 后先展示摘要并等待确认。
+Leader 验收须记录：结论、实际检查证据、接受或退回的原因。先确认最终回复含独立标题 `Human-readable summary` 与 `Technical details`，再检查产物。检查强度取决于交付物：代码检查实际改动和必要测试，研究检查来源与关键论断，文档检查范围与一致性。不要机械重复全部测试，也不能仅信成员的“完成”。缺少规定标题、只有字段或 `dispatch_key` 出现在摘要中时记 `rework`，不得 `accepted`。`reported` 不是 `accepted`；验收前不得派下一阶段。`automatic` accepted 后继续，`confirmation` accepted 后先展示摘要并等待确认。
 
 派给下一成员前，明确前序产物如何进入其工作目录，并验证可访问、版本正确；特别是 Git worktree 间的未提交文件不会自动同步。成员是长期角色，不绑定一次性阶段；返修、复核均复用原会话。
 

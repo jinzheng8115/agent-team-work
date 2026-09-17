@@ -7,6 +7,7 @@
 - 通过菜单确认项目、目标、角色、阶段顺序、DoD 和 `automatic` / `confirmation` 门控。
 - 绑定真实项目和会话，避免重复创建 Leader 或把普通子代理当作团队成员。
 - 只有成员报告、产物和能力门验收通过后，才推进下一阶段。
+- Worker 回合采用摘要优先的双层呈现：最终回复必须含独立标题 `Human-readable summary` 和 `Technical details`，先展示角色结论、产物、验证和风险，技术身份与执行细节保留在后部供 Lead 核验。
 - 中断后按项目状态恢复；返修复用原成员并递增 `attempt`。
 - 首轮完成后的修改先由 Lead 做 `impact_analysis`，记录新的 `revision_cycle`，再只派受影响阶段和必要下游阶段。
 - 支持有界的 `worker_can_request` 讨论回合：由 Lead 批准范围和决策 owner，要求参与者在共享 transcript 中进行真实 peer exchange 后才能形成决定。
@@ -86,6 +87,7 @@ GitHub 仓库只保留运行时需要的 Skill 入口、接口与参考文件、
 - [完整工作流程](references/workflow.md)
 - [调度与状态协议](references/team-protocol.md)
 - [Codex 工具规则](references/codex-tools.md)
+- [Worker 可读回报契约](references/worker-readable-report.md)
 - [角色预设](references/role-presets.md)
 - [团队规模边界](references/team-scaling.md)
 

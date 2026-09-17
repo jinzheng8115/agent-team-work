@@ -11,7 +11,7 @@ description: "Use when a user explicitly asks to create or continue a Codex proj
 
 ## 执行入口
 
-- 新建团队：读 [工作流程](references/workflow.md) 和 [工具规则](references/codex-tools.md)，核实项目与当前 Leader；菜单确认目标、角色、阶段、门控及工作目录。新任务需要 worker-to-worker 决策时，按工作流程中的 Decision triage 和讨论生命周期执行。
+- 新建团队：读 [工作流程](references/workflow.md)、[工具规则](references/codex-tools.md) 和 [Worker 可读回报契约](references/worker-readable-report.md)，核实项目与当前 Leader；菜单确认目标、角色、阶段、门控及工作目录。新任务需要 worker-to-worker 决策时，按工作流程中的 Decision triage 和讨论生命周期执行。
 - 选择角色：按需读 [角色预设](references/role-presets.md) 和 [角色能力门](references/role-capabilities.md)，允许增删修改。
 - 继续或查看团队：先读 [状态协议](references/team-protocol.md) 和现有 `.team/` 记录，再核验真实会话、当前 Leader 和 ownership epoch，不重复建队。讨论恢复也必须核对讨论记录、消息身份和真实会话；只查状态时不派单。
 
@@ -27,7 +27,7 @@ Worker-to-worker discussion 是当前阶段内、由成员请求且由 Lead 批�
 
 ## 输入与交付契约
 
-每次运行先把以下信息写入菜单摘要和 `.team/team.json`：项目归属与允许的 checkout、目标和首要交付物、完成判定、成员职责与阶段顺序、输入/依赖路径、工作范围，以及 `automatic` 或 `confirmation` 门控。缺少目标项目、首要交付物或完成判定时停在菜单，不创建会话。
+每次运行先把以下信息写入菜单摘要和 `.team/team.json`：项目归属与允许的 checkout、目标和首要交付物、完成判定、成员职责与阶段顺序、输入/依赖路径、工作范围，以及 `automatic` 或 `confirmation` 门控。成员回报遵循 [Worker 可读回报契约](references/worker-readable-report.md)：最终回复必须含独立标题行 `Human-readable summary` 和 `Technical details`，字段不能顶替标题；身份和技术日志保留为机器证据，用户默认先看到角色结论、产物、验证、风险和下一步。缺少目标项目、首要交付物或完成判定时停在菜单，不创建会话。
 
 交付必须包含可核验的团队绑定（真实 `project_id`、`thread_id`、标题与项目归属）、逐阶段任务与报告（身份字段、产物绝对路径、验证结果），以及最终状态和下一步；未查询到的创建、送达或验收事实标为 `unknown`。
 

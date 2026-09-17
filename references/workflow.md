@@ -57,7 +57,7 @@ no + cross-role options/conflict/high-impact choice -> discussion_request
 
 核验每个会话的标题和项目归属，已有会话仅在用户选定复用时绑定。创建、标题同步、项目列表核验和派单分别记录；有任何绑定未就绪时先修复，不启动首阶段。
 
-建队后按照 [调度与状态协议](team-protocol.md) 保存状态。正式消息首行使用 `[ATW team=<id> epoch=<n> stage=<label> attempt=<n> kind=<standby|work|rework|result|accept|snapshot>]`；将待命回合结束与业务任务完成区分开，未派单的角色始终待启动。
+建队后按照 [调度与状态协议](team-protocol.md) 保存状态。正式消息首行使用 `[ATW team=<id> epoch=<n> stage=<label> attempt=<n> kind=<standby|work|rework|result|accept|snapshot>]`；worker 最终回复遵循 [Worker 可读回报契约](worker-readable-report.md)，在身份标记后先写独立标题行 `Human-readable summary`，再写独立标题行 `Technical details`。将待命回合结束与业务任务完成区分开，未派单的角色始终待启动。
 
 ## 4. 阶段调度
 
@@ -115,6 +115,6 @@ Lead 在首次修订派单前写 `.team/revisions/<cycle>.md`，保存原修改�
 
 ## 6. 输出与恢复
 
-用简短状态说明：团队已就绪/部分完成/待用户处理；当前阶段；成员会话及状态；交付物；下一步。不得把未核验的项目列表可见性、未送达的任务或未验收结果报告为成功。
+用简短、面向用户的状态说明：团队已就绪/部分完成/待用户处理；当前阶段；成员会话及状态；已验收交付物；风险；下一步。Lead 只在核对成员产物和 `accepted` 报告后生成团队摘要；worker 的技术详情作为可展开或可按需查看的证据入口。不得把未核验的项目列表可见性、未送达的任务或未验收结果报告为成功。
 
 恢复时先核对真实会话、任务编号、ownership epoch、dispatch key 和最新报告，并先验证当前会话就是绑定 Leader；只续接未完成阶段。创建或发送结果不确定时先查询；明确成功入队的不重发，明确未发送的原目标最多安全重试一次，仍无法判断则 `blocked` 并请求人工核验。详细规则见调度协议。
