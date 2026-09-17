@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "ok": true,
   "generated_at": "2026-09-17",
-  "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "item_count": 15,
     "pass_count": 11,
@@ -311,7 +311,7 @@
       "key": "review-studio",
       "label": "Review Studio",
       "status": "pass",
-      "current": "decision review; warnings 5; score 86",
+      "current": "decision review; warnings 3; score 91",
       "target": "One page shows gates, evidence paths, blockers, warnings, actions, waivers, and annotations",
       "evidence": [
         {
@@ -333,7 +333,7 @@
       "key": "telemetry-drift",
       "label": "Telemetry Drift",
       "status": "pass",
-      "current": "events 0; risk no-data; recipes 5",
+      "current": "events 1; risk low; recipes 5",
       "target": "Local-first metadata-only event contract, aggregate drift report, hook recipes, and import path",
       "evidence": [
         {
@@ -355,7 +355,7 @@
       "key": "native-client-telemetry",
       "label": "Native Client Telemetry",
       "status": "external_required",
-      "current": "external source events 0; adoption samples 0",
+      "current": "external source events 0; adoption samples 1",
       "target": "A real Browser/Chrome/provider client sends production metadata events",
       "evidence": [
         {
@@ -441,7 +441,7 @@
       "key": "native-client-telemetry",
       "label": "Native Client Telemetry",
       "status": "external_required",
-      "current": "external source events 0; adoption samples 0",
+      "current": "external source events 0; adoption samples 1",
       "target": "A real Browser/Chrome/provider client sends production metadata events",
       "evidence": [
         {

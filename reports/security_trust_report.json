@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
-    "scanned_files": 43,
+    "scanned_files": 44,
     "script_count": 6,
     "internal_module_count": 0,
     "secret_findings": 0,
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 43,
-    "package_sha256": "71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc"
+    "package_hash_file_count": 44,
+    "package_sha256": "cdf50d6917ef2e97c046253cf1433bc30e8e8d353c84349c54a469f2f3efb084"
   },
   "failures": [],
   "warnings": [],
@@ -280,7 +280,7 @@
     "remote_metadata_policy": "allow-metadata-only"
   },
   "artifacts": {
-    "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/security_trust_report.json",
-    "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/security_trust_report.md"
+    "json": "/Volumes/Code/team-worker/agent-team-work/reports/security_trust_report.json",
+    "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/security_trust_report.md"
   }
 }

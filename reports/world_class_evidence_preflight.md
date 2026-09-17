@@ -10,10 +10,10 @@ Generated at: `2026-09-17`
 - credential value exposed: `false`
 - collection ready: `0`
 - collection blocked: `4`
-- source checks: `5` pass / `14` total
-- repair rows: `17` blocked / `17` total
+- source checks: `6` pass / `14` total
+- repair rows: `16` blocked / `16` total
 - phase queue: `2` blocked / `2` phases
-- phase queue rows: `17`
+- phase queue rows: `16`
 - next repair action: `human-adjudication-precheck-decision-template`
 - next repair owner: `human reviewer`
 - next phase: `unblock-access`
@@ -51,7 +51,7 @@ Phase queue rows group the same repair checklist into operator execution phases.
 | Priority | Phase | Status | Rows | Owners | Evidence | Verify | Next action |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | `20` | `unblock-access` | `blocked` | 8 / 8 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Collect three exact 20-pair reviewer packets with integrity and independent-review attestations. |
-| `40` | `collect-source` | `blocked` | 9 / 9 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout | `python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <A.json> --decisions <B.json> --decisions <C.json> --reviewer-registry <registry.json> --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Bind adjudication to the reviewed blind pack SHA256. |
+| `40` | `collect-source` | `blocked` | 8 / 8 blocked | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout | `python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <A.json> --decisions <B.json> --decisions <C.json> --reviewer-registry <registry.json> --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Bind adjudication to the reviewed blind pack SHA256. |
 
 ## Evidence Items
 
@@ -79,7 +79,6 @@ Repair rows convert preflight and source blockers into a prioritized operator qu
 | `40` | `collect-source` | human reviewer | `human-adjudication` | `source-check` | `blind_pack_bound` | `blocked` | `python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <A.json> --decisions <B.json> --decisions <C.json> --reviewer-registry <registry.json> --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Bind adjudication to the reviewed blind pack SHA256. |
 | `40` | `collect-source` | human reviewer | `human-adjudication` | `source-check` | `pair_count` | `blocked` | `python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <A.json> --decisions <B.json> --decisions <C.json> --reviewer-registry <registry.json> --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Complete all 20 blind pairs. |
 | `40` | `collect-source` | human reviewer | `human-adjudication` | `source-check` | `reviewer_count` | `blocked` | `python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <A.json> --decisions <B.json> --decisions <C.json> --reviewer-registry <registry.json> --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Collect reviewer-a, reviewer-b, and reviewer-c. |
-| `40` | `collect-source` | Browser/Chrome/IDE/provider client integrator | `native-client-telemetry` | `source-check` | `adoption_sample_count` | `blocked` | `python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Telemetry must include adoption outcome evidence. |
 | `40` | `collect-source` | Browser/Chrome/IDE/provider client integrator | `native-client-telemetry` | `source-check` | `external_source_events` | `blocked` | `python3 scripts/yao.py telemetry-import . --input-jsonl .yao/telemetry_spool/external_events.jsonl --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Import at least one metadata-only event from a real client. |
 | `40` | `collect-source` | target client or installer integrator | `native-permission-enforcement` | `source-check` | `installer_enforcement_ready` | `blocked` | `python3 scripts/yao.py runtime-permissions . --package-dir dist --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Installer enforcement is supporting evidence, not native proof. |
 | `40` | `collect-source` | target client or installer integrator | `native-permission-enforcement` | `source-check` | `native_enforcement_count` | `blocked` | `python3 scripts/yao.py runtime-permissions . --package-dir dist --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` | Collect real target-client or external runtime guard proof. |
@@ -190,7 +189,7 @@ Repair rows convert preflight and source blockers into a prioritized operator qu
 | Check | Current | Expected | Status | Next action |
 | --- | --- | --- | --- | --- |
 | External events | `0` | `>0` | `blocked` | Import at least one metadata-only event from a real client. |
-| Adoption sample | `0` | `>0` | `blocked` | Telemetry must include adoption outcome evidence. |
+| Adoption sample | `1` | `>0` | `pass` | Telemetry must include adoption outcome evidence. |
 | Raw content blocked | `False` | `false` | `pass` | Telemetry must stay metadata-only. |
 
 ## Boundary

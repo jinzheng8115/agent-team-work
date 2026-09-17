@@ -6,8 +6,8 @@
 - Maturity: `governed`
 - Owner: `Local Codex Team`
 - License: `MIT`
-- Package SHA256: `71bbbdd0b3208a299f3cddfeee9feb35cc152d6c56861429843726b9c27c38cc`
-- Archive SHA256: `dbd9243877f9f8285c1e8b3d42619b21d5e1351b43f3768b950fa97c78ffe144`
+- Package SHA256: `cdf50d6917ef2e97c046253cf1433bc30e8e8d353c84349c54a469f2f3efb084`
+- Archive SHA256: `3b3c43c2d3ab45386ed8a4a14215c4cc77c4b5a4e42c05e8a930edbd220efb22`
 - Install simulated: `True`
 
 ## Compatibility
@@ -31,7 +31,7 @@
 
 ## Artifacts
 
-- index: `/Volumes/Code/team-worker/worker-discussion-round-worktree/registry/index.json`
-- package: `/Volumes/Code/team-worker/worker-discussion-round-worktree/registry/packages/agent-team-work.json`
-- json: `/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/registry_audit.json`
-- markdown: `/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/registry_audit.md`
+- index: `/Volumes/Code/team-worker/agent-team-work/registry/index.json`
+- package: `/Volumes/Code/team-worker/agent-team-work/registry/packages/agent-team-work.json`
+- json: `/Volumes/Code/team-worker/agent-team-work/reports/registry_audit.json`
+- markdown: `/Volumes/Code/team-worker/agent-team-work/reports/registry_audit.md`

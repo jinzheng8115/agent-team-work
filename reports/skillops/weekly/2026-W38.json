@@ -14,7 +14,7 @@
   "report_only_count": 0,
   "top_score": 0,
   "skill_count": 1,
-  "actionable_portfolio_issue_count": 1,
+  "actionable_portfolio_issue_count": 0,
   "release_lock_ready": true,
   "evidence_consistency_ok": false,
   "public_world_class_ready": false,
@@ -34,7 +34,7 @@
     "report_only_count": 0,
     "top_score": 0,
     "skill_count": 1,
-    "actionable_portfolio_issue_count": 1,
+    "actionable_portfolio_issue_count": 0,
     "release_lock_ready": true,
     "evidence_consistency_ok": false,
     "public_world_class_ready": false,
@@ -101,15 +101,15 @@
   "curator_queue": [],
   "portfolio": {
     "skill_count": 1,
-    "actionable_issue_count": 1,
+    "actionable_issue_count": 0,
     "route_collision_count": 0,
     "actionable_route_collision_count": 0,
     "owner_gap_count": 0,
     "actionable_owner_gap_count": 0,
     "stale_count": 0,
     "actionable_stale_count": 0,
-    "drift_signal_count": 1,
-    "actionable_drift_signal_count": 1,
+    "drift_signal_count": 0,
+    "actionable_drift_signal_count": 0,
     "no_route_opportunity_count": 0
   },
   "release_state": {
@@ -119,11 +119,6 @@
     "world_class_pending_count": 4
   },
   "actions": [
-    {
-      "key": "triage-skill-library",
-      "priority": "high",
-      "action": "Triage actionable route collisions, owner gaps, stale skills, drift signals, or no-route opportunities from Skill Atlas."
-    },
     {
       "key": "close-world-class-evidence",
       "priority": "high",

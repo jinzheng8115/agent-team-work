@@ -12,7 +12,7 @@ Generated at: `2026-09-17`
 - awaiting submission: `4`
 - ready for ledger review: `0`
 - phase queue: `2` blocked / `2` phases
-- phase queue rows: `17`
+- phase queue rows: `16`
 - phase queue counts as completion: `false`
 - coordination steps: `6` user-required / `6` total
 - coordination pending keys: `human-adjudication, native-client-telemetry, native-permission-enforcement, provider-holdout`
@@ -46,7 +46,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 | Phase | Status | Rows | Blocked | Owners | Next action | Verify |
 | --- | --- | ---: | ---: | --- | --- | --- |
 | `unblock-access` | `blocked` | `8` | `8` | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | Collect three exact 20-pair reviewer packets with integrity and independent-review attestations. | `python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` |
-| `collect-source` | `blocked` | `9` | `9` | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | Bind adjudication to the reviewed blind pack SHA256. | `python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <A.json> --decisions <B.json> --decisions <C.json> --reviewer-registry <registry.json> --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` |
+| `collect-source` | `blocked` | `8` | `8` | Browser/Chrome/IDE/provider client integrator, human reviewer, operator with provider credentials, target client or installer integrator | Bind adjudication to the reviewed blind pack SHA256. | `python3 scripts/yao.py evidence-finalize-review . --source-run <PROVIDER_RUN_ID> --decisions <A.json> --decisions <B.json> --decisions <C.json> --reviewer-registry <registry.json> --self && python3 scripts/yao.py world-class-preflight . --submissions-dir evidence/world_class/submissions --self` |
 
 ## Evidence Items
 
@@ -55,7 +55,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 | `provider-holdout` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Complete all 40 fixed DeepSeek calls. | operator with provider credentials |
 | `human-adjudication` | `pending` | `awaiting-submission` | `awaiting-submission` | `3` | Collect reviewer-a, reviewer-b, and reviewer-c. | human reviewer |
 | `native-permission-enforcement` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Collect real target-client or external runtime guard proof. | target client or installer integrator |
-| `native-client-telemetry` | `pending` | `awaiting-submission` | `awaiting-submission` | `2` | Import at least one metadata-only event from a real client. | Browser/Chrome/IDE/provider client integrator |
+| `native-client-telemetry` | `pending` | `awaiting-submission` | `awaiting-submission` | `1` | Import at least one metadata-only event from a real client. | Browser/Chrome/IDE/provider client integrator |
 
 ## Provider Holdout
 
@@ -303,8 +303,8 @@ This runbook coordinates evidence collection only. It does not accept submission
 
 - objective: Import production metadata-only events from a real external client into the local drift loop.
 - blocking reason: No evidence packet has been submitted for review.
-- blocked source checks: `2`
-- repair rows: `4` blocked
+- blocked source checks: `1`
+- repair rows: `3` blocked
 - phase queue: `2` blocked phases
 - submission: `evidence/world_class/submissions/native-client-telemetry.json`
 - template: `evidence/world_class/templates/native-client-telemetry.intake.json`
@@ -314,7 +314,7 @@ This runbook coordinates evidence collection only. It does not accept submission
 | Phase | Status | Rows | Blocked | Next action |
 | --- | --- | ---: | ---: | --- |
 | `unblock-access` | `blocked` | `2` | `2` | Install a real Browser, Chrome, IDE, or provider client that emits metadata-only events. |
-| `collect-source` | `blocked` | `2` | `2` | Telemetry must include adoption outcome evidence. |
+| `collect-source` | `blocked` | `1` | `1` | Import at least one metadata-only event from a real client. |
 
 ### Source Runbook
 
@@ -365,14 +365,13 @@ This runbook coordinates evidence collection only. It does not accept submission
 ### Next Source Actions
 
 - Import at least one metadata-only event from a real client.
-- Telemetry must include adoption outcome evidence.
 
 ### Source Evidence Snapshot
 
 | Check | Current | Expected | Status | Next action |
 | --- | --- | --- | --- | --- |
 | External events | `0` | `>0` | `blocked` | Import at least one metadata-only event from a real client. |
-| Adoption sample | `0` | `>0` | `blocked` | Telemetry must include adoption outcome evidence. |
+| Adoption sample | `1` | `>0` | `pass` | Telemetry must include adoption outcome evidence. |
 | Raw content blocked | `False` | `false` | `pass` | Telemetry must stay metadata-only. |
 
 ## Release Gate

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "ok": true,
-  "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "generated_at": "2026-09-17",
   "summary": {
     "waiver_count": 0,
@@ -114,7 +114,7 @@
   "failures": [],
   "warnings": [],
   "artifacts": {
-    "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/review_waivers.json",
-    "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/review_waivers.md"
+    "json": "/Volumes/Code/team-worker/agent-team-work/reports/review_waivers.json",
+    "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/review_waivers.md"
   }
 }

@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "ok": false,
   "generated_at": "2026-09-17",
-  "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "item_count": 21,
     "module_count": 8,
@@ -246,7 +246,7 @@
       "label": "Review Studio",
       "status": "missing",
       "objective": "One HTML page supports first-pass production review across trigger, output, runtime, trust, release, and evidence actions.",
-      "current": "16 gates; decision review; warnings 5",
+      "current": "16 gates; decision review; warnings 3",
       "command": "python3 scripts/yao.py review-studio . --self",
       "test": "python3 tests/verify_review_studio.py",
       "evidence": [
@@ -275,7 +275,7 @@
       "label": "Telemetry Drift",
       "status": "missing",
       "objective": "Real usage feedback is captured as metadata-only local-first drift signals.",
-      "current": "events 0; recipes 5; risk no-data",
+      "current": "events 1; recipes 5; risk low",
       "command": "python3 scripts/yao.py telemetry-hooks . --self && python3 scripts/yao.py adoption-drift . --self",
       "test": "python3 tests/verify_telemetry_hooks.py",
       "evidence": [

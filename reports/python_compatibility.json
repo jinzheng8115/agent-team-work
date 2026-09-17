@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "ok": true,
   "generated_at": "2026-09-17",
-  "root": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+  "root": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "target_python": "3.11",
     "file_count": 9,

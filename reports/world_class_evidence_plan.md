@@ -22,7 +22,7 @@ This report is an execution plan for the remaining world-class evidence gaps. It
 | `provider-holdout` | `external_required` | `external` | operator with provider credentials | phase1 model-executed 0/40; calls 0/40; status external-required |
 | `human-adjudication` | `human_required` | `human` | human reviewer | phase1 reviewers 0/3; pairs 0/20; promotion pending |
 | `native-permission-enforcement` | `external_required` | `external` | target client or installer integrator | native-enforced targets 0; installer-enforced targets 0 |
-| `native-client-telemetry` | `external_required` | `external` | Browser/Chrome/IDE/provider client integrator | external source events 0; adoption samples 0 |
+| `native-client-telemetry` | `external_required` | `external` | Browser/Chrome/IDE/provider client integrator | external source events 0; adoption samples 1 |
 
 ## Provider Holdout
 

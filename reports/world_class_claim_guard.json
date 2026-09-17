@@ -2,13 +2,13 @@
   "schema_version": "1.0",
   "ok": true,
   "generated_at": "2026-09-17",
-  "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "ledger_ready_to_claim_world_class": false,
     "ledger_pending_count": 4,
-    "claim_surface_count": 147,
-    "json_claim_surface_count": 77,
-    "metadata_claim_surface_count": 79,
+    "claim_surface_count": 149,
+    "json_claim_surface_count": 78,
+    "metadata_claim_surface_count": 80,
     "package_claim_surface_count": 11,
     "violation_count": 0,
     "overclaim_guard_active": true,
@@ -96,6 +96,10 @@
     },
     {
       "path": "docs/superpowers/plans/2026-09-16-worker-discussion-round.md",
+      "violation_count": 0
+    },
+    {
+      "path": "docs/superpowers/plans/2026-09-17-peer-visible-discussion-round.md",
       "violation_count": 0
     },
     {
@@ -268,6 +272,10 @@
     },
     {
       "path": "reports/output-risk-profile.md",
+      "violation_count": 0
+    },
+    {
+      "path": "reports/output_blind_answer_key.json",
       "violation_count": 0
     },
     {

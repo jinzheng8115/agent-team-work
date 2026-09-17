@@ -4,9 +4,9 @@ This standalone package review is generated from the current local evidence. It 
 
 ## Current Snapshot
 
-- Review Studio score `86`
+- Review Studio score `91`
 - Review Studio gates: `16` gates
-- Review Studio warnings: `5` warnings
+- Review Studio warnings: `3` warnings
 - Trust report: `0` declared internal modules; `6 / 6` CLI help smoke checks passing across `6` scripts.
 - Runtime-only package archive: `13` zip entries; archive with `13` entries.
 - Runtime package check: `0` installer permission checks enforced; `0` permission failures because no executable maintainer scripts ship in the archive.
@@ -16,7 +16,7 @@ This standalone package review is generated from the current local evidence. It 
 
 ## Release Decision
 
-The local package, target adapters, deterministic runner, installation simulation, trust scan, registry metadata, and source commit `cdac77a` are reviewable. The package remains in review because provider-backed holdout execution, three-person blind adjudication, native permission enforcement, and real client telemetry are still pending in `reports/world_class_evidence_ledger.md`. The benchmark records a clean release lock for that committed source; this does not waive the external and human evidence gates required for an unconditional public production publication.
+The local package, target adapters, deterministic runner, installation simulation, trust scan, registry metadata, and source commit `7947dcf` are reviewable. The package remains in review because provider-backed holdout execution, three-person blind adjudication, native permission enforcement, and real client telemetry are still pending in `reports/world_class_evidence_ledger.md`. The benchmark records a clean release lock for that committed source; this does not waive the external and human evidence gates required for an unconditional public production publication.
 
 ## Evidence Boundary
 

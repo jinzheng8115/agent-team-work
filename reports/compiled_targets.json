@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "ok": true,
   "generated_at": "2026-09-17",
-  "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+  "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "target_count": 5,
     "pass_count": 5,
@@ -24,7 +24,7 @@
         "ir_schema_version": "2.0.0"
       },
       "source": {
-        "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+        "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
         "canonical_metadata": "agents/interface.yaml",
         "declared_targets": [
           "openai",
@@ -571,7 +571,7 @@
         "ir_schema_version": "2.0.0"
       },
       "source": {
-        "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+        "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
         "canonical_metadata": "agents/interface.yaml",
         "declared_targets": [
           "openai",
@@ -1118,7 +1118,7 @@
         "ir_schema_version": "2.0.0"
       },
       "source": {
-        "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+        "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
         "canonical_metadata": "agents/interface.yaml",
         "declared_targets": [
           "openai",
@@ -1649,7 +1649,7 @@
         "ir_schema_version": "2.0.0"
       },
       "source": {
-        "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+        "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
         "canonical_metadata": "agents/interface.yaml",
         "declared_targets": [
           "openai",
@@ -2180,7 +2180,7 @@
         "ir_schema_version": "2.0.0"
       },
       "source": {
-        "skill_dir": "/Volumes/Code/team-worker/worker-discussion-round-worktree",
+        "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
         "canonical_metadata": "agents/interface.yaml",
         "declared_targets": [
           "openai",
@@ -2713,7 +2713,7 @@
   "failures": [],
   "warnings": [],
   "artifacts": {
-    "json": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/compiled_targets.json",
-    "markdown": "/Volumes/Code/team-worker/worker-discussion-round-worktree/reports/compiled_targets.md"
+    "json": "/Volumes/Code/team-worker/agent-team-work/reports/compiled_targets.json",
+    "markdown": "/Volumes/Code/team-worker/agent-team-work/reports/compiled_targets.md"
   }
 }

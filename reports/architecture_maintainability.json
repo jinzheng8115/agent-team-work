@@ -16,9 +16,9 @@
     "watch_line_threshold": 720,
     "early_watch_line_threshold": 600,
     "block_line_threshold": 1500,
-    "largest_file_lines": 595,
+    "largest_file_lines": 672,
     "watchlist_count": 0,
-    "early_watchlist_count": 0,
+    "early_watchlist_count": 1,
     "hotspot_count": 0,
     "blocker_count": 0,
     "decision": "pass"
@@ -26,10 +26,10 @@
   "largest_files": [
     {
       "path": "scripts/validate_team_state.py",
-      "lines": 595,
+      "lines": 672,
       "kind": "cli-script",
       "severity": "pass",
-      "early_watch": false,
+      "early_watch": true,
       "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
     },
     {
@@ -74,7 +74,16 @@
     }
   ],
   "watchlist": [],
-  "early_watchlist": [],
+  "early_watchlist": [
+    {
+      "path": "scripts/validate_team_state.py",
+      "lines": 672,
+      "kind": "cli-script",
+      "severity": "pass",
+      "early_watch": true,
+      "recommendation": "Watch this file before adding new responsibilities; extract a helper module when one concern dominates."
+    }
+  ],
   "hotspots": [],
   "actions": [],
   "artifacts": {

@@ -29,8 +29,8 @@ This report maps the Skill OS 2.0 upgrade blueprint to concrete local artifacts,
 | Trust Security | `missing` | 6 scripts; secrets 0; help failures 0 | `python3 scripts/yao.py trust . --self` | `python3 tests/verify_trust_check.py` |
 | Skill Atlas | `missing` | 1 scanned skills; actionable collisions 0 | `python3 scripts/yao.py skill-atlas --workspace-root . --self` | `python3 tests/verify_skill_atlas.py` |
 | Registry Distribution | `missing` | archive entries 13; install failures 0 | `python3 scripts/yao.py package . --platform openai --platform claude --platform generic --platform vscode --output-dir dist --zip --self && python3 scripts/yao.py registry-audit . --self` | `python3 tests/verify_registry_audit.py` |
-| Review Studio | `missing` | 16 gates; decision review; warnings 5 | `python3 scripts/yao.py review-studio . --self` | `python3 tests/verify_review_studio.py` |
-| Telemetry Drift | `missing` | events 0; recipes 5; risk no-data | `python3 scripts/yao.py telemetry-hooks . --self && python3 scripts/yao.py adoption-drift . --self` | `python3 tests/verify_telemetry_hooks.py` |
+| Review Studio | `missing` | 16 gates; decision review; warnings 3 | `python3 scripts/yao.py review-studio . --self` | `python3 tests/verify_review_studio.py` |
+| Telemetry Drift | `missing` | events 1; recipes 5; risk low | `python3 scripts/yao.py telemetry-hooks . --self && python3 scripts/yao.py adoption-drift . --self` | `python3 tests/verify_telemetry_hooks.py` |
 
 ## Recommended PR Coverage
 
