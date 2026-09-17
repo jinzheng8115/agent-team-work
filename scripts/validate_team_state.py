@@ -135,10 +135,21 @@ def validate_discussion_record(team_dir: Path, team: dict, tasks_by_id: dict,
         failures.append(f"{label} is bound to another team or ownership_epoch")
     if parsed["cycle"] != active_cycle:
         failures.append(f"{label} revision_cycle does not match active cycle")
-    if parsed["stage"] != team.get("active_stage"):
+    task = tasks_by_id.get(parsed["task"])
+    # A discussion is scoped to the stage in which it was opened. Once the
+    # Lead closes it and accepts the owning task, the serial pipeline may move
+    # to the next stage; that historical record must remain valid while the
+    # team's active_stage advances. Any discussion that is still open (or only
+    # lead_accepted) must continue to match the current stage.
+    stage_matches_active = parsed["stage"] == team.get("active_stage")
+    closed_historical_task = (
+        record.get("status") == "closed"
+        and task is not None
+        and task.get("status") == "accepted"
+    )
+    if not stage_matches_active and not closed_historical_task:
         failures.append(f"{label} stage does not match team active_stage")
 
-    task = tasks_by_id.get(parsed["task"])
     if not task:
         failures.append(f"{label} has no matching active task")
     else:

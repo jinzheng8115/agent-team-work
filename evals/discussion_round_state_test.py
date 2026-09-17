@@ -200,6 +200,37 @@ def test_valid_closed_discussion():
     assert result["ok"], result
 
 
+def test_closed_discussion_remains_valid_after_next_stage_starts():
+    team_dir = write_fixture(status="closed", task_status="accepted")
+    team_path = team_dir / "team.json"
+    team = json.loads(team_path.read_text(encoding="utf-8"))
+    team["active_stage"] = "reviewer"
+    team_path.write_text(json.dumps(team), encoding="utf-8")
+
+    tasks_path = team_dir / "tasks.json"
+    tasks = json.loads(tasks_path.read_text(encoding="utf-8"))
+    tasks["tasks"][0]["acceptance"] = {
+        "status": "accepted",
+        "evidence": ["reports/task.md"],
+    }
+    tasks_path.write_text(json.dumps(tasks), encoding="utf-8")
+
+    result = validate(team_dir)
+    assert result["ok"], result
+
+
+def test_open_discussion_must_match_active_stage():
+    team_dir = write_fixture(status="open")
+    team_path = team_dir / "team.json"
+    team = json.loads(team_path.read_text(encoding="utf-8"))
+    team["active_stage"] = "reviewer"
+    team_path.write_text(json.dumps(team), encoding="utf-8")
+
+    result = validate(team_dir)
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 stage does not match team active_stage" in result["failures"]
+
+
 def test_legacy_team_without_discussion_policy_remains_valid():
     result = validate(write_fixture(
         with_policy=False,
