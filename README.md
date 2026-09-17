@@ -18,7 +18,7 @@
 1. 下载 [runtime-only 发布包](dist/agent-team-work.zip)，解压到目标 Agent Skills 目录，或按宿主平台的 Skill 安装方式复制包体。归档已包含四个平台适配器。
 2. 在目标项目中显式调用 `$agent-team-work`。通常只需要说明想做什么，不必预先写角色和阶段；Skill 会先通过菜单补齐这些信息。
 3. 首次建队先完成菜单摘要和一次最终确认；只读查看已有团队时不创建会话或派单。
-4. 状态保存在项目根目录 `.team/`，可用 `python3 scripts/validate_team_state.py .team` 做只读账本校验。
+4. 状态保存在目标项目根目录 `.team/`；团队恢复时由 Leader 按项目状态协议核对账本和真实会话。
 
 例如：
 
@@ -49,11 +49,7 @@
 | Generic Agent Skills | `targets/generic/adapter.json` | 提供平台中立的 Agent Skills 兼容元数据 |
 | VS Code | `targets/vscode/adapter.json`、`targets/vscode/README.md` | 说明 VS Code 安装范围、workspace trust 和运行限制 |
 
-适配器由跨平台打包阶段生成；最终归档通过以下命令验证目标文件和适配器元数据均已包含：
-
-```bash
-python3 scripts/runtime_package_check.py . --package-dir dist
-```
+适配器由跨平台打包阶段生成，并随 runtime-only 归档一起发布；目标文件和适配器元数据会在发布前完成归档校验。
 
 ## Demo 项目实景
 
@@ -79,11 +75,11 @@ python3 scripts/runtime_package_check.py . --package-dir dist
 
 *协议要点：peer exchange 必须在共享 transcript 中真实可见；只有完成身份、证据和范围核验后，决定才能进入后续串行流程。*
 
-## 维护与发布证据
+## 发布包说明
 
-维护者可用 `python3 scripts/ci_test.py` 运行路由、Python 语法、包形状、运行时归档和状态回归检查；`scripts/local_output_eval_runner.py` 只回放固定 fixture。`scripts/import_telemetry_events.py` 校验 metadata-only JSONL 并向 stdout 输出脱敏事件，不联网也不写文件。`evals/output/provider_matrix.json` 与 `holdout_cases.zh-CN.jsonl` 定义真实 provider 留出评测的 40-call 合同，但没有凭证时保持 `external-required`。
+GitHub 仓库只保留运行时需要的 Skill 入口、接口与参考文件、清单、许可证、README 配图和最终 runtime-only 压缩包。`reports/`、`evals/`、`evidence/`、审计报告、测试脚本和打包过程文件属于维护工作区，不作为用户安装依赖，也不会随仓库发布。
 
-源码仓库的 `reports/`、`evals/`、`scripts/` 和其他审计资产只用于维护与发布验证，不进入 runtime-only 发布包；仅保留两个用于校验归档完整性的便携元数据文件。发布包保留 Skill 入口、运行时参考、接口元数据、四个目标适配器及其目标说明、清单和许可证；本地命令执行、模板或待审查记录不会被当作 provider 或人工证据。目标适配器由跨平台打包阶段生成，并在最终 zip 内按 allowlist 校验。
+最终安装包保留 Skill 入口、运行时参考、接口元数据、四个目标适配器及其目标说明、清单和许可证；过程性命令、模板、transcript 和待审查记录不会被打包。
 
 ## 进一步阅读
 

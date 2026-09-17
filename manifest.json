@@ -9,7 +9,6 @@
   "lifecycle_stage": "governed",
   "context_budget_tier": "production",
   "review_cadence": "monthly",
-  "skill_ir_source": "reports/skill-ir.json",
   "skill_archetype": "workflow",
   "target_platforms": [
     "openai",
@@ -18,14 +17,5 @@
     "agent-skills-compatible",
     "vscode"
   ],
-  "target_platforms_scope": "Codex/OpenAI provides the native project and thread execution surface; other targets carry the source contract and explicit degradation notes.",
-  "factory_components": [
-    "skill-ir",
-    "references",
-    "evals",
-    "scripts",
-    "reports",
-    "examples",
-    "failures"
-  ]
+  "target_platforms_scope": "Codex/OpenAI provides the native project and thread execution surface; other targets carry the source contract and explicit degradation notes."
 }

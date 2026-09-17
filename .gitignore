@@ -5,3 +5,24 @@ dist/install-simulation/
 reports/telemetry_events.jsonl
 reports/output_blind_answer_key.json
 evidence/world_class/submissions/*.json
+
+# Maintainer-only process, evaluation, and release evidence. These remain
+# available in a full local checkout but are intentionally not published.
+/.superpowers/
+/AGENTS.md
+/docs/
+/evals/
+/evidence/
+/examples/
+/failures/
+/package-runtime.json
+/registry/
+/reports/
+/requirements-ci.txt
+/scripts/
+/security/
+/skill-ir/
+/skill_atlas/
+/references/e2e-smoke-checklist.md
+/dist/*
+!/dist/agent-team-work.zip
