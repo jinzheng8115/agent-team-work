@@ -16,7 +16,7 @@ This standalone package review is generated from the current local evidence. It 
 
 ## Release Decision
 
-The local package, target adapters, deterministic runner, installation simulation, trust scan, registry metadata, and source commit `7947dcf` are reviewable. The package remains in review because provider-backed holdout execution, three-person blind adjudication, native permission enforcement, and real client telemetry are still pending in `reports/world_class_evidence_ledger.md`. The benchmark records a clean release lock for that committed source; this does not waive the external and human evidence gates required for an unconditional public production publication.
+The local package, target adapters, deterministic runner, installation simulation, trust scan, registry metadata, and source commit `2c733c0` are reviewable. The package remains in review because provider-backed holdout execution, three-person blind adjudication, native permission enforcement, and real client telemetry are still pending in `reports/world_class_evidence_ledger.md`. The benchmark records a clean release lock for that committed source; this does not waive the external and human evidence gates required for an unconditional public production publication.
 
 ## Evidence Boundary
 

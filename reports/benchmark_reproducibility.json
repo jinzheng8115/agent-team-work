@@ -3,51 +3,21 @@
   "ok": true,
   "generated_at": "2026-09-17",
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
-  "commit": "896c1e018383804eaa606f4f4ad0e3acc38a561b",
+  "commit": "2c733c0397db4070689b9c4d9dcdaa345adb092d",
   "git_status": {
     "available": true,
     "dirty": true,
-    "changed_file_count": 36,
+    "changed_file_count": 1,
     "generated_dirty": true,
-    "generated_changed_file_count": 29,
-    "source_dirty": true,
-    "source_changed_file_count": 7,
+    "generated_changed_file_count": 1,
+    "source_dirty": false,
+    "source_changed_file_count": 0,
     "sample": [
-      " M README.md",
-      " M dist/agent-team-work.zip",
-      " M dist/manifest.json",
-      " M dist/targets/claude/adapter.json",
-      " M dist/targets/generic/adapter.json",
-      " M dist/targets/openai/adapter.json",
-      " M dist/targets/vscode/adapter.json",
-      " M evals/packaging_expectations.json",
-      " M package-runtime.json",
-      " M registry/index.json",
-      " M registry/packages/agent-team-work.json",
-      " M reports/architecture_maintainability.json"
+      " M reports/skill-os-2-review.md"
     ],
-    "source_sample": [
-      " M README.md",
-      " M evals/packaging_expectations.json",
-      " M package-runtime.json",
-      " M scripts/build_runtime_package.py",
-      " M scripts/ci_test.py",
-      " M scripts/runtime_package_check.py",
-      "?? evals/runtime_package_state_test.py"
-    ],
+    "source_sample": [],
     "generated_sample": [
-      " M dist/agent-team-work.zip",
-      " M dist/manifest.json",
-      " M dist/targets/claude/adapter.json",
-      " M dist/targets/generic/adapter.json",
-      " M dist/targets/openai/adapter.json",
-      " M dist/targets/vscode/adapter.json",
-      " M registry/index.json",
-      " M registry/packages/agent-team-work.json",
-      " M reports/architecture_maintainability.json",
-      " M reports/architecture_maintainability.md",
-      " M reports/install_simulation.json",
-      " M reports/install_simulation.md"
+      " M reports/skill-os-2-review.md"
     ],
     "generated_dirty_prefixes": [
       "dist/",
@@ -61,7 +31,7 @@
   },
   "summary": {
     "reproducibility_ready": true,
-    "release_lock_ready": false,
+    "release_lock_ready": true,
     "methodology_complete": true,
     "required_artifact_count": 25,
     "missing_artifact_count": 0,
@@ -89,22 +59,21 @@
     "world_class_source_pass_count": 6,
     "world_class_source_blocked_count": 8,
     "beta_test_ready": false,
-    "beta_test_blocker_count": 2,
+    "beta_test_blocker_count": 1,
     "beta_test_deferred_evidence_count": 4,
     "public_claim_ready": false,
-    "public_claim_blocker_count": 7,
+    "public_claim_blocker_count": 6,
     "working_tree_dirty": true,
-    "changed_file_count": 36,
-    "source_tree_dirty": true,
-    "source_changed_file_count": 7,
+    "changed_file_count": 1,
+    "source_tree_dirty": false,
+    "source_changed_file_count": 0,
     "generated_tree_dirty": true,
-    "generated_changed_file_count": 29
+    "generated_changed_file_count": 1
   },
   "beta_test_release": {
     "ready": false,
     "scope": "beta/public test release without superiority, fully-reviewed, or world-class claims",
     "blockers": [
-      "release lock is not clean or commit is unavailable",
       "provider-backed model holdout source evidence is incomplete"
     ],
     "allowed_deferred_evidence": [
@@ -136,7 +105,6 @@
     "ready": false,
     "scope": "public benchmark or world-class readiness claim",
     "blockers": [
-      "release lock is not clean or commit is unavailable",
       "provider-backed model holdout evidence is incomplete",
       "human blind-review adjudication is incomplete",
       "phase-one provider matrix is incomplete",
@@ -147,12 +115,12 @@
     "policy": "Local reproducibility can pass before public claims; public claims require provider evidence, human adjudication, clean release lock, accepted world-class evidence, and complete source checks."
   },
   "release_lock": {
-    "ready": false,
-    "commit": "896c1e018383804eaa606f4f4ad0e3acc38a561b",
+    "ready": true,
+    "commit": "2c733c0397db4070689b9c4d9dcdaa345adb092d",
     "status_scope": "generation-time status before this report is written",
-    "source_changed_file_count": 7,
-    "generated_changed_file_count": 29,
-    "reason": "source files were dirty at generation time"
+    "source_changed_file_count": 0,
+    "generated_changed_file_count": 1,
+    "reason": "only generated evidence artifacts were dirty at generation time"
   },
   "evidence_bundle": {
     "algorithm": "sha256(path,label,exists,artifact_sha256)",

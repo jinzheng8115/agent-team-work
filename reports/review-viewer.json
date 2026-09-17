@@ -486,7 +486,7 @@
           "path": "evals",
           "label": "Trigger and quality checks",
           "kind": "folder",
-          "file_count": 15
+          "file_count": 16
         },
         {
           "path": "reports",
@@ -495,7 +495,7 @@
           "file_count": 119
         }
       ],
-      "file_count": 151,
+      "file_count": 152,
       "folder_count": 4,
       "distribution": [
         {
@@ -524,7 +524,7 @@
         },
         {
           "label": "evals",
-          "value": 15
+          "value": 16
         },
         {
           "label": "reports",
@@ -654,7 +654,7 @@
         "path": "evals",
         "label": "Trigger and quality checks",
         "kind": "folder",
-        "file_count": 15
+        "file_count": 16
       },
       {
         "path": "reports",
@@ -969,7 +969,7 @@
       "ok": true,
       "summary": {
         "reproducibility_ready": true,
-        "release_lock_ready": false,
+        "release_lock_ready": true,
         "methodology_complete": true,
         "required_artifact_count": 25,
         "missing_artifact_count": 0,
@@ -997,18 +997,18 @@
         "world_class_source_pass_count": 6,
         "world_class_source_blocked_count": 8,
         "beta_test_ready": false,
-        "beta_test_blocker_count": 2,
+        "beta_test_blocker_count": 1,
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
-        "public_claim_blocker_count": 7,
+        "public_claim_blocker_count": 6,
         "working_tree_dirty": true,
-        "changed_file_count": 36,
-        "source_tree_dirty": true,
-        "source_changed_file_count": 7,
+        "changed_file_count": 1,
+        "source_tree_dirty": false,
+        "source_changed_file_count": 0,
         "generated_tree_dirty": true,
-        "generated_changed_file_count": 29
+        "generated_changed_file_count": 1
       },
-      "commit": "896c1e018383804eaa606f4f4ad0e3acc38a561b",
+      "commit": "2c733c0397db4070689b9c4d9dcdaa345adb092d",
       "missing_artifacts": [],
       "limitations": [
         "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",

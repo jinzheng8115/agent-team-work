@@ -1,16 +1,16 @@
 # Benchmark Reproducibility
 
 Generated at: `2026-09-17`
-Commit: `896c1e018383804eaa606f4f4ad0e3acc38a561b`
+Commit: `2c733c0397db4070689b9c4d9dcdaa345adb092d`
 Working tree dirty at generation: `true`
-Source tree dirty at generation: `true`
+Source tree dirty at generation: `false`
 Generated evidence dirty at generation: `true`
 Evidence bundle SHA256: `ba17758838587c77229a9067b6b2ba429d99d6fe8f14268d7b795a2a5ac8aec7`
 
 ## Summary
 
 - reproducibility ready: `true`
-- release lock ready: `false`
+- release lock ready: `true`
 - methodology complete: `true`
 - required artifacts: `25`
 - missing artifacts: `0`
@@ -27,13 +27,13 @@ Evidence bundle SHA256: `ba17758838587c77229a9067b6b2ba429d99d6fe8f14268d7b795a2
 - world-class ready: `false`
 - world-class source checks: `6` pass / `14` total; `8` blocked
 - beta test ready: `false`
-- beta test blockers: `2`
+- beta test blockers: `1`
 - beta deferred evidence: `4`
 - public claim ready: `false`
-- public claim blockers: `7`
-- changed files at generation: `36`
-- source changed files at generation: `7`
-- generated changed files at generation: `29`
+- public claim blockers: `6`
+- changed files at generation: `1`
+- source changed files at generation: `0`
+- generated changed files at generation: `1`
 
 This report proves local benchmark reproducibility only. It keeps external provider and human-review gaps visible instead of counting them as complete. The git commit and dirty samples are generation-time context; the evidence bundle SHA is the durable anchor for the artifacts listed below.
 
@@ -46,7 +46,6 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 | Blocker |
 | --- |
-| release lock is not clean or commit is unavailable |
 | provider-backed model holdout source evidence is incomplete |
 
 | Deferred evidence | Reason |
@@ -64,7 +63,6 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 | Blocker |
 | --- |
-| release lock is not clean or commit is unavailable |
 | provider-backed model holdout evidence is incomplete |
 | human blind-review adjudication is incomplete |
 | phase-one provider matrix is incomplete |
@@ -74,8 +72,8 @@ This report proves local benchmark reproducibility only. It keeps external provi
 
 ## Release Lock
 
-- ready: `false`
-- reason: source files were dirty at generation time
+- ready: `true`
+- reason: only generated evidence artifacts were dirty at generation time
 - status scope: generation-time status before this report is written
 
 ## Evidence Bundle
