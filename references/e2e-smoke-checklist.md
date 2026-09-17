@@ -26,11 +26,11 @@
 在当前 `work` 任务中选择一个会影响其他成员交付物的未决合同，完成下列一次真实场景。每项都填写实际 ID、时间戳、工具结果和对应文件路径，不得用预期值代替运行证据。
 
 - Request：记录 worker 提交的 `discussion_request`，包括 team/epoch/revision/stage/task/dispatch identity、trigger、question、options、evidence、affected tasks 和 suggested owner；确认 worker 没有自行创建 discussion record。
-- Lead participant/owner：记录 Lead 批准时选定的二至四名 participant，逐个填写 label、role 和真实 `thread_id`；另记录 `decision_owner` 及其 `thread_id`、`max_rounds` 和 deadline。
-- Peer message 1：保留第一条 peer message 的 `message_id`、sender/recipients、sequence、kind、body、发送结果及 `messages.jsonl` 行号。
-- Peer message 2：保留来自另一 participant 的第二条 peer message，记录 `in_reply_to`、完整身份、发送结果及 transcript 行号。
-- Decision：记录 decision owner 发出的 `decision` message 和 `decision.json`，核对选项、rationale、evidence、rejected alternatives 与 affected tasks。
-- Lead acceptance：保留 Lead 对身份、证据、范围和依赖的实际检查，以及写入 `lead_accepted` 和 `closed` 的时间戳。
+- Lead participant/owner：记录 Lead 批准时选定的二至四名 participant，逐个填写 label、role 和真实 `thread_id`；另记录作为 participant 的 worker `decision_owner`、其 `thread_id`、`max_rounds` 和 deadline。保留发给每名 participant 的相同 context、完整 identity 和 transcript path，证明未只私发 owner。
+- Peer message 1：保留第一条 peer message 的 `message_id`、sender/recipients、目标 peer 的真实 thread ID、sequence、kind、body、发送结果及 `messages.jsonl` 行号；证明 sender 先读取共享 transcript，`recipients` 是 worker label 而非 Lead。
+- Peer message 2：保留来自另一 participant、指向第一名 worker 的第二条 peer message，记录 `in_reply_to`、完整身份、发送结果及 transcript 行号。两行必须以 worker labels 展示 proposal/challenge/response 的 cross-worker exchange，而不是对 Lead 的两条回复；每个 canonical message 仅有一条 transcript 行。
+- Decision：记录 worker decision owner 在 cross-worker exchange 之后发出的 `decision` message 和 `decision.json`，核对选项、rationale、evidence、rejected alternatives 与 affected tasks。
+- Lead acceptance：保留 Lead 对所有 participant 的 peer visibility、真实 thread/label、唯一 transcript 追加、身份、证据、范围和依赖的实际检查，以及写入 `lead_accepted` 和 `closed` 的时间戳。仅 Lead-mediated consultation 必须作为无效证据保留，不能通过验收。
 - 未提前派发：对比 `discussion_request`、decision、Lead acceptance 与下一阶段 `send_message_to_thread` 的时间；附上成员历史和账本差异，证明验收前没有后续阶段消息或状态推进。
 - Stale 检查：在 `closed` 后使用原 discussion identity 发送一条测试消息；记录它被保留为 `stale` 历史，且 decision、task status 和下一阶段派发均未变化。
 - timeout/block 检查：用一个独立演练 discussion 到达 deadline 但不产生 owner decision；确认 Lead 将其标记 `expired`，把依赖工作标记 `blocked` 或只向用户提一个具体问题，并证明没有派发下一阶段。

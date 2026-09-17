@@ -2,7 +2,7 @@
 
 `agent-team-work` 用于在 Codex 项目开始时，通过菜单确认目标、角色、阶段和 DoD，建立一个当前会话 Leader 加多个独立项目成员会话的严格串行团队。Leader 逐阶段派单、核对成员报告和实际产物，只有验收通过后才推进下一阶段；返修复用原成员会话并递增 attempt。
 
-新建任务默认可使用 `worker_can_request` 讨论策略：成员遇到未决的跨角色合同、冲突证据或高影响选择时，可请求一个由 Lead 批准、最多两轮、Lead 定期限的有界 worker-to-worker 决策讨论回合。指定的 `decision_owner` 给出结论，Lead 核验并接受后原任务才可消费该决定；讨论始终是当前阶段内的子流程，不改变串行派单和验收门。
+新建任务默认可使用 `worker_can_request` 讨论策略：成员遇到未决的跨角色合同、冲突证据或高影响选择时，可请求一个由 Lead 批准、最多两轮、Lead 定期限的有界 worker-to-worker 决策讨论回合。Lead 从 worker participant 中指定 `decision_owner`，向所有 participant 发送相同 context 和共享 transcript 路径；每人读取 transcript 后以真实 peer thread ID 给另一成员发送身份绑定消息，`recipients` 明确写 peer label，规范消息只追加一次。owner 只能在 cross-worker exchange 后给出结论，Lead 核验 peer 可见性、身份、证据和范围后才可接受；仅回复 Lead 的流程无效。讨论始终是当前阶段内的子流程，不改变串行派单和验收门，且 discussion marker 缺失的 legacy 团队维持原行为。
 
 ## 使用范围
 

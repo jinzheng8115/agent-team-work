@@ -26,7 +26,7 @@
 ## 派单、等待与结果
 
 - `send_message_to_thread` 是发送新工作回合的工具，目标必须是绑定的真实会话 ID；省略模型参数以保留原设置。每次发送前附带稳定 `dispatch_key` 和 ATW 身份字段，先确认该成员的待命回合/上一任务已经结束；工具没有可证明的队列语义时，忙碌目标先等待，不假定消息会自动排队。
-- Worker-to-worker 消息仍使用已绑定成员的真实 `thread_id` 和现有 `send_message_to_thread`，且只能在 Lead 已批准对应讨论、参与者与 `decision_owner` 后发送；不能为讨论新建临时会话、替代角色或隐形协调器。每条 peer message 都携带完整 `discussion_id`、team/epoch/revision/stage/task/dispatch identity、sender、recipients、sequence 和 kind，并追加持久化到 record 指定的 `.team/discussions/{task_id}/d{sequence}/messages.jsonl`。消息只推进讨论记录，不能修改两个 Lead-only JSON 账本、验收任务或派发阶段。
+- Worker-to-worker 消息仍使用已绑定成员的真实 `thread_id` 和现有 `send_message_to_thread`，且只能在 Lead 已批准对应讨论、worker participant 与 worker `decision_owner` 后发送；不能为讨论新建临时会话、替代角色或隐形协调器。Lead 必须先向每名 participant 发送完全相同的 discussion context、完整 `discussion_id` identity 和 transcript path。participant 读取该共享 transcript 后，用目标 peer 的真实 `thread_id` 发送消息；`recipients` 明确列出该 peer label，不能仅指向 Lead。每名 participant 至少发送一条 peer message，且规范消息只追加一次到 record 指定的 `.team/discussions/{task_id}/d{sequence}/messages.jsonl`。owner 只能在存在 cross-worker exchange 后发送 `decision`。消息只推进讨论记录，不能修改两个 Lead-only JSON 账本、验收任务或派发阶段；Lead-only consultation 不满足此协议。
 - 团队 `complete` 后收到修改请求时，禁止直接调用 `send_message_to_thread`。Lead 必须先进入 `impact_analysis`、查询真实成员状态和既有验收，并写好 `.team/revisions/<cycle>.md`；修订任务及 revision-aware key 已进入账本后才可发送首个受影响阶段。
 - 修订派单发送失败、超时或恢复中断时，重试前先查询账本中 planned/active tasks、目标成员历史与会话状态，并按 `revision_cycle`、stage、attempt、dispatch key 排除已经送达或已被替代的任务；不能从旧 cycle 复制消息直接重发。
 - `wait_threads` 以成员 ID、可用的 hostId 和上次 cursor 等待；后续使用 `afterCursor`，避免重复收取同一完成回合。通常设置至多 60000 ms 的一次有界等待，超时后先处理新用户消息和必要沟通再继续等待，不用循环即时快照忙轮询。

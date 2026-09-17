@@ -87,11 +87,13 @@ impact_if_wrong
 paused_work
 ```
 
-成员仅暂停依赖未决结论或不可逆的部分，可以继续独立工作。Lead 按 trigger policy 审核请求，选择二至四名既有成员、指定 `decision_owner`、轮次上限和期限，再批准或拒绝；默认最多两轮，期限由 Lead 定义。正常状态流为 `requested -> approved -> open -> proposing/challenging -> decision_pending -> decided -> lead_accepted -> closed`，其中 `proposing` 和 `challenging` 是同一讨论窗口内可交替出现的活动状态；替代终态为 `rejected`、`blocked`、`expired`、`cancelled`。
+成员仅暂停依赖未决结论或不可逆的部分，可以继续独立工作。Lead 按 trigger policy 审核请求，选择二至四名既有成员，并从这些 worker participant 中指定 `decision_owner`、轮次上限和期限，再批准或拒绝；默认最多两轮，期限由 Lead 定义。批准后 Lead 向每名 participant fan-out 相同的 question、options、evidence、完整 discussion identity 和共享 transcript 路径，而不是只向 owner 发送私有决策问题。正常状态流为 `requested -> approved -> open -> proposing/challenging -> decision_pending -> decided -> lead_accepted -> closed`，其中 `proposing` 和 `challenging` 是同一讨论窗口内可交替出现的活动状态；替代终态为 `rejected`、`blocked`、`expired`、`cancelled`。
 
 Worker 负责 triage，并在批准后提交有界的 `proposal`、`challenge`、`evidence` 或 `response`；`decision_owner` 必须选择一个选项或明确升级，并提交 `decision`，说明 rationale、evidence、rejected alternatives 和 affected tasks，不能静默扩大任务范围。Lead 验证完整身份、证据、范围和依赖后，记录 `lead_accepted` 或退回澄清；只有 Lead 可以把 accepted decision 附到原任务并关闭讨论。期限到达时不得继续收取可推进状态的消息；Lead 将讨论标为 `expired`，若 owner 仍无法决定则把依赖工作标为 `blocked`，或只向用户提出一个具体问题。参与者不可用时只能缩减既有 participant set 或标为 `blocked`，不能静默换角色；讨论不能无限保持开放。
 
-讨论是当前任务内的决策子流程，永远不会创建或启动一个后续交付阶段，也不能覆盖 accepted task。`closed` 后原成员按决定恢复工作；后续阶段仍只能在当前任务按正常报告和验收门成为 `accepted` 后，由 Lead 依原 gate 派发。
+Peer-visible completion rule：participant 在批准后先读取共享 transcript，再向另一 participant 的真实 thread ID 发送 `proposal`、`challenge`、`evidence` 或 `response`；每人至少一条，`recipients` 必须列出 peer label，规范消息只追加一次。worker `decision_owner` 只能在已有 cross-worker exchange 后发送 `decision`。Lead 必须在 `lead_accepted` 前核对所有 participant 获得相同 context/transcript path、peer 可见性、完整身份、证据和范围；仅 Lead-mediated consultation 无效。讨论窗口内不得派发下一阶段。
+
+讨论是当前任务内的决策子流程，永远不会创建或启动一个后续交付阶段，也不能覆盖 accepted task。`closed` 后原成员按决定恢复工作；后续阶段仍只能在当前任务按正常报告和验收门成为 `accepted` 后，由 Lead 依原 gate 派发。没有 discussion marker 的 legacy task 继续既有串行门控，不进入此子流程。
 
 ## 5. 完成后的修改周期
 

@@ -17,8 +17,8 @@
 假设 backend 阶段已经派发，任务包含默认 `discussion_policy`。backend worker 发现 response pagination contract 同时影响 frontend，并且 cursor 与 offset 两个可行方案存在实质兼容性权衡；它暂停依赖该合同的实现，继续不受影响的工作，向 Lead 返回 `decision_status: unresolved` 和结构化 `discussion_request`。
 
 1. Lead 核对 hard trigger、active task 和完整 identity，建立 `{team_id}/{ownership_epoch}/r1/backend/{task_id}/d1`，批准 frontend/backend 两名参与者，指定 frontend worker 为 `decision_owner`，设置两轮上限和期限。
-2. Lead 使用两名既有 worker 的真实 thread ID 发送带相同 discussion identity 的邀请；backend 提交 `proposal` 与 API evidence，frontend 提交 `challenge`/`response`，全部追加到对应 `messages.jsonl`。两人都不能写 `team.json`/`tasks.json`，也不能启动 frontend 交付阶段。
-3. 指定的 frontend owner 写 `decision`，选择 cursor contract，说明理由、证据、被拒绝的 offset 方案和受影响任务。Lead 核验身份、证据与范围，写 `lead_accepted`，把 decision 附到 backend task 后关闭讨论。
+2. Lead 向 backend 和 frontend 两名既有 worker 的真实 thread ID fan-out 完全相同的邀请：question、options、evidence、完整 discussion identity 和 `messages.jsonl` 路径。两人先读取同一 transcript；backend 向 `recipients: [frontend]` 发送 `proposal` 与 API evidence，frontend 再向 `recipients: [backend]` 发送 `challenge`/`response`，每条规范消息恰好追加一次到对应 `messages.jsonl`。因此 transcript 明确显示 `backend -> frontend` 和 `frontend -> backend`，不是只显示 worker 回复 Lead。两人都不能写 `team.json`/`tasks.json`，也不能启动 frontend 交付阶段。
+3. 指定的 frontend worker owner 仅在上述 cross-worker exchange 已存在后写 `decision`，选择 cursor contract，说明理由、证据、被拒绝的 offset 方案和受影响任务。Lead 核验每人收到同一 context、peer thread/label、唯一 transcript 行、身份、证据与范围，确认没有下一阶段派发后，才写 `lead_accepted`，把 decision 附到 backend task 后关闭讨论。只有 Lead 与任一 worker 的私下往返时，必须退回而不能接受。
 4. backend worker 依据 accepted decision 恢复并完成原任务，报告 `decision_status: clear`。Lead 仍须检查实现和报告并将 backend task 标为 `accepted`；只有这一步完成，且 `confirmation` gate 获得用户确认后，才派发后续 frontend stage。
 
 首轮 `revision_cycle: 1` 已 `complete` 后，用户要求只修改 developer 产出的数据映射，并让 reviewer 重新核验：
