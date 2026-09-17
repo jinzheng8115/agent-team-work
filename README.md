@@ -14,12 +14,29 @@
 
 ## 安装与运行
 
-1. 将 `dist/agent-team-work.zip` 解压到目标 skill 目录，或按目标平台的 Agent Skills 安装方式复制包体。
+1. 将 `dist/agent-team-work.zip` 解压到目标 skill 目录，或按目标平台的 Agent Skills 安装方式复制包体。归档已包含四个平台适配器。
 2. 在目标项目中显式调用 `$agent-team-work`。
 3. 首次建队先完成菜单摘要和一次最终确认；只读查看已有团队时不创建会话或派单。
 4. 状态保存在项目根目录 `.team/`，可用 `python3 scripts/validate_team_state.py .team` 做只读账本校验。
 
 维护者可用 `python3 scripts/ci_test.py` 运行路由、Python 语法和包形状检查；`scripts/local_output_eval_runner.py` 只回放固定 fixture。`scripts/import_telemetry_events.py` 校验 metadata-only JSONL 并向 stdout 输出脱敏事件，不联网也不写文件。`evals/output/provider_matrix.json` 与 `holdout_cases.zh-CN.jsonl` 定义真实 provider 留出评测的 40-call 合同，但没有凭证时保持 `external-required`。
+
+## 平台适配器
+
+适配器是统一 Skill 契约与目标平台原生元数据之间的桥接层。它负责平台侧的发现、激活、安装范围、权限说明和能力降级，不复制一套新的团队逻辑，也不会额外创建 worker。平台不支持 Codex 原生项目会话时，适配器会明确保留的通用语义和降级边界。
+
+| 平台 | 归档文件 | 作用 |
+| --- | --- | --- |
+| OpenAI/Codex | `targets/openai/adapter.json`、`targets/openai/agents/openai.yaml` | 描述 Codex 项目/会话能力及 OpenAI 风格展示元数据 |
+| Claude | `targets/claude/adapter.json`、`targets/claude/README.md` | 提供 Claude 侧元数据，并记录 Codex 会话能力的降级说明 |
+| Generic Agent Skills | `targets/generic/adapter.json` | 提供平台中立的 Agent Skills 兼容元数据 |
+| VS Code | `targets/vscode/adapter.json`、`targets/vscode/README.md` | 说明 VS Code 安装范围、workspace trust 和运行限制 |
+
+适配器由跨平台打包阶段生成；最终归档通过以下命令验证目标文件和适配器元数据均已包含：
+
+```bash
+python3 scripts/runtime_package_check.py . --package-dir dist
+```
 
 ## 发布证据
 
