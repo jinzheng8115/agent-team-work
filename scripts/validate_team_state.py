@@ -20,6 +20,7 @@ DISCUSSION_STATUSES = {
     "rejected", "blocked", "expired", "cancelled",
 }
 DISCUSSION_MESSAGE_KINDS = {"proposal", "challenge", "evidence", "response", "decision"}
+DISCUSSION_NON_DECISION_MESSAGE_KINDS = {"proposal", "challenge", "evidence", "response"}
 TERMINAL_DISCUSSION_STATUSES = {"closed", "rejected", "blocked", "expired", "cancelled"}
 DEFAULT_DISCUSSION_POLICY = {
     "mode": "worker_can_request",
@@ -198,6 +199,8 @@ def validate_discussion_record(team_dir: Path, team: dict, tasks_by_id: dict,
     if closed_or_lead_accepted:
         if len(participant_labels) < 2:
             failures.append(f"{label} requires at least two participants")
+        if len(worker_participant_labels) < 2:
+            failures.append(f"{label} requires at least two worker participants")
         if decision_owner not in worker_participant_labels:
             failures.append(f"{label} decision_owner must be a worker participant")
 
@@ -210,11 +213,10 @@ def validate_discussion_record(team_dir: Path, team: dict, tasks_by_id: dict,
 
     transcript_path = team_dir / expected_transcript
     owner_decision_message = False
-    worker_to_worker_non_decision_sequences: set[int] = set()
     worker_to_worker_message = False
-    participant_senders_before_owner_decision: set[str] = set()
-    participant_message_senders: list[tuple[int, str]] = []
-    owner_decision_sequence: int | None = None
+    worker_peer_senders_before_decision: set[str] = set()
+    participant_senders_before_decision: set[str] = set()
+    owner_decision_line: int | None = None
     if not transcript_path.is_file():
         failures.append(f"{label} missing messages transcript: {transcript_path}")
     else:
@@ -267,41 +269,48 @@ def validate_discussion_record(team_dir: Path, team: dict, tasks_by_id: dict,
                     and message.get("sender") == decision_owner
                     and message.get("discussion_id") == discussion_id):
                 owner_decision_message = True
-                if sequence > 0 and (owner_decision_sequence is None or sequence < owner_decision_sequence):
-                    owner_decision_sequence = sequence
+                if owner_decision_line is None:
+                    owner_decision_line = line_number
             sender = message.get("sender")
-            if sequence > 0 and sender in participant_labels:
-                participant_message_senders.append((sequence, sender))
-            if sender in worker_participant_labels:
-                has_worker_recipient = any(
-                    recipient in worker_participant_labels and recipient != sender
-                    for recipient in recipients
-                ) if isinstance(recipients, list) else False
-                if has_worker_recipient:
-                    worker_to_worker_message = True
-                    if message.get("kind") != "decision":
-                        worker_to_worker_non_decision_sequences.add(sequence)
-        if owner_decision_sequence is not None:
-            participant_senders_before_owner_decision = {
-                sender for sequence, sender in participant_message_senders
-                if sequence < owner_decision_sequence
-            }
-        has_peer_exchange_before_owner_decision = (
-            owner_decision_sequence is not None
-            and any(
-                sequence < owner_decision_sequence
-                for sequence in worker_to_worker_non_decision_sequences
+            recipients_list = recipients if isinstance(recipients, list) else []
+            before_decision_boundary = (
+                owner_decision_line is None or line_number < owner_decision_line
             )
+            if before_decision_boundary and sender in participant_labels:
+                participant_senders_before_decision.add(sender)
+            if sender in worker_participant_labels:
+                peer_recipients = [
+                    recipient for recipient in recipients_list
+                    if recipient in worker_participant_labels and recipient != sender
+                ]
+                if peer_recipients:
+                    worker_to_worker_message = True
+                    if (before_decision_boundary
+                            and message.get("kind") in DISCUSSION_NON_DECISION_MESSAGE_KINDS):
+                        worker_peer_senders_before_decision.add(sender)
+        missing_worker_peer_senders = sorted(
+            worker_participant_labels - worker_peer_senders_before_decision
         )
 
         if closed_or_lead_accepted:
-            if not has_peer_exchange_before_owner_decision:
+            if not worker_peer_senders_before_decision:
                 failures.append(
                     f"{label} requires a worker-to-worker non-decision message before decision_owner decision"
                 )
+            elif missing_worker_peer_senders:
+                participant_noun = (
+                    "worker participant"
+                    if len(missing_worker_peer_senders) == 1
+                    else "worker participants"
+                )
+                failures.append(
+                    f"{label} requires {participant_noun} "
+                    + ", ".join(missing_worker_peer_senders)
+                    + " to send a peer message before decision_owner decision"
+                )
             if not worker_to_worker_message:
                 failures.append(f"{label} cannot contain only self-directed or Lead-directed messages")
-            if len(participant_senders_before_owner_decision) < 2:
+            if len(participant_senders_before_decision) < 2:
                 failures.append(
                     f"{label} requires two participant senders before decision_owner decision"
                 )

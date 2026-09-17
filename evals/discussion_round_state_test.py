@@ -370,6 +370,117 @@ def test_closed_discussion_rejects_peer_exchange_appended_after_owner_decision()
     assert "discussion team/1/r1/implementation/task/d1 requires a worker-to-worker non-decision message before decision_owner decision" in result["failures"]
 
 
+_LEADER_MEMBER = {
+    "label": "leader",
+    "role": "leader",
+    "thread_id": "leader-thread",
+    "host_id": "host",
+    "checkout_path": ".",
+    "project_verified": True,
+}
+
+
+def test_closed_and_lead_accepted_reject_leader_as_substitute_peer_sender():
+    for status in ("closed", "lead_accepted"):
+        result = validate(write_fixture(
+            status=status,
+            extra_members=[_LEADER_MEMBER],
+            record_overrides={
+                "participants": [
+                    {"label": "worker", "role": "implementer", "thread_id": "worker-thread"},
+                    {"label": "reviewer", "role": "reviewer", "thread_id": "reviewer-thread"},
+                    {"label": "leader", "role": "leader", "thread_id": "leader-thread"},
+                ],
+            },
+            message_overrides=[
+                {"recipients": ["reviewer"]},
+                {"sender": "leader", "recipients": ["worker"], "kind": "challenge"},
+                {"recipients": ["reviewer"]},
+            ],
+        ))
+        assert not result["ok"], result
+        assert (
+            "discussion team/1/r1/implementation/task/d1 requires worker participant "
+            "reviewer to send a peer message before decision_owner decision"
+        ) in result["failures"], result
+
+
+def test_closed_and_lead_accepted_reject_self_directed_peer_substitute():
+    for status in ("closed", "lead_accepted"):
+        result = validate(write_fixture(
+            status=status,
+            message_overrides=[
+                {"recipients": ["reviewer"]},
+                {"recipients": ["reviewer"]},
+                {"recipients": ["reviewer"]},
+            ],
+        ))
+        assert not result["ok"], result
+        assert (
+            "discussion team/1/r1/implementation/task/d1 requires worker participant "
+            "reviewer to send a peer message before decision_owner decision"
+        ) in result["failures"], result
+
+
+def test_closed_discussion_rejects_silent_third_worker_participant():
+    result = validate(write_fixture(
+        extra_members=[{
+            "label": "third",
+            "role": "writer",
+            "thread_id": "third-thread",
+            "host_id": "host",
+            "checkout_path": ".",
+            "project_verified": True,
+        }],
+        record_overrides={
+            "participants": [
+                {"label": "worker", "role": "implementer", "thread_id": "worker-thread"},
+                {"label": "reviewer", "role": "reviewer", "thread_id": "reviewer-thread"},
+                {"label": "third", "role": "writer", "thread_id": "third-thread"},
+            ],
+        },
+    ))
+    assert not result["ok"], result
+    assert (
+        "discussion team/1/r1/implementation/task/d1 requires worker participant "
+        "third to send a peer message before decision_owner decision"
+    ) in result["failures"], result
+
+
+def test_closed_and_lead_accepted_reject_lower_sequence_backfill_after_owner_decision():
+    discussion_id = "team/1/r1/implementation/task/d1"
+    for status in ("closed", "lead_accepted"):
+        result = validate(write_fixture(
+            status=status,
+            message_overrides=[
+                {"recipients": ["worker"]},
+                {
+                    "message_id": f"{discussion_id}/m3",
+                    "sender": "worker",
+                    "recipients": ["reviewer"],
+                    "kind": "decision",
+                    "sequence": 3,
+                    "in_reply_to": f"{discussion_id}/m1",
+                    "body": "Decide before peer reply.",
+                },
+                {
+                    "message_id": f"{discussion_id}/m2",
+                    "sender": "reviewer",
+                    "recipients": ["worker"],
+                    "kind": "response",
+                    "sequence": 2,
+                    "in_reply_to": f"{discussion_id}/m3",
+                    "body": "Late peer reply.",
+                },
+            ],
+        ))
+        assert not result["ok"], result
+        assert (
+            "discussion team/1/r1/implementation/task/d1 requires a worker-to-worker "
+            "non-decision message before decision_owner decision"
+        ) in result["failures"], result
+
+
 def test_closed_discussion_requires_two_participants():
     result = validate(write_fixture(
         record_overrides={
