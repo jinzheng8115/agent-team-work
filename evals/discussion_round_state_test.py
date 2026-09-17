@@ -20,7 +20,7 @@ def write_fixture(*, status="closed", with_policy=True, discussions=["d1"],
                   statuses=None, record_overrides=None, message_overrides=None,
                   decision_overrides=None, task_status="reported",
                   task_overrides=None, team_protocol_version=1,
-                  tasks_protocol_version=1) -> Path:
+                  tasks_protocol_version=1, extra_members=None) -> Path:
     """Create a temporary schema-3 team with optional discussion evidence."""
     team_dir = Path(tempfile.mkdtemp())
     _FIXTURES.append(team_dir)
@@ -54,6 +54,8 @@ def write_fixture(*, status="closed", with_policy=True, discussions=["d1"],
             },
         ],
     }
+    if extra_members:
+        team["members"].extend(extra_members)
     if team_protocol_version is not None:
         team["discussion_protocol_version"] = team_protocol_version
     task = {
@@ -289,6 +291,126 @@ def test_lead_accepted_requires_owner_authored_decision_message():
     ))
     assert not result["ok"], result
     assert "discussion team/1/r1/implementation/task/d1 missing decision message from decision_owner" in result["failures"]
+
+
+def test_closed_and_lead_accepted_reject_ai_music_d1_leader_mediated_shape():
+    for status in ("closed", "lead_accepted"):
+        result = validate(write_fixture(
+            status=status,
+            extra_members=[{
+                "label": "leader",
+                "role": "leader",
+                "thread_id": "leader-thread",
+                "host_id": "host",
+                "checkout_path": ".",
+                "project_verified": True,
+            }],
+            record_overrides={
+                "participants": [
+                    {"label": "worker", "role": "implementer", "thread_id": "worker-thread"},
+                    {"label": "reviewer", "role": "reviewer", "thread_id": "reviewer-thread"},
+                    {"label": "leader", "role": "leader", "thread_id": "leader-thread"},
+                ],
+            },
+            message_overrides=[
+                {"recipients": ["leader"]},
+                {"recipients": ["leader"]},
+                {"recipients": ["leader"]},
+            ],
+        ))
+        assert not result["ok"], result
+        assert "discussion team/1/r1/implementation/task/d1 requires a worker-to-worker non-decision message before decision_owner decision" in result["failures"]
+        assert "discussion team/1/r1/implementation/task/d1 cannot contain only self-directed or Lead-directed messages" in result["failures"]
+
+
+def test_closed_discussion_requires_two_participant_senders_before_owner_decision():
+    result = validate(write_fixture(message_overrides=[
+        {"recipients": ["reviewer"]},
+        {"sender": "worker", "recipients": ["reviewer"]},
+        {"recipients": ["reviewer"]},
+    ]))
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 requires two participant senders before decision_owner decision" in result["failures"]
+
+
+def test_closed_discussion_rejects_peer_exchange_appended_after_owner_decision():
+    team_dir = write_fixture(message_overrides=[
+        {"recipients": ["leader"]},
+        {"recipients": ["leader"]},
+        {"recipients": ["leader"]},
+    ], extra_members=[{
+        "label": "leader",
+        "role": "leader",
+        "thread_id": "leader-thread",
+        "host_id": "host",
+        "checkout_path": ".",
+        "project_verified": True,
+    }], record_overrides={
+        "participants": [
+            {"label": "worker", "role": "implementer", "thread_id": "worker-thread"},
+            {"label": "reviewer", "role": "reviewer", "thread_id": "reviewer-thread"},
+            {"label": "leader", "role": "leader", "thread_id": "leader-thread"},
+        ],
+    })
+    transcript_path = team_dir / "discussions/task/d1/messages.jsonl"
+    with transcript_path.open("a", encoding="utf-8") as transcript:
+        transcript.write(json.dumps({
+            "message_id": "team/1/r1/implementation/task/d1/m4",
+            "discussion_id": "team/1/r1/implementation/task/d1",
+            "sender": "reviewer",
+            "recipients": ["worker"],
+            "sequence": 4,
+            "kind": "response",
+            "in_reply_to": "team/1/r1/implementation/task/d1/m3",
+            "body": "This peer exchange arrived after the decision.",
+            "created_at": "2026-09-17T10:15:00+08:00",
+        }) + "\n")
+    result = validate(team_dir)
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 requires a worker-to-worker non-decision message before decision_owner decision" in result["failures"]
+
+
+def test_closed_discussion_requires_two_participants():
+    result = validate(write_fixture(
+        record_overrides={
+            "participants": [{"label": "worker", "role": "implementer", "thread_id": "worker-thread"}],
+        },
+        message_overrides=[
+            {"recipients": ["worker"]},
+            {"sender": "worker", "recipients": ["worker"]},
+            {"recipients": ["worker"]},
+        ],
+    ))
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 requires at least two participants" in result["failures"]
+
+
+def test_closed_discussion_rejects_leader_as_decision_owner():
+    result = validate(write_fixture(
+        extra_members=[{
+            "label": "leader",
+            "role": "leader",
+            "thread_id": "leader-thread",
+            "host_id": "host",
+            "checkout_path": ".",
+            "project_verified": True,
+        }],
+        record_overrides={
+            "participants": [
+                {"label": "worker", "role": "implementer", "thread_id": "worker-thread"},
+                {"label": "reviewer", "role": "reviewer", "thread_id": "reviewer-thread"},
+                {"label": "leader", "role": "leader", "thread_id": "leader-thread"},
+            ],
+            "decision_owner": "leader",
+        },
+        message_overrides=[{}, {}, {"sender": "leader", "recipients": ["worker"]}],
+        decision_overrides={
+            "decision_owner": "leader",
+            "decision_owner_thread_id": "leader-thread",
+        },
+    ))
+    assert not result["ok"], result
+    assert "discussion team/1/r1/implementation/task/d1 decision_owner must be a worker participant" in result["failures"]
 
 
 def test_lead_acceptance_must_be_affirmative():

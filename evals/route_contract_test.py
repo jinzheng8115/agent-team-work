@@ -174,7 +174,8 @@ def main() -> None:
             "lead_selects_participants", "lead_assigns_decision_owner", "does_not_dispatch_next_stage",
         },
         "discussion-decision-owner": {
-            "owner_records_decision", "lead_accepts_before_resume", "does_not_dispatch_next_stage",
+            "requires_peer_visible_worker_exchange", "owner_records_decision",
+            "lead_accepts_before_resume", "does_not_dispatch_next_stage",
         },
         "discussion-timeout-escalation": {
             "blocks_or_escalates", "does_not_dispatch_next_stage",
@@ -205,7 +206,10 @@ def main() -> None:
     required_output_phrases = {
         "discussion-triage-hard-trigger": ("worker submits a discussion_request",),
         "discussion-lead-approval": ("Lead approves", "does not dispatch the next stage"),
-        "discussion-decision-owner": ("decision_owner", "Lead acceptance", "does not dispatch the next stage"),
+        "discussion-decision-owner": (
+            "two worker participants exchange peer-visible", "directly with each other",
+            "worker decision_owner", "Lead acceptance", "does not dispatch the next stage",
+        ),
     }
     for case_id, phrases in required_output_phrases.items():
         for phrase in phrases:

@@ -186,6 +186,21 @@ def validate_discussion_record(team_dir: Path, team: dict, tasks_by_id: dict,
     if decision_owner not in participant_labels:
         failures.append(f"{label} decision_owner must be a participant")
 
+    status = record.get("status")
+    closed_or_lead_accepted = status in {"lead_accepted", "closed"}
+    leader_thread_id = (team.get("leader") or {}).get("thread_id")
+    worker_participant_labels = {
+        participant_label for participant_label in participant_labels
+        if (member := members_by_label.get(participant_label))
+        and member.get("thread_id") != leader_thread_id
+        and str(member.get("role", "")).casefold() != "leader"
+    }
+    if closed_or_lead_accepted:
+        if len(participant_labels) < 2:
+            failures.append(f"{label} requires at least two participants")
+        if decision_owner not in worker_participant_labels:
+            failures.append(f"{label} decision_owner must be a worker participant")
+
     expected_transcript = f"discussions/{parsed['task']}/d{parsed['sequence']}/messages.jsonl"
     expected_decision = f"discussions/{parsed['task']}/d{parsed['sequence']}/decision.json"
     if record.get("transcript_path") != expected_transcript:
@@ -195,6 +210,11 @@ def validate_discussion_record(team_dir: Path, team: dict, tasks_by_id: dict,
 
     transcript_path = team_dir / expected_transcript
     owner_decision_message = False
+    worker_to_worker_non_decision_sequences: set[int] = set()
+    worker_to_worker_message = False
+    participant_senders_before_owner_decision: set[str] = set()
+    participant_message_senders: list[tuple[int, str]] = []
+    owner_decision_sequence: int | None = None
     if not transcript_path.is_file():
         failures.append(f"{label} missing messages transcript: {transcript_path}")
     else:
@@ -247,8 +267,45 @@ def validate_discussion_record(team_dir: Path, team: dict, tasks_by_id: dict,
                     and message.get("sender") == decision_owner
                     and message.get("discussion_id") == discussion_id):
                 owner_decision_message = True
+                if sequence > 0 and (owner_decision_sequence is None or sequence < owner_decision_sequence):
+                    owner_decision_sequence = sequence
+            sender = message.get("sender")
+            if sequence > 0 and sender in participant_labels:
+                participant_message_senders.append((sequence, sender))
+            if sender in worker_participant_labels:
+                has_worker_recipient = any(
+                    recipient in worker_participant_labels and recipient != sender
+                    for recipient in recipients
+                ) if isinstance(recipients, list) else False
+                if has_worker_recipient:
+                    worker_to_worker_message = True
+                    if message.get("kind") != "decision":
+                        worker_to_worker_non_decision_sequences.add(sequence)
+        if owner_decision_sequence is not None:
+            participant_senders_before_owner_decision = {
+                sender for sequence, sender in participant_message_senders
+                if sequence < owner_decision_sequence
+            }
+        has_peer_exchange_before_owner_decision = (
+            owner_decision_sequence is not None
+            and any(
+                sequence < owner_decision_sequence
+                for sequence in worker_to_worker_non_decision_sequences
+            )
+        )
 
-    status = record.get("status")
+        if closed_or_lead_accepted:
+            if not has_peer_exchange_before_owner_decision:
+                failures.append(
+                    f"{label} requires a worker-to-worker non-decision message before decision_owner decision"
+                )
+            if not worker_to_worker_message:
+                failures.append(f"{label} cannot contain only self-directed or Lead-directed messages")
+            if len(participant_senders_before_owner_decision) < 2:
+                failures.append(
+                    f"{label} requires two participant senders before decision_owner decision"
+                )
+
     decision_path = team_dir / expected_decision
     decision_required = status in {"decided", "lead_accepted", "closed"}
     if decision_required and not decision_path.is_file():

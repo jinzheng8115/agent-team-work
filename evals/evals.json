@@ -88,9 +88,9 @@
     {
       "id": "discussion-decision-owner",
       "prompt": "参与者已完成提案和挑战，讨论应如何决策并恢复原任务？",
-      "expected_output": "decision_owner 写入选项、理由、证据、被拒绝备选和受影响任务；只有记录 Lead acceptance 后才恢复依赖工作，在此之前 does not dispatch the next stage。",
+      "expected_output": "至少两名 worker participant 必须先直接交换 peer-visible 的 proposal、challenge、evidence 或 response，之后 worker decision_owner 写入选项、理由、证据、被拒绝备选和受影响任务；只有记录 Lead acceptance 后才恢复依赖工作，在此之前 does not dispatch the next stage。",
       "files": [],
-      "assertions": ["owner_records_decision", "lead_accepts_before_resume", "does_not_dispatch_next_stage"]
+      "assertions": ["requires_peer_visible_worker_exchange", "owner_records_decision", "lead_accepts_before_resume", "does_not_dispatch_next_stage"]
     },
     {
       "id": "discussion-timeout-escalation",
