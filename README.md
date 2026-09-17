@@ -71,6 +71,14 @@ python3 scripts/runtime_package_check.py . --package-dir dist
 
 *Demo 实际产物：把任务拆分、权限控制、人工确认和失败恢复纳入同一条交付链。*
 
+### 回合对话：从申请到采纳
+
+新增的 worker-to-worker 讨论回合不是自由聊天，而是当前阶段内的有界子流程：Lead 先批准范围和 decision owner，参与者读取共享 transcript 后进行真实 peer exchange，owner 再形成决定，最后由 Lead 核验并采纳。
+
+![Worker-to-Worker 回合对话生命周期](README-assets/worker-discussion-round.svg)
+
+*协议要点：peer exchange 必须在共享 transcript 中真实可见；只有完成身份、证据和范围核验后，决定才能进入后续串行流程。*
+
 ## 维护与发布证据
 
 维护者可用 `python3 scripts/ci_test.py` 运行路由、Python 语法、包形状、运行时归档和状态回归检查；`scripts/local_output_eval_runner.py` 只回放固定 fixture。`scripts/import_telemetry_events.py` 校验 metadata-only JSONL 并向 stdout 输出脱敏事件，不联网也不写文件。`evals/output/provider_matrix.json` 与 `holdout_cases.zh-CN.jsonl` 定义真实 provider 留出评测的 40-call 合同，但没有凭证时保持 `external-required`。
