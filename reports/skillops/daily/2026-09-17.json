@@ -15,7 +15,7 @@
   "public_world_class_ready": false,
   "world_class_pending_count": 4,
   "release_lock_ready": true,
-  "evidence_consistency_ok": false,
+  "evidence_consistency_ok": true,
   "writes_source_files": false,
   "auto_patch_enabled": false,
   "failure_count": 0,
@@ -32,7 +32,7 @@
     "public_world_class_ready": false,
     "world_class_pending_count": 4,
     "release_lock_ready": true,
-    "evidence_consistency_ok": false,
+    "evidence_consistency_ok": true,
     "writes_source_files": false,
     "auto_patch_enabled": false,
     "failure_count": 0
@@ -125,7 +125,7 @@
     "public_world_class_ready": false,
     "world_class_pending_count": 4,
     "release_lock_ready": true,
-    "evidence_consistency_ok": false
+    "evidence_consistency_ok": true
   },
   "actions": [
     {
@@ -137,11 +137,6 @@
       "key": "close-world-class-evidence",
       "priority": "high",
       "action": "Collect accepted external or human evidence for the pending world-class ledger entries."
-    },
-    {
-      "key": "refresh-evidence-consistency",
-      "priority": "high",
-      "action": "Regenerate evidence-consistency before using this report for release decisions."
     }
   ],
   "failures": [],

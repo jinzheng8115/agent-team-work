@@ -2534,14 +2534,14 @@
           "beta_test_deferred_evidence_count": 4,
           "public_claim_ready": false,
           "public_claim_blocker_count": 6,
-          "working_tree_dirty": true,
-          "changed_file_count": 59,
+          "working_tree_dirty": false,
+          "changed_file_count": 0,
           "source_tree_dirty": false,
           "source_changed_file_count": 0,
-          "generated_tree_dirty": true,
-          "generated_changed_file_count": 59
+          "generated_tree_dirty": false,
+          "generated_changed_file_count": 0
         },
-        "commit": "7947dcfacb6616d682cafd732048fbe8d31f59c8",
+        "commit": "d9a194069ed347e3914e45bd343b3536f5791582",
         "missing_artifacts": [],
         "limitations": [
           "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -5799,44 +5799,18 @@
       "ok": true,
       "generated_at": "2026-09-17",
       "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
-      "commit": "7947dcfacb6616d682cafd732048fbe8d31f59c8",
+      "commit": "d9a194069ed347e3914e45bd343b3536f5791582",
       "git_status": {
         "available": true,
-        "dirty": true,
-        "changed_file_count": 59,
-        "generated_dirty": true,
-        "generated_changed_file_count": 59,
+        "dirty": false,
+        "changed_file_count": 0,
+        "generated_dirty": false,
+        "generated_changed_file_count": 0,
         "source_dirty": false,
         "source_changed_file_count": 0,
-        "sample": [
-          " M dist/agent-team-work.zip",
-          " M registry/index.json",
-          " M registry/packages/agent-team-work.json",
-          " M reports/adoption_drift_report.json",
-          " M reports/adoption_drift_report.md",
-          " M reports/architecture_maintainability.json",
-          " M reports/architecture_maintainability.md",
-          " M reports/benchmark_reproducibility.json",
-          " M reports/benchmark_reproducibility.md",
-          " M reports/compiled_targets.json",
-          " M reports/evidence_consistency.json",
-          " M reports/evidence_consistency.md"
-        ],
+        "sample": [],
         "source_sample": [],
-        "generated_sample": [
-          " M dist/agent-team-work.zip",
-          " M registry/index.json",
-          " M registry/packages/agent-team-work.json",
-          " M reports/adoption_drift_report.json",
-          " M reports/adoption_drift_report.md",
-          " M reports/architecture_maintainability.json",
-          " M reports/architecture_maintainability.md",
-          " M reports/benchmark_reproducibility.json",
-          " M reports/benchmark_reproducibility.md",
-          " M reports/compiled_targets.json",
-          " M reports/evidence_consistency.json",
-          " M reports/evidence_consistency.md"
-        ],
+        "generated_sample": [],
         "generated_dirty_prefixes": [
           "dist/",
           "registry/index.json",
@@ -5881,12 +5855,12 @@
         "beta_test_deferred_evidence_count": 4,
         "public_claim_ready": false,
         "public_claim_blocker_count": 6,
-        "working_tree_dirty": true,
-        "changed_file_count": 59,
+        "working_tree_dirty": false,
+        "changed_file_count": 0,
         "source_tree_dirty": false,
         "source_changed_file_count": 0,
-        "generated_tree_dirty": true,
-        "generated_changed_file_count": 59
+        "generated_tree_dirty": false,
+        "generated_changed_file_count": 0
       },
       "beta_test_release": {
         "ready": false,
@@ -5934,11 +5908,11 @@
       },
       "release_lock": {
         "ready": true,
-        "commit": "7947dcfacb6616d682cafd732048fbe8d31f59c8",
+        "commit": "d9a194069ed347e3914e45bd343b3536f5791582",
         "status_scope": "generation-time status before this report is written",
         "source_changed_file_count": 0,
-        "generated_changed_file_count": 59,
-        "reason": "only generated evidence artifacts were dirty at generation time"
+        "generated_changed_file_count": 0,
+        "reason": "clean source tree at generation-time HEAD"
       },
       "evidence_bundle": {
         "algorithm": "sha256(path,label,exists,artifact_sha256)",
@@ -11266,7 +11240,7 @@
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
       "release_lock_ready": true,
-      "evidence_consistency_ok": false,
+      "evidence_consistency_ok": true,
       "writes_source_files": false,
       "auto_patch_enabled": false,
       "failure_count": 0,
@@ -11283,7 +11257,7 @@
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
         "release_lock_ready": true,
-        "evidence_consistency_ok": false,
+        "evidence_consistency_ok": true,
         "writes_source_files": false,
         "auto_patch_enabled": false,
         "failure_count": 0
@@ -11376,7 +11350,7 @@
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
         "release_lock_ready": true,
-        "evidence_consistency_ok": false
+        "evidence_consistency_ok": true
       },
       "actions": [
         {
@@ -11388,11 +11362,6 @@
           "key": "close-world-class-evidence",
           "priority": "high",
           "action": "Collect accepted external or human evidence for the pending world-class ledger entries."
-        },
-        {
-          "key": "refresh-evidence-consistency",
-          "priority": "high",
-          "action": "Regenerate evidence-consistency before using this report for release decisions."
         }
       ],
       "failures": [],
@@ -11430,7 +11399,7 @@
       "skill_count": 1,
       "actionable_portfolio_issue_count": 0,
       "release_lock_ready": true,
-      "evidence_consistency_ok": false,
+      "evidence_consistency_ok": true,
       "public_world_class_ready": false,
       "world_class_pending_count": 4,
       "writes_source_files": false,
@@ -11450,7 +11419,7 @@
         "skill_count": 1,
         "actionable_portfolio_issue_count": 0,
         "release_lock_ready": true,
-        "evidence_consistency_ok": false,
+        "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4,
         "writes_source_files": false,
@@ -11528,7 +11497,7 @@
       },
       "release_state": {
         "release_lock_ready": true,
-        "evidence_consistency_ok": false,
+        "evidence_consistency_ok": true,
         "public_world_class_ready": false,
         "world_class_pending_count": 4
       },
@@ -11537,11 +11506,6 @@
           "key": "close-world-class-evidence",
           "priority": "high",
           "action": "Collect accepted external or human evidence for pending world-class ledger entries before public claims."
-        },
-        {
-          "key": "refresh-evidence-consistency",
-          "priority": "high",
-          "action": "Regenerate evidence consistency before using this curator report for release decisions."
         }
       ],
       "failures": [],
