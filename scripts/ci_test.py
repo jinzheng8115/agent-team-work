@@ -15,7 +15,7 @@ from pathlib import Path
 SCRIPT_INTERFACE = "cli"
 SCRIPT_INTERFACE_REASON = "Runs local, dependency-free route, syntax, and package-shape checks before release."
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_TARGETS = ["route-contract", "python-compile", "package-shape", "runtime-package", "revision-state", "discussion-state"]
+DEFAULT_TARGETS = ["route-contract", "python-compile", "package-shape", "runtime-package", "runtime-package-state", "revision-state", "discussion-state"]
 
 
 def route_contract() -> None:
@@ -83,11 +83,22 @@ def runtime_package() -> None:
         raise AssertionError("runtime-only package check failed")
 
 
+def runtime_package_state() -> None:
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "evals" / "runtime_package_state_test.py")],
+        cwd=ROOT,
+        check=False,
+    )
+    if result.returncode:
+        raise AssertionError("runtime-package-state regression tests failed")
+
+
 CHECKS = {
     "route-contract": route_contract,
     "python-compile": python_compile,
     "package-shape": package_shape,
     "runtime-package": runtime_package,
+    "runtime-package-state": runtime_package_state,
     "revision-state": revision_state,
     "discussion-state": discussion_state,
 }

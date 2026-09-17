@@ -3,10 +3,10 @@
   "schema_version": "2.0",
   "profile": "runtime-only",
   "package": "/Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip",
-  "entry_count": 13,
+  "entry_count": 20,
   "summary": {
     "archive_present": true,
-    "archive_entry_count": 13,
+    "archive_entry_count": 20,
     "nested_skill_entry_count": 0,
     "archive_extracted": true,
     "entrypoint_loaded": true,
@@ -40,7 +40,12 @@
     {
       "id": "runtime-allowlist",
       "status": "pass",
-      "detail": "archive entries match runtime allowlist (13 files)"
+      "detail": "archive entries match runtime allowlist (20 files)"
+    },
+    {
+      "id": "target-files-packaged",
+      "status": "pass",
+      "detail": "target adapter files are packaged: []"
     },
     {
       "id": "development-assets-excluded",
@@ -56,6 +61,16 @@
       "id": "runtime-manifest",
       "status": "pass",
       "detail": "archive manifest declares runtime-only profile"
+    },
+    {
+      "id": "runtime-manifest-files",
+      "status": "pass",
+      "detail": "archive manifest runtime_files match the runtime allowlist"
+    },
+    {
+      "id": "target-adapter-metadata",
+      "status": "pass",
+      "detail": "target adapter metadata is runtime-only and points to the complete allowlist"
     },
     {
       "id": "entrypoint-name",
@@ -77,6 +92,15 @@
   "warnings": [],
   "artifacts": {
     "archive": "/Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip",
-    "package_manifest": "/Volumes/Code/team-worker/agent-team-work/dist/manifest.json"
+    "package_manifest": "/Volumes/Code/team-worker/agent-team-work/dist/manifest.json",
+    "target_files": [
+      "targets/claude/README.md",
+      "targets/claude/adapter.json",
+      "targets/generic/adapter.json",
+      "targets/openai/adapter.json",
+      "targets/openai/agents/openai.yaml",
+      "targets/vscode/README.md",
+      "targets/vscode/adapter.json"
+    ]
   }
 }

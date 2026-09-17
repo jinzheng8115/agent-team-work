@@ -32,9 +32,19 @@ def frontmatter_name(text: str) -> str:
     return match.group(1).strip().strip('"\'') if match else ""
 
 
-def check(source_dir: Path, package_dir: Path, config_path: Path) -> dict[str, Any]:
+def check(
+    source_dir: Path,
+    package_dir: Path,
+    config_path: Path,
+    expectations_path: Path | None = None,
+) -> dict[str, Any]:
     config = load_json(config_path)
     include = sorted(str(item) for item in config.get("include", []))
+    target_files = set(str(item) for item in config.get("target_files", []))
+    if expectations_path and expectations_path.is_file():
+        expectations = load_json(expectations_path)
+        target_files.update(str(item) for item in expectations.get("archive_required_files", []))
+    target_files = sorted(target_files)
     manifest = load_json(source_dir / "manifest.json")
     package_name = str(manifest.get("name", "")).strip()
     archive_path = package_dir / f"{package_name}.zip"
@@ -58,6 +68,12 @@ def check(source_dir: Path, package_dir: Path, config_path: Path) -> dict[str, A
             add("archive-safe-paths", not unsafe, "archive has no absolute or parent-traversal paths")
             add("archive-root", not outside_root, f"archive entries use the package root: {outside_root[:5]}")
             add("runtime-allowlist", relative == expected, f"archive entries match runtime allowlist ({len(relative)} files)")
+            missing_target_files = [path for path in target_files if path not in relative]
+            add(
+                "target-files-packaged",
+                not missing_target_files,
+                f"target adapter files are packaged: {missing_target_files[:5]}",
+            )
             integrity_files = set(config.get("integrity_files", []))
             banned = [
                 name
@@ -75,6 +91,29 @@ def check(source_dir: Path, package_dir: Path, config_path: Path) -> dict[str, A
                 )
             root_manifest = json.loads(archive.read(f"{prefix}manifest.json"))
             add("runtime-manifest", root_manifest.get("package_profile") == "runtime-only", "archive manifest declares runtime-only profile")
+            add(
+                "runtime-manifest-files",
+                root_manifest.get("runtime_files") == expected,
+                "archive manifest runtime_files match the runtime allowlist",
+            )
+            adapter_paths = [path for path in target_files if path.endswith("/adapter.json") and path in relative]
+            adapter_metadata_failures: list[str] = []
+            for adapter_path in adapter_paths:
+                try:
+                    adapter = json.loads(archive.read(f"{prefix}{adapter_path}"))
+                except (KeyError, json.JSONDecodeError):
+                    adapter_metadata_failures.append(f"invalid adapter metadata: {adapter_path}")
+                    continue
+                if adapter.get("package_profile") != "runtime-only":
+                    adapter_metadata_failures.append(f"adapter is not runtime-only: {adapter_path}")
+                if adapter.get("runtime_files") != expected:
+                    adapter_metadata_failures.append(f"adapter runtime_files drift: {adapter_path}")
+            add(
+                "target-adapter-metadata",
+                not adapter_metadata_failures,
+                "target adapter metadata is runtime-only and points to the complete allowlist"
+                + (f": {adapter_metadata_failures[:5]}" if adapter_metadata_failures else ""),
+            )
             skill_text = archive.read(f"{prefix}SKILL.md").decode("utf-8")
             add("entrypoint-name", frontmatter_name(skill_text) == package_name, "SKILL.md frontmatter name matches package")
             references = sorted(set(re.findall(r"references/[A-Za-z0-9_.-]+\.md", skill_text)))
@@ -82,9 +121,16 @@ def check(source_dir: Path, package_dir: Path, config_path: Path) -> dict[str, A
             add("entrypoint-references", not missing_references, f"entrypoint references are packaged: {missing_references[:5]}")
             add("single-entrypoint", sum(name.endswith("SKILL.md") for name in names) == 1, "archive has one root SKILL.md entrypoint")
 
+    archive_adapter_count = 0
+    if archive_path.is_file():
+        with zipfile.ZipFile(archive_path) as archive:
+            prefix = f"{package_name}/"
+            archive_adapter_count = sum(
+                1
+                for path in target_files
+                if path.endswith("/adapter.json") and f"{prefix}{path}" in archive.namelist()
+            )
     package_manifest = load_json(package_dir / "manifest.json") if (package_dir / "manifest.json").is_file() else {}
-    targets_dir = package_dir / "targets"
-    adapter_count = len(list(targets_dir.glob("*/adapter.json"))) if targets_dir.is_dir() else 0
     report = {
         "ok": not failures,
         "schema_version": "2.0",
@@ -99,10 +145,10 @@ def check(source_dir: Path, package_dir: Path, config_path: Path) -> dict[str, A
             "entrypoint_loaded": not bool(failures),
             "manifest_loaded": bool(package_manifest),
             "interface_loaded": "agents/interface.yaml" in include,
-            "adapter_count": adapter_count,
+            "adapter_count": archive_adapter_count,
             "installer_permission_enforced_count": 0,
             "installer_permission_failure_count": 0,
-            "permission_target_count": adapter_count,
+            "permission_target_count": archive_adapter_count,
             "permission_capability_count": 0,
             "install_root_is_temp": False,
             "failure_count": len(failures),
@@ -114,6 +160,7 @@ def check(source_dir: Path, package_dir: Path, config_path: Path) -> dict[str, A
         "artifacts": {
             "archive": str(archive_path),
             "package_manifest": str(package_dir / "manifest.json"),
+            "target_files": target_files,
         },
     }
     return report
@@ -146,10 +193,16 @@ def main() -> None:
     parser.add_argument("source_dir", nargs="?", default=".")
     parser.add_argument("--package-dir", default="dist")
     parser.add_argument("--config", default="package-runtime.json")
+    parser.add_argument("--expectations", default="evals/packaging_expectations.json")
     parser.add_argument("--output-json")
     parser.add_argument("--output-md")
     args = parser.parse_args()
-    report = check(Path(args.source_dir).resolve(), Path(args.package_dir).resolve(), Path(args.config).resolve())
+    report = check(
+        Path(args.source_dir).resolve(),
+        Path(args.package_dir).resolve(),
+        Path(args.config).resolve(),
+        Path(args.expectations).resolve(),
+    )
     rendered = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
     if args.output_json:
         Path(args.output_json).write_text(rendered, encoding="utf-8")

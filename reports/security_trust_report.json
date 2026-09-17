@@ -2,7 +2,7 @@
   "ok": true,
   "skill_dir": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
-    "scanned_files": 44,
+    "scanned_files": 45,
     "script_count": 6,
     "internal_module_count": 0,
     "secret_findings": 0,
@@ -22,8 +22,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 44,
-    "package_sha256": "cdf50d6917ef2e97c046253cf1433bc30e8e8d353c84349c54a469f2f3efb084"
+    "package_hash_file_count": 45,
+    "package_sha256": "b2cb5bbf2289db153e5a57e51fca12251437db55276a8abc7be54e73a3cd92b6"
   },
   "failures": [],
   "warnings": [],
@@ -188,7 +188,7 @@
         "timed_out": false,
         "passed": true,
         "has_help_text": true,
-        "stdout_excerpt": "usage: runtime_package_check.py [-h] [--package-dir PACKAGE_DIR]\n                                [--config CONFIG] [--output-json OUTPUT_JSON]\n                                [--output-md OUTPUT_MD]\n                                [source_d",
+        "stdout_excerpt": "usage: runtime_package_check.py [-h] [--package-dir PACKAGE_DIR]\n                                [--config CONFIG]\n                                [--expectations EXPECTATIONS]\n                                [--output-json OUTPUT_JSON]\n   ",
         "stderr_excerpt": ""
       },
       {

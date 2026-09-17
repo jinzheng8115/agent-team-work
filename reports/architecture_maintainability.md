@@ -42,10 +42,10 @@ No near-threshold files found.
 | File | Lines | Kind | Severity |
 | --- | ---: | --- | --- |
 | `scripts/validate_team_state.py` | `672` | `cli-script` | `pass` |
-| `scripts/runtime_package_check.py` | `163` | `cli-script` | `pass` |
-| `scripts/build_runtime_package.py` | `160` | `cli-script` | `pass` |
+| `scripts/runtime_package_check.py` | `216` | `cli-script` | `pass` |
+| `scripts/build_runtime_package.py` | `183` | `cli-script` | `pass` |
 | `scripts/import_telemetry_events.py` | `136` | `cli-script` | `pass` |
-| `scripts/ci_test.py` | `111` | `cli-script` | `pass` |
+| `scripts/ci_test.py` | `122` | `cli-script` | `pass` |
 | `scripts/local_output_eval_runner.py` | `68` | `cli-script` | `pass` |
 
 ## Release Rule

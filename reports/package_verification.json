@@ -8,8 +8,8 @@
     "target_count": 4,
     "adapter_count": 4,
     "archive_present": true,
-    "archive_sha256": "3b3c43c2d3ab45386ed8a4a14215c4cc77c4b5a4e42c05e8a930edbd220efb22",
-    "archive_entry_count": 13,
+    "archive_sha256": "97a16b203263012d659ddaff799ebd1b324223a085f222270fca080a61da3f3d",
+    "archive_entry_count": 20,
     "nested_skill_entry_count": 0,
     "failure_count": 0,
     "warning_count": 0
@@ -592,6 +592,41 @@
     },
     {
       "id": "vscode-file-targets/vscode/README.md",
+      "status": "pass",
+      "detail": "Package contains targets/vscode/README.md"
+    },
+    {
+      "id": "archive-file-targets/openai/adapter.json",
+      "status": "pass",
+      "detail": "Package contains targets/openai/adapter.json"
+    },
+    {
+      "id": "archive-file-targets/openai/agents/openai.yaml",
+      "status": "pass",
+      "detail": "Package contains targets/openai/agents/openai.yaml"
+    },
+    {
+      "id": "archive-file-targets/claude/adapter.json",
+      "status": "pass",
+      "detail": "Package contains targets/claude/adapter.json"
+    },
+    {
+      "id": "archive-file-targets/claude/README.md",
+      "status": "pass",
+      "detail": "Package contains targets/claude/README.md"
+    },
+    {
+      "id": "archive-file-targets/generic/adapter.json",
+      "status": "pass",
+      "detail": "Package contains targets/generic/adapter.json"
+    },
+    {
+      "id": "archive-file-targets/vscode/adapter.json",
+      "status": "pass",
+      "detail": "Package contains targets/vscode/adapter.json"
+    },
+    {
+      "id": "archive-file-targets/vscode/README.md",
       "status": "pass",
       "detail": "Package contains targets/vscode/README.md"
     },

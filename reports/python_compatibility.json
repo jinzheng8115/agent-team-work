@@ -5,7 +5,7 @@
   "root": "/Volumes/Code/team-worker/agent-team-work",
   "summary": {
     "target_python": "3.11",
-    "file_count": 9,
+    "file_count": 10,
     "issue_count": 0,
     "syntax_error_count": 0,
     "fstring_311_violation_count": 0,
@@ -36,6 +36,12 @@
     },
     {
       "path": "evals/route_contract_test.py",
+      "ok": true,
+      "issue_count": 0,
+      "issues": []
+    },
+    {
+      "path": "evals/runtime_package_state_test.py",
       "ok": true,
       "issue_count": 0,
       "issues": []

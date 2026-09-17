@@ -8,11 +8,11 @@ This standalone package review is generated from the current local evidence. It 
 - Review Studio gates: `16` gates
 - Review Studio warnings: `3` warnings
 - Trust report: `0` declared internal modules; `6 / 6` CLI help smoke checks passing across `6` scripts.
-- Runtime-only package archive: `13` zip entries; archive with `13` entries.
+- Runtime-only package archive: `20` zip entries; archive with `20` entries, including all four target adapters and their declared companion files.
 - Runtime package check: `0` installer permission checks enforced; `0` permission failures because no executable maintainer scripts ship in the archive.
 - Benchmark contract: `25` required artifacts; `23` reproduction commands.
 - Context budget: initial load `878/1000`.
-- CI manifest: target count is `6`.
+- CI manifest: target count is `7`.
 
 ## Release Decision
 

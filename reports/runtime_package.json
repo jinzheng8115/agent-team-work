@@ -3,7 +3,7 @@
   "profile": "runtime-only",
   "package": "/Volumes/Code/team-worker/agent-team-work/dist/agent-team-work.zip",
   "package_name": "agent-team-work",
-  "entry_count": 13,
+  "entry_count": 20,
   "entries": [
     "LICENSE",
     "SKILL.md",
@@ -17,7 +17,14 @@
     "references/team-scaling.md",
     "references/workflow.md",
     "reports/.current-run.json",
-    "reports/artifact-index.json"
+    "reports/artifact-index.json",
+    "targets/claude/README.md",
+    "targets/claude/adapter.json",
+    "targets/generic/adapter.json",
+    "targets/openai/adapter.json",
+    "targets/openai/agents/openai.yaml",
+    "targets/vscode/README.md",
+    "targets/vscode/adapter.json"
   ],
   "excluded_roots": [
     "docs",

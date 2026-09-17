@@ -4,7 +4,7 @@
 - Package directory: `/Volumes/Code/team-worker/agent-team-work/dist`
 - Targets: `4 / 4` adapters present
 - Archive present: `True`
-- Archive SHA256: `3b3c43c2d3ab45386ed8a4a14215c4cc77c4b5a4e42c05e8a930edbd220efb22`
+- Archive SHA256: `97a16b203263012d659ddaff799ebd1b324223a085f222270fca080a61da3f3d`
 - Nested SKILL.md entries: `0`
 - Failures: `0`
 - Warnings: `0`
@@ -129,6 +129,13 @@
 | `generic-file-targets/generic/adapter.json` | `pass` | Package contains targets/generic/adapter.json |
 | `vscode-file-targets/vscode/adapter.json` | `pass` | Package contains targets/vscode/adapter.json |
 | `vscode-file-targets/vscode/README.md` | `pass` | Package contains targets/vscode/README.md |
+| `archive-file-targets/openai/adapter.json` | `pass` | Package contains targets/openai/adapter.json |
+| `archive-file-targets/openai/agents/openai.yaml` | `pass` | Package contains targets/openai/agents/openai.yaml |
+| `archive-file-targets/claude/adapter.json` | `pass` | Package contains targets/claude/adapter.json |
+| `archive-file-targets/claude/README.md` | `pass` | Package contains targets/claude/README.md |
+| `archive-file-targets/generic/adapter.json` | `pass` | Package contains targets/generic/adapter.json |
+| `archive-file-targets/vscode/adapter.json` | `pass` | Package contains targets/vscode/adapter.json |
+| `archive-file-targets/vscode/README.md` | `pass` | Package contains targets/vscode/README.md |
 | `archive-safe-paths` | `pass` | Archive has no absolute or parent-traversal entries |
 | `archive-entry-agent-team-work/SKILL.md` | `pass` | Archive contains agent-team-work/SKILL.md |
 | `archive-entry-agent-team-work/manifest.json` | `pass` | Archive contains agent-team-work/manifest.json |

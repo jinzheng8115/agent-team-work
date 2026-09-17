@@ -973,13 +973,13 @@
     "ok": true,
     "summary": {
       "reproducibility_ready": true,
-      "release_lock_ready": true,
+      "release_lock_ready": false,
       "methodology_complete": true,
       "required_artifact_count": 25,
       "missing_artifact_count": 0,
-      "evidence_bundle_sha256": "d5d47d9d943b1761b60c5ff3583d3354d7c2b73623469db881c2a478ca3335b0",
-      "source_contract_sha256": "cdf50d6917ef2e97c046253cf1433bc30e8e8d353c84349c54a469f2f3efb084",
-      "archive_sha256": "3b3c43c2d3ab45386ed8a4a14215c4cc77c4b5a4e42c05e8a930edbd220efb22",
+      "evidence_bundle_sha256": "ba17758838587c77229a9067b6b2ba429d99d6fe8f14268d7b795a2a5ac8aec7",
+      "source_contract_sha256": "b2cb5bbf2289db153e5a57e51fca12251437db55276a8abc7be54e73a3cd92b6",
+      "archive_sha256": "97a16b203263012d659ddaff799ebd1b324223a085f222270fca080a61da3f3d",
       "output_case_count": 13,
       "failure_disclosure_count": 3,
       "command_count": 23,
@@ -1001,18 +1001,18 @@
       "world_class_source_pass_count": 6,
       "world_class_source_blocked_count": 8,
       "beta_test_ready": false,
-      "beta_test_blocker_count": 1,
+      "beta_test_blocker_count": 2,
       "beta_test_deferred_evidence_count": 4,
       "public_claim_ready": false,
-      "public_claim_blocker_count": 6,
-      "working_tree_dirty": false,
-      "changed_file_count": 0,
-      "source_tree_dirty": false,
-      "source_changed_file_count": 0,
-      "generated_tree_dirty": false,
-      "generated_changed_file_count": 0
+      "public_claim_blocker_count": 7,
+      "working_tree_dirty": true,
+      "changed_file_count": 36,
+      "source_tree_dirty": true,
+      "source_changed_file_count": 7,
+      "generated_tree_dirty": true,
+      "generated_changed_file_count": 29
     },
-    "commit": "d9a194069ed347e3914e45bd343b3536f5791582",
+    "commit": "896c1e018383804eaa606f4f4ad0e3acc38a561b",
     "missing_artifacts": [],
     "limitations": [
       "The git commit and dirty flags are generation-time context; release lock is blocked by source changes, while generated evidence artifacts are tracked separately.",
@@ -1096,7 +1096,7 @@
     "failures": []
   },
   "trust_security": {
-    "scanned_files": 44,
+    "scanned_files": 45,
     "script_count": 6,
     "internal_module_count": 0,
     "secret_findings": 0,
@@ -1116,8 +1116,8 @@
     "help_smoke_failed_count": 0,
     "interactive_script_count": 0,
     "package_hash_scope": "source-contract-without-generated-reports",
-    "package_hash_file_count": 44,
-    "package_sha256": "cdf50d6917ef2e97c046253cf1433bc30e8e8d353c84349c54a469f2f3efb084"
+    "package_hash_file_count": 45,
+    "package_sha256": "b2cb5bbf2289db153e5a57e51fca12251437db55276a8abc7be54e73a3cd92b6"
   },
   "skill_atlas": {
     "skill_count": 1,
@@ -1155,8 +1155,8 @@
       "trust_level": "local",
       "license": "MIT",
       "checksums": {
-        "package_sha256": "cdf50d6917ef2e97c046253cf1433bc30e8e8d353c84349c54a469f2f3efb084",
-        "archive_sha256": "3b3c43c2d3ab45386ed8a4a14215c4cc77c4b5a4e42c05e8a930edbd220efb22"
+        "package_sha256": "b2cb5bbf2289db153e5a57e51fca12251437db55276a8abc7be54e73a3cd92b6",
+        "archive_sha256": "97a16b203263012d659ddaff799ebd1b324223a085f222270fca080a61da3f3d"
       },
       "compatibility": {
         "openai": "pass",
@@ -1187,7 +1187,7 @@
       },
       "distribution": {
         "archive_verified": true,
-        "archive_sha256": "3b3c43c2d3ab45386ed8a4a14215c4cc77c4b5a4e42c05e8a930edbd220efb22",
+        "archive_sha256": "97a16b203263012d659ddaff799ebd1b324223a085f222270fca080a61da3f3d",
         "package_verification": "reports/package_verification.json",
         "install_simulated": true,
         "install_simulation": "reports/install_simulation.json"
@@ -1203,8 +1203,8 @@
       "target_count": 4,
       "adapter_count": 4,
       "archive_present": true,
-      "archive_sha256": "3b3c43c2d3ab45386ed8a4a14215c4cc77c4b5a4e42c05e8a930edbd220efb22",
-      "archive_entry_count": 13,
+      "archive_sha256": "97a16b203263012d659ddaff799ebd1b324223a085f222270fca080a61da3f3d",
+      "archive_entry_count": 20,
       "nested_skill_entry_count": 0,
       "failure_count": 0,
       "warning_count": 0
@@ -1216,7 +1216,7 @@
     "ok": true,
     "summary": {
       "archive_present": true,
-      "archive_entry_count": 13,
+      "archive_entry_count": 20,
       "nested_skill_entry_count": 0,
       "archive_extracted": true,
       "entrypoint_loaded": true,
@@ -1274,12 +1274,12 @@
         {
           "field": "archive_sha256",
           "from": "",
-          "to": "3b3c43c2d3ab45386ed8a4a14215c4cc77c4b5a4e42c05e8a930edbd220efb22"
+          "to": "97a16b203263012d659ddaff799ebd1b324223a085f222270fca080a61da3f3d"
         },
         {
           "field": "package_sha256",
           "from": "previous-fixture",
-          "to": "cdf50d6917ef2e97c046253cf1433bc30e8e8d353c84349c54a469f2f3efb084"
+          "to": "b2cb5bbf2289db153e5a57e51fca12251437db55276a8abc7be54e73a3cd92b6"
         }
       ]
     },

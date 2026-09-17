@@ -460,7 +460,14 @@
     "references/team-scaling.md",
     "references/workflow.md",
     "reports/.current-run.json",
-    "reports/artifact-index.json"
+    "reports/artifact-index.json",
+    "targets/claude/README.md",
+    "targets/claude/adapter.json",
+    "targets/generic/adapter.json",
+    "targets/openai/adapter.json",
+    "targets/openai/agents/openai.yaml",
+    "targets/vscode/README.md",
+    "targets/vscode/adapter.json"
   ],
   "semantic_contract": {
     "decision_point_count": 0,

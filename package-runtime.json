@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "profile": "runtime-only",
-  "description": "Files required by the Agent Team Work skill at runtime. Development, evaluation, audit, and release evidence remain source-only; two tiny portable integrity metadata files are retained for archive verification.",
+  "description": "Files required by the Agent Team Work skill at runtime, including generated target adapters. Development, evaluation, audit, and release evidence remain source-only; two tiny portable integrity metadata files are retained for archive verification.",
   "include": [
     "LICENSE",
     "SKILL.md",
@@ -15,7 +15,26 @@
     "references/role-presets.md",
     "references/team-protocol.md",
     "references/team-scaling.md",
-    "references/workflow.md"
+    "references/workflow.md",
+    "targets/claude/README.md",
+    "targets/claude/adapter.json",
+    "targets/generic/adapter.json",
+    "targets/openai/adapter.json",
+    "targets/openai/agents/openai.yaml",
+    "targets/vscode/README.md",
+    "targets/vscode/adapter.json"
+  ],
+  "generated_roots": [
+    "targets"
+  ],
+  "target_files": [
+    "targets/claude/README.md",
+    "targets/claude/adapter.json",
+    "targets/generic/adapter.json",
+    "targets/openai/adapter.json",
+    "targets/openai/agents/openai.yaml",
+    "targets/vscode/README.md",
+    "targets/vscode/adapter.json"
   ],
   "excluded_roots": [
     "docs",
